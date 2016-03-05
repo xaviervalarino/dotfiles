@@ -1,0 +1,114 @@
+alignment top_right
+background no
+cpu_avg_samples 2
+default_color BFCCFF
+color0 80BBFF
+color1 3393FF
+color2 0077FF
+color3 0057BF
+default_outline_color 0077FF
+default_shade_color 0077FF
+double_buffer yes
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+gap_x 10
+gap_y 40
+maximum_width 210
+max_port_monitor_connections 64
+max_user_text 16384
+minimum_size 330 10
+net_avg_samples 2
+no_buffers yes
+out_to_console no
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window_type desktop
+own_window yes
+stippled_borders 2
+update_interval 2
+uppercase no
+use_spacer none
+use_xft yes
+xftalpha .7
+xftfont Monospace:size=9
+
+TEXT
+#${color0}$sysname $kernel ${alignr}$color${time %k:%M:%S}
+#${machine} @ $freq(MHz)
+#
+# BATTERY INFO
+# ------------
+# ${color0}Battery:$color$alignr${execi 60 acpi | grep -Eo '[0-9]+%'}
+# ${color0}${execi 60 acpi | grep -Eo '(Discharging|Charging)'}:$color$alignr${execi 60 acpi | grep -Eo '(:?[0-9]+){3}'}
+
+# NETWORK CONNECTION
+# ------------------------------------------------------------------------------------------
+${color1}N E T W O R K ${color3}${hr}
+${color0}IP address:$color$alignr${addr wlan0}
+${color0}ESSID:$color$alignr${wireless_essid wlan0}
+${color0}Connection: $alignr${color}${wireless_link_qual_perc wlan0}%
+
+${color0}Down: $color${downspeed wlan0}$alignr${totaldown wlan0}
+${color2}${downspeedgraph wlan0 27,210 0077ff 0077ff}
+${color0}Up:   $color${upspeed wlan0}$alignr${totalup wlan0}
+${color2}${upspeedgraph wlan0 27,210 0077FF 0077ff}
+
+# CPU INFO
+# ------------------------------------------------------------------------------------------
+${color1}P R O C E S S O R ${color3}${hr}
+${color0}Core1:$color ${cpu cpu1}%${goto 105}${exec sensors | grep 'Core 0' | cut -c16-22 | sed '/^$/d'}$alignr#
+${color0}Core2:$color ${cpu cpu2}%$alignr${exec sensors | grep 'Core 1' | cut -c16-22 | sed '/^$/d'}
+${color2}${cpugraph cpu1 27,100 0077FF 0077FF}#
+${color2}${goto 110}${cpugraph cpu2 27,105 0077FF 0077FF}
+#${color0}${cpugraph 32,210 0077FF 0077ff}
+#
+# DISK I/O
+# --------
+${color0}Read: $color${diskio_read}$alignr${color0}Write: $color${diskio_write}
+${color2}${diskiograph /dev/sda 27,210 0077FF 0077ff}
+#
+# TOP CPU
+# -------
+${color1}TOP${alignr}CPU%
+$color${top name 1}$alignr${top cpu 1}
+$color${top name 2}$alignr${top cpu 2}
+$color${top name 3}$alignr${top cpu 3}
+$color${top name 4}$alignr${top cpu 4}
+$color${top name 5}$alignr${top cpu 5}
+
+# MEMORY
+# ------------------------------------------------------------------------------------------
+${color1}M E M O R Y ${color3}${hr}
+${color0}DDR3: $color$memperc%$alignr$mem${color2}/${color0}$memmax
+# Membar
+${color2}$membar
+# Memgraph
+#${color2}${memgraph mem 27,210 0077FF 0077ff}
+# Top Memory Processes
+${color1}TOP${alignr}Mem
+$color${top_mem name 1}$alignr${top_mem mem_res 1}
+$color${top_mem name 2}$alignr${top_mem mem_res 2}
+$color${top_mem name 3}$alignr${top_mem mem_res 3}
+$color${top_mem name 4}$alignr${top_mem mem_res 4}
+$color${top_mem name 5}$alignr${top_mem mem_res 5}
+
+# DISK SPACE
+# ------------------------------------------------------------------------------------------
+${color1}D I S K  S P A C E ${color3}${hr}
+# Root
+${color0}/$alignr$color${fs_used /}${color2}/${color0}${fs_size /}
+${color2}${fs_bar 5,210 /}
+#
+# Home
+${color0}/home$alignr$color${fs_used /home}${color2}/${color0}${fs_size /home}
+${color2}${fs_bar 5,210 /home}
+#
+# Media
+${color0}storage$alignr$color${fs_used /media/storage}${color2}/${color0}${fs_size /media/storage}
+${color2}${fs_bar 5,210 /media/storage}
+#
+# Swap
+${color0}swap$alignr$color${swap}${color2}/${color0}${swapmax}
+${color2}${swapbar}
