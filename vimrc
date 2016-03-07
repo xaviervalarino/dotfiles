@@ -8,6 +8,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'ryanoasis/vim-devicons'
+Plug 'mikewest/vimroom'
 Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'elzr/vim-json'
@@ -80,3 +81,5 @@ let g:NERDTreeIgnore = ['\.git$','\.sass-cache$'] "Ignore files
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 map <C-N> :NERDTreeToggle<CR>
+
+let g:vimroom_sidebar_height=0                    "Fix issue with airline statusbar in Vimroom
