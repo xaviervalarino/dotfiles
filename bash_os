@@ -1,0 +1,9 @@
+#!/bin/bash
+
+#TODO set OS specific settings
+
+os=''
+if [[ uname -eq 'Darwin' ]]; then
+  os='mac'
+# else if os -eq 'linux'
+fi
