@@ -1,0 +1,11 @@
+{
+    "line_numbers": true,
+    "gutter": true,
+    "highlight_line": true,
+    "draw_centered": true,
+    "wrap_width": 82,
+    "word_wrap": true,
+    "scroll_past_end": true,
+    "rulers": [],
+    "typewriter_mode_scrolling" : true
+}

@@ -1,0 +1,42 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"1337 Color Scheme",
+		"AutoFileName",
+		"BracketHighlighter",
+		"Calculate",
+		"Color Highlighter",
+		"ColorPicker",
+		"CSS3",
+		"Dotfiles Syntax Highlighting",
+		"doTjs Template Syntax Highlighting",
+		"FileDiffs",
+		"HTML-CSS-JS Prettify",
+		"Jade",
+		"Markdown Preview",
+		"MarkdownEditing",
+		"Material Theme",
+		"memTask",
+		"Nunjucks Syntax",
+		"Package Control",
+		"PlainTasks",
+		"Predawn",
+		"Sass",
+		"SCSS",
+		"SideBarEnhancements",
+		"Siteleaf Liquid Syntax",
+		"SublimeLinter",
+		"SublimeLinter-contrib-scss-lint",
+		"SublimeLinter-csslint",
+		"SublimeLinter-jshint",
+		"Syntax Manager",
+		"ToDone",
+		"TrailingSpaces",
+		"Typewriter",
+		"Whitespace"
+	]
+}
