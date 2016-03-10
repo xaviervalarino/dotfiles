@@ -7,18 +7,18 @@ Some color, a lot of bash aliases, along with some OS specific settings
 ###Installation
 Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the bash files to the home directory.
 ```bash
-chmod +x config/bash_setup.sh
-./bash_setup.sh
+chmod +x config/bash_setup.sh # make script executable
+./bash_setup.sh               # run script
 ```
 
 ## Vim
 I have been slowly learning Vim. This was born from the desire to be able do everything in the terminal—jumping back and forth between the terminal and a text editor window while debugging starts to feel tedious.
 
 ###Installation
-Running the setup script will symlink vimrc to your home directory, install Vim-Plug (if it is not already installed) and install or update plugins
+Running the setup script will symlink _vimrc_ to your home directory, installs [vim-plug](https://github.com/junegunn/vim-plug) (if it is not already installed) and installs or updates plugins
 ```bash
-chmod +x config/vim_setup.sh
-./vim_setup.sh
+chmod +x config/vim_setup.sh # make script executable
+./vim_setup.sh               # run script
 ```
 
 ###Plugins
