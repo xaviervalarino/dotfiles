@@ -5,7 +5,6 @@
 	],
 	"installed_packages":
 	[
-		"1337 Color Scheme",
 		"AutoFileName",
 		"BracketHighlighter",
 		"Calculate",
@@ -24,7 +23,6 @@
 		"Nunjucks Syntax",
 		"Package Control",
 		"PlainTasks",
-		"Predawn",
 		"Sass",
 		"SCSS",
 		"SideBarEnhancements",
@@ -33,8 +31,6 @@
 		"SublimeLinter-contrib-scss-lint",
 		"SublimeLinter-csslint",
 		"SublimeLinter-jshint",
-		"Syntax Manager",
-		"ToDone",
 		"TrailingSpaces",
 		"Typewriter",
 		"Whitespace"
