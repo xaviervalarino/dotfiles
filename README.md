@@ -34,7 +34,7 @@ chmod +x config/vim_setup.sh # make script executable
 |[vim-javascript](https://github.com/pangloss/vim-javascript)|
 |[vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax)|
 |[vim-json](https://github.com/elzr/vim-json)|
-|[delimitMate](https://github.com/Raimondi/delimitMate)|
+|[vim-surround](https://github.com/tpope/vim-surround)|
 |[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)|
 |[syntastic](https://github.com/scrooloose/syntastic)|
 |[tern_for_vim](https://github.com/marijnh/tern_for_vim)|
