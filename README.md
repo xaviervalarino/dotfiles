@@ -45,8 +45,6 @@ chmod +x config/vim_setup.sh # make script executable
 ## Sublime
 That being said, Sublime still remains my editor of choice when I need to get something done quickly.
 
-I am currently using [SyntaxMgr](https://github.com/randy3k/SyntaxMgr) to manage platform specific settings.
-
 ## Nano
 I find myself using this editor from time to time... so why not have syntax highlighting on all of my machines?
 
