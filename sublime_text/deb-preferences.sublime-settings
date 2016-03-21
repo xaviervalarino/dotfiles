@@ -1,13 +1,15 @@
 {
 	"afn_use_project_root": true,
 	"bold_folder_labels": true,
+	"caret_extra_width": 1,
 	"caret_style": "phase",
-	"color_scheme": "Packages/User/SublimeLinter/Material-Theme-OceanicNext (SL).tmTheme",
-	"font_size": 15,
+	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
+	"detect_indentation": true,
 	"highlight_line": true,
 	"ignored_packages":
 	[
-		"Markdown"
+		"Markdown",
+		"Vintage"
 	],
 	"line_padding_bottom": 3,
 	"line_padding_top": 3,
@@ -19,8 +21,7 @@
 	"show_full_path": true,
 	"tab_size": 2,
 	"theme": "Material-Theme.sublime-theme",
-	"trailing_spaces_include_current_line": false,
-	"trailing_spaces_trim_on_save": true,
 	"translate_tabs_to_spaces": true,
+	"trim_automatic_white_space": true,
 	"use_tab_stops": true
 }

@@ -19,6 +19,8 @@ Plug 'marijnh/tern_for_vim'
 Plug 'matze/vim-move'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'digitaltoad/vim-pug'
+Plug 'elentok/plaintasks.vim'
+
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -41,13 +43,14 @@ set expandtab
 set sw=2
 set sts=2
 
+set incsearch                        "Do incremental searching
 set showmatch                        "Highlight matching bracket
 autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
 set listchars=tab:\ \ ,trail:·       "Set trails for tabs and spaces
 
 set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
 
-":set background=dark
+set background=dark
 colorscheme hybrid_material
 
 set noswapfile                        "turn off swapfile

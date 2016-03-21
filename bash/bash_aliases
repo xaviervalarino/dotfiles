@@ -16,6 +16,9 @@ alias ..='cd ..'
 alias ...='cd ../../'
 alias ....='cd ../../../'
 
+# copy and pasting
+alias copy='xclip -selection c'
+alias paste='xclip -selection clipboard -o'
 
 #shorthand / easy to remember
 alias calc='bc'         # Calculator from terminal

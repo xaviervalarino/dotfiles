@@ -8,7 +8,7 @@ Some color, a lot of bash aliases, along with some OS specific settings
 Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the bash files to the home directory.
 ```bash
 chmod +x config/bash_setup.sh # make script executable
-./bash_setup.sh               # run script
+./config/bash_setup.sh        # run script
 ```
 
 ## Vim
@@ -18,12 +18,12 @@ I have been slowly learning Vim. This was born from the desire to be able do eve
 Running the setup script will symlink _vimrc_ to your home directory, installs [vim-plug](https://github.com/junegunn/vim-plug) (if it is not already installed) and installs or updates plugins
 ```bash
 chmod +x config/vim_setup.sh # make script executable
-./vim_setup.sh               # run script
+./config/vim_setup.sh        # run script
 ```
 
-###Plugins
-|Plugin|
-|------|
+###plugins
+|plugin|description|
+|------|-----------|
 |[nerdtree](https://github.com/scrooloose/nerdtree)|
 |[html5.vim](https://github.com/othree/html5.vim)|
 |[vim-airline](https://github.com/vim-airline/vim-airline)|
@@ -36,16 +36,16 @@ chmod +x config/vim_setup.sh # make script executable
 |[vim-json](https://github.com/elzr/vim-json)|
 |[vim-surround](https://github.com/tpope/vim-surround)|
 |[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)|
+|[delimitmate](https://github.com/raimondi/delimitmate)|
+|[youcompleteme](https://github.com/valloric/youcompleteme)|
 |[syntastic](https://github.com/scrooloose/syntastic)|
 |[tern_for_vim](https://github.com/marijnh/tern_for_vim)|
 |[vim-move](https://github.com/matze/vim-move)|
 |[vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors)|
-|[vim-pug](https://github.com/digitaltoad/vim-pug)|
-
+|[vim-pug](https://github.com/digitaltoad/vim-pug)|[jade](http://jade-lang.com/) syntax highlighting (now Pug?)|
+|[plaintask.vim](https://github.com/elentok/plaintasks.vim)|[Plaintasks](https://github.com/aziz/PlainTasks) for VIM|
 ## Sublime
 That being said, Sublime still remains my editor of choice when I need to get something done quickly.
-
-I am currently using [SyntaxMgr](https://github.com/randy3k/SyntaxMgr) to manage platform specific settings.
 
 ## Nano
 I find myself using this editor from time to time... so why not have syntax highlighting on all of my machines?
