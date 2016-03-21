@@ -19,6 +19,8 @@ Plug 'marijnh/tern_for_vim'
 Plug 'matze/vim-move'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'digitaltoad/vim-pug'
+Plug 'elentok/plaintasks.vim'
+
 
 " Add plugins to &runtimepath
 call plug#end()
