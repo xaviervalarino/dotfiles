@@ -41,13 +41,14 @@ set expandtab
 set sw=2
 set sts=2
 
+set incsearch                        "Do incremental searching
 set showmatch                        "Highlight matching bracket
 autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
 set listchars=tab:\ \ ,trail:·       "Set trails for tabs and spaces
 
 set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
 
-":set background=dark
+set background=dark
 colorscheme hybrid_material
 
 set noswapfile                        "turn off swapfile
