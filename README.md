@@ -25,12 +25,14 @@ chmod +x config/vim_setup.sh # make script executable
 |plugin|description|
 |------|-----------|
 |[nerdtree](https://github.com/scrooloose/nerdtree)|
-|[html5.vim](https://github.com/othree/html5.vim)|
+|[html5.vim](https://github.com/othree/html5.vim)|HTML5 omnicomplete and syntax highlighting|
+|[skammer/vim-css-color](http://github.com/skammer/vim-css-color)|Show colors in CSS files|
+|[scss-syntax](http://github.com/cakebaker/scss-syntax.vim)|Syntax highlighting for [Sass](http://sass-lang.com)|
 |[vim-airline](https://github.com/vim-airline/vim-airline)|
 |[vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)|
 |[vim-hybrid-material](https://github.com/kristijanhusak/vim-hybrid-material)|
-|[vim-devicons](https://github.com/ryanoasis/vim-devicons)|
-|[vimroom](https://github.com/mikewest/vimroom)|
+|[vim-devicons](https://github.com/ryanoasis/vim-devicons)|Filetype glyphs for other plugins|
+|[vimroom](https://github.com/mikewest/vimroom)|Full-screen focus mode (maybe switching to [pgdouyon's fork](https://github.com/pgdouyon/vimroom))|
 |[vim-javascript](https://github.com/pangloss/vim-javascript)|
 |[vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax)|
 |[vim-json](https://github.com/elzr/vim-json)|
@@ -39,7 +41,7 @@ chmod +x config/vim_setup.sh # make script executable
 |[delimitmate](https://github.com/raimondi/delimitmate)|
 |[youcompleteme](https://github.com/valloric/youcompleteme)|
 |[syntastic](https://github.com/scrooloose/syntastic)|
-|[tern_for_vim](https://github.com/marijnh/tern_for_vim)|
+|[tern_for_vim](https://github.com/marijnh/tern_for_vim)|[tern](http://ternjs.net/)-based JS editing support|
 |[vim-move](https://github.com/matze/vim-move)|
 |[vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors)|
 |[vim-pug](https://github.com/digitaltoad/vim-pug)|[jade](http://jade-lang.com/) syntax highlighting (now Pug?)|
