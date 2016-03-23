@@ -2,25 +2,25 @@ set nocompatible              " be iMproved
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'scrooloose/nerdtree'
 Plug 'othree/html5.vim'
+Plug 'skammer/vim-css-color'
+"Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'ryanoasis/vim-devicons'
 Plug 'mikewest/vimroom'
-Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'matze/vim-move'
 Plug 'tpope/vim-surround'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'marijnh/tern_for_vim'
-Plug 'matze/vim-move'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'digitaltoad/vim-pug'
 Plug 'elentok/plaintasks.vim'
-
 
 " Add plugins to &runtimepath
 call plug#end()
@@ -33,6 +33,7 @@ set t_Co=256                         "Set 256 Colors
 set encoding=utf8                    "Show devicons
 set history=512                      "Default history is 20
 set hlsearch                         "Highlight search results
+set incsearch                        "Do incremental searching
 set mouse=a                          "Enable mouse
 set cursorline                       "Highlight current line
 set noshowmode                       "Hide default mode indicator (controlled by airline)
@@ -43,7 +44,6 @@ set expandtab
 set sw=2
 set sts=2
 
-set incsearch                        "Do incremental searching
 set showmatch                        "Highlight matching bracket
 autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
 set listchars=tab:\ \ ,trail:·       "Set trails for tabs and spaces
@@ -76,13 +76,6 @@ let g:airline#extensions#tabline#left_sep = ' '   "Don't use arrow separator for
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts=1                   "Enable powerline fonts
 let g:airline_theme = "bubblegum"                 "Set theme to powerline default theme
-
-let g:NERDTreeChDirMode = 2                       "Always change the root directory
-let g:NERDTreeShowHidden = 1                      "Show hidden files
-let g:NERDTreeIgnore = ['\.git$','\.sass-cache$'] "Ignore files
-"Open Nerd tree if no file specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-map <C-N> :NERDTreeToggle<CR>
+let g:move_key_modifier = 'C'                     "Use C with k and j to move lines up or down
 
 let g:vimroom_sidebar_height=0                    "Fix issue with airline statusbar in Vimroom
