@@ -82,4 +82,4 @@ fi
 
 # make hostame and username green
 # (uses pastel colors in iterm settings )
-export PS1='\[\e[32m\]\u@\h:\[\e[34m\] \W $(__git_ps1 "(%s)") \[\e[32m\]\n\$\[\e[m\] '
+export PS1='\[\e[32m\]\u@\h:\[\e[34m\]\W$(__git_ps1 "(%s)")\[\e[32m\]\$\[\e[m\] '
