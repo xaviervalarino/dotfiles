@@ -1,27 +1,35 @@
 {
-	"afn_use_project_root": true,
 	"bold_folder_labels": true,
 	"caret_extra_width": 1,
 	"caret_style": "phase",
-	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
+	"color_scheme": "Packages/User/SublimeLinter/Material-Theme-Darker-OceanicNext (SL).tmTheme",
 	"detect_indentation": true,
+	"dictionary": "Packages/Language - English/en_US.dic",
+	"font_size": 10,
 	"highlight_line": true,
 	"ignored_packages":
 	[
 		"Markdown",
-		"Vintage"
+		"Vintage",
 	],
-	"line_padding_bottom": 3,
-	"line_padding_top": 3,
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"line_padding_bottom": 2,
+	"line_padding_top": 2,
 	"material_theme_disable_folder_animation": true,
 	"material_theme_small_statusbar": true,
 	"material_theme_tabs_autowidth": true,
-	"material_theme_tree_headings": true,
+	"material_theme_small_tab": true,
 	"overlay_scroll_bars": "enabled",
-	"show_full_path": true,
 	"tab_size": 2,
-	"theme": "Material-Theme.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"trim_automatic_white_space": true,
-	"use_tab_stops": true
+	"detect_indentation": true,
+	"trailing_spaces_trim_on_save": true,
+	"theme": "Material-Theme-Darker.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"use_tab_stops": true,
+	"wide_caret": true
 }
