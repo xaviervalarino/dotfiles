@@ -42,10 +42,11 @@ chmod +x config/vim_setup.sh # make script executable
 |[youcompleteme](https://github.com/valloric/youcompleteme)|
 |[syntastic](https://github.com/scrooloose/syntastic)|
 |[tern_for_vim](https://github.com/marijnh/tern_for_vim)|[tern](http://ternjs.net/)-based JS editing support|
-|[vim-move](https://github.com/matze/vim-move)|
+|[vim-move](https://github.com/matze/vim-move)|Move lines and selections up and down|
 |[vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors)|
-|[vim-pug](https://github.com/digitaltoad/vim-pug)|[jade](http://jade-lang.com/) syntax highlighting (now Pug?)|
+|[vim-pug](https://github.com/digitaltoad/vim-pug)|[Pug](http://jade-lang.com/) HTML template syntax highlighting (formerly Jade)|
 |[plaintask.vim](https://github.com/elentok/plaintasks.vim)|[Plaintasks](https://github.com/aziz/PlainTasks) for VIM|
+
 ## Sublime
 That being said, Sublime still remains my editor of choice when I need to get something done quickly.
 
