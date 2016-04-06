@@ -76,6 +76,6 @@ let g:airline#extensions#tabline#left_sep = ' '   "Don't use arrow separator for
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts=1                   "Enable powerline fonts
 let g:airline_theme = "bubblegum"                 "Set theme to powerline default theme
-let g:move_key_modifier = 'C'                     "Use C with k and j to move lines up or down
+let g:move_key_modifier = 'D'                     "Use D with k and j to move lines up or down
 
 let g:vimroom_sidebar_height=0                    "Fix issue with airline statusbar in Vimroom
