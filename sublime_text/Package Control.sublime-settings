@@ -34,7 +34,6 @@
 		"SublimeLinter-csslint",
 		"SublimeLinter-jshint",
 		"TrailingSpaces",
-		"Typewriter",
-		"Whitespace"
+		"Typewriter"
 	]
 }
