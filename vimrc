@@ -21,6 +21,7 @@ Plug 'scrooloose/syntastic'
 Plug 'marijnh/tern_for_vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'elentok/plaintasks.vim'
+Plug 'ciaranm/detectindent'
 
 " Add plugins to &runtimepath
 call plug#end()
