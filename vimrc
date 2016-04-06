@@ -22,6 +22,7 @@ Plug 'marijnh/tern_for_vim'
 Plug 'digitaltoad/vim-pug'
 Plug 'elentok/plaintasks.vim'
 Plug 'ciaranm/detectindent'
+Plug 'mustache/vim-mustache-handlebars'
 
 " Add plugins to &runtimepath
 call plug#end()

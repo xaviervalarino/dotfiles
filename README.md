@@ -47,6 +47,7 @@ chmod +x config/vim_setup.sh # make script executable
 |[vim-pug](https://github.com/digitaltoad/vim-pug)|[Pug](http://jade-lang.com/) HTML template syntax highlighting (formerly Jade)|
 |[plaintask.vim](https://github.com/elentok/plaintasks.vim)|[Plaintasks](https://github.com/aziz/PlainTasks) for VIM|
 |[detectindent](https://github.com/ciaranm/detectindent)|Automatically detect indent settings in file|
+|[mustache/vim-mustache-handlebars](https://github.com/mustache/vim-mustache-handlebars)|Support for [Mustache](http://mustache.github.io/) and [Handlebars](http://handlebarsjs.com/) templates|
 
 ## Sublime
 That being said, Sublime still remains my editor of choice when I need to get something done quickly.
