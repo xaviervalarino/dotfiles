@@ -10,7 +10,7 @@
 	"ignored_packages":
 	[
 		"Markdown",
-		"Vintage",
+		"Vintage"
 	],
 	"indent_guide_options":
 	[
@@ -21,14 +21,12 @@
 	"line_padding_top": 2,
 	"material_theme_disable_folder_animation": true,
 	"material_theme_small_statusbar": true,
-	"material_theme_tabs_autowidth": true,
 	"material_theme_small_tab": true,
+	"material_theme_tabs_autowidth": true,
 	"overlay_scroll_bars": "enabled",
 	"tab_size": 2,
-	"translate_tabs_to_spaces": true,
-	"detect_indentation": true,
-	"trailing_spaces_trim_on_save": true,
 	"theme": "Material-Theme-Darker.sublime-theme",
+	"trailing_spaces_trim_on_save": true,
 	"translate_tabs_to_spaces": true,
 	"use_tab_stops": true,
 	"wide_caret": true
