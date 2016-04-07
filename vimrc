@@ -49,6 +49,13 @@ set sts=2
 "Unset search pattern (highlighting) by hitting backslash '\'
 nnoremap \ :noh<CR>
 
+set incsearch                        "Do incremental searching
+set showmatch                        "Highlight matching bracket
+autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
+set listchars=tab:\ \ ,trail:·       "Set trails for tabs and spaces
+
+set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
+
 set background=dark
 colorscheme hybrid_material
 
