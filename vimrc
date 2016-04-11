@@ -3,8 +3,8 @@ set nocompatible              " be iMproved
 call plug#begin('~/.vim/plugged')
 
 Plug 'othree/html5.vim'
-Plug 'skammer/vim-css-color'
-"Plug 'cakebaker/scss-syntax.vim'
+Plug 'ap/vim-css-color'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
