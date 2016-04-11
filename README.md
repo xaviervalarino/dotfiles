@@ -2,7 +2,7 @@
 I use these dotfiles on Mac OSX and Debian Jessie.
 
 ## Bash
-Some color, a lot of bash aliases, along with some OS specific settings
+My Bash config includes some color for PS1, a lot of bash aliases, and some OS specific settings
 
 ###Installation
 Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the bash files to the home directory.
@@ -24,9 +24,8 @@ chmod +x config/vim_setup.sh # make script executable
 ###plugins
 |plugin|description|
 |------|-----------|
-|[nerdtree](https://github.com/scrooloose/nerdtree)|
 |[html5.vim](https://github.com/othree/html5.vim)|HTML5 omnicomplete and syntax highlighting|
-|[skammer/vim-css-color](http://github.com/skammer/vim-css-color)|Show colors in CSS files|
+|[ap/vim-css-color](http://github.com/skammer/vim-css-color)|Show colors hex codes|
 |[scss-syntax](http://github.com/cakebaker/scss-syntax.vim)|Syntax highlighting for [Sass](http://sass-lang.com)|
 |[vim-airline](https://github.com/vim-airline/vim-airline)|
 |[vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)|
