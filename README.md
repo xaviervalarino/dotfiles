@@ -53,11 +53,12 @@ That being said, Sublime still remains my editor of choice when I need to get so
 ## Nano
 I find myself using this editor from time to time... so why not have syntax highlighting on all of my machines?
 
-##[Conky](https://github.com/brndnmtthws/conky)
+## [Conky](https://github.com/brndnmtthws/conky)
 I use conky to monitor:
 * Network connection
 * CPU load
 * Memory usage
 * Disk Space
 
+## Screenshots
 ![Screenshot of my Debian desktop with Conky and Vim Running](./img/debian_screenshot.png?raw=true)
