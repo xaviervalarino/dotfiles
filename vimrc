@@ -10,6 +10,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
 "Plug 'ryanoasis/vim-devicons'
 Plug 'mikewest/vimroom'
+Plug 'tpope/vim-vinegar'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
 Plug 'elzr/vim-json'
@@ -64,7 +65,8 @@ set noswapfile                        "turn off swapfile
 
 " remap 'jj' to escape in insert mode
 inoremap jj <Esc>
-
+"search for visually selected text using '//'
+vnoremap // y/<C-R>"<CR>"
 "switch buffers
 map <tab> :bn<cr>
 map <S-tab> :bp<cr>
