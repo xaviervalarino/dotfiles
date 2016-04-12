@@ -27,6 +27,8 @@ chmod +x config/vim_setup.sh # make script executable
 |[html5.vim](https://github.com/othree/html5.vim)|HTML5 omnicomplete and syntax highlighting|
 |[ap/vim-css-color](http://github.com/skammer/vim-css-color)|Show colors hex codes|
 |[scss-syntax](http://github.com/cakebaker/scss-syntax.vim)|Syntax highlighting for [Sass](http://sass-lang.com)|
+|[delmitMate](https://github.com/Raimondi/delimitMate)|Auto-completion for quotes, parens, brackets in insert mode|
+|[html5.vim](https://github.com/othree/html5.vim)|HTML5 + inline SVG omnicomplete function, indent and syntax|
 |[vim-airline](https://github.com/vim-airline/vim-airline)|
 |[vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)|
 |[vim-hybrid-material](https://github.com/kristijanhusak/vim-hybrid-material)|
@@ -36,7 +38,7 @@ chmod +x config/vim_setup.sh # make script executable
 |[vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax)|
 |[vim-json](https://github.com/elzr/vim-json)|JSON highlighting for key/value pairs and quote concealment|
 |[vim-surround](https://github.com/tpope/vim-surround)|Key mappings to easily delete, change, and add surrounding pairs|
-|[delimitMate](https://github.com/Raimondi/delimitMate)|Auto-completion for quotes, parenthesis, bracketsin _Insert_ mode|
+|[delimitMate](https://github.com/Raimondi/delimitMate)|Auto-completion for quotes, parenthesis, brackets in _Insert_ mode|
 |[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)|Code-completion using tab|
 |[syntastic](https://github.com/scrooloose/syntastic)|Syntax checking/code linting|
 |[tern_for_vim](https://github.com/marijnh/tern_for_vim)|[Tern](http://ternjs.net/)-based JS editing support|

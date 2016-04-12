@@ -2,7 +2,6 @@ set nocompatible              " be iMproved
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'Raimondi/delimitMate'
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
@@ -17,6 +16,7 @@ Plug 'elzr/vim-json'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'matze/vim-move'
 Plug 'tpope/vim-surround'
+Plug 'Raimondi/delimitMate'
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'marijnh/tern_for_vim'
@@ -73,10 +73,9 @@ let g:enable_bold_font = 1
 
 " ================ plugins setups ========================
 let delimitMate_expand_cr = 1                         "Expand brackets
-"let delimitMate_expand_inside_quotes = 0
+let g:ycm_key_list_previous_completion = ['<Up>']     "remove <s-Tab> for
 let javascript_enable_domhtmlcss=1                    "Enable HTML/CSS syntax in JS
-
-let g:move_key_modifier = 'C'                         " Vim move modifier key (CTRL)
+let g:move_key_modifier = 'C'                         "Vim move modifier key (CTRL)
 
 "Airline
 let g:airline#extensions#tabline#enabled = 0      "Don't display all buffers if one tab open
