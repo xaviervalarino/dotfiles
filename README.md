@@ -1,8 +1,8 @@
 # Personal Dotfiles
-I use these dotfiles on Mac OSX and Debian Jessie.
+Dotfiles on Mac OSX and Debian Jessie.
 
 ## Bash
-My Bash config includes some color for PS1, a lot of bash aliases, and some OS specific settings
+Configuration includes color for PS1, bash aliases, and some OS specific settings
 
 ###Installation
 Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the bash files to the home directory.
@@ -21,8 +21,8 @@ chmod +x config/vim_setup.sh # make script executable
 ./config/vim_setup.sh        # run script
 ```
 
-###plugins
-|plugin|description|
+###Plugins
+|Plugin|Description|
 |------|-----------|
 |[html5.vim](https://github.com/othree/html5.vim)|HTML5 omnicomplete and syntax highlighting|
 |[ap/vim-css-color](http://github.com/skammer/vim-css-color)|Show colors hex codes|
@@ -30,31 +30,30 @@ chmod +x config/vim_setup.sh # make script executable
 |[vim-airline](https://github.com/vim-airline/vim-airline)|
 |[vim-airline-themes](https://github.com/vim-airline/vim-airline-themes)|
 |[vim-hybrid-material](https://github.com/kristijanhusak/vim-hybrid-material)|
-|[vim-devicons](https://github.com/ryanoasis/vim-devicons)|Filetype glyphs for other plugins|
 |[vimroom](https://github.com/mikewest/vimroom)|Full-screen focus mode (maybe switching to [pgdouyon's fork](https://github.com/pgdouyon/vimroom))|
+<!--|[vim-devicons](https://github.com/ryanoasis/vim-devicons)|Filetype glyphs for other plugins|-->
 |[vim-javascript](https://github.com/pangloss/vim-javascript)|
 |[vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax)|
-|[vim-json](https://github.com/elzr/vim-json)|
-|[vim-surround](https://github.com/tpope/vim-surround)|
-|[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)|
-|[delimitmate](https://github.com/raimondi/delimitmate)|
-|[youcompleteme](https://github.com/valloric/youcompleteme)|
-|[syntastic](https://github.com/scrooloose/syntastic)|
-|[tern_for_vim](https://github.com/marijnh/tern_for_vim)|[tern](http://ternjs.net/)-based JS editing support|
-|[vim-move](https://github.com/matze/vim-move)|Move lines and selections up and down|
+|[vim-json](https://github.com/elzr/vim-json)|JSON highlighting for key/value pairs and quote concealment|
+|[vim-surround](https://github.com/tpope/vim-surround)|Key mappings to easily delete, change, and add surrounding pairs|
+|[delimitMate](https://github.com/Raimondi/delimitMate)|Auto-completion for quotes, parenthesis, bracketsin _Insert_ mode|
+|[YouCompleteMe](https://github.com/Valloric/YouCompleteMe)|Code-completion using tab|
+|[syntastic](https://github.com/scrooloose/syntastic)|Syntax checking/code linting|
+|[tern_for_vim](https://github.com/marijnh/tern_for_vim)|[Tern](http://ternjs.net/)-based JS editing support|
+|[vim-move](https://github.com/matze/vim-move)|Easily move lines and selected blocks|
 |[vim-multiple-cursors](https://github.com/terryma/vim-multiple-cursors)|
 |[vim-pug](https://github.com/digitaltoad/vim-pug)|[Pug](http://jade-lang.com/) HTML template syntax highlighting (formerly Jade)|
 |[plaintask.vim](https://github.com/elentok/plaintasks.vim)|[Plaintasks](https://github.com/aziz/PlainTasks) for VIM|
 |[detectindent](https://github.com/ciaranm/detectindent)|Automatically detect indent settings in file|
 |[mustache/vim-mustache-handlebars](https://github.com/mustache/vim-mustache-handlebars)|Support for [Mustache](http://mustache.github.io/) and [Handlebars](http://handlebarsjs.com/) templates|
 
-## Sublime
+##Sublime
 That being said, Sublime still remains my editor of choice when I need to get something done quickly.
 
-## Nano
+##Nano
 I find myself using this editor from time to time... so why not have syntax highlighting on all of my machines?
 
-## [Conky](https://github.com/brndnmtthws/conky)
+##[Conky](https://github.com/brndnmtthws/conky)
 I use conky to monitor:
 * Network connection
 * CPU load

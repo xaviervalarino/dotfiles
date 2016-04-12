@@ -2,13 +2,14 @@ set nocompatible              " be iMproved
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'Raimondi/delimitMate'
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kristijanhusak/vim-hybrid-material'
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 Plug 'mikewest/vimroom'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
@@ -72,16 +73,16 @@ let g:enable_bold_font = 1
 
 " ================ plugins setups ========================
 let delimitMate_expand_cr = 1                         "Expand brackets
+"let delimitMate_expand_inside_quotes = 0
 let javascript_enable_domhtmlcss=1                    "Enable HTML/CSS syntax in JS
 
 let g:move_key_modifier = 'C'                         " Vim move modifier key (CTRL)
 
 "Airline
-let g:airline#extensions#tabline#enabled = 1      "Display all buffers if one tab open
+let g:airline#extensions#tabline#enabled = 0      "Don't display all buffers if one tab open
 let g:airline#extensions#tabline#left_sep = ' '   "Don't use arrow separator for buffer
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts=1                   "Enable powerline fonts
 let g:airline_theme = "bubblegum"                 "Set theme to powerline default theme
-let g:move_key_modifier = 'D'                     "Use D with k and j to move lines up or down
 
 let g:vimroom_sidebar_height=0                    "Fix issue with airline statusbar in Vimroom
