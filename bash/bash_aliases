@@ -11,10 +11,6 @@ BASE16_SHELL="$HOME/.config/bash/base16-material.dark.sh"
 # Add git branches to PS1
 [ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
 
-## __HOMEBREW__ ##
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  source $(brew --prefix)/etc/bash_completion
-fi
 
 # base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-material.dark.sh"
@@ -51,6 +47,11 @@ if [[ $platform == 'Linux' ]]; then
 ### MAC OSX SPECIFIC ###
 ########################
 elif [[  $platform == 'Darwin' ]]; then
+
+  ## __HOMEBREW__ ##
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+  source $(brew --prefix)/etc/bash_completion
+  fi
 
   # make all homebrew packages accessible when prepended with 'my'
   alias my="PATH=/usr/local/bin:$PATH"
