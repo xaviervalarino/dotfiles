@@ -1,12 +1,14 @@
+if [ -f ~/.git-completion.bash ]; then
+. ~/.git-completion.bash
+fi
+
+if [ -f ~/.git-prompt.sh ]; then
+. ~/.git-prompt.sh
+fi
 # base16 Shell
 BASE16_SHELL="$HOME/.config/base16-shell/base16-material.dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
-#TODO Move to OS specific file
-## __HOMEBREW__ ##
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  . $(brew --prefix)/etc/bash_completion
-fi
 
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion
@@ -21,9 +23,9 @@ export EDITOR='open -a "Sublime Text"'
 alias my="PATH=/usr/local/bin:$PATH"
 
 
-##################
-### MY ALIASES ###
-##################
+###############
+### ALIASES ###
+###############
 
 # up 'n' folders
 alias ..='cd ..'
@@ -41,45 +43,29 @@ alias grep='grep --color=auto'
 # refresh shell
 alias reload='source ~/.bash_profile'
 
-#TODO if [ $localhost == 'mac' ]; then
+########################
+### MAC OSX SPECIFIC ###
+########################
+elif [[  $platform == 'Darwin' ]]; then
+  ## __HOMEBREW__ ##
+  if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    source $(brew --prefix)/etc/bash_completion
+  fi
 
-# lock computer
-alias lock='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
-# hibernation and sleep settings
-alias hibernate='sudo pmset -a hibernatemode 25'
-alias sleep='sudo pmset -a hibernatemode 0'
-alias safesleep='sudo pmset -a hibernatemode 3'
-alias smartsleep='sudo pmset -a hibernatemode 2'
-# Launch quicklook from terminal
-alias ql='qlmanage -p 2> /dev/null'
-alias quicklook='ql'
+  # launch application
+  alias finder='open .'
+  alias thunar='finder'
+  alias ps='open -a  /Applications/Adobe\ Photoshop\ CS5/Adobe\ Photoshop\ CS5.app'
+  alias ai='open -a  /Applications/Adobe\ Illustrator\ CS5/Adobe\ Illustrator.app'
+  alias graffle='open -a /Applications/OmniGraffle.app'
+  alias chromium='open -a  /Applications/Chromium.app'
+  alias firefox='open -a /Applications/Firefox.app'
+  alias sublime='open -a /Applications/Sublime\ Text.app'
+  alias writer='open -a /Applications/iA\ Writer.app'
+  alias write='writer'
 
-# launch application
-alias finder='open .'
-alias thunar='finder'
-alias ps='open -a  /Applications/Adobe\ Photoshop\ CS5/Adobe\ Photoshop\ CS5.app'
-alias ai='open -a  /Applications/Adobe\ Illustrator\ CS5/Adobe\ Illustrator.app'
-alias graffle='open -a /Applications/OmniGraffle.app'
-alias chromium='open -a  /Applications/Chromium.app'
-alias firefox='open -a /Applications/Firefox.app'
-alias sublime='open -a /Applications/Sublime\ Text.app'
-alias writer='open -a /Applications/iA\ Writer.app'
-alias write='writer'
-
-alias cask='brew cask'
-alias todo='writer ~/Dropbox/notes/todo.md'
-alias nano='my nano'
-alias diff='colordiff'
-
-
-if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+  alias cask='brew cask'
+  alias todo='writer ~/Dropbox/notes/todo.md'
+  alias nano='my nano'
+  alias diff='colordiff'
 fi
-
-if [ -f ~/.git-prompt.sh ]; then
-  . ~/.git-prompt.sh
-fi
-
-# make hostame and username green
-# (uses pastel colors in iterm settings )
-export PS1='\[\e[32m\]\u@\h:\[\e[34m\]\W$(__git_ps1 "(%s)")\[\e[32m\]\$\[\e[m\] '
