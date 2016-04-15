@@ -1,3 +1,8 @@
+
+# Base16 Shell color for Material Theme
+BASE16_SHELL="$HOME/.config/bash/base16-material.dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
 # Normal Colors
 Black='\[\e[0;30m\]'        # Black
 Red='\[\e[0;31m\]'          # Red
