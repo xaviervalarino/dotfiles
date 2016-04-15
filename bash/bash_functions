@@ -1,5 +1,5 @@
 function markdown(){
-  # if argv[0] string lenght does not equal zero
+  # if argv[0] string length does not equal zero
   if [ -z $1 ]
     then
       echo 'No markdown file specified';
