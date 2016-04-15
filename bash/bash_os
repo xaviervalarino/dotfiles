@@ -1,9 +1,9 @@
-#!/bin/bash
 
-#TODO set OS specific settings
-
-os=''
-if [[ uname -eq 'Darwin' ]]; then
-  os='mac'
-# else if os -eq 'linux'
+platform='Unkown'
+unameStr=$(uname)
+# Debian / Linux
+if [[ $unameStr == 'Linux' ]]; then
+  platform='Linux'
+elif [[  $unameStr == 'Darwin' ]]; then
+  platform='OSX'
 fi
