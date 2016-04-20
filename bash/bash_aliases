@@ -100,11 +100,17 @@ alias .....='cd ../../../..'
 
 # make rm always recursive
 alias rm='rm -r'
-# Colorize cat
-alias ccat="source-highlight --out-format=esc -o STDOUT -i"
 
 # refresh shell
 alias reload='source ~/.bash_profile'
+
+# Colorize cat
+alias ccat="source-highlight --out-format=esc -o STDOUT -i"
+
+# Git aliases
+alias st='git status'
+alias log='git log --graph --decorate --pretty=oneline --abbrev-commit'
+alias com='git commit'
 
 # Actions
 # TODO combine reload aliases
