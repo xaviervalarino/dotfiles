@@ -1,13 +1,13 @@
 # Personal Dotfiles
-Dotfiles on Mac OSX and Debian Jessie.
+Dotfiles for Mac OSX and Debian Jessie.
 
 ## Bash
-Configuration includes color for PS1, bash aliases, and some OS specific settings
+Configuration includes color for PS1, bash aliases, and OS specific settings (controlled by looking up `uname`)
 
 ### Installation
 Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the bash files to the home directory.
 ```bash
-chmod +x config/bash_setup.sh # make script executable
+# from inside dotfiles directory
 ./config/bash_setup.sh        # run script
 ```
 
@@ -17,7 +17,7 @@ I have been slowly learning Vim. This was born from the desire to be able do eve
 ### Installation
 Running the setup script will symlink _vimrc_ to your home directory, installs [vim-plug](https://github.com/junegunn/vim-plug) (if it is not already installed) and installs or updates plugins
 ```bash
-chmod +x config/vim_setup.sh # make script executable
+# from inside dotfiles directory
 ./config/vim_setup.sh        # run script
 ```
 
@@ -45,7 +45,7 @@ Plugin | Description
 ~~[vim-devicons](https://github.com/ryanoasis/vim-devicons)~~ | ~~Filetype glyphs for other plugins~~
 [vim-airline](https://github.com/vim-airline/vim-airline) | Enhanced status and tabline
 [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes) | Themes for airline
-[vim-hybrid-material](https://github.com/kristijanhusak/vim-hybrid-material) | Material color scheme
+[base16-ocean](https://github.com/chriskempson/base16-vim) | Dark [Base16-Ocean](http://chriskempson.github.io/base16/#ocean) color scheme
 
 ## Sublime
 That being said, Sublime still remains my editor of choice when I need to get something done quickly.

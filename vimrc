@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved
+set nocompatible              "be iMproved
 
 call plug#begin('~/.vim/plugged')
 
@@ -7,8 +7,7 @@ Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'kristijanhusak/vim-hybrid-material'
-"Plug 'ryanoasis/vim-devicons'
+Plug 'chriskempson/base16-vim'
 Plug 'mikewest/vimroom'
 Plug 'tpope/vim-vinegar'
 Plug 'jelera/vim-javascript-syntax'
@@ -26,7 +25,7 @@ Plug 'elentok/plaintasks.vim'
 Plug 'ciaranm/detectindent'
 Plug 'mustache/vim-mustache-handlebars'
 
-" Add plugins to &runtimepath
+"Add plugins to &runtimepath
 call plug#end()
 filetype plugin indent on
 
@@ -42,7 +41,7 @@ set mouse=a                          "Enable mouse
 set cursorline                       "Highlight current line
 set noshowmode                       "Hide default mode indicator (controlled by airline)
 
-" Default to soft tabs, 2 spaces
+"Default to soft tabs, 2 spaces
 set smartindent
 set expandtab
 set sw=2
@@ -59,11 +58,13 @@ set listchars=tab:\ \ ,trail:·       "Set trails for tabs and spaces
 set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
 
 set background=dark
-colorscheme hybrid_material
+let base16colorspace=256
+colorscheme base16-ocean
+"colorscheme hybrid_material
 
 set noswapfile                        "turn off swapfile
 
-" remap 'jj' to escape in insert mode
+"remap 'jj' to escape in insert mode
 inoremap jj <Esc>
 "search for visually selected text using '//'
 vnoremap // y/<C-R>"<CR>"
@@ -71,19 +72,19 @@ vnoremap // y/<C-R>"<CR>"
 map <tab> :bn<cr>
 map <S-tab> :bp<cr>
 
-let g:enable_bold_font = 1
+"let g:enable_bold_font = 1
 
-" ================ plugins setups ========================
+"================ plugins setups ========================
 let delimitMate_expand_cr = 1                         "Expand brackets
 let g:ycm_key_list_previous_completion = ['<Up>']     "remove <s-Tab> for
 let javascript_enable_domhtmlcss=1                    "Enable HTML/CSS syntax in JS
 let g:move_key_modifier = 'C'                         "Vim move modifier key (CTRL)
 
 "Airline
-let g:airline#extensions#tabline#enabled = 0      "Don't display all buffers if one tab open
+let g:airline#extensions#tabline#enabled = 1      "Don't display all buffers if one tab open
 let g:airline#extensions#tabline#left_sep = ' '   "Don't use arrow separator for buffer
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts=1                   "Enable powerline fonts
-let g:airline_theme = "bubblegum"                 "Set theme to powerline default theme
+let g:airline_theme = "base16"                    "Set theme to powerline default theme
 
 let g:vimroom_sidebar_height=0                    "Fix issue with airline statusbar in Vimroom
