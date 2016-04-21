@@ -1,13 +1,20 @@
 #!/bin/bash
 
+cat<<"EOT"
+-----------------
+VIM CONFIGURATION
+-----------------
+EOT
+
 # SymLink vimrc to home dir
-if [ -f "${HOME}/.vimrc" ]; then
+vimrc=${HOME}/.vimrc
+if [ -f $vimrc ]; then
   echo "Your old .vimrc has been renamed .vimrc.old"
-  mv "$HOME/.vimrc" "$HOME/.vimrc.old"
+  mv $vimrc "$HOME/.vimrc.old"
 
   echo "symlinking new vimrc to home directory"
-  path=$(pwd)
-  ln -s ${path}/vimrc ~/.vimrc
+  dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+  ln -s -f ${dotfiles}/vimrc $vimrc
 fi
 
 # Download Vim Plug

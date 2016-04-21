@@ -8,7 +8,7 @@ Configuration includes color for PS1, bash aliases, and OS specific settings (co
 Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the bash files to the home directory.
 ```bash
 # from inside dotfiles directory
-./config/bash_setup.sh        # run script
+./config/bash_setup.sh # run script
 ```
 
 ## Vim
@@ -18,16 +18,15 @@ I have been slowly learning Vim. This was born from the desire to be able do eve
 Running the setup script will symlink _vimrc_ to your home directory, installs [vim-plug](https://github.com/junegunn/vim-plug) (if it is not already installed) and installs or updates plugins
 ```bash
 # from inside dotfiles directory
-./config/vim_setup.sh        # run script
+./config/vim_setup.sh # run script
 ```
 
 ### Plugins
 Plugin | Description
 ------ | -----------
-[html5.vim](https://github.com/othree/html5.vim) | HTML5 omnicomplete and syntax highlighting
+[html5.vim](https://github.com/othree/html5.vim) | HTML5 + inline SVG omnicomplete function, indent and syntax
 [ap/vim-css-color](http://github.com/skammer/vim-css-color) | Show colors hex codes
 [scss-syntax](http://github.com/cakebaker/scss-syntax.vim) | Syntax highlighting for [Sass](http://sass-lang.com)
-[html5.vim](https://github.com/othree/html5.vim) | HTML5 + inline SVG omnicomplete function, indent and syntax
 [vim-javascript](https://github.com/pangloss/vim-javascript) | Improved JS indentation
 [vim-javascript-syntax](https://github.com/jelera/vim-javascript-syntax) | Improved JS syntax highlighting
 [vim-pug](https://github.com/digitaltoad/vim-pug) | Highlighting for [Pug](http://jade-lang.com/) HTML template syntax (formerly Jade)
@@ -47,10 +46,10 @@ Plugin | Description
 [vim-airline-themes](https://github.com/vim-airline/vim-airline-themes) | Themes for airline
 [base16-ocean](https://github.com/chriskempson/base16-vim) | Dark [Base16-Ocean](http://chriskempson.github.io/base16/#ocean) color scheme
 
-## Sublime
+## [Sublime](http://www.sublimetext.com/)
 That being said, Sublime still remains my editor of choice when I need to get something done quickly.
 
-## Nano
+## [Nano](http://nano-editor.org/)
 I find myself using this editor from time to time... so why not have syntax highlighting on all of my machines?
 
 ## [Conky](https://github.com/brndnmtthws/conky)
