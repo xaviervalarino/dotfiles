@@ -4,12 +4,13 @@ cat<<"EOT"
 -----------------
 VIM CONFIGURATION
 -----------------
+
 EOT
 
 # SymLink vimrc to home dir
 vimrc=${HOME}/.vimrc
 if [ -f $vimrc ]; then
-  echo "Your old .vimrc has been renamed .vimrc.old"
+  echo "(!) Your old .vimrc has been renamed .vimrc.old"
   mv $vimrc "$HOME/.vimrc.old"
 
   echo "symlinking new vimrc to home directory"
@@ -39,5 +40,6 @@ else
 fi
 
 vim +$viCmd +'qall!' > /dev/null
-echo "Done"
+echo
+echo "DONE!"
 
