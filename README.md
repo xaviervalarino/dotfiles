@@ -2,12 +2,12 @@
 Dotfiles for Mac OSX and Debian Jessie.
 
 ## Screenshots
-![Screenshot of my Debian desktop with Conky and Vim Running](./img/debian_screenshot.png?raw=true)
+![Screenshot of Xavier's Debian desktop with Conky and Vim Running](./img/debian_screenshot.png?raw=true)
 
 ## Bash
 Configuration includes color for PS1, bash aliases, and OS specific settings (controlled by looking up `uname`)
 
-### Installation
+#### Installation
 Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the files located in bash/ to the home directory.
 ```bash
 ./setup/bash_setup.sh # run script
@@ -16,7 +16,7 @@ Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_l
 ## [Terminator](http://gnometerminator.blogspot.com/p/introduction.html)
 A terminal emulator with some nice features like window splitting and dropping files to get the path
 
-### Installation
+#### Installation
 Sets up the terminal with no scrollbar and the base16-ocean dark colorscheme
 ```bash
 ./setup/terminator_setup.sh # run script
@@ -25,13 +25,13 @@ Sets up the terminal with no scrollbar and the base16-ocean dark colorscheme
 ## Vim
 I have been slowly learning Vim. This was born from the desire to be able do everything in the terminal—jumping back and forth between the terminal and a text editor window while debugging starts to feel tedious.
 
-### Installation
+#### Installation
 Running the setup script will symlink _vimrc_ to your home directory, installs [vim-plug](https://github.com/junegunn/vim-plug) (if it is not already installed) and installs or updates plugins
 ```bash
 ./setup/vim_setup.sh # run script
 ```
 
-### Plugins
+#### Plugins
 Plugin | Description
 ------ | -----------
 [html5.vim](https://github.com/othree/html5.vim) | HTML5 + inline SVG omnicomplete function, indent and syntax
@@ -72,10 +72,10 @@ I use conky to monitor:
 ## [Openbox](http://openbox.org/wiki/Main_Page)
 Openbox lightweight stacking windows manager. Many of my settings are based of off the defaults that came with Crunchbang linux (defunct, but forked as [BunsenLabs](https://www.bunsenlabs.org/))
 
-### Dependencies
+#### Dependencies
 This configuration requires [cb-pipemenus](https://github.com/gearge/cb-pipemenus) to be in your `$PATH`
 
-### Installation
+#### Installation
 Setup script will symlink `autostart`, `rc.xml`, `menu.xml` into `$HOME/.config/openbox`
 ```bash
 ./setup/openbox_setup.sh # run script
