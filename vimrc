@@ -47,6 +47,10 @@ set expandtab
 set sw=2
 set sts=2
 
+"Fix backspace
+set backspace=2
+set backspace=indent,eol,start
+
 "Unset search pattern (highlighting) by hitting backslash '\'
 nnoremap \ :noh<CR>
 
