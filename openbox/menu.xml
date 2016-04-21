@@ -511,7 +511,7 @@
     <item label="Lock Screen">
       <action name="Execute">
         <command>
-          xautolock -locknow
+          slimlock
         </command>
       </action>
     </item>
