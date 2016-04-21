@@ -5,12 +5,22 @@ Dotfiles for Mac OSX and Debian Jessie.
 Configuration includes color for PS1, bash aliases, and OS specific settings (controlled by looking up `uname`)
 
 ### Installation
-Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the bash files to the home directory.
+Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the files located in bash/ to the home directory.
 ```bash
 # from inside dotfiles directory
 ./config/bash_setup.sh # run script
 ```
 
+## [Terminator](http://gnometerminator.blogspot.com/p/introduction.html)
+A terminal emulator with some nice features like window splitting and dropping files to get the path
+
+### Installation
+Sets up the terminal with no scrollbar and the base16-ocean dark colorscheme
+```bash
+# from inside dotfiles directory
+./config/terminator_setup.sh # run script
+```
+-->
 ## Vim
 I have been slowly learning Vim. This was born from the desire to be able do everything in the terminal—jumping back and forth between the terminal and a text editor window while debugging starts to feel tedious.
 
