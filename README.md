@@ -1,24 +1,25 @@
 # Personal Dotfiles
 Dotfiles for Mac OSX and Debian Jessie.
 
+## Screenshots
+![Screenshot of my Debian desktop with Conky and Vim Running](./img/debian_screenshot.png?raw=true)
+
 ## Bash
 Configuration includes color for PS1, bash aliases, and OS specific settings (controlled by looking up `uname`)
 
 ### Installation
 Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the files located in bash/ to the home directory.
 ```bash
-# from inside dotfiles directory
-./config/bash_setup.sh # run script
+./setup/bash_setup.sh # run script
 ```
-
+<!--
 ## [Terminator](http://gnometerminator.blogspot.com/p/introduction.html)
 A terminal emulator with some nice features like window splitting and dropping files to get the path
 
 ### Installation
 Sets up the terminal with no scrollbar and the base16-ocean dark colorscheme
 ```bash
-# from inside dotfiles directory
-./config/terminator_setup.sh # run script
+./setup/terminator_setup.sh # run script
 ```
 -->
 ## Vim
@@ -27,8 +28,7 @@ I have been slowly learning Vim. This was born from the desire to be able do eve
 ### Installation
 Running the setup script will symlink _vimrc_ to your home directory, installs [vim-plug](https://github.com/junegunn/vim-plug) (if it is not already installed) and installs or updates plugins
 ```bash
-# from inside dotfiles directory
-./config/vim_setup.sh # run script
+./setup/vim_setup.sh # run script
 ```
 
 ### Plugins
@@ -69,5 +69,17 @@ I use conky to monitor:
 * Memory usage
 * Disk Space
 
-## Screenshots
-![Screenshot of my Debian desktop with Conky and Vim Running](./img/debian_screenshot.png?raw=true)
+## [Openbox](http://openbox.org/wiki/Main_Page)
+Openbox lightweight stacking windows manager. Many of my settings are based of off the defaults that came with Crunchbang linux (defunct, but forked as [BunsenLabs](https://www.bunsenlabs.org/))
+
+### Dependencies
+This configuration requires [cb-pipemenus](https://github.com/gearge/cb-pipemenus) to be in your `$PATH`
+
+### Installation
+Setup script will symlink `autostart`, `rc.xml`, `menu.xml` into `$HOME/.config/openbox`
+```bash
+./setup/openbox_setup.sh # run script
+```
+
+## Disclaimer
+These files are for personal use, so your milage (_especially_ with the setup scripts) may vary.
