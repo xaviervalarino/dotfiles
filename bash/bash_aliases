@@ -40,6 +40,7 @@ if [[ $platform == 'Linux' ]]; then
   alias calc='bc'         # Calculator from terminal
   alias mouse='ltunify'   # Pair wireless mouse
   alias node='nodejs'
+  alias fontr='fc-cache -f -v'
 
 ########################
 ### MAC OSX SPECIFIC ###
