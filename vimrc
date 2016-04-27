@@ -43,13 +43,17 @@ set noshowmode                       "Hide default mode indicator (controlled by
 
 "Default to soft tabs, 2 spaces
 set smartindent
+set smarttab
 set expandtab
-set sw=2
-set sts=2
+set shiftwidth=4
+set softtabstop=4
 
 "Fix backspace
 set backspace=2
 set backspace=indent,eol,start
+
+"Treat all numerals as decimal, regardless of padded zeros
+set nrformats=
 
 "Unset search pattern (highlighting) by hitting backslash '\'
 nnoremap \ :noh<CR>
