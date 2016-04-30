@@ -40,6 +40,7 @@ set incsearch                        "Do incremental searching
 set mouse=a                          "Enable mouse
 set cursorline                       "Highlight current line
 set noshowmode                       "Hide default mode indicator (controlled by airline)
+set clipboard=unnamedplus            "Add X11 to the copy register (e.g. <+y>)
 
 "Default to soft tabs, 2 spaces
 set smartindent
@@ -61,7 +62,6 @@ nnoremap \ :noh<CR>
 set incsearch                        "Do incremental searching
 set showmatch                        "Highlight matching bracket
 autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
-set listchars=tab:\ \ ,trail:·       "Set trails for tabs and spaces
 
 set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
 
