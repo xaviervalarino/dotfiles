@@ -1,0 +1,15 @@
+Things to fix:
+☐ bash reload on OSX (points to _aliases, not _profile)
+
+Config files to add:
+☐ tracking openbox dependencies (cb-pipemenu)?
+☐ tint2
+☐ gtk-2 and gtk2 3
+☐ compton
+
+Archive:
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+✔ Add Openbox @done (2016-04-21 12:49)
+  ✔ rc.xml @done (2016-04-21 12:49)
+  ✔ autostart @done (2016-04-21 12:50)
+  ✔ menu.xml @done (2016-04-21 12:51)
