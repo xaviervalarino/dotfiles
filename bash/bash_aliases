@@ -118,8 +118,6 @@ alias log='git log --graph --decorate --pretty=oneline --abbrev-commit'
 alias com='git commit'
 
 # Actions
-# TODO combine reload aliases
-# alias reload='source ~/.bash_aliases'             # Reload bash aliases
 alias todo='sublime -n ~/Dropbox/notes/todo.md'   # Open ToDo list
 alias md='vmd.sh'                                 # Read markdown files in Lynx
 # short / easy to remember
