@@ -7,7 +7,8 @@ Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
+"Plug 'chriskempson/base16-vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'mikewest/vimroom'
 Plug 'tpope/vim-vinegar'
 Plug 'jelera/vim-javascript-syntax'
@@ -24,6 +25,7 @@ Plug 'digitaltoad/vim-pug'
 Plug 'elentok/plaintasks.vim'
 Plug 'ciaranm/detectindent'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'tpope/vim-commentary'
 
 "Add plugins to &runtimepath
 call plug#end()
@@ -40,7 +42,7 @@ set incsearch                        "Do incremental searching
 set mouse=a                          "Enable mouse
 set cursorline                       "Highlight current line
 set noshowmode                       "Hide default mode indicator (controlled by airline)
-set clipboard=unnamedplus            "Add X11 to the copy register (e.g. <+y>)
+" set clipboard=unnamedplus            "Add X11 to the copy register (e.g. <+y>)
 
 "Default to soft tabs, 2 spaces
 set smartindent
@@ -65,10 +67,14 @@ autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
 
 set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
 
-set background=dark
-let base16colorspace=256
-colorscheme base16-ocean
-"colorscheme hybrid_material
+" Set the background light from 7am to 7pm
+let hour = strftime("%H")
+if 7 <= hour && hour < 19
+  set background=light
+else " Set to dark from 7pm to 7am
+  set background=dark
+endif
+colorscheme solarized
 
 set noswapfile                        "turn off swapfile
 
@@ -93,6 +99,7 @@ let g:airline#extensions#tabline#enabled = 1      "Don't display all buffers if 
 let g:airline#extensions#tabline#left_sep = ' '   "Don't use arrow separator for buffer
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts=1                   "Enable powerline fonts
-let g:airline_theme = "base16"                    "Set theme to powerline default theme
+" let g:airline_theme = "base16"                  " Set airline to base16
+let g:airline_theme = "solarized"                 " Set airline to solarized
 
 let g:vimroom_sidebar_height=0                    "Fix issue with airline statusbar in Vimroom
