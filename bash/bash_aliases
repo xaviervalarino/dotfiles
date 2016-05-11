@@ -33,52 +33,54 @@ platform=$(uname)
 ######################
 if [[ $platform == 'Linux' ]]; then
 
-  # copy and pasting
-  alias copy='xclip -selection c'
-  alias paste='xclip -selection clipboard -o'
+    # copy and pasting
+    alias copy='xclip -selection c'
+    alias paste='xclip -selection clipboard -o'
 
-  #shorthand / easy to remember
-  alias calc='bc'         # Calculator from terminal
-  alias mouse='ltunify'   # Pair wireless mouse
-  alias node='nodejs'
-  alias fontr='fc-cache -f -v'
+    #shorthand / easy to remember
+    alias calc='bc'         # Calculator from terminal
+    alias mouse='ltunify'   # Pair wireless mouse
+    alias node='nodejs'
+    alias fontr='fc-cache -f -v'
 
 ########################
 ### MAC OSX SPECIFIC ###
 ########################
 elif [[ $platform == 'Darwin' ]]; then
+
     # Change iterm profile with time of day
     iterm2_profile() { echo -e "\033]50;SetProfile=$1\a"; }
     HOUR=`date +"%H"`
     if [ $HOUR -gt 7 ] && [ $HOUR -lt 19 ]; then
         iterm2_profile 'Solarized Light'
-    else iterm2_profile 'Solarized Dark'
+    else
+        iterm2_profile 'Solarized Dark'
     fi
 
-  ## __HOMEBREW__ ##
-  if [ -f $(brew --prefix)/etc/bash_completion ]; then
-  source $(brew --prefix)/etc/bash_completion
-  fi
+    ## __HOMEBREW__ ##
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        source $(brew --prefix)/etc/bash_completion
+    fi
 
-  # make all homebrew packages accessible when prepended with 'my'
-  alias my="PATH=/usr/local/bin:$PATH"
+    # make all homebrew packages accessible when prepended with 'my'
+    alias my="PATH=/usr/local/bin:$PATH"
 
-  # launch application
-  alias finder='open .'
-  alias thunar='finder'
-  alias ps='open -a  /Applications/Adobe\ Photoshop\ CS5/Adobe\ Photoshop\ CS5.app'
-  alias ai='open -a  /Applications/Adobe\ Illustrator\ CS5/Adobe\ Illustrator.app'
-  alias graffle='open -a /Applications/OmniGraffle.app'
-  alias chromium='open -a  /Applications/Chromium.app'
-  alias firefox='open -a /Applications/Firefox.app'
-  alias sublime='open -a /Applications/Sublime\ Text.app'
-  alias writer='open -a /Applications/iA\ Writer.app'
-  alias write='writer'
+    # launch application
+    alias finder='open .'
+    alias thunar='finder'
+    alias ps='open -a  /Applications/Adobe\ Photoshop\ CS5/Adobe\ Photoshop\ CS5.app'
+    alias ai='open -a  /Applications/Adobe\ Illustrator\ CS5/Adobe\ Illustrator.app'
+    alias graffle='open -a /Applications/OmniGraffle.app'
+    alias chromium='open -a  /Applications/Chromium.app'
+    alias firefox='open -a /Applications/Firefox.app'
+    alias sublime='open -a /Applications/Sublime\ Text.app'
+    alias writer='open -a /Applications/iA\ Writer.app'
+    alias write='writer'
 
-  alias cask='brew cask'
-  alias todo='writer ~/Dropbox/notes/todo.md'
-  alias nano='my nano'
-  alias diff='colordiff'
+    alias cask='brew cask'
+    alias todo='writer ~/Dropbox/notes/todo.md'
+    alias nano='my nano'
+    alias diff='colordiff'
 fi
 
 ##########################
@@ -119,6 +121,7 @@ alias reload=$shell
 
 # Colorize cat
 alias ccat="source-highlight --out-format=esc -o STDOUT -i"
+alias subl='sublime'
 
 # Git aliases
 alias st='git status'
@@ -129,4 +132,3 @@ alias com='git commit'
 alias todo='sublime -n ~/Dropbox/notes/todo.md'   # Open ToDo list
 alias md='vmd.sh'                                 # Read markdown files in Lynx
 # short / easy to remember
-alias subl='sublime'
