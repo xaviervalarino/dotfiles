@@ -7,8 +7,7 @@ Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'chriskempson/base16-vim'
-Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
 Plug 'mikewest/vimroom'
 Plug 'tpope/vim-vinegar'
 Plug 'jelera/vim-javascript-syntax'
@@ -67,14 +66,15 @@ autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
 
 set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
 
-" Set the background light from 7am to 7pm
-let hour = strftime("%H")
-if 7 <= hour && hour < 19
+" Set the background  according to shell theme
+let theme=$THEME
+if theme == 'light'
   set background=light
-else " Set to dark from 7pm to 7am
+else
   set background=dark
 endif
-colorscheme solarized
+let base16colorspace=256
+colorscheme base16-ateliersulphurpool
 
 set noswapfile                        "turn off swapfile
 
@@ -99,7 +99,8 @@ let g:airline#extensions#tabline#enabled = 1      "Don't display all buffers if 
 let g:airline#extensions#tabline#left_sep = ' '   "Don't use arrow separator for buffer
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline_powerline_fonts=1                   "Enable powerline fonts
-" let g:airline_theme = "base16"                  " Set airline to base16
-let g:airline_theme = "solarized"                 " Set airline to solarized
+let g:airline_theme = 'base16'                  " Set airline to base16
+" TODO copy over airline theme form base16-builder
+" let g:airline_theme = 'base16-ateliersulphurpool'                  " Set airline to base16
 
 let g:vimroom_sidebar_height=0                    "Fix issue with airline statusbar in Vimroom
