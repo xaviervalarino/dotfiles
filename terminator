@@ -1,7 +1,9 @@
 [global_config]
+  borderless = True
   broadcast_default = off
   focus = mouse
   geometry_hinting = False
+  handle_size = 1
 [keybindings]
 [layouts]
   [[default]]
@@ -15,16 +17,43 @@
 [profiles]
   [[default]]
     audible_bell = True
-    background_color = "#2b302b"
+    background_color = "#002b36"
     background_darkness = 0.95
     background_image = None
     background_type = transparent
     copy_on_selection = True
     cursor_color = "#c0c5ce"
-    foreground_color = "#c0c5ce"
+    foreground_color = "#839496"
     icon_bell = False
-    palette = "#2b303b:#bf616a:#a3be8c:#ebcb8b:#8fa1b3:#b48ead:#96b5b4:#c0c5ce:#65737e:#eff1f5:#d08770:#ab7967:#343d46:#4f5b66:#a7adba:#dfe1e8"
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     scrollback_infinite = True
     scrollback_lines = 1000
+    scrollbar_position = hidden
+    show_titlebar = False
+  [[Solarized Dark]]
+    audible_bell = True
+    background_color = "#002b36"
+    background_darkness = 0.95
+    background_image = None
+    background_type = transparent
+    copy_on_selection = True
+    foreground_color = "#839496"
+    icon_bell = False
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    scrollback_infinite = True
+    scrollbar_position = hidden
+    show_titlebar = False
+  [[Solarized Light]]
+    audible_bell = True
+    background_color = "#fdf6e3"
+    background_darkness = 0.95
+    background_image = None
+    background_type = transparent
+    copy_on_selection = True
+    foreground_color = "#657b83"
+    icon_bell = False
+    palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
+    scrollback_infinite = True
+    scrollback_lines = 2000
     scrollbar_position = hidden
     show_titlebar = False
