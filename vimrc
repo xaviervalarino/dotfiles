@@ -26,6 +26,7 @@ Plug 'elentok/plaintasks.vim'
 Plug 'ciaranm/detectindent'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-commentary'
+Plug 'vim-scripts/TaskList.vim'
 
 "Add plugins to &runtimepath
 call plug#end()
