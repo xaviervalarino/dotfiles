@@ -1,31 +1,39 @@
-set nocompatible              "be iMproved
+" PLUGINS
+"===============================================================================
 
 call plug#begin('~/.vim/plugged')
 
+" Syntax highlighting ----------------------------------------------------------
 Plug 'othree/html5.vim'
 Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'elzr/vim-json'
+Plug 'digitaltoad/vim-pug'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'elentok/plaintasks.vim'
+
+" UI & Theme -------------------------------------------------------------------
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mikewest/vimroom'
 Plug 'tpope/vim-vinegar'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'pangloss/vim-javascript'
-Plug 'elzr/vim-json'
-Plug 'terryma/vim-multiple-cursors'
+
+" Text manipulation ------------------------------------------------------------
+" Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
 Plug 'matze/vim-move'
 Plug 'tpope/vim-surround'
 Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-commentary'
+
+" Integrated development environment -------------------------------------------
 Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'marijnh/tern_for_vim'
-Plug 'digitaltoad/vim-pug'
-Plug 'elentok/plaintasks.vim'
 Plug 'ciaranm/detectindent'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'tpope/vim-commentary'
 Plug 'vim-scripts/TaskList.vim'
 
 "Add plugins to &runtimepath
@@ -35,6 +43,7 @@ call plug#end()
 " GENERAL
 "===============================================================================
 
+set nocompatible                     " Be iMproved
 set history=512                      " Default history is 20
 set mouse=a                          " Enable mouse
 set backspace=indent,eol,start       " Make backspace behave normally
