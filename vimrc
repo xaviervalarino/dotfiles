@@ -34,6 +34,7 @@ Plug 'ciaranm/detectindent'             " Detect tab settings in a file
 Plug 'scrooloose/syntastic'             " Sytax linting
 Plug 'Valloric/YouCompleteMe'           " Autocompletion
 " Plug 'marijnh/tern_for_vim'           " for YouCompleteMe
+Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, tag, etc finder
 Plug 'vim-scripts/TaskList.vim'         " Show all TODOs in a file
 
 "Add plugins to &runtimepath
@@ -78,11 +79,10 @@ autocmd FileType css  setl sw=2 sts=2
 autocmd BufRead * DetectIndent
 
 
-
-
 " FILE SPECIFIC
 "===============================================================================
 
+" TODO: does this need augroup
 " Set Git commit msg width to 72 chars & enable formatoptions in Insert Mode
 autocmd FileType gitcommit setl textwidth=72 fo-=l
 
@@ -102,7 +102,6 @@ nnoremap \ :noh<CR>
 
 " SAVING
 "===============================================================================
-
 
 set noswapfile                       " Turn off swapfile
 autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
@@ -141,16 +140,24 @@ map <S-tab> :bp<cr>
 "===============================================================================
 
 let delimitMate_expand_cr = 1                       " Expand brackets
-let javascript_enable_domhtmlcss=1                  " Enable HTML/CSS syntax in JS
+let javascript_enable_domhtmlcss = 1                " Enable HTML/CSS syntax in JS
 let g:move_key_modifier = 'C'                       " Vim move modifier key (CTRL)
-let g:vimroom_sidebar_height=0                      " Remove statusbar in Vimroom
+let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroom
 
 " YouCompleteMe auto-completion -------------------------------------------------
-set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
-let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for automcomplete
+set omnifunc=syntaxcomplete#Complete                " Turn on omnicompletion
+let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for complete
 
 " Airline Status Bar ------------------------------------------------------------
 let g:airline_powerline_fonts=1                     " Enable powerline fonts
 let g:airline#extensions#tabline#enabled = 1        " Don't display all buffers if one tab open
 let g:airline#extensions#tabline#left_sep = ' '     " Don't use arrow separator for buffer
 let g:airline#extensions#tabline#left_alt_sep = '|' " Same as above
+
+" CtrlP settings ----------------------------------------------------------------
+let g:ctrlp_match_window = 'bottom,order:ttb'       " Order matching top to bottom
+let g:ctrlp_switch_buffer = 0                       " Open file in new buffer
+let g:ctrlp_working_path=0                          " Disable working dir settings
+
+" Search with ag 'silver searcher'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
