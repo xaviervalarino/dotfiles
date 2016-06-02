@@ -44,12 +44,24 @@ set cursorline                       "Highlight current line
 set noshowmode                       "Hide default mode indicator (controlled by airline)
 " set clipboard=unnamedplus            "Add X11 to the copy register (e.g. <+y>)
 
-"Default to soft tabs, 2 spaces
-set smartindent
-set smarttab
-set expandtab
-set shiftwidth=4
-set softtabstop=4
+" TABS
+" ==============================================================================
+" Default to soft tabs, 4 spaces
+
+set shiftwidth=4    " {sw}  Number of spaces to use for each step of (auto)indent
+set softtabstop=4   " {sts} Number of spaces in a <Tab>
+
+set smartindent     " Do smart autoindenting when starting a new line
+set smarttab        " <Tab> in front of a line inserts spaces according to 'sw'
+set expandtab       " In Insert, use the appropriate number of spaces for a <Tab>
+
+" Set specific filetype tab settings
+autocmd FileType js   setl sw=4 sts=4
+autocmd FileType jade setl sw=2 sts=2
+autocmd FileType css  setl sw=2 sts=2
+
+" Run detectIndent whenever a file is opened
+autocmd BufRead * DetectIndent
 
 "Fix backspace
 set backspace=2
