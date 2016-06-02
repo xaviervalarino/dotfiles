@@ -5,7 +5,6 @@ call plug#begin('~/.vim/plugged')
 
 " Syntax highlighting ----------------------------------------------------------
 Plug 'othree/html5.vim'
-Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'jelera/vim-javascript-syntax'
@@ -15,26 +14,27 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'elentok/plaintasks.vim'
 
 " UI & Theme -------------------------------------------------------------------
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'          " Enhanced Statusbar
+Plug 'vim-airline/vim-airline-themes'   " Themes for Airline
 "Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
-Plug 'mikewest/vimroom'
-Plug 'tpope/vim-vinegar'
+Plug 'mikewest/vimroom'                 " 'Focus Mode'
+Plug 'tpope/vim-vinegar'                " Enhance Vim's directory browser
 
 " Text manipulation ------------------------------------------------------------
 " Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
-Plug 'matze/vim-move'
-Plug 'tpope/vim-surround'
-Plug 'Raimondi/delimitMate'
-Plug 'tpope/vim-commentary'
+Plug 'matze/vim-move'                   " Easily move lines & v-lines around
+Plug 'tpope/vim-surround'               " Modify quotes, parens, or tags
+Plug 'Raimondi/delimitMate'             " Insert Mode completion for quotes, etc
+Plug 'tpope/vim-commentary'             " Change lines into comments
 
 " Integrated development environment -------------------------------------------
-Plug 'Valloric/YouCompleteMe'
-Plug 'scrooloose/syntastic'
-Plug 'marijnh/tern_for_vim'
-Plug 'ciaranm/detectindent'
-Plug 'vim-scripts/TaskList.vim'
+Plug 'ap/vim-css-color'                 " Color highlights in CSS
+Plug 'ciaranm/detectindent'             " Detect tab settings in a file
+Plug 'scrooloose/syntastic'             " Sytax linting
+Plug 'Valloric/YouCompleteMe'           " Autocompletion
+" Plug 'marijnh/tern_for_vim'           " for YouCompleteMe
+Plug 'vim-scripts/TaskList.vim'         " Show all TODOs in a file
 
 "Add plugins to &runtimepath
 call plug#end()
