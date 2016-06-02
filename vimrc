@@ -30,25 +30,24 @@ Plug 'vim-scripts/TaskList.vim'
 
 "Add plugins to &runtimepath
 call plug#end()
-filetype plugin indent on
 
-syntax on
-set number                           "Show line numbers
-set laststatus=2                     "Show statusbar
-set t_Co=256                         "Set 256 Colors
-set encoding=utf8                    "Show devicons
-set history=512                      "Default history is 20
-set hlsearch                         "Highlight search results
-set incsearch                        "Do incremental searching
-set mouse=a                          "Enable mouse
-set cursorline                       "Highlight current line
-set noshowmode                       "Hide default mode indicator (controlled by airline)
-" set clipboard=unnamedplus            "Add X11 to the copy register (e.g. <+y>)
+
+"
+"===============================================================================
+
+set history=512                      " Default history is 20
+set mouse=a                          " Enable mouse
+
+" TODO fix clipboard settings
+" set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
+
 
 " TABS
-" ==============================================================================
-" Default to soft tabs, 4 spaces
+"===============================================================================
 
+filetype plugin indent on            " Turn on filetype and indent detection
+
+" Default to soft tabs, 4 spaces
 set shiftwidth=4    " {sw}  Number of spaces to use for each step of (auto)indent
 set softtabstop=4   " {sts} Number of spaces in a <Tab>
 
@@ -71,14 +70,40 @@ set backspace=indent,eol,start
 "Treat all numerals as decimal, regardless of padded zeros
 set nrformats=
 
-"Unset search pattern (highlighting) by hitting backslash '\'
+
+" SEARCH
+"===============================================================================
+
+set hlsearch                         " Highlight search results
+set incsearch                        " Do incremental searching
+set showmatch                        " Highlight matching bracket
+
+" Search for visually selected text using '//'
+vnoremap // y/<C-R>"<CR>"
+" Unset search pattern (highlighting) w/ backslash <\>
 nnoremap \ :noh<CR>
 
-set incsearch                        "Do incremental searching
-set showmatch                        "Highlight matching bracket
-autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
 
-set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
+" SAVING
+"===============================================================================
+
+"remap 'jj' to escape in insert mode
+inoremap jj <Esc>
+
+autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
+set noswapfile                       " Turn off swapfile
+
+
+" THEME
+"===============================================================================
+
+syntax on
+set number                           " Show line numbers
+set laststatus=2                     " Show statusbar
+set cursorline                       " Highlight current line
+set t_Co=256                         " Set 256 Colors
+set encoding=utf8                    " Set char encoding inside Vim
+set noshowmode                       " Hide mode line (controlled by Airline)
 
 " Set the background light from 7am to 7pm
 let hour = strftime("%H")
@@ -89,30 +114,29 @@ else " Set to dark from 7pm to 7am
 endif
 colorscheme solarized
 
-set noswapfile                        "turn off swapfile
 
-"remap 'jj' to escape in insert mode
-inoremap jj <Esc>
-"search for visually selected text using '//'
-vnoremap // y/<C-R>"<CR>"
+" NAVIGATION
+"===============================================================================
+
 "switch buffers
 map <tab> :bn<cr>
 map <S-tab> :bp<cr>
 
-"let g:enable_bold_font = 1
 
-"================ plugins setups ========================
-let delimitMate_expand_cr = 1                         "Expand brackets
-let g:ycm_key_list_previous_completion = ['<Up>']     "remove <s-Tab> for
-let javascript_enable_domhtmlcss=1                    "Enable HTML/CSS syntax in JS
-let g:move_key_modifier = 'C'                         "Vim move modifier key (CTRL)
+" PLUGINS SETUPS
+"===============================================================================
 
-"Airline
-let g:airline#extensions#tabline#enabled = 1      "Don't display all buffers if one tab open
-let g:airline#extensions#tabline#left_sep = ' '   "Don't use arrow separator for buffer
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_powerline_fonts=1                   "Enable powerline fonts
-" let g:airline_theme = "base16"                  " Set airline to base16
-let g:airline_theme = "solarized"                 " Set airline to solarized
+let delimitMate_expand_cr = 1                       " Expand brackets
+let javascript_enable_domhtmlcss=1                  " Enable HTML/CSS syntax in JS
+let g:move_key_modifier = 'C'                       " Vim move modifier key (CTRL)
+let g:vimroom_sidebar_height=0                      " Remove statusbar in Vimroom
 
-let g:vimroom_sidebar_height=0                    "Fix issue with airline statusbar in Vimroom
+" YouCompleteMe auto-completion -------------------------------------------------
+set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
+let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for automcomplete
+
+" Airline Status Bar ------------------------------------------------------------
+let g:airline_powerline_fonts=1                     " Enable powerline fonts
+let g:airline#extensions#tabline#enabled = 1        " Don't display all buffers if one tab open
+let g:airline#extensions#tabline#left_sep = ' '     " Don't use arrow separator for buffer
+let g:airline#extensions#tabline#left_alt_sep = '|' " Same as above
