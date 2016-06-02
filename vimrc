@@ -32,17 +32,22 @@ Plug 'vim-scripts/TaskList.vim'
 call plug#end()
 
 
-"
+" GENERAL
 "===============================================================================
 
 set history=512                      " Default history is 20
 set mouse=a                          " Enable mouse
+set backspace=indent,eol,start       " Make backspace behave normally
+set nrformats=                       " Treat all numerals as decimal, regardless of padded zeros
 
 " TODO fix clipboard settings
 " set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
 
+" Remap 'jj' to escape in Insert Mode
+inoremap jj <Esc>
 
-" TABS
+
+" INDENTATION
 "===============================================================================
 
 filetype plugin indent on            " Turn on filetype and indent detection
@@ -55,7 +60,7 @@ set smartindent     " Do smart autoindenting when starting a new line
 set smarttab        " <Tab> in front of a line inserts spaces according to 'sw'
 set expandtab       " In Insert, use the appropriate number of spaces for a <Tab>
 
-" Set specific filetype tab settings
+" Specific filetype tab settings
 autocmd FileType js   setl sw=4 sts=4
 autocmd FileType jade setl sw=2 sts=2
 autocmd FileType css  setl sw=2 sts=2
@@ -63,12 +68,14 @@ autocmd FileType css  setl sw=2 sts=2
 " Run detectIndent whenever a file is opened
 autocmd BufRead * DetectIndent
 
-"Fix backspace
-set backspace=2
-set backspace=indent,eol,start
 
-"Treat all numerals as decimal, regardless of padded zeros
-set nrformats=
+
+
+" FILE SPECIFIC
+"===============================================================================
+
+" Set Git commit msg width to 72 chars & enable formatoptions in Insert Mode
+autocmd FileType gitcommit setl textwidth=72 fo-=l
 
 
 " SEARCH
@@ -87,14 +94,12 @@ nnoremap \ :noh<CR>
 " SAVING
 "===============================================================================
 
-"remap 'jj' to escape in insert mode
-inoremap jj <Esc>
 
-autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
 set noswapfile                       " Turn off swapfile
+autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
 
 
-" THEME
+" UI & THEME
 "===============================================================================
 
 syntax on
