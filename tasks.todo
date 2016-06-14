@@ -7,6 +7,16 @@ Config files to add:
 ☐ gtk-2 and gtk2 3
 ☐ compton
 
+Time Themed Terminal:
+☐ figure out to:
+  ☐ set terminal based on time
+  ☐ persist $THEME env variable
+  ☐ source base16 script each time terminal is opened
+  ☐ make below work for:
+    ☐ bash alias ( is this actually important? )
+    ☐ openbox (rc.xml)
+    ☐ sudoedit, other times terminal is called
+
 Archive:
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 ✔ Add Openbox @done (2016-04-21 12:49)
