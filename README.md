@@ -7,6 +7,19 @@ Dotfiles for Mac OSX and Debian Jessie.
 ## Bash
 Configuration includes color for PS1, bash aliases, and OS specific settings (controlled by looking up `uname`)
 
+#### OSX Specific Setup
+Mac OSX ships with ancient versions of GNU core utilities.
+
+To install newer versions, use Homebrew. Use the `--with-default-names` flag to use them over the older defaults.
+```
+brew install coreutils findutils gnu-tar gnu-sed gawk gnutls gnu-tar gnu-indent gnu-getopt grep gzip wget --with-default-names
+```
+
+Add them to the PATH and MANPATH in `.bash_profile`:
+```sh
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+```
 #### Installation
 Running the setup script will [symlink](https://en.wikipedia.org/wiki/Symbolic_link) all the files located in bash/ to the home directory.
 ```bash
