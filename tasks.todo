@@ -8,7 +8,7 @@ Config files to add:
 ☐ compton
 
 Time Themed Terminal:
-☐ fix different coreutil version on Mac and Debian
+✔ fix different coreutil version on Mac and Debian @done (2016-06-14 00:29)
 ☐ figure out:
   ☐ set terminal based on time
   ☐ persist $THEME env variable
