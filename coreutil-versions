@@ -1,0 +1,8 @@
+Version numbers for Core Utils
+
+DEBIAN:
+
+ls (GNU coreutils) 8.23
+dir (GNU coreutils) 8.23
+grep (GNU grep) 2.20
+diff (GNU diffutils) 3.3
