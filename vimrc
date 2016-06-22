@@ -34,6 +34,7 @@ Plug 'ciaranm/detectindent'             " Detect tab settings in a file
 Plug 'scrooloose/syntastic'             " Sytax linting
 Plug 'Valloric/YouCompleteMe'           " Autocompletion
 " Plug 'marijnh/tern_for_vim'           " for YouCompleteMe
+Plug 'rking/ag.vim'                     " Ag search in Vim
 Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, tag, etc finder
 Plug 'vim-scripts/TaskList.vim'         " Show all TODOs in a file
 
