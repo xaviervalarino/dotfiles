@@ -70,7 +70,7 @@ Plugin | Description
 [base16-ocean](https://github.com/chriskempson/base16-vim) | Dark [Base16-Ocean](http://chriskempson.github.io/base16/#ocean) color scheme
 
 ## [Sublime](http://www.sublimetext.com/)
-That being said, Sublime still remains my editor of choice when I need to get something done quickly.
+~~That being said, Sublime still remains my editor of choice when I need to get something done quickly.~~
 
 ## [Nano](http://nano-editor.org/)
 I find myself using this editor from time to time... so why not have syntax highlighting on all of my machines?
@@ -81,6 +81,9 @@ I use conky to monitor:
 * CPU load
 * Memory usage
 * Disk Space
+
+## [KWM](https://github.com/koekeishiya/kwm)
+Tiling windows manager for OSX
 
 ## [Openbox](http://openbox.org/wiki/Main_Page)
 Openbox lightweight stacking windows manager. Many of my settings are based of off the defaults that came with Crunchbang linux (defunct, but forked as [BunsenLabs](https://www.bunsenlabs.org/))
