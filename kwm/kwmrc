@@ -5,8 +5,8 @@ Commands prefixed with 'kwmc' will call
 local functions corresponding to the
 kwmc syntax.
 
-To run an external program or command,
 use the prefix 'exec' followed by command.
+To run an external program or command,
 e.g 'exec mvim' would open macvim
 
 Read file and execute commands as
@@ -30,15 +30,16 @@ define hyper cmd+ctrl+alt+shift
 kwmc bindsym hyper-h window -f west
 */
 
-// Set default values for screen padding
-// 3rd No. adds padding for Dock
+kwmc display -c vertical
+
+/*
+Set default values for screen padding
+{padding}: top bottom left right
+*/
 kwmc config padding 35 15 55 15
 
 // Set default values for container gaps
 kwmc config gap 8 8
-
-kwm config border marked 10
-kwm config border color 0x00000000
 
 // Default tiling mode for Kwm (bsp | monocle | float)
 kwmc config tiling bsp
@@ -51,9 +52,9 @@ kwmc config float-non-resizable on
 
 // Automatically resize the window to its container
 kwmc config lock-to-container on
-
 // Set focus-follows-mouse-mode to autoraise
-kwmc config focus-follows-mouse on
+
+// kwmc config focus-follows-mouse on
 
 /* Focus-follows-mouse is temporarily disabled when
    a floating window has focus */
@@ -61,7 +62,7 @@ kwmc config standby-on-float on
 
 /* The mouse will automatically move to the center
    of the focused window */
-kwmc config mouse-follows-focus on
+// kwmc config mouse-follows-focus on
 
 // Allow window focus to wrap-around
 kwmc config cycle-focus on
@@ -82,37 +83,17 @@ kwmc config split-ratio 0.5
 // New splits become the left leaf-node
 kwmc config spawn left
 
-/* Add custom tiling rules for applications that
-   does not get tiled by Kwm by default.
-   This is because some applications do not have the
-   AXWindowRole and AXStandardWindowSubRole */
-kwmc rule owner="iTerm2" properties={role="AXDialog"}
-kwmc rule owner="iTerm" properties={role="AXDialog"}
-
-
-/* The following commands create rules that
-   blacklists an application from Kwms tiling
-*/
-   kwmc rule owner="Photoshop" properties={float="true"}
-   kwmc rule owner="Illustrator" properties={float="true"}
-   kwmc rule owner="InDesign" properties={float="true"}
-   kwmc rule owner="OmniGraffle" properties={float="true"}
-
-/* The following command creates a rule that
-   captures an application to the given screen,
-   if the screen exists.
-
-   kwmc rule owner="iTunes" properties={display="1"} */
 
 // Enable border for focused window
 kwmc config border focused on
 kwmc config border focused size 2
-kwmc config border focused color 0xFFBDD322
+/* kwmc config border focused color 0xFF555555 */
+kwmc config border focused color 0xAA7DCBC4
 kwmc config border focused radius 6
 
 // Enable border for marked window
 kwmc config border marked on
-kwmc config border marked size 22
+kwmc config border marked size 2
 kwmc config border marked color 0xFFCC5577
 kwmc config border marked radius 6
 
@@ -120,7 +101,7 @@ kwmc config border marked radius 6
 kwmc mode prefix prefix on
 kwmc mode prefix timeout 0.75
 kwmc mode prefix restore default
-kwmc mode prefix color 0xFF458588
+// kwmc mode prefix color 0xFF458588
 
 /*  Default Keybinds */
 // Activate prefix mode
@@ -233,3 +214,5 @@ kwmc bindsym prefix+shift-p space -p decrease all
 kwmc bindsym cmd-7 write \
 kwmc bindsym cmd-8 write {
 kwmc bindsym cmd-9 write }
+
+include rules
