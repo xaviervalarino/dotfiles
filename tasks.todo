@@ -1,5 +1,7 @@
 Things to fix:
 ☐ bash reload on OSX (points to _aliases, not _profile)
+☐ change setup files to use `mkdir -p` instead of if statments
+☐ make Vim default $EDITOR in OSX
 
 Config files to add:
 ☐ tracking openbox dependencies (cb-pipemenu)?
@@ -10,7 +12,7 @@ Config files to add:
 Time Themed Terminal:
 ✔ fix different coreutil version on Mac and Debian @done (2016-06-14 00:29)
 ☐ merge coreutil color aliases
-☐ merge coreutil aliases
+✔ merge coreutil aliases @done (2016-06-22 22:18)
 ☐ figure out:
   ☐ set terminal based on time
   ☐ persist $THEME env variable
