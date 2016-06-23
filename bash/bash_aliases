@@ -68,6 +68,10 @@ elif [[ $platform == 'Darwin' ]]; then
     # make all homebrew packages accessible when prepended with 'my'
     # alias my="PATH=/usr/local/bin:$PATH"
 
+    # aliases for Kwm tiling window manager
+    alias kwm='brew services restart kwm'
+    alias kstop='brew services stop kwm'
+
     # launch application
     alias finder='open .'
     alias thunar='finder'
