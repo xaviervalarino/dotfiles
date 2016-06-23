@@ -1,33 +1,26 @@
-/* Add custom tiling rules for applications that
- * does not get tiled by Kwm by default.
- * This is because some applications do not have the
- * AXWindowRole and AXStandardWindowSubRole
+/* Tile windows that to not not get tiled by default.
  */
 kwmc rule properties={role="AXDialog"} owner="iTerm"
 kwmc rule properties={role="AXDialog"} owner="iTerm2"
+kwmc rule properties={role="AXDialog"} owner="Firefox"
 
 
 /* The following commands create rules that
- * blacklists an application from Kwms tiling
- */
+ * blacklists an application from tiling */
 kwmc rule properties={float="true"} owner="Photoshop"
-kwmc rule properties={float="true"} owner="Illustrator" properties={float="true"}
-kwmc rule properties={float="true"} owner="InDesign" properties={float="true"}
+kwmc rule properties={float="true"} owner="Illustrator"
+kwmc rule properties={float="true"} owner="InDesign"
 kwmc rule properties={float="true"} owner="App Store"
-kwmc rule properties={float="true"} owner="OmniGraffle" properties={float="true"}
+kwmc rule properties={float="true"} owner="OmniGraffle"
 kwmc rule properties={float="true"} name="Preferences"
 kwmc rule properties={float="true"} owner="System Preferences"
 kwmc rule properties={float="true"} owner="The Unarchiver"
 kwmc rule properties={float="true"} owner="Archive Utility"
 
 
-/* The following command creates a rule that
- *  captures an application to the given screen,
- *  if the screen exists.
- */
+/* Captures an application to the given screen */
 kwmc rule properties={display="1"} owner="iTunes"
 
-/* Set Applications into specific spaces
- */
-kwmc rule properties={space="4"} owner="Slack"
-kwmc rule properties={space="4"} owner="Messages"
+/* Set Applications into specific spaces */
+// kwmc rule properties={space="2"} owner="Slack"
+// kwmc rule properties={space="2"} owner="Messages"
