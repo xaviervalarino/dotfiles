@@ -61,6 +61,7 @@ elif [[ $platform == 'Darwin' ]]; then
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         source $(brew --prefix)/etc/bash_completion
     fi
+    alias brup='brew update; brew upgrade'
 
     # Make GNU Coreutils default in OSX
     PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
