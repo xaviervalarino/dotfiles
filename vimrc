@@ -31,6 +31,7 @@ Plug 'tpope/vim-commentary'             " Change lines into comments
 " Integrated development environment -------------------------------------------
 Plug 'ap/vim-css-color'                 " Color highlights in CSS
 Plug 'ciaranm/detectindent'             " Detect tab settings in a file
+Plug 'airblade/vim-gitgutter'           " Git diff in SignColumn
 Plug 'scrooloose/syntastic'             " Sytax linting
 Plug 'Valloric/YouCompleteMe'           " Autocompletion
 " Plug 'marijnh/tern_for_vim'           " for YouCompleteMe
