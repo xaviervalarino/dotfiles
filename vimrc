@@ -15,6 +15,7 @@ Plug 'elentok/plaintasks.vim'
 
 " UI & Theme -------------------------------------------------------------------
 Plug 'itchyny/lightline.vim'            " Enhanced Statusline
+Plug 'bling/vim-bufferline'             " List buffers in command bar
 "Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mikewest/vimroom'                 " _Focus Mode_
@@ -157,6 +158,9 @@ let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroo
 " YouCompleteMe auto-completion -------------------------------------------------
 set omnifunc=syntaxcomplete#Complete                " Turn on omnicompletion
 let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for complete
+
+" Bufferline --------------------------------------------------------------------
+let g:bufferline_echo = 1
 
 " Lightline Statusline ----------------------------------------------------------
 let g:lightline = {
