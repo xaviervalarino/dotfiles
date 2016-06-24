@@ -14,8 +14,7 @@ Plug 'mustache/vim-mustache-handlebars'
 Plug 'elentok/plaintasks.vim'
 
 " UI & Theme -------------------------------------------------------------------
-Plug 'vim-airline/vim-airline'          " Enhanced Statusbar
-Plug 'vim-airline/vim-airline-themes'   " Themes for Airline
+Plug 'itchyny/lightline.vim'            " Enhanced Statusline
 "Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mikewest/vimroom'                 " _Focus Mode_
@@ -159,11 +158,14 @@ let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroo
 set omnifunc=syntaxcomplete#Complete                " Turn on omnicompletion
 let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for complete
 
-" Airline Status Bar ------------------------------------------------------------
-let g:airline_powerline_fonts = 1                   " Enable powerline fonts
-let g:airline#extensions#tabline#enabled = 1        " Don't display all buffers if one tab open
-let g:airline#extensions#tabline#left_sep = ' '     " Don't use arrow separator for buffer
-let g:airline#extensions#tabline#left_alt_sep = '|' " Same as above
+" Lightline Statusline ----------------------------------------------------------
+let g:lightline = {
+  \ 'colorscheme': 'solarized',
+  \ 'component': {
+  \   'readonly': '%{&readonly?"":""}',
+  \ },
+  \ 'subseparator': { 'left': '｜', 'right': '｜' }
+  \ }
 
 " CtrlP settings ----------------------------------------------------------------
 let g:ctrlp_match_window = 'bottom,order:ttb'       " Order matching top to bottom
