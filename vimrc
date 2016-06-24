@@ -18,7 +18,7 @@ Plug 'vim-airline/vim-airline'          " Enhanced Statusbar
 Plug 'vim-airline/vim-airline-themes'   " Themes for Airline
 "Plug 'chriskempson/base16-vim'
 Plug 'altercation/vim-colors-solarized'
-Plug 'mikewest/vimroom'                 " 'Focus Mode'
+Plug 'mikewest/vimroom'                 " _Focus Mode_
 Plug 'tpope/vim-vinegar'                " Enhance Vim's directory browser
 
 " Text manipulation ------------------------------------------------------------
@@ -121,13 +121,21 @@ set noshowmode                       " Hide mode line (controlled by Airline)
 set wildmenu                         " Show completion menu for command line
 
 " Set the background light from 7am to 7pm
+colorscheme solarized
+
 let hour = strftime("%H")
-if 7 <= hour && hour < 19
+
+if ( hour > 7 && hour < 18 )
   set background=light
+  hi LineNr ctermbg=White
+  hi SignColumn ctermbg=White
+  hi CursorLineNr ctermbg=LightGray
 else " Set to dark from 7pm to 7am
   set background=dark
+  hi LineNr ctermbg=8
+  hi SignColumn ctermbg=8
+  hi CursorLineNr ctermfg=14 ctermbg=Black
 endif
-colorscheme solarized
 
 
 " NAVIGATION
@@ -151,7 +159,7 @@ set omnifunc=syntaxcomplete#Complete                " Turn on omnicompletion
 let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for complete
 
 " Airline Status Bar ------------------------------------------------------------
-let g:airline_powerline_fonts=1                     " Enable powerline fonts
+let g:airline_powerline_fonts = 1                   " Enable powerline fonts
 let g:airline#extensions#tabline#enabled = 1        " Don't display all buffers if one tab open
 let g:airline#extensions#tabline#left_sep = ' '     " Don't use arrow separator for buffer
 let g:airline#extensions#tabline#left_alt_sep = '|' " Same as above
