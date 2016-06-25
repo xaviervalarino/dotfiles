@@ -23,6 +23,7 @@ Plug 'tpope/vim-vinegar'                " Enhance Vim's directory browser
 
 " Text manipulation ------------------------------------------------------------
 " Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
+Plug 'tommcdo/vim-exchange'             " Easily exchange text
 Plug 'matze/vim-move'                   " Easily move lines & v-lines around
 Plug 'tpope/vim-surround'               " Modify quotes, parens, or tags
 Plug 'Raimondi/delimitMate'             " Insert Mode completion for quotes, etc
