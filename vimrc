@@ -52,6 +52,7 @@ set history=512                      " Default history is 20
 set mouse=a                          " Enable mouse
 set backspace=indent,eol,start       " Make backspace behave normally
 set nrformats=                       " Treat all numerals as decimal, regardless of padded zeros
+set spell spelllang=en_us            " Spell checking
 
 " TODO fix clipboard settings
 " set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
