@@ -71,6 +71,7 @@ Plugin | Description
 
 ## [Sublime](http://www.sublimetext.com/)
 ~~That being said, Sublime still remains my editor of choice when I need to get something done quickly.~~
+I now rarely use sublime, but find it useful to keep it's config under source control.
 
 ## [Nano](http://nano-editor.org/)
 I find myself using this editor from time to time... so why not have syntax highlighting on all of my machines?
