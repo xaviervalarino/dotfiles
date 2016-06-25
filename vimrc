@@ -48,7 +48,7 @@ call plug#end()
 "===============================================================================
 
 set nocompatible                     " Be iMproved
-set history=512                      " Default history is 20
+set history=5000                     " Default history is 20
 set mouse=a                          " Enable mouse
 set backspace=indent,eol,start       " Make backspace behave normally
 set nrformats=                       " Treat all numerals as decimal, regardless of padded zeros
