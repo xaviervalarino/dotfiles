@@ -135,6 +135,7 @@ alias subl='sublime'
 alias st='git status'
 alias log='git log --graph --decorate --pretty=oneline --abbrev-commit'
 alias com='git commit'
+alias patch='git add --patch'
 
 # Actions
 alias todo='sublime -n ~/Dropbox/notes/todo.md'   # Open ToDo list
