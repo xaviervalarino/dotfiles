@@ -1,10 +1,25 @@
-function markdown(){
-  # if argv[0] string length does not equal zero
-  if [ -z $1 ]
-    then
-      echo 'No markdown file specified';
-      exit;
+#! /bin/bash
+
+# Render Markdown into Lynx
+ markdown(){
+# if argv[0] string length does not equal zero
+    if [ -z $1 ]; then
+        echo 'No markdown file specified';
+        exit;
     else
-      kramdown $1 | lynx -stdin;
-  fi
+        kramdown $1 | lynx -stdin;
+    fi
+}
+
+# Set iTerm profile by name
+iterm2_profile() { echo -e "\033]50;SetProfile=$1\a"; clear; }
+
+# Set Terminal color by passing the arg `light` or `dark`
+terminal_theme(){
+    # Change iterm profile with time of day
+    if [[ $(uname) == 'Darwin' ]]; then
+        iterm2_profile 'Sulphurpool ${type}'
+    fi
+    . ~/.config/base16-shell/base16-ateliersulphurpool.$1.sh
+    export THEME=$1
 }

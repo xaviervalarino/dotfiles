@@ -1,5 +1,5 @@
 Things to fix:
-☐ bash reload on OSX (points to _aliases, not _profile)
+✔ bash reload on OSX (points to _aliases, not _profile) @done (2016-06-26 04:36)
 ☐ change setup files to use `mkdir -p` instead of if statments
 ☐ make Vim default $EDITOR in OSX
 
@@ -11,16 +11,15 @@ Config files to add:
 
 Time Themed Terminal:
 ✔ fix different coreutil version on Mac and Debian @done (2016-06-14 00:29)
-☐ merge coreutil color aliases
 ✔ merge coreutil aliases @done (2016-06-22 22:18)
-☐ figure out:
-  ☐ set terminal based on time
-  ☐ persist $THEME env variable
-  ☐ source base16 script each time terminal is opened
-  ☐ make below work for:
-    ☐ bash alias ( is this actually important? )
-    ☐ openbox (rc.xml)
-    ☐ sudoedit, other times terminal is called
+☐ openbox (rc.xml) and terminal initiating theme call
+☐ sudoedit, other times terminal is called
+✔ figure out: @done (2016-06-26 04:36)
+  ✔ set terminal based on time @done (2016-06-26 04:35)
+  ✔ persist $THEME env variable @done (2016-06-26 04:35)
+  ✔ source base16 script each time terminal is opened @done (2016-06-26 04:35)
+  ✔ make below work for: @done (2016-06-26 04:35)
+    ✔ bash alias ( is this actually important? ) @done (2016-06-26 04:35)
 
 Archive:
 ＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿

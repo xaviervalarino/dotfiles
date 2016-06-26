@@ -1,10 +1,17 @@
+#! /bin/bash
+
 # TODO seperate profile and alias settings into two different files
 source ~/.bash_color
 source ~/.bash_functions
 
-# Base16 Shell
-# BASE16_SHELL="$HOME/.config/base16-shell/base16-ocean.dark.sh"
-# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# TODO move this to .bashrc?
+# set theme based on time of day
+hour=`date +"%H"`
+if [ $hour -gt 7 ] && [ $hour -lt 16 ]; then
+    terminal_theme light
+else
+    terminal_theme dark
+fi
 
 # If possible, add tab completion for many more commands
 [ -f /etc/bash_completion ] && source /etc/bash_completion        # linux
@@ -48,15 +55,6 @@ if [[ $platform == 'Linux' ]]; then
 ########################
 elif [[ $platform == 'Darwin' ]]; then
 
-    # Change iterm profile with time of day
-    iterm2_profile() { echo -e "\033]50;SetProfile=$1\a";clear; }
-    HOUR=`date +"%H"`
-    if [ $HOUR -gt 7 ] && [ $HOUR -lt 18 ]; then
-        iterm2_profile 'Solarized Light'
-    else
-        iterm2_profile 'Solarized Dark'
-    fi
-
     ## __HOMEBREW__ ##
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         source $(brew --prefix)/etc/bash_completion
@@ -95,6 +93,10 @@ fi
 ### UNIVERSAL  ALIASES ###
 ##########################
 
+# Manual change Theme
+alias light='terminal_theme light'
+alias dark='terminal_theme dark'
+
 # ls alias for color-mode
 alias ls='ls -G'
 alias lh='ls -lhaG'
@@ -115,11 +117,12 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../..'
 
-# make rm always recursive
-alias rm='rm -r'
+# You can cry if you want to
+alias rm='trash'
 
 # refresh shell
 # TODO difference between these two files?
+# http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
 if [[ -s ~/.bash_profile ]]; then
   shell='source ~/.bash_profile'
   elif [[ -s ~/.bashrc ]]; then
