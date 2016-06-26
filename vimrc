@@ -1,17 +1,13 @@
-set nocompatible              "be iMproved
-
+" PLUGINS
+"===============================================================================
 call plug#begin('~/.vim/plugged')
 
+
+" Syntax highlighting ----------------------------------------------------------
 Plug 'othree/html5.vim'
-Plug 'ap/vim-css-color'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
-Plug 'mikewest/vimroom'
-Plug 'tpope/vim-vinegar'
-Plug 'jelera/vim-javascript-syntax'
 Plug 'pangloss/vim-javascript'
+Plug 'jelera/vim-javascript-syntax'
 Plug 'elzr/vim-json'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'matze/vim-move'
@@ -21,48 +17,102 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'scrooloose/syntastic'
 Plug 'marijnh/tern_for_vim'
 Plug 'digitaltoad/vim-pug'
-Plug 'elentok/plaintasks.vim'
-Plug 'ciaranm/detectindent'
 Plug 'mustache/vim-mustache-handlebars'
-Plug 'tpope/vim-commentary'
+Plug 'elentok/plaintasks.vim'
+
+" UI & Theme -------------------------------------------------------------------
+Plug 'itchyny/lightline.vim'            " Enhanced Statusline
+" Plug 'felixjung/vim-base16-lightline'
+Plug 'daviesjamie/vim-base16-lightline'
+Plug 'bling/vim-bufferline'             " List buffers in command bar
+"Plug 'chriskempson/base16-vim'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'mikewest/vimroom'                 " _Focus Mode_
+Plug 'tpope/vim-vinegar'                " Enhance Vim's directory browser
+
+" Text manipulation ------------------------------------------------------------
+" Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
+Plug 'tommcdo/vim-exchange'             " Easily exchange text
+Plug 'matze/vim-move'                   " Easily move lines & v-lines around
+Plug 'tpope/vim-surround'               " Modify quotes, parens, or tags
+Plug 'Raimondi/delimitMate'             " Insert Mode completion for quotes, etc
+Plug 'tpope/vim-commentary'             " Change lines into comments
+
+" Integrated development environment -------------------------------------------
+Plug 'ap/vim-css-color'                 " Color highlights in CSS
+Plug 'ciaranm/detectindent'             " Detect tab settings in a file
+Plug 'airblade/vim-gitgutter'           " Git diff in SignColumn
+Plug 'scrooloose/syntastic'             " Sytax linting
+Plug 'Valloric/YouCompleteMe'           " Autocompletion
+" Plug 'marijnh/tern_for_vim'           " Needed for YouCompleteMe?
+Plug 'rking/ag.vim'                     " Ag search in Vim
+Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, tag, etc finder
+Plug 'vim-scripts/TaskList.vim'         " Show all TODOs in a file
 
 "Add plugins to &runtimepath
 call plug#end()
 filetype plugin indent on
 
-syntax on
-set number                           "Show line numbers
-set laststatus=2                     "Show statusbar
-set t_Co=256                         "Set 256 Colors
-set encoding=utf8                    "Show devicons
-set history=512                      "Default history is 20
-set hlsearch                         "Highlight search results
-set incsearch                        "Do incremental searching
-set mouse=a                          "Enable mouse
-set cursorline                       "Highlight current line
-set noshowmode                       "Hide default mode indicator (controlled by airline)
-" set clipboard=unnamedplus            "Add X11 to the copy register (e.g. <+y>)
 
-"Default to soft tabs, 2 spaces
-set smartindent
-set smarttab
-set expandtab
-set shiftwidth=4
-set softtabstop=4
+" GENERAL
+"===============================================================================
 
-"Fix backspace
-set backspace=2
-set backspace=indent,eol,start
+set nocompatible                     " Be iMproved
+set history=5000                     " Default history is 20
+set mouse=a                          " Enable mouse
+set backspace=indent,eol,start       " Make backspace behave normally
+set nrformats=                       " Treat all numerals as decimal, regardless of padded zeros
+set spell spelllang=en_us            " Spell checking
 
-"Treat all numerals as decimal, regardless of padded zeros
-set nrformats=
+" TODO fix clipboard settings
+" set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
 
-"Unset search pattern (highlighting) by hitting backslash '\'
+" Remap 'jj' to escape in Insert Mode
+inoremap jj <Esc>
+
+
+" INDENTATION
+"===============================================================================
+
+filetype plugin indent on            " Turn on filetype and indent detection
+
+" Default to soft tabs, 4 spaces
+set shiftwidth=4    " {sw}  Number of spaces to use for each step of (auto)indent
+set softtabstop=4   " {sts} Number of spaces in a <Tab>
+
+set smartindent     " Do smart autoindenting when starting a new line
+set smarttab        " <Tab> in front of a line inserts spaces according to 'sw'
+set expandtab       " In Insert, use the appropriate number of spaces for a <Tab>
+
+" Specific filetype tab settings
+autocmd FileType js   setl sw=4 sts=4
+autocmd FileType jade setl sw=2 sts=2
+autocmd FileType css  setl sw=2 sts=2
+
+" Run detectIndent whenever a file is opened
+autocmd BufRead * DetectIndent
+
+
+" FILE SPECIFIC
+"===============================================================================
+
+" TODO: does this need augroup?
+" Set Git commit msg width to 72 chars & enable formatoptions in Insert Mode
+autocmd FileType gitcommit setl textwidth=72 fo-=l
+
+
+" SEARCH
+"===============================================================================
+
+set hlsearch                         " Highlight search results
+set incsearch                        " Do incremental searching
+set showmatch                        " Highlight matching bracket
+
+" Search for visually selected text using '//'
+vnoremap // y/<C-R>"<CR>"
+" Unset search pattern (highlighting) w/ backslash <\>
 nnoremap \ :noh<CR>
 
-set incsearch                        "Do incremental searching
-set showmatch                        "Highlight matching bracket
-autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
 
 " SAVING
 "===============================================================================
@@ -108,31 +158,56 @@ else
   hi GitGutterChangeDelete ctermbg=0
 endif
 
-set noswapfile                        "turn off swapfile
+" Make search text darker
+hi search ctermfg=0
+hi WildMenu ctermfg=0
 
-"remap 'jj' to escape in insert mode
-inoremap jj <Esc>
-"search for visually selected text using '//'
-vnoremap // y/<C-R>"<CR>"
+
+" NAVIGATION
+"===============================================================================
+
 "switch buffers
 map <tab> :bn<cr>
 map <S-tab> :bp<cr>
 
-"let g:enable_bold_font = 1
 
-"================ plugins setups ========================
-let delimitMate_expand_cr = 1                         "Expand brackets
-let g:ycm_key_list_previous_completion = ['<Up>']     "remove <s-Tab> for
-let javascript_enable_domhtmlcss=1                    "Enable HTML/CSS syntax in JS
-let g:move_key_modifier = 'C'                         "Vim move modifier key (CTRL)
+" PLUGINS SETUPS
+"===============================================================================
 
-"Airline
-let g:airline#extensions#tabline#enabled = 1      "Don't display all buffers if one tab open
-let g:airline#extensions#tabline#left_sep = ' '   "Don't use arrow separator for buffer
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_powerline_fonts=1                   "Enable powerline fonts
-let g:airline_theme = 'base16'                  " Set airline to base16
-" TODO copy over airline theme form base16-builder
-" let g:airline_theme = 'base16-ateliersulphurpool'                  " Set airline to base16
+let delimitMate_expand_cr = 1                       " Expand brackets
+let javascript_enable_domhtmlcss = 1                " Enable HTML/CSS syntax in JS
+let g:move_key_modifier = 'C'                       " Vim move modifier key (CTRL)
+let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroom
 
-let g:vimroom_sidebar_height=0                    "Fix issue with airline statusbar in Vimroom
+" YouCompleteMe auto-completion -------------------------------------------------
+set omnifunc=syntaxcomplete#Complete                " Turn on omnicompletion
+let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for complete
+
+" Bufferline --------------------------------------------------------------------
+let g:bufferline_echo = 1
+
+" Lightline Statusline ----------------------------------------------------------
+let g:lightline = {
+  \ 'colorscheme': 'base16',
+  \ 'component': {
+  \   'readonly': '%{&readonly?"":""}',
+  \ },
+  \ 'subseparator': { 'left': '｜', 'right': '｜' }
+  \ }
+
+" CtrlP settings ----------------------------------------------------------------
+let g:ctrlp_match_window = 'bottom,order:ttb'       " Order matching top to bottom
+let g:ctrlp_switch_buffer = 0                       " Open file in new buffer
+let g:ctrlp_working_path=0                          " Disable working dir settings
+
+" Search with ag 'silver searcher'
+let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+" Syntastic ---------------------------------------------------------------------
+let g:syntastic_error_symbol = '☻'
+let g:syntastic_style_error_symbol = '☻'
+let g:syntastic_warning_symbol = '☻'
+let g:syntastic_style_warning_symbol = '☻'
+
+" Make warnings yellow
+highlight SyntasticWarningSign ctermfg = 3
