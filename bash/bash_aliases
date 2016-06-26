@@ -107,11 +107,12 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../..'
 
-# make rm always recursive
-alias rm='rm -r'
+# You can cry if you want to
+alias rm='trash'
 
 # refresh shell
 # TODO difference between these two files?
+# http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
 if [[ -s ~/.bash_profile ]]; then
   shell='source ~/.bash_profile'
   elif [[ -s ~/.bashrc ]]; then
@@ -131,4 +132,3 @@ alias com='git commit'
 # Actions
 alias todo='sublime -n ~/Dropbox/notes/todo.md'   # Open ToDo list
 alias md='vmd.sh'                                 # Read markdown files in Lynx
-# short / easy to remember
