@@ -64,17 +64,49 @@ set incsearch                        "Do incremental searching
 set showmatch                        "Highlight matching bracket
 autocmd BufWritePre * :%s/\s\+$//e   "Remove trailing whitespace on save
 
-set omnifunc=syntaxcomplete#Complete "turn on omnicompletion
+" SAVING
+"===============================================================================
 
-" Set the background  according to shell theme
-let theme=$THEME
-if theme == 'light'
+set noswapfile                       " Turn off swapfile
+autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
+
+
+" UI & THEME
+"===============================================================================
+
+syntax on
+set number                           " Show line numbers
+set laststatus=2                     " Show statusbar
+set cursorline                       " Highlight current line
+set t_Co=256                         " Set 256 Colors
+set encoding=utf8                    " Set char encoding inside Vim
+set noshowmode                       " Hide mode line (controlled by Airline)
+set wildmenu                         " Show completion menu for command line
+
+colorscheme base16-ateliersulphurpool
+let base16colorspace=256
+
+"TODO: colorscheme needs some serious overhaul
+" Set the background to ENV $THEME
+if $THEME == 'light'
   set background=light
+  hi LineNr ctermbg=White
+  hi SignColumn ctermbg=White
+  hi CursorLineNr ctermfg=14 ctermbg=21
+  hi GitGutterAdd          ctermbg=White
+  hi GitGutterChange       ctermbg=White
+  hi GitGutterDelete       ctermbg=White
+  hi GitGutterChangeDelete ctermbg=White
 else
   set background=dark
+  hi LineNr ctermbg=0
+  hi SignColumn ctermbg=0
+  hi CursorLineNr ctermfg=14 ctermbg=18
+  hi GitGutterAdd          ctermbg=0
+  hi GitGutterChange       ctermbg=0
+  hi GitGutterDelete       ctermbg=0
+  hi GitGutterChangeDelete ctermbg=0
 endif
-let base16colorspace=256
-colorscheme base16-ateliersulphurpool
 
 set noswapfile                        "turn off swapfile
 
