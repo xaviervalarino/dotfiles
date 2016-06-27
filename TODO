@@ -1,0 +1,37 @@
+Other:
+☐ Add new screenshots to README
+  ☐ Debian
+  ☐ OSX
+
+Things to fix:
+✔ bash reload on OSX (points to _aliases, not _profile) @done (2016-06-26 04:36)
+☐ change setup files to use `mkdir -p` instead of if statments
+☐ make Vim default $EDITOR in OSX
+
+Config files to add:
+☐ tracking openbox dependencies (cb-pipemenu)?
+☐ tint2
+☐ gtk-2 and gtk2 3
+☐ compton
+
+Vim:
+☐ autosave
+
+  Time Themed Terminal:
+  ✔ fix different coreutil version on Mac and Debian @done (2016-06-14 00:29)
+  ✔ merge coreutil aliases @done (2016-06-22 22:18)
+  ☐ openbox (rc.xml) and terminal initiating theme call
+  ☐ sudoedit, other times terminal is called
+  ✔ figure out: @done (2016-06-26 04:36)
+    ✔ set terminal based on time @done (2016-06-26 04:35)
+    ✔ persist $THEME env variable @done (2016-06-26 04:35)
+    ✔ source base16 script each time terminal is opened @done (2016-06-26 04:35)
+    ✔ make below work for: @done (2016-06-26 04:35)
+      ✔ bash alias ( is this actually important? ) @done (2016-06-26 04:35)
+
+Archive:
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+✔ Add Openbox @done (2016-04-21 12:49)
+  ✔ rc.xml @done (2016-04-21 12:49)
+  ✔ autostart @done (2016-04-21 12:50)
+  ✔ menu.xml @done (2016-04-21 12:51)
