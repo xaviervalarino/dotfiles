@@ -79,7 +79,7 @@ autocmd FileType jade setl sw=2 sts=2
 autocmd FileType css  setl sw=2 sts=2
 
 " Run detectIndent whenever a file is opened
-autocmd BufRead * DetectIndent
+autocmd BufReadPost * DetectIndent
 
 
 set noswapfile                       " Turn off swapfile
