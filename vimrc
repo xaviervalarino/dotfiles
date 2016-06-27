@@ -82,6 +82,9 @@ autocmd FileType css  setl sw=2 sts=2
 autocmd BufReadPost * DetectIndent
 
 
+" SAVING
+"===============================================================================
+
 set noswapfile                       " Turn off swapfile
 autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
 
