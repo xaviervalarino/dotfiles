@@ -138,6 +138,24 @@ hi WildMenu ctermfg=0
 map <tab> :bn<cr>
 map <S-tab> :bp<cr>
 
+" Window Splits auto-completion -------------------------------------------------
+
+" Easier split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" More natural split opening
+set splitbelow
+set splitright
+
+" Quickly resize windows with horizontal split
+:map - <C-W>-
+:map = <C-W>+
+" Quickly resize windows with vertical split
+:map _ <C-W><
+:map + <C-W>>
 
 " PLUGINS SETUPS
 "===============================================================================
