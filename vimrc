@@ -20,8 +20,8 @@ Plug 'itchyny/lightline.vim'            " Enhanced Statusline
 Plug 'bling/vim-bufferline'             " List buffers in command bar
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'chriskempson/base16-vim'
-" Plug 'felixjung/vim-base16-lightline'
-Plug 'daviesjamie/vim-base16-lightline'
+Plug 'felixjung/vim-base16-lightline'
+" Plug 'daviesjamie/vim-base16-lightline'
 
 " Text manipulation ------------------------------------------------------------
 " Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
@@ -177,7 +177,7 @@ let g:bufferline_echo = 1
 
 " Lightline Statusline ----------------------------------------------------------
 let g:lightline = {
-  \ 'colorscheme': 'base16',
+  \ 'colorscheme': 'base16_ocean',
   \ 'component': {
   \   'readonly': '%{&readonly?"":""}',
   \ },
