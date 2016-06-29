@@ -36,8 +36,11 @@ Plug 'ap/vim-css-color'                 " Color highlights in CSS
 Plug 'ciaranm/detectindent'             " Detect tab settings in a file
 Plug 'airblade/vim-gitgutter'           " Git diff in SignColumn
 Plug 'scrooloose/syntastic'             " Sytax linting
+Plug 'Valloric/YouCompleteMe'
 " Plug 'marijnh/tern_for_vim'           " Needed for YouCompleteMe?
 Plug 'rking/ag.vim'                     " Ag search in Vim
+Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, tag, etc finder
+Plug 'vim-scripts/TaskList.vim'         " Show all TODOs in a file
 
 "Add plugins to &runtimepath
 call plug#end()
