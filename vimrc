@@ -62,6 +62,10 @@ set spell spelllang=en_us            " Spell checking
 " Remap 'jj' to escape in Insert Mode
 inoremap jj <Esc>
 
+" Remove timeout for <escape> i.e. <caps> key
+set ttimeout
+set ttimeoutlen=100
+
 
 " INDENTATION
 "===============================================================================
@@ -165,7 +169,8 @@ set splitright
 
 let delimitMate_expand_cr = 1                       " Expand brackets
 let javascript_enable_domhtmlcss = 1                " Enable HTML/CSS syntax in JS
-let g:move_key_modifier = 'C'                       " Vim move modifier key (CTRL)
+" TODO: collision with Vim-Move and Split Navigation
+let g:move_key_modifier = 'C'                   " Vim move modifier key (CTRL)
 let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroom
 
 " YouCompleteMe auto-completion -------------------------------------------------
