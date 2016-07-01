@@ -10,8 +10,7 @@ kwmc config tiling bsp // tile windows w/ binary space partitioning
 kwmc config spawn right // New splits become right leaf-node
 
 kwmc config split-ratio 0.5
-// kwmc config optimal-ratio 1.382
-kwmc config optimal-ratio 1.5
+kwmc config optimal-ratio 1.382
 kwmc config padding 35 15 55 15 // {padding}: top bottom left right
 kwmc config gap 8 8 // {gap}: vertical horizontal
 
