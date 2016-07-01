@@ -49,11 +49,7 @@ kwmc config spawn right
 // Enable border for focused window
 kwmc config border focused on
 kwmc config border focused size 2
-kwmc config border focused color 0xFF555555
-
-
-‾   1
-kwmc config border focused color 0x057DCBC4
+kwmc config border focused color 0xFF7DCBC4
 kwmc config border focused radius 6
 
 // Enable border for marked window
