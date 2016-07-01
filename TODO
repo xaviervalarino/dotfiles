@@ -8,6 +8,14 @@ Things to fix:
 ☐ change setup files to use `mkdir -p` instead of if statments
 ☐ make Vim default $EDITOR in OSX
 
+Kwm:
+☐ Finalize key bindings
+  ☐ Key bindings to start/stop/restart
+  ☐ Moving around (H/J/K/L)
+  ☐ Resizing windows
+  ☐ Moving windows
+  ☐ Spaces?
+
 Config files to add:
 ☐ tracking openbox dependencies (cb-pipemenu)?
 ☐ tint2
@@ -15,7 +23,7 @@ Config files to add:
 ☐ compton
 
 Vim:
-☐ autosave
+☐ autosave and/or save on focus lost
 
   Time Themed Terminal:
   ✔ fix different coreutil version on Mac and Debian @done (2016-06-14 00:29)
