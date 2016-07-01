@@ -17,7 +17,7 @@ kwmc bindsym hyper-m exec open -na /Applications/Mail.app
 // MODES
 //===============================================================
 // Set Space Tiling Mode To BSP
-kwmc bindsym hyper space -t bsp
+kwmc bindsym hyper-b space -t bsp
 
 // Set Space Tiling Mode To Monocle
 kwmc bindsym hyper-f space -t monocle
