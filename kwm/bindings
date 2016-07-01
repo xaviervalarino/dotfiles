@@ -3,7 +3,7 @@ define hyper cmd+ctrl+alt+shift
 kwmc bindsym hyper-h window -f west
 
 // Activate prefix mode
-/* kwmc bindsym ctrl-s mode activate prefix */
+kwmc bindsym ctrl-s mode activate prefix
 
 // Quit Kwm
 /* kwmc bindsym cmd+alt+ctrl-q quit */
