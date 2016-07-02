@@ -89,6 +89,27 @@ autocmd FileType css  setl sw=2 sts=2
 autocmd BufReadPost * DetectIndent
 
 
+" FILE SPECIFIC
+"===============================================================================
+
+" TODO: does this need augroup
+" Set Git commit msg width to 72 chars & enable formatoptions in Insert Mode
+autocmd FileType gitcommit setl textwidth=72 fo-=l
+
+
+" SEARCH
+"===============================================================================
+
+set hlsearch                         " Highlight search results
+set incsearch                        " Do incremental searching
+set showmatch                        " Highlight matching bracket
+
+" Search for visually selected text using '//'
+vnoremap // y/<C-R>"<CR>"
+" Unset search pattern (highlighting) w/ backslash <\>
+nnoremap \ :noh<CR>
+
+
 " SAVING
 "===============================================================================
 
