@@ -24,6 +24,14 @@ Config files to add:
 
 Vim:
 ☐ autosave and/or save on focus lost
+☐ Remove cursor and lineNr when window looses focus
+  https://www.reddit.com/r/vim/comments/4aab93/weekly_vim_tips_and_tricks_thread_1/d0ypww5
+☐ Configure global Tern `tern-config` file to get YouCompleteMe to use Tern JS completion
+  http://ternjs.net/doc/manual.html#configuration
+
+  Git:
+  ☐ Install Vim-Fugitive
+  ☐ map GitGutter{Stage,Revert,Preview}Hunk to keybindings
 
   Time Themed Terminal:
   ✔ fix different coreutil version on Mac and Debian @done (2016-06-14 00:29)
