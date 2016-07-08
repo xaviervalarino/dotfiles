@@ -30,6 +30,7 @@ Plug 'matze/vim-move'                   " Easily move lines & v-lines around
 Plug 'tpope/vim-surround'               " Modify quotes, parens, or tags
 Plug 'Raimondi/delimitMate'             " Insert Mode completion for quotes, etc
 Plug 'tpope/vim-commentary'             " Change lines into comments
+Plug 'tpope/vim-repeat'                 " repeat mappings with Dot command
 
 " Integrated development environment -------------------------------------------
 Plug 'ap/vim-css-color'                 " Color highlights in CSS
