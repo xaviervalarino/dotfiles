@@ -98,12 +98,12 @@ fi
 alias light='terminal_theme light'
 alias dark='terminal_theme dark'
 
-# ls alias for color-mode
-alias ls='ls -G'
-alias lh='ls -lhaG'
-
 # grep with color
 alias grep='grep --color=auto'
+
+# ls alias for color-mode
+alias ls='ls --color'
+alias lh='ls -lha'
 
 # dir aliases
 alias ll='ls -lhA'
