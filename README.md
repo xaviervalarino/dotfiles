@@ -44,6 +44,8 @@ Running the setup script will symlink _vimrc_ to your home directory, installs [
 ./setup/vim_setup.sh # run script
 ```
 
+## The Silver Searcher (Ag)
+The silver searcher is supposedly faster than ack. I use it in Vim with CtrlP for fuzzy file searching. This repo contains ag's global `.agignore` file.
 ## [Sublime](http://www.sublimetext.com/)
 ~~That being said, Sublime still remains my editor of choice when I need to get something done quickly.~~
 I now rarely use sublime, but find it useful to keep it's config under source control.
