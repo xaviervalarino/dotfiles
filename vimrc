@@ -180,8 +180,8 @@ set splitbelow
 set splitright
 
 " Quickly resize windows with horizontal split
-:map - <C-W>-
-:map = <C-W>+
+" :map - <C-W>-
+" :map = <C-W>+
 " Quickly resize windows with vertical split
 :map _ <C-W><
 :map + <C-W>>
