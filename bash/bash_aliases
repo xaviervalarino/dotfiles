@@ -134,8 +134,7 @@ if [[ -s ~/.bash_profile ]]; then
 fi
 alias reload=$shell
 
-# Colorize cat
-alias ccat="source-highlight --out-format=esc -o STDOUT -i"
+alias less='color_less'
 alias subl='sublime'
 
 # Git aliases

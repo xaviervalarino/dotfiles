@@ -25,3 +25,8 @@ terminal_theme(){
     . ~/.config/base16-shell/base16-ateliersulphurpool.$1.sh
     export THEME=$1
 }
+
+# Colorize less
+color_less(){
+ pygmentize $1 | less -R
+}
