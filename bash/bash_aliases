@@ -75,6 +75,10 @@ elif [[ $platform == 'Darwin' ]]; then
     alias kwm='brew services restart kwm'
     alias kstop='brew services stop kwm'
 
+    # copy and pasting
+    alias copy='pbcopy'
+    alias paste='pbpaste'
+
     # launch application
     alias finder='open .'
     alias thunar='finder'
