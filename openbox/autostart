@@ -92,3 +92,5 @@ syndaemon -i 1 &
 
 ## Allow special char (accents, tildes) with Right ALT key
 setxkbmap -option compose:ralt &
+## Map Caps lock to Escape
+xmodmap ~/.Xmodmap
