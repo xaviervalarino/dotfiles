@@ -21,6 +21,8 @@ terminal_theme(){
     # Change iterm profile with time of day
     if [[ $(uname) == 'Darwin' ]]; then
         iterm2_profile 'Sulphurpool ${type}'
+    # else
+        # printf string to set urxvt border color
     fi
     . ~/.config/base16-shell/base16-ateliersulphurpool.$1.sh
     export THEME=$1
@@ -28,5 +30,7 @@ terminal_theme(){
 
 # Colorize less
 color_less(){
- pygmentize $1 | less -R
+    # TODO: fix  issue when file doesn't have `lexer`
+    # pygmentize $1 | less -R
+    less
 }
