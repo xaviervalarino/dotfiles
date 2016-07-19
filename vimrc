@@ -137,7 +137,7 @@ set encoding=utf8                    " Set char encoding inside Vim
 set noshowmode                       " Hide mode line (controlled by Airline)
 set wildmenu                         " Show completion menu for command line
 
-colorscheme base16-ateliersulphurpool
+colorscheme base16-atelier-sulphurpool
 let base16colorspace=256
 
 "TODO: colorscheme needs some serious overhaul
