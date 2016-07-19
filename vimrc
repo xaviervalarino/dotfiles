@@ -15,13 +15,9 @@ Plug 'elentok/plaintasks.vim'
 
 " UI & Theme -------------------------------------------------------------------
 Plug 'tpope/vim-vinegar'                " Enhance Vim's directory browser
-Plug 'mikewest/vimroom'                 " _Focus Mode_
-Plug 'itchyny/lightline.vim'            " Enhanced Statusline
 Plug 'bling/vim-bufferline'             " List buffers in command bar
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'chriskempson/base16-vim'
-Plug 'felixjung/vim-base16-lightline'
-" Plug 'daviesjamie/vim-base16-lightline'
+Plug 'itchyny/lightline.vim'            " Enhanced Statusline
+Plug 'felixjung/vim-base16-lightline'   " Base16 Lightline colorscheme
 
 " Text manipulation ------------------------------------------------------------
 " Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
