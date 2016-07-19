@@ -65,6 +65,9 @@ inoremap jj <Esc>
 set ttimeout
 set ttimeoutlen=100
 
+" Automatically cd into the directory that the file is in
+autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+
 
 " INDENTATION
 "===============================================================================
