@@ -108,6 +108,10 @@ set showmatch                        " Highlight matching bracket
 set ignorecase                       " Ignore case in search patterns
 set smartcase                        " Override `ignorecase` if search contains upper
 
+" Center search in the middle of the screen
+map N Nzz
+map n nzz
+
 " Search for visually selected text using '//'
 vnoremap // y/<C-R>"<CR>"
 " Unset search pattern (highlighting) w/ backslash <\>
