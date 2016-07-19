@@ -1,0 +1,16 @@
+[user]
+  name = xaviervalarino
+  email = xavier@valarino.com
+[alias]
+  st = status
+  co = checkout
+  br = branch
+  up = rebase
+  ci = commit
+[core]
+	editor = vim
+[push]
+	default = simple
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
