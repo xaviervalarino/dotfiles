@@ -105,6 +105,8 @@ autocmd FileType gitcommit setl textwidth=72 fo-=l
 set hlsearch                         " Highlight search results
 set incsearch                        " Do incremental searching
 set showmatch                        " Highlight matching bracket
+set ignorecase                       " Ignore case in search patterns
+set smartcase                        " Override `ignorecase` if search contains upper
 
 " Search for visually selected text using '//'
 vnoremap // y/<C-R>"<CR>"
