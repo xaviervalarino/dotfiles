@@ -1,12 +1,25 @@
-Other:
 ☐ Add new screenshots to README
-  ☐ Debian
-  ☐ OSX
+☐ Debian
+☐ OSX
+
+Documentation:
+☐ Bspwm,
+☐ Xmodmap
+☐ scss-lint
+☐ Tern
+☐ Agignore
+☐ Gitignore
+☐ Xmodmap (combine with OSX Karabiner)
+
 
 Things to fix:
-✔ bash reload on OSX (points to _aliases, not _profile) @done (2016-06-26 04:36)
-☐ change setup files to use `mkdir -p` instead of if statments
 ☐ make Vim default $EDITOR in OSX
+☐ $XGD_CONFIG_HOME variable is not exported?
+
+Setup scripts:
+☐ change setup files to use `mkdir -p` instead of if statments
+☐ `ln -s` function for single files?
+☐ install script to run all setups in `setup/`?
 
 Kwm:
 ☐ Finalize key bindings
@@ -17,7 +30,7 @@ Kwm:
   ☐ Spaces?
 
 Config files to add:
-☐ tracking openbox dependencies (cb-pipemenu)?
+✘ tracking openbox dependencies (cb-pipemenu)? @cancelled (2016-07-19 01:20)
 ☐ tint2
 ☐ gtk-2 and gtk2 3
 ☐ compton
@@ -26,7 +39,6 @@ Vim:
 ☐ autosave and/or save on focus lost
 ☐ Remove cursor and lineNr when window looses focus
   https://www.reddit.com/r/vim/comments/4aab93/weekly_vim_tips_and_tricks_thread_1/d0ypww5
-☐ Configure global Tern `tern-config` file to get YouCompleteMe to use Tern JS completion
   http://ternjs.net/doc/manual.html#configuration
 
   Git:
@@ -34,19 +46,21 @@ Vim:
   ☐ map GitGutter{Stage,Revert,Preview}Hunk to keybindings
 
   Time Themed Terminal:
+  ☐ sudoedit, other times terminal is called
+  ✘ openbox (rc.xml) and terminal initiating theme call @cancelled (2016-07-19 01:20)
+
+Archive:
+＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
+✔ bash reload on OSX (points to _aliases, not _profile) @done (2016-06-26 04:36)
+✔ Configure global Tern `tern-config` file to get YouCompleteMe to use Tern JS completion @done (2016-07-19 01:20)
   ✔ fix different coreutil version on Mac and Debian @done (2016-06-14 00:29)
   ✔ merge coreutil aliases @done (2016-06-22 22:18)
-  ☐ openbox (rc.xml) and terminal initiating theme call
-  ☐ sudoedit, other times terminal is called
   ✔ figure out: @done (2016-06-26 04:36)
     ✔ set terminal based on time @done (2016-06-26 04:35)
     ✔ persist $THEME env variable @done (2016-06-26 04:35)
     ✔ source base16 script each time terminal is opened @done (2016-06-26 04:35)
     ✔ make below work for: @done (2016-06-26 04:35)
       ✔ bash alias ( is this actually important? ) @done (2016-06-26 04:35)
-
-Archive:
-＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
 ✔ Add Openbox @done (2016-04-21 12:49)
   ✔ rc.xml @done (2016-04-21 12:49)
   ✔ autostart @done (2016-04-21 12:50)
