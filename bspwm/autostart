@@ -1,0 +1,47 @@
+#! /bin/bash
+
+
+compton &
+
+# =======
+# Top bar
+# =======
+
+tint2 &
+
+# Volume control for systray
+(sleep 2s && pnmixer) &
+
+~/.dropbox-dist/dropboxd &
+redshift-gtk &
+
+# Volume keys daemon
+xfce4-volumed &
+
+# Enable power management
+xfce4-power-manager &
+
+conky -q -d
+
+# ===================
+# keyboard & trackpad
+# ===================
+
+# Disable trackpad movement and tapping
+# Set 2 second timeout while keyboard is active
+syndaemon -i 1 &
+
+# Allow special char (accents, tildes) with Right ALT key
+setxkbmap -option compose:ralt &
+
+# Map Caps lock to Escape
+xmodmap $HOME/.Xmodmap &
+
+# Start Thunar Daemon
+thunar --daemon &
+
+# Detect and configure touchpad. See 'man synclient' for more info.
+if egrep -iq 'touchpad' /proc/bus/input/devices; then
+    synclient VertEdgeScroll=1 &
+    synclient TapButton1=1 &
+fi
