@@ -18,6 +18,8 @@ Plug 'tpope/vim-vinegar'                " Enhance Vim's directory browser
 Plug 'bling/vim-bufferline'             " List buffers in command bar
 Plug 'itchyny/lightline.vim'            " Enhanced Statusline
 Plug 'felixjung/vim-base16-lightline'   " Base16 Lightline colorscheme
+Plug 'junegunn/goyo.vim'                " Focus writing mode
+Plug 'junegunn/limelight.vim'           " Highlight text based on focus
 
 " Text manipulation ------------------------------------------------------------
 " Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
@@ -223,3 +225,18 @@ let g:syntastic_style_warning_symbol = '☻'
 
 " Make warnings yellow
 highlight SyntasticWarningSign ctermfg = 3
+
+" Goyo --------------------------------------------------------------------------
+function! s:goyo_enter()
+  set showmode
+  set scrolloff=999 " Center the cursor like a typewriter
+  Limelight
+endfunction
+
+function! s:goyo_leave()
+  set scrolloff=5
+  Limelight!
+endfunction
+
+autocmd! User GoyoEnter nested call <SID>goyo_enter()
+autocmd! User GoyoLeave nested call <SID>goyo_leave()
