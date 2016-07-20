@@ -9,6 +9,7 @@ Xft.rgba: rgb
 
 Xft.lcdfilter: lcddefault
 
+
 ! base16 atelier sulphurpool -------------------------------------------------
 ! Scheme: Bram de Haan (http://atelierbram.github.io/syntax-highlighting/atelier-schemes/sulphurpool)
 
@@ -18,15 +19,7 @@ Xft.lcdfilter: lcddefault
 #define base03 #6b7394
 #define base04 #898ea4
 #define base05 #979db4
-#define base06 #dfe2f1
-#define base07 #f5f7ff
-#define base08 #c94922
-#define base09 #c76b29
-#define base0A #c08b30
-#define base0B #ac9739
-#define base0C #22a2c9
-#define base0D #3d8fd1
-#define base0E #6679cc
+#define base06 #dfe2f
 #define base0F #9c637a
 
 *foreground:   base05
@@ -79,13 +72,23 @@ URxvt.keysym.C-Down:   perl:font-size:decrease
 !URxvt.keysym.C-Minus: font-size:decglobal
 
 ! rofi -----------------------------------------------------------------------
+! rofi.fullscreen:      true
+rofi.font:	      System San Francisco Display 14
 rofi.fullscreen:      true
 rofi.padding:	      200
-rofi.opacity:	      85
-rofi.line-margin:     20
-rofi.separator-style: solid
-rofi.lines:           10
-!rofi.font:	      "xft.monospace 10"
-!rofi.color-enabled:   true
-!rofi.bg:	      #000000
-!rofi.fg:	      #FFFFFF
+/* rofi.width:	      100 */
+rofi.line-margin:     10
+rofi.separator-style: none
+rofi.hide-scrollbar:  true
+rofi.lines:           5
+rofi*eh:	      2
+
+rofi.opacity:	      80
+rofi.color-enabled:   true
+! State	           bg,       fg,       bgalt,    hlbg,     hlfg
+rofi.color-normal: #293256,  #dfe2f1,  #293256,  #293256,  #22a2c9
+rofi.color-urgent: #293256,  #293256,  #293256,  #293256,  #22a2c9
+rofi.color-active: #293256,  #293256,  #293256,  #293256,  #22a2c9
+
+!		   background,  border
+rofi.color-window: #293256,     #293256
