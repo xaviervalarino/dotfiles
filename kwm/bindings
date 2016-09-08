@@ -10,6 +10,12 @@ kwmc bindsym hyper-s mode activate resize
 kwmc bindsym resize-h window -c reduce 0.025
 kwmc bindsym resize-l window -c expand 0.025
 
+// Manage Kwm
+kwmc bindsym hyper-q quit
+kwmc bindsym hyper-r config reload
+kwmc bindsym hyper-e space -r focused
+/* kwmc bindsym hyper-k exec vim ~/.kwm */
+
 // LAUNCH APPLICATIONS
 //===============================================================
 kwmc bindsym hyper-t exec open -na ~/Applications/iTerm2.app
