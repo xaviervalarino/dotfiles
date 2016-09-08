@@ -62,7 +62,7 @@ kwmc config border marked radius 6
 kwmc mode prefix prefix on
 kwmc mode prefix timeout 0.75
 kwmc mode prefix restore default
-// kwmc mode prefix color 0xFF458588
+kwmc mode prefix color 0xFF458588
 
 
 // INCLUDES
