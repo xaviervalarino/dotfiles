@@ -5,8 +5,10 @@ kwmc bindsym hyper-h window -f west
 // Activate prefix mode
 kwmc bindsym ctrl-s mode activate prefix
 
-// Quit Kwm
-/* kwmc bindsym cmd+alt+ctrl-q quit */
+kwmc bindsym hyper-s mode activate resize
+
+kwmc bindsym resize-h window -c reduce 0.025
+kwmc bindsym resize-l window -c expand 0.025
 
 // LAUNCH APPLICATIONS
 //===============================================================

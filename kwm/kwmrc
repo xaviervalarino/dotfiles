@@ -64,6 +64,11 @@ kwmc mode prefix timeout 0.75
 kwmc mode prefix restore default
 kwmc mode prefix color 0xFF458588
 
+// Activate resize mode
+kwmc mode resize prefix on
+kwmc mode resize timeout 0.75
+kwmc mode resize restore default
+kwmc mode resize color 0xFF458588
 
 // INCLUDES
 //======================================================================
