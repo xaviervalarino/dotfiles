@@ -27,7 +27,7 @@ fi
 export PS1='\[\e[33m\]\u@\h:\[\e[34m\]\W$(__git_ps1 "(%s)")\[\e[33m\]\$\[\e[m\] '
 
 # Load local perl modules (perlbrew)
-# source ~/perl5/perlbrew/etc/bashrc
+source ~/perl5/perlbrew/etc/bashrc
 
 # make sublime default editor
 # export EDITOR='open -a "Sublime Text"'
