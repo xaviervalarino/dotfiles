@@ -75,3 +75,5 @@ kwmc mode resize color 0xFF458588
 
 include bindings
 include rules
+
+// vim:syntax=rc
