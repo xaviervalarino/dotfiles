@@ -3,7 +3,7 @@ define hyper cmd+ctrl+alt+shift
 kwmc bindsym hyper-h window -f west
 
 // Activate prefix mode
-kwmc bindsym ctrl-s mode activate prefix
+// kwmc bindsym ctrl-s mode activate prefix
 
 kwmc bindsym hyper-s mode activate resize
 
@@ -38,12 +38,10 @@ kwmc bindsym hyper-r tree rotate 90
 
 // Modify Container
 kwmc bindsym hyper-s window -c split-mode toggle
-kwmc bindsym hyper-j window -c reduce 0.05
-kwmc bindsym hyper-l window -c expand 0.05
 kwmc bindsym hyper-< window -c type toggle
 
 // Set Temporary Window Container
-kwmc bindsym prefix-f window -z fullscreen
+// kwmc bindsym prefix-f window -z fullscreen
 kwmc bindsym prefix-d window -z parent
 kwmc bindsym prefix-w window -t focused
 
