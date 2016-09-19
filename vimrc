@@ -66,8 +66,10 @@ set ttimeout
 set ttimeoutlen=100
 
 " Automatically cd into the directory that the file is in
-autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+" autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
+" Stop syntax highlighting for long lines from slowing down Vim
+set synmaxcol=120
 
 " INDENTATION
 "===============================================================================
@@ -205,6 +207,7 @@ let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroo
 " YouCompleteMe auto-completion -------------------------------------------------
 set omnifunc=syntaxcomplete#Complete                " Turn on omnicompletion
 let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for complete
+set completeopt-=preview                            " Remove preview window
 
 " Bufferline --------------------------------------------------------------------
 let g:bufferline_echo = 1
