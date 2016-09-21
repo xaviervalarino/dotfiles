@@ -38,7 +38,7 @@ Plug 'scrooloose/syntastic'             " Sytax linting
 Plug 'Valloric/YouCompleteMe'
 " Plug 'marijnh/tern_for_vim'           " Needed for YouCompleteMe?
 Plug 'rking/ag.vim'                     " Ag search in Vim
-Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, tag, etc finder
+" Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, tag, etc finder
 Plug 'vim-scripts/TaskList.vim'         " Show all TODOs in a file
 
 "Add plugins to &runtimepath
