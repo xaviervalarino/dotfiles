@@ -72,7 +72,7 @@ set ttimeoutlen=100
 autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
 
 " Stop syntax highlighting for long lines from slowing down Vim
-set synmaxcol=120
+set synmaxcol=150
 
 " INDENTATION
 "===============================================================================
