@@ -71,8 +71,14 @@ set ttimeoutlen=100
 " Syntax highlight YAML front matter as a comment in Markdown files
 autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
 
-" Stop syntax highlighting for long lines from slowing down Vim
-set synmaxcol=150
+
+" COMMAND LINE MODE
+"===============================================================================
+
+" Recall command history with filter capabilities
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
 
 " INDENTATION
 "===============================================================================
@@ -99,8 +105,8 @@ autocmd BufReadPost * DetectIndent
 " FILE SPECIFIC
 "===============================================================================
 
-" TODO: does this need augroup
 " Set Git commit msg width to 72 chars & enable formatoptions in Insert Mode
+" TODO: does this need augroup
 autocmd FileType gitcommit setl textwidth=72 fo-=l
 
 
@@ -141,6 +147,7 @@ set t_Co=256                         " Set 256 Colors
 set encoding=utf8                    " Set char encoding inside Vim
 set noshowmode                       " Hide mode line (controlled by Airline)
 set wildmenu                         " Show completion menu for command line
+set synmaxcol=120                    " Set low column width for syntax highlight (stops slow down)
 
 colorscheme base16-atelier-sulphurpool
 let base16colorspace=256
@@ -198,13 +205,14 @@ set splitright
 :map _ <C-W><
 :map + <C-W>>
 
+
 " PLUGINS SETUPS
 "===============================================================================
 
 let delimitMate_expand_cr = 1                       " Expand brackets
 let javascript_enable_domhtmlcss = 1                " Enable HTML/CSS syntax in JS
 " TODO: collision with Vim-Move and Split Navigation
-let g:move_key_modifier = 'C'                   " Vim move modifier key (CTRL)
+let g:move_key_modifier = 'C'                       " Vim move modifier key (CTRL)
 let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroom
 
 " YouCompleteMe auto-completion -------------------------------------------------
