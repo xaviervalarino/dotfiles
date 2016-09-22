@@ -74,6 +74,7 @@ autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
 " Stop syntax highlighting for long lines from slowing down Vim
 set synmaxcol=150
 
+
 " INDENTATION
 "===============================================================================
 
@@ -198,13 +199,14 @@ set splitright
 :map _ <C-W><
 :map + <C-W>>
 
+
 " PLUGINS SETUPS
 "===============================================================================
 
 let delimitMate_expand_cr = 1                       " Expand brackets
 let javascript_enable_domhtmlcss = 1                " Enable HTML/CSS syntax in JS
 " TODO: collision with Vim-Move and Split Navigation
-let g:move_key_modifier = 'C'                   " Vim move modifier key (CTRL)
+let g:move_key_modifier = 'C'                       " Vim move modifier key (CTRL)
 let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroom
 
 " YouCompleteMe auto-completion -------------------------------------------------
