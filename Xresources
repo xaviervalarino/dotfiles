@@ -52,11 +52,11 @@ Xft.lcdfilter: lcddefault
 URxvt.cursorBlink:      true
 URxvt.scrollBar:        false
 URxvt.externalBorder:   0
-! Need to set internalBorder color equal to Background
+!TODO Need to set internalBorder color equal to Background
 URxvt.internalBorder:   15
 /* URxvt.borderless:       1 */
 URxvt.saveLines:        90000
-URxvt*fading:		30
+URxvt*fading:		15
 
 ! text
 URxvt.font:             xft:Terminus:size=12
