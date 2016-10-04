@@ -1,3 +1,6 @@
+! To load changes to X resources
+! xrdb -load ~/.Xresources
+
 ! font settings --------------------------------------------------------------
 
 Xft.autohint: true
