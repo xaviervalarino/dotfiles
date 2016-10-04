@@ -1,9 +1,32 @@
 # Personal Dotfiles
 Dotfiles for Mac OSX and Debian Jessie.
+<!--
+TOC
 
+Installation:
+    Caveat
+    Individually
+    As a whole
+
+Tiling window managers:
+    Kwm
+    Bswpm
+
+Bash?
+    aliases
+Text editors:
+    Nano
+    Sublime
+    Vim:
+	Tern
+	Ag
+	Xmodmap
+-->
+
+<!--
 ## Screenshots
 ![Screenshot of Xavier's Debian desktop with Conky and Vim Running](./img/debian_screenshot.png?raw=true)
-
+-->
 ## Bash
 Configuration includes color for PS1, bash aliases, and OS specific settings (controlled by looking up `uname`)
 
@@ -44,8 +67,9 @@ Running the setup script will symlink _vimrc_ to your home directory, installs [
 ./setup/vim_setup.sh # run script
 ```
 
-## The Silver Searcher (Ag)
-The silver searcher is supposedly faster than ack. I use it in Vim with CtrlP for fuzzy file searching. This repo contains ag's global `.agignore` file.
+## [The Silver Searcher (Ag)](https://github.com/ggreer/the_silver_searcher)
+The silver searcher is supposedly faster than ack. I use it in Vim with `CtrlP` for fuzzy file searching. This repo contains ag's global `.agignore` file.
+
 ## [Sublime](http://www.sublimetext.com/)
 ~~That being said, Sublime still remains my editor of choice when I need to get something done quickly.~~
 I now rarely use sublime, but find it useful to keep it's config under source control.
@@ -60,20 +84,21 @@ I use conky to monitor:
 * Memory usage
 * Disk Space
 
-## [KWM](https://github.com/koekeishiya/kwm)
+## [Kwm](https://github.com/koekeishiya/kwm)
 Tiling windows manager for OSX
 
 ## [Openbox](http://openbox.org/wiki/Main_Page)
 Openbox lightweight stacking windows manager. Many of my settings are based of off the defaults that came with Crunchbang linux (defunct, but forked as [BunsenLabs](https://www.bunsenlabs.org/))
 
+<!--
 #### Dependencies
 This configuration requires [cb-pipemenus](https://github.com/gearge/cb-pipemenus) to be in your `$PATH`
-
 #### Installation
 Setup script will symlink `autostart`, `rc.xml`, `menu.xml` into `$HOME/.config/openbox`
 ```bash
 ./setup/openbox_setup.sh # run script
 ```
+-->
 
 ## Disclaimer
-These files are for personal use, so your milage (_especially_ with the setup scripts) may vary.
+These files are for personal use, your mileage may vary (_especially_ with the setup scripts).
