@@ -54,6 +54,7 @@ set mouse=a                          " Enable mouse
 set backspace=indent,eol,start       " Make backspace behave normally
 set nrformats=                       " Treat all numerals as decimal, regardless of padded zeros
 set spell spelllang=en_us            " Spell checking
+set autowrite                        " Save file when modified (esp. nice when switching buffers)
 
 " TODO fix clipboard settings
 " set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
@@ -130,8 +131,8 @@ vnoremap // y/<C-R>"<CR>"
 nnoremap \ :noh<CR>
 
 
-" SAVING
 "===============================================================================
+" SAVING
 
 set noswapfile                       " Turn off swapfile
 autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
