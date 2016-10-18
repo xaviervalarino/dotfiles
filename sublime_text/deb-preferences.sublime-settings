@@ -10,6 +10,7 @@
 	"ignored_packages":
 	[
 		"Markdown",
+		"SublimeLinter-contrib-scss-lint",
 		"Vintage"
 	],
 	"indent_guide_options":
