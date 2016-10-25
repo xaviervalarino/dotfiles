@@ -6,6 +6,9 @@ compton &
 # Top bar
 # =======
 
+# Network Manager tray dropdown
+# TODO: does not always work on click
+nm-applet &
 
 # Volume control
 (sleep 2s && pnmixer) &
