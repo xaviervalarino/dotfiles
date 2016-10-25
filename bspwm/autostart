@@ -43,7 +43,8 @@ syndaemon -i 1 &
 setxkbmap -option compose:ralt &
 
 # Map Caps lock to Escape
-xmodmap $HOME/.Xmodmap &
+# TODO: xmodmap does not seem to work after pm-hibernate
+xmodmap $HOME/.Xmodmap
 
 # Start Thunar Daemon
 thunar --daemon &
