@@ -1,18 +1,20 @@
 #! /bin/bash
 
-
 compton &
 
 # =======
 # Top bar
 # =======
 
-tint2 &
 
-# Volume control for systray
+# Volume control
 (sleep 2s && pnmixer) &
 
+# Dropbox sync & tray icon
 ~/.dropbox-dist/dropboxd &
+
+# Redshift screen at night
+# ~/.config/redshift.conf
 redshift-gtk &
 
 # Volume keys daemon
@@ -20,6 +22,9 @@ xfce4-volumed &
 
 # Enable power management
 xfce4-power-manager &
+
+# topbar
+tint2 &
 
 conky -q -d
 
