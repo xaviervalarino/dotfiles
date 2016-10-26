@@ -21,7 +21,7 @@ bspc config pointer_follows_focus true
 # bspc rule -a Kupfer.py focus=on
 # bspc rule -a Screenkey manage=off
 
-bspc monitor -d I II III IV
+bspc monitor -d 1 2 3 4
 
 sxhkd &
 . $HOME/.config/bspwm/autostart
