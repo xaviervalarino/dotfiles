@@ -1,6 +1,9 @@
 #! /bin/bash
 
-compton &
+# Compton compositor
+# compton &
+# fade (2 milliseconds) and daemonize
+compton -f -D 3  -b
 
 # =======
 # Top bar
