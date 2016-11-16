@@ -17,6 +17,7 @@ kwmc rule properties={float="true"} owner="System Preferences"
 kwmc rule properties={float="true"} owner="The Unarchiver"
 kwmc rule properties={float="true"} owner="Archive Utility"
 kwmc rule properties={float="true"} owner="Calculator"
+kwmc rule properties={float="true"} owner="Finder" name="Copy"
 
 /* Captures an application to the given screen */
 kwmc rule properties={display="1"} owner="iTunes"
