@@ -6,17 +6,17 @@ VIM CONFIGURATION
 -----------------
 
 EOT
-
-# SymLink vimrc to home dir
+# Don't overwrite existing vimrc
 vimrc=${HOME}/.vimrc
 if [ -f $vimrc ]; then
   echo "(!) Your old .vimrc has been renamed .vimrc.old"
   mv $vimrc "$HOME/.vimrc.old"
-
-  echo "symlinking new vimrc to home directory"
-  dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
-  ln -s -f ${dotfiles}/vimrc $vimrc
 fi
+
+# SymLink vimrc to home dir
+echo "symlinking new vimrc to home directory"
+dotfiles="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+ln -s -f ${dotfiles}/vimrc $vimrc
 
 # Download Vim Plug
 if [ ! -d "${HOME}/.vim/autoload/" ]; then
