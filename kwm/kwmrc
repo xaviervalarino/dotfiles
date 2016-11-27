@@ -20,7 +20,7 @@ kwmc config cycle-focus on // Allow window focus to wrap-around
 
 
 // MOUSE
-//======================================================================
+// =====================================================================
 
 kwmc config focus-follows-mouse off // dont autoraise windows
 kwmc config mouse-follows-focus off // center mouse on focused window
@@ -44,7 +44,7 @@ kwmc config spawn right
 
 
 // BORDERS
-//======================================================================
+// =====================================================================
 
 // Enable border for focused window
 kwmc config border focused on
@@ -71,7 +71,7 @@ kwmc mode resize restore default
 kwmc mode resize color 0xFF458588
 
 // INCLUDES
-//======================================================================
+// =====================================================================
 
 include bindings
 include rules
