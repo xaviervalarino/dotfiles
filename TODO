@@ -1,9 +1,10 @@
+☐ Add link to `OSX-setup.md`
 ☐ Add new screenshots to README
-☐ Debian
-☐ OSX
+  ☐ Debian
+  ☐ OSX
 
 Documentation:
-☐ Bspwm,
+☐ Bspwm
 ☐ Xmodmap
 ☐ scss-lint
 ☐ Tern
@@ -17,9 +18,9 @@ Things to fix:
 ☐ $XGD_CONFIG_HOME variable is not exported?
 
 Setup scripts:
-☐ change setup files to use `mkdir -p` instead of if statments
+☐ change setup files to use `mkdir -p` instead of if statements
 ☐ `ln -s` function for single files?
-☐ install script to run all setups in `setup/`?
+☐ install script to run them all? some sort of prompt that points to `setup/`?
 
 Kwm:
 ☐ Finalize key bindings
@@ -36,7 +37,7 @@ Config files to add:
 ☐ compton
 
 Vim:
-☐ autosave and/or save on focus lost
+✔ autosave and/or save on focus lost @done (2016-11-27 11:09)
 ☐ Remove cursor and lineNr when window looses focus
   https://www.reddit.com/r/vim/comments/4aab93/weekly_vim_tips_and_tricks_thread_1/d0ypww5
   http://ternjs.net/doc/manual.html#configuration
