@@ -1,0 +1,330 @@
+# enable kwm compatibility mode
+khd kwm on
+
+# # set border color for different modes
+khd mode default color 0xddd5c4a1
+khd mode SWITCHER color 0xddbdd322
+khd mode RESIZE color 0xddd75f5f
+khd mode PADDING color 0xddb16286
+# khd mode swap color 0xdd458588
+# khd mode tree color 0xddfabd2f
+# khd mode info color 0xddcd950c
+# khd mode ytd color 0xddd75f5f
+
+# reload Khd config
+ctrl + shift + cmd + alt - e  : khd -e "reload" &&  \
+				terminal-notifier   \
+				    -title "Khd"    \
+				    -subtitle "Restarting at $(date '+%r')"
+
+
+# toggle between modes
+# TODO: decide whether to use top level "switcher" mode
+
+ctrl + shift + cmd + alt - f	:   khd -e "mode activate SWITCHER"
+
+# return to DEFAULT mode with ESC key
+SWITCHER - 0x35			:   khd -e "mode activate default"
+RESIZE - 0x35			:   khd -e "mode activate default"
+PADDING  - 0x35			:   khd -e "mode activate default"
+# ytd + ctrl - 0x35		 :   khd -e "mode activate DEFAULT"
+# swap + ctrl - 0x35        	 :   khd -e "mode activate DEFAULT"
+# tree + ctrl - 0x35        	 :   khd -e "mode activate DEFAULT"
+
+# resize window
+SWITCHER - s			:   khd -e "mode activate RESIZE"
+# manipulate padding (is really the margin) around windows
+SWITCHER - p			:   khd -e "mode activate PADDING"
+
+# SWITCHER - a           	 :   khd -e "mode activate swap"
+# SWITCHER - d           	 :   khd -e "mode activate tree"
+# SWITCHER - q           	 :   khd -e "mode activate info"
+# SWITCHER - w           	 :   khd -e "mode activate ytd"
+
+
+# rotate window-tree by 90* (clockwise)
+ctrl + shift + cmd + alt - r		    :   kwmc tree rotate 90
+
+ctrl + shift + cmd + alt - a		    :   kwmc space -t bsp
+ctrl + shift + cmd + alt - s		    :   kwmc space -t monocle
+ctrl + shift + cmd + alt - d		    :   kwmc space -t float
+
+# swap window locations
+ctrl + shift + cmd + alt - h	:   kwmc window -s west
+ctrl + shift + cmd + alt - j	:   kwmc window -s north
+ctrl + shift + cmd + alt - k	:   kwmc window -s south
+ctrl + shift + cmd + alt - l	:   kwmc window -s east
+
+
+# resize windows
+
+RESIZE - h	    	:   kwmc window -c expand 0.01 west
+RESIZE - j		:   kwmc window -c expand 0.01 south
+RESIZE - k		:   kwmc window -c expand 0.01 north
+RESIZE - l		:   kwmc window -c expand 0.01 east
+
+RESIZE + shift - h   	:   kwmc window -c reduce 0.01 west
+RESIZE + shift - j	:   kwmc window -c reduce 0.01 south
+RESIZE + shift - k	:   kwmc window -c reduce 0.01 north
+RESIZE + shift - l	:   kwmc window -c reduce 0.01 east
+
+# Move window focus
+SWITCHER - h            :   kwmc window -f west
+SWITCHER - l            :   kwmc window -f east
+SWITCHER - j            :   kwmc window -f south
+SWITCHER - k            :   kwmc window -f north
+SWITCHER - n            :   kwmc window -fm prev
+SWITCHER - m            :   kwmc window -fm next
+
+# Move spaces
+SWITCHER - 1            :   kwmc space -fExperimental 1
+SWITCHER - 2            :   kwmc space -fExperimental 2
+SWITCHER - 3            :   kwmc space -fExperimental 3
+SWITCHER - 4            :   kwmc space -fExperimental 4
+# SWITCHER - 5            :   kwmc space -fExperimental 5
+# SWITCHER - 6            :   kwmc space -fExperimental 6
+
+SWITCHER - z            :   kwmc space -fExperimental left
+SWITCHER - c            :   kwmc space -fExperimental right
+SWITCHER - f            :   kwmc space -fExperimental previous
+
+SWITCHER + shift - z    :   kwmc window -m space left;\
+                            kwmc space -fExperimental left
+
+SWITCHER + shift - c    :   kwmc window -m space right;\
+                            kwmc space -fExperimental right
+
+# SWITCHER + shift - 1    :   kwmc display -f 0
+# SWITCHER + shift - 2    :   kwmc display -f 1
+# SWITCHER + shift - 3    :   kwmc display -f 2
+
+
+# # swap mode
+# swap - h                :   kwmc window -s west
+# swap - j                :   kwmc window -s south
+# swap - k                :   kwmc window -s north
+# swap - l                :   kwmc window -s east
+# swap - m                :   kwmc window -s mark
+
+# swap + shift - l        :   kwmc window -m east
+# swap + shift - k        :   kwmc window -m north
+# swap + shift - j        :   kwmc window -m south
+# swap + shift - h        :   kwmc window -m west
+# swap + shift - m        :   kwmc window -m mark
+
+# swap - 1                :   kwmc window -m space 1
+# swap - 2                :   kwmc window -m space 2
+# swap - 3                :   kwmc window -m space 3
+# swap - 4                :   kwmc window -m space 4
+# swap - 5                :   kwmc window -m space 5
+
+# swap - z                :   kwmc window -m space left
+# swap - c                :   kwmc window -m space right
+
+# swap + shift - 1        :   kwmc window -m display 0
+# swap + shift - 2        :   kwmc window -m display 1
+# swap + shift - 3        :   kwmc window -m display 2
+
+
+
+
+PADDING - x		:   kwmc space -g increase horizontal
+PADDING - y		:   kwmc space -g increase vertical
+PADDING + shift - x	:   kwmc space -g decrease horizontal
+PADDING + shift - y	:   kwmc space -g decrease vertical
+
+PADDING - h		:   kwmc space -p increase left
+PADDING - j	        :   kwmc space -p increase bottom
+PADDING - k	        :   kwmc space -p increase top
+PADDING - l	        :   kwmc space -p increase right
+PADDING - p		:   kwmc space -p increase all
+
+PADDING + shift - h	:   kwmc space -p decrease left
+PADDING + shift - l	:   kwmc space -p decrease right
+PADDING + shift - k	:   kwmc space -p decrease top
+PADDING + shift - j	:   kwmc space -p decrease bottom
+PADDING + shift - p	:   kwmc space -p decrease all
+
+
+
+# # tree mode
+# tree - f                :   kwmc window -z fullscreen
+# tree - d                :   kwmc window -z parent
+# tree - w                :   kwmc window -t focused
+# tree - r                :   kwmc tree rotate 90
+
+# tree - s                :   kwmc window -c split - mode toggle;\
+#                             khd -e "mode activate default"
+
+# tree - c                :   kwmc window -c type toggle;\
+#                             khd -e "mode activate default"
+
+# tree - h                :   kwmc window -c expand 0.05 west
+# tree - j                :   kwmc window -c expand 0.05 south
+# tree - k                :   kwmc window -c expand 0.05 north
+# tree - l                :   kwmc window -c expand 0.05 east
+# tree + shift - h        :   kwmc window -c reduce 0.05 west
+# tree + shift - j        :   kwmc window -c reduce 0.05 south
+# tree + shift - k        :   kwmc window -c reduce 0.05 north
+# tree + shift - l        :   kwmc window -c reduce 0.05 east
+
+# tree - p                :   kwmc tree -pseudo create
+# tree + shift - p        :   kwmc tree -pseudo destroy
+
+# tree - o                :   kwmc window -s prev
+# tree + shift - o        :   kwmc window -s next
+
+
+
+# # default
+# cmd + alt + ctrl - m    :   kwmc window -mk focused
+# cmd + alt + ctrl - h    :   kwmc window -mk west wrap
+# cmd + alt + ctrl - l    :   kwmc window -mk east wrap
+# cmd + alt + ctrl - j    :   kwmc window -mk south wrap
+# cmd + alt + ctrl - k    :   kwmc window -mk north wrap
+
+# cmd - 0x2A              :   khd -w "aasvi93@hotmail.com"
+# cmd - 7                 :   khd -w "\\"
+# cmd - 8                 :   khd -w "{"
+# cmd - 9                 :   khd -w "}"
+
+
+
+
+# vi-mode for non-terminal applications
+
+# remap left-control h/j/k/l -> arrow keys
+lctrl - h         ![Terminal,iTerm2] :   khd -p "- left"
+lctrl - j         ![Terminal,iTerm2] :   khd -p "- down"
+lctrl - k         ![Terminal,iTerm2] :   khd -p "- up"
+lctrl - l         ![Terminal,iTerm2] :   khd -p "- right"
+
+shift + lctrl - h ![Terminal,iTerm2] :   khd -p "shift - left"
+shift + lctrl - j ![Terminal,iTerm2] :   khd -p "shift - down"
+shift + lctrl - k ![Terminal,iTerm2] :   khd -p "shift - up"
+shift + lctrl - l ![Terminal,iTerm2] :   khd -p "shift - right"
+
+# remap left-control 0 / 4 ---> start / end of line
+lctrl - 0         ![Terminal,iTerm2] :  khd -p "cmd - left"
+lctrl - 4         ![Terminal,iTerm2] :  khd -p "cmd - right"
+
+# remap left-control g / G ---> start / end of text
+lctrl - g         ![Terminal,iTerm2] :  khd -p "cmd - up"
+lctrl + shift - g ![Terminal,iTerm2] :  khd -p "cmd - down"
+
+shift + lctrl - 0 ![Terminal,iTerm2] :  khd -p "shift + cmd - left"
+shift + lctrl - 4 ![Terminal,iTerm2] :  khd -p "shift + cmd - right"
+
+# remap left-control b / e ---> start / end of word
+lctrl - b         ![Terminal,iTerm2] :  khd -p "alt - left"
+lctrl - e         ![Terminal,iTerm2] :  khd -p "alt - right"
+
+shift + lctrl - b ![Terminal,iTerm2] :  khd -p "shift + alt - left"
+shift + lctrl - e ![Terminal,iTerm2] :  khd -p "shift + alt - right"
+
+# remap left-control x -------> forward delete
+lctrl - x         ![Terminal,iTerm2] :  khd -p "- delete"
+
+# remap left-control u -------> undo typing
+lctrl - u         ![Terminal,iTerm2] :  khd -p "cmd - z"
+
+lctrl - n         ![Terminal,iTerm2] :  khd -p "cmd - z"
+
+# TODO: make search in Safari more like Vim
+# left-control / -------------> open search
+# lctrl - 0x2F	    [Safari]	     :	khd -p "cmd - f"
+# lctrl - n	    [Safari]	     :	khd -p "return"
+# lctrl + shift - n   [Safari]	     :	khd -p "shift - return"
+
+
+# switcher - return       :   open -na /Applications/iTerm2.app;\
+#                             khd -e "mode activate default"
+
+# TO REVIEW #######################################################
+#
+# # ytd mode
+# # A simple local media-server for youtube
+# # https://github.com/koekeishiya/ytd
+#
+# ytd - x                 :   ytc play;\
+#                             khd -e "mode activate default"
+
+# ytd - s                 :   ytc mkfav;\
+#                             khd -e "mode activate default"
+
+# # 0x32 == <
+# ytd - 0x32              :   ytc fav
+# ytd - z                 :   ytc prev
+# ytd - c                 :   ytc next
+# ytd - v                 :   ytc stop
+# ytd - d                 :   ytc voldown
+# ytd - a                 :   ytc volup
+# ytd - right             :   ytc seekfw
+# ytd - left              :   ytc seekbk
+
+# sample config for khd
+
+# NOTE(koekeishiya): A bind is written in the form:
+#                   <keysym> [!] [<app list>] [->] : <command>
+#                   where
+#                       <keysym>   = mode + mod + ... + mod - literal
+#                       <keysym>   = mode + mod + ... + mod - keycode (must have -2x prefix)
+#                       <keysym>   = mode + mod + ... + mod (modifier only binding)
+#
+#                       [<app,
+#                         app,     = optional list '[app1, ..., appN]' of applications
+#                         app>]      that this bind will be activated for. if the
+#                                    focused application is not contained in this list,
+#                                    the associated command will not be triggered, and
+#                                    the keypress will be passed through as normal.
+#
+#                       [!]        = optional operator '!' negates the behaviour when a
+#                                    list of applications is given. this marks the bind
+#                                    as 'Hotkey_Exclude', causing the bind to not work
+#                                    when the focused application is in the given list.
+#
+#                       [->]       = optional operator '->' that marks this bind as
+#                                    'passthrough'. this causes the key to be passed
+#                                    through to the system, instead of being consumed.
+#
+#                       <command>  = command is executed through '$SHELL -c' and
+#                                    follows valid shell syntax. if the $SHELL environment
+#                                    variable is not set, it will default to '/bin/bash'.
+#                                    when bash is used, the ';' delimeter can be specified
+#                                    to chain commands.
+#
+#                                    to allow a command to extend into multiple lines,
+#                                    prepend '\' at the end of the previous line.
+#
+#                                    an EOL character signifies the end of the bind.
+
+# NOTE(koekeishiya) Example of passthrough
+# cmd - m -> : echo "alert and minimize window" | alerter -title Test passthrough -timeout 2
+
+# NOTE(koekeishiya) Example of app list
+# alt - e [
+#           iTerm2,
+#           Terminal,
+#           HyperTerm
+#         ]
+#         : echo "so this is how deep the rabbit hole goes.." |\
+#           alerter -title Test passthrough -timeout 2
+
+# NOTE(koekeishiya) Example of negated app list
+# alt - e [
+#           iTerm2,
+#           Terminal,
+#           HyperTerm
+#         ] !
+#         : echo "blue pill, i choose you!" |\
+#           alerter -title Test passthrough -timeout 2
+
+# NOTE(koekeishiya) Modifier only binding
+# left shift    -> (    right shift   -> )
+# left cmd      -> {    right cmd     -> }
+
+# khd mod_trigger_timeout 0.1
+# lshift : khd -p "shift - 8"
+# rshift : khd -p "shift - 9"
+# lcmd   : khd -p "shift + alt - 8"
+# rcmd   : khd -p "shift + alt - 9"
