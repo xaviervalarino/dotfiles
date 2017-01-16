@@ -56,6 +56,8 @@ set nrformats=                       " Treat all numerals as decimal, regardless
 set spell spelllang=en_us            " Spell checking
 set autowrite                        " Save file when modified (esp. nice when switching buffers)
 
+" set  virtualedit+=block             " Allow cursor to move anywhere in V-BLOCK mode
+
 " TODO fix clipboard settings
 " set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
 
@@ -120,6 +122,7 @@ set incsearch                        " Do incremental searching
 set showmatch                        " Highlight matching bracket
 set ignorecase                       " Ignore case in search patterns
 set smartcase                        " Override `ignorecase` if search contains upper
+" set gdefault                        " Set search to Global by default
 
 " Center search in the middle of the screen
 map N Nzz
