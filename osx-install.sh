@@ -81,6 +81,7 @@ brew cask install \
     fontforge \
     handbrake \
     itsycal \
+    whichspace \
     karabiner \
     seil \
     sublime-text \
