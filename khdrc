@@ -11,12 +11,6 @@ khd mode PADDING color 0xddb16286
 # khd mode info color 0xddcd950c
 # khd mode ytd color 0xddd75f5f
 
-# reload Khd config
-ctrl + shift + cmd + alt - e  : khd -e "reload" &&  \
-				terminal-notifier   \
-				    -title "Khd"    \
-				    -subtitle "Restarting at $(date '+%r')"
-
 
 # toggle between modes
 # TODO: decide whether to use top level "switcher" mode
@@ -42,19 +36,38 @@ SWITCHER - p			:   khd -e "mode activate PADDING"
 # SWITCHER - w           	 :   khd -e "mode activate ytd"
 
 
+# Top level commands ------------------------------------------------
+
+# reload Khd config
+ctrl + shift + cmd + alt - e  : khd -e "reload" &&  \
+			        kwmc quit && \
+				terminal-notifier   \
+				    -title "Kwm & Khd"    \
+				    -subtitle "Restarting at $(date '+%r')"
+
+ctrl + shift + cmd + alt - p	:
+
 # rotate window-tree by 90* (clockwise)
 ctrl + shift + cmd + alt - r		    :   kwmc tree rotate 90
+ctrl + shift + cmd + alt - r	:   kwmc tree rotate 90
 
-ctrl + shift + cmd + alt - a		    :   kwmc space -t bsp
-ctrl + shift + cmd + alt - s		    :   kwmc space -t monocle
-ctrl + shift + cmd + alt - d		    :   kwmc space -t float
 
-# swap window locations
-ctrl + shift + cmd + alt - h	:   kwmc window -s west
-ctrl + shift + cmd + alt - j	:   kwmc window -s north
-ctrl + shift + cmd + alt - k	:   kwmc window -s south
-ctrl + shift + cmd + alt - l	:   kwmc window -s east
+#TODO: difference between `kwmc space -t` and `kwmc config tiling [bsp | monocle | float ]` ?
+ctrl + shift + cmd + alt - a	:   kwmc space -t bsp
+ctrl + shift + cmd + alt - s	:   kwmc space -t monocle
+ctrl + shift + cmd + alt - d	:   kwmc space -t float
 
+
+# Move window focus
+ctrl + shift + cmd + alt - h	:   kwmc window -f west
+ctrl + shift + cmd + alt - l	:   kwmc window -f east
+ctrl + shift + cmd + alt - j	:   kwmc window -f south
+ctrl + shift + cmd + alt - k	:   kwmc window -f north
+ctrl + shift + cmd + alt - n	:   kwmc window -fm prev
+ctrl + shift + cmd + alt - m	:   kwmc window -fm next
+# Move display focus
+# TODO: focus follows mouse when switching displays
+ctrl + shift + cmd + alt - o	:   kwmc display -f next
 
 # resize windows
 
@@ -68,13 +81,26 @@ RESIZE + shift - j	:   kwmc window -c reduce 0.01 south
 RESIZE + shift - k	:   kwmc window -c reduce 0.01 north
 RESIZE + shift - l	:   kwmc window -c reduce 0.01 east
 
-# Move window focus
-SWITCHER - h            :   kwmc window -f west
-SWITCHER - l            :   kwmc window -f east
-SWITCHER - j            :   kwmc window -f south
-SWITCHER - k            :   kwmc window -f north
-SWITCHER - n            :   kwmc window -fm prev
-SWITCHER - m            :   kwmc window -fm next
+
+# swap window locations
+SWITCHER - h	:   kwmc window -s west
+SWITCHER - j	:   kwmc window -s north
+SWITCHER - k	:   kwmc window -s south
+SWITCHER - l	:   kwmc window -s east
+# swap window to other display
+SWITCHER - w	:   kwmc window -m display next
+
+# TODO: change split-mode
+# kwmc display -c {mode}
+#     {mode}: optimal | vertical | horizontal
+
+# launch applications
+
+SWITCHER - return   : open -a iTerm2.app && khd -e "mode activate default"
+SWITCHER - w	    : open -a Safari.app && khd -e "mode activate default"
+SWITCHER - a	    : open -a Adobe\ Illustrator.app && khd -e "mode activate default"
+SWITCHER - p	    : open -a Adobe\ Photoshop\ CS6.app && khd -e "mode activate default"
+SWITCHER - i	    : open -a Adobe\ InDesign\ CS6.app && khd -e "mode activate default"
 
 # Move spaces
 SWITCHER - 1            :   kwmc space -fExperimental 1
