@@ -22,9 +22,6 @@ fi
 
 # Bold and color username@hostname in  yellow, working dir in blue, bang in yellow
 # PS1="${debian_chroot:+($debian_chroot)}${BYellow}\u@\h: ${BBlue}\w${RESET} ${BYellow}\$${RESET} "
-# TODO combine bash_colors with git_ps1
-# export PS1="${BYellow}\u@\h: ${BBlue}\w$(__git_ps1 "(%s)"){RESET} ${BYellow}\$${RESET} "
-export PS1='\[\e[33m\]\u@\h:\[\e[34m\]\W$(__git_ps1 "(%s)")\[\e[33m\]\$\[\e[m\] '
 
 # Load local perl modules (perlbrew)
 source ~/perl5/perlbrew/etc/bashrc
