@@ -52,6 +52,9 @@ if [[ $platform == 'Linux' ]]; then
 ########################
 elif [[ $platform == 'Darwin' ]]; then
 
+    # TODO: alias for showing hidden files
+    # defaults write com.apple.finder AppleShowAllFiles YES
+
     ## __HOMEBREW__ ##
     if [ -f $(brew --prefix)/etc/bash_completion ]; then
         source $(brew --prefix)/etc/bash_completion
