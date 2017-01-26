@@ -1,6 +1,5 @@
-/* Tile windows that to not not get tiled by default.
+/* Tile windows that do not get tiled by default.
  */
-kwmc rule properties={role="AXDialog"} owner="iTerm"
 kwmc rule properties={role="AXDialog"} owner="iTerm2"
 kwmc rule properties={role="AXDialog"} owner="Firefox"
 
