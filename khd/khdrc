@@ -39,13 +39,13 @@ SWITCHER - p			:   khd -e "mode activate PADDING"
 # Top level commands ------------------------------------------------
 
 # reload Khd config
-ctrl + shift + cmd + alt - e	: khd -e "reload" &&  \
-			          kwmc quit && \
-				  terminal-notifier   \
-				    -title "Kwm & Khd"    \
+ctrl + shift + cmd + alt - e	: khd -e "reload" && \
+			          kwmc config reload && \
+				  terminal-notifier \
+				    -title "Kwm & Khd" \
 				    -subtitle "Restarting at $(date '+%r')"
 
-ctrl + shift + cmd + alt - p	: ./$HOME/dotfiles/khd/scripts/pause-kwm.sh
+ctrl + shift + cmd + alt - p	: source /$HOME/dotfiles/khd/scripts/pause-kwm.sh
 
 # rotate window-tree by 90* (clockwise)
 ctrl + shift + cmd + alt - r	:   kwmc tree rotate 90
