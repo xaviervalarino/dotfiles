@@ -1,9 +1,11 @@
 #! /bin/bash
 
+platform=`uname`
 ######################
 ### LINUX SPECIFIC ###
 ######################
-if [[ $(umame) == 'Linux' ]]; then
+
+if [[ $platform == 'Linux' ]]; then
 
     # copy and pasting
     alias copy='xclip -selection c'
@@ -18,7 +20,7 @@ if [[ $(umame) == 'Linux' ]]; then
 ########################
 ### MAC OSX SPECIFIC ###
 ########################
-elif [[ $(uname)  == 'Darwin' ]]; then
+elif [[ $platform  == 'Darwin' ]]; then
 
     # TODO: alias for showing hidden files
     # defaults write com.apple.finder AppleShowAllFiles YES
