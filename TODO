@@ -1,68 +1,28 @@
-☐ Add link to `OSX-setup.md`
-☐ Add new screenshots to README
-  ☐ Debian
-  ☐ OSX
-
 Documentation:
 ☐ Bspwm
+☐ Better documentation in `OSX-setup.md`
+  ☐ Xmodmap (combine with OSX Karabiner)
 ☐ Xmodmap
 ☐ scss-lint
 ☐ Tern
 ☐ Agignore
 ☐ Gitignore
-☐ Xmodmap (combine with OSX Karabiner)
-
+☐ Add new screenshots to README
+  ☐ Debian
+  ☐ OSX
 
 Things to fix:
 ☐ make Vim default $EDITOR in OSX
 ☐ $XGD_CONFIG_HOME variable is not exported?
 
-Setup scripts:
-☐ change setup files to use `mkdir -p` instead of if statements
-☐ `ln -s` function for single files?
-☐ install script to run them all? some sort of prompt that points to `setup/`?
-
-Kwm:
-☐ Finalize key bindings
-  ☐ Key bindings to start/stop/restart
-  ☐ Moving around (H/J/K/L)
-  ☐ Resizing windows
-  ☐ Moving windows
-  ☐ Spaces?
-
-Config files to add:
-✘ tracking openbox dependencies (cb-pipemenu)? @cancelled (2016-07-19 01:20)
-☐ tint2
-☐ gtk-2 and gtk2 3
-☐ compton
-
 Vim:
-✔ autosave and/or save on focus lost @done (2016-11-27 11:09)
 ☐ Remove cursor and lineNr when window looses focus
   https://www.reddit.com/r/vim/comments/4aab93/weekly_vim_tips_and_tricks_thread_1/d0ypww5
   http://ternjs.net/doc/manual.html#configuration
 
-  Git:
-  ☐ Install Vim-Fugitive
-  ☐ map GitGutter{Stage,Revert,Preview}Hunk to keybindings
+Git:
+☐ Install Vim-Fugitive
+☐ map GitGutter{Stage,Revert,Preview} Hunk to keybindings
 
-  Time Themed Terminal:
-  ☐ sudoedit, other times terminal is called
-  ✘ openbox (rc.xml) and terminal initiating theme call @cancelled (2016-07-19 01:20)
-
-Archive:
-＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
-✔ bash reload on OSX (points to _aliases, not _profile) @done (2016-06-26 04:36)
-✔ Configure global Tern `tern-config` file to get YouCompleteMe to use Tern JS completion @done (2016-07-19 01:20)
-  ✔ fix different coreutil version on Mac and Debian @done (2016-06-14 00:29)
-  ✔ merge coreutil aliases @done (2016-06-22 22:18)
-  ✔ figure out: @done (2016-06-26 04:36)
-    ✔ set terminal based on time @done (2016-06-26 04:35)
-    ✔ persist $THEME env variable @done (2016-06-26 04:35)
-    ✔ source base16 script each time terminal is opened @done (2016-06-26 04:35)
-    ✔ make below work for: @done (2016-06-26 04:35)
-      ✔ bash alias ( is this actually important? ) @done (2016-06-26 04:35)
-✔ Add Openbox @done (2016-04-21 12:49)
-  ✔ rc.xml @done (2016-04-21 12:49)
-  ✔ autostart @done (2016-04-21 12:50)
-  ✔ menu.xml @done (2016-04-21 12:51)
+Time Themed Terminal:
+☐ sudoedit, other times terminal is called
