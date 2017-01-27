@@ -70,15 +70,15 @@ ctrl + shift + cmd + alt - o	:   kwmc display -f next
 
 # resize windows
 
-RESIZE - h	    	:   kwmc window -c expand 0.01 west
-RESIZE - j		:   kwmc window -c expand 0.01 south
-RESIZE - k		:   kwmc window -c expand 0.01 north
-RESIZE - l		:   kwmc window -c expand 0.01 east
+RESIZE - h	    	:   kwmc window -c expand 0.05 west
+RESIZE - j		:   kwmc window -c expand 0.05 south
+RESIZE - k		:   kwmc window -c expand 0.05 north
+RESIZE - l		:   kwmc window -c expand 0.05 east
 
-RESIZE + shift - h   	:   kwmc window -c reduce 0.01 west
-RESIZE + shift - j	:   kwmc window -c reduce 0.01 south
-RESIZE + shift - k	:   kwmc window -c reduce 0.01 north
-RESIZE + shift - l	:   kwmc window -c reduce 0.01 east
+RESIZE + shift - h   	:   kwmc window -c reduce 0.05 west
+RESIZE + shift - j	:   kwmc window -c reduce 0.05 south
+RESIZE + shift - k	:   kwmc window -c reduce 0.05 north
+RESIZE + shift - l	:   kwmc window -c reduce 0.05 east
 
 
 # swap window locations
