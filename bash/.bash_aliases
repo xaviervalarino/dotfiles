@@ -1,41 +1,9 @@
 #! /bin/bash
 
-# TODO seperate profile and alias settings into two different files
-source ~/.bash_color
-source ~/.bash_functions
-
-# TODO move this to .bashrc?
-# set theme based on time of day
-hour=`date +"%H"`
-if [ $hour -gt 7 ] && [ $hour -lt 16 ]; then
-    terminal_theme light
-else
-    terminal_theme dark
-fi
-
-# If possible, add tab completion for many more commands
-[ -f /etc/bash_completion ] && source /etc/bash_completion        # linux
-[ -f ~/.git-completion.bash ] && source ~/.git-completion.bash    # mac
-
-# Add git branches to PS1
-[ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
-
-# Bold and color username@hostname in  yellow, working dir in blue, bang in yellow
-# PS1="${debian_chroot:+($debian_chroot)}${BYellow}\u@\h: ${BBlue}\w${RESET} ${BYellow}\$${RESET} "
-
-# Load local perl modules (perlbrew)
-source ~/perl5/perlbrew/etc/bashrc
-
-# make sublime default editor
-# export EDITOR='open -a "Sublime Text"'
-
-# look up system type
-platform=$(uname)
-
 ######################
 ### LINUX SPECIFIC ###
 ######################
-if [[ $platform == 'Linux' ]]; then
+if [[ $(umame) == 'Linux' ]]; then
 
     # copy and pasting
     alias copy='xclip -selection c'
@@ -50,26 +18,11 @@ if [[ $platform == 'Linux' ]]; then
 ########################
 ### MAC OSX SPECIFIC ###
 ########################
-elif [[ $platform == 'Darwin' ]]; then
+elif [[ $(uname)  == 'Darwin' ]]; then
 
     # TODO: alias for showing hidden files
     # defaults write com.apple.finder AppleShowAllFiles YES
-
-    ## __HOMEBREW__ ##
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        source $(brew --prefix)/etc/bash_completion
-    fi
-    # non-brewed cpan modules are installed to the Cellar by default
-    # `local::lib` installs them to perl5 dir
-    eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
-
     alias bup='brew update; brew upgrade'
-
-    # Make GNU Coreutils default in OSX
-    PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-    # make all homebrew packages accessible when prepended with 'my'
-    # alias my="PATH=/usr/local/bin:$PATH"
 
     # aliases for Kwm tiling window manager
     alias kwm='brew services restart kwm'
@@ -78,6 +31,8 @@ elif [[ $platform == 'Darwin' ]]; then
     # copy and pasting
     alias copy='pbcopy'
     alias paste='pbpaste'
+
+    alias stow='stow --ignore=".DS_Store"'
 
     # launch application
     alias finder='open .'
@@ -92,8 +47,6 @@ elif [[ $platform == 'Darwin' ]]; then
     alias write='writer'
 
     alias cask='brew cask'
-    alias todo='writer ~/Dropbox/notes/todo.md'
-    alias nano='my nano'
     alias diff='colordiff'
 fi
 
@@ -116,6 +69,7 @@ alias lh='ls -lha'
 alias ll='ls -lhA'
 alias la='ls -A'
 alias l='ls -CF'
+
 # TODO: collision with internal command `tr`
 # alias tr='tree -L '
 
@@ -126,16 +80,13 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../..'
 
-# You can cry if you want to
-alias rm='trash'
-
 # refresh shell
 # TODO difference between these two files?
 # http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
 if [[ -s ~/.bash_profile ]]; then
-  shell='source ~/.bash_profile'
-  elif [[ -s ~/.bashrc ]]; then
-    shell='source ~/.bashrc'
+    shell='source ~/.bash_profile'
+# elif [[ -s ~/.bashrc ]]; then
+#     shell='source ~/.bashrc'
 fi
 alias reload=$shell
 
@@ -149,6 +100,5 @@ alias com='git commit'
 alias patch='git add --patch'
 alias cached='git diff --cached'
 
-# Actions
-alias todo='sublime -n ~/Dropbox/notes/todo.md'   # Open ToDo list
-alias md='vmd.sh'                                 # Read markdown files in Lynx
+# Read markdown files in Lynx
+alias md='vmd.sh'

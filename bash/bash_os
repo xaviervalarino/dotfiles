@@ -1,9 +1,0 @@
-
-platform='Unkown'
-unameStr=$(uname)
-# Debian / Linux
-if [[ $unameStr == 'Linux' ]]; then
-  platform='Linux'
-elif [[  $unameStr == 'Darwin' ]]; then
-  platform='OSX'
-fi

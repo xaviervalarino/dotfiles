@@ -3,8 +3,8 @@ khd kwm on
 
 # # set border color for different modes
 khd mode default color 0xddd5c4a1
-khd mode SWITCHER color 0xddbdd322
 khd mode RESIZE color 0xddd75f5f
+khd mode SWITCHER color 0xddbdd322
 khd mode PADDING color 0xddb16286
 # khd mode swap color 0xdd458588
 # khd mode tree color 0xddfabd2f
@@ -45,7 +45,7 @@ ctrl + shift + cmd + alt - e	: khd -e "reload" && \
 				    -title "Kwm & Khd" \
 				    -subtitle "Restarting at $(date '+%r')"
 
-ctrl + shift + cmd + alt - p	: source /$HOME/dotfiles/khd/scripts/pause-kwm.sh
+ctrl + shift + cmd + alt - p	: source /$HOME/.kwm/scripts/pause-kwm.sh
 
 # rotate window-tree by 90* (clockwise)
 ctrl + shift + cmd + alt - r	:   kwmc tree rotate 90
