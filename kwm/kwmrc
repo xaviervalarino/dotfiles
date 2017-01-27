@@ -28,7 +28,7 @@ kwmc config mouse-follows-focus off  // center mouse on focused window
 */
 kwmc config mouse-drag on
 // The modifier keys to be held down to initiate mouse-drag
-kwmc config mouse-drag mod shift+ctrl
+kwmc config mouse-drag mod shift+ctrl+alt+cmd
 
 
 // BORDERS =============================================================
