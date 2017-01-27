@@ -5,6 +5,7 @@ khd kwm on
 khd mode default color 0xddd5c4a1
 khd mode RESIZE color 0xddd75f5f
 khd mode SWITCHER color 0xddbdd322
+khd mode LAUNCHER color 0xdd458588
 khd mode MARGIN color 0xddb16286
 
 # khd mode swap color 0xdd458588
@@ -96,12 +97,21 @@ SWITCHER - o	:   kwmc window -m display next
 #     {mode}: optimal | vertical | horizontal
 
 # launch applications
+SWITCHER - return   : khd -e "mode activate LAUNCHER"
+LAUNCHER - return   : open -a iTerm2.app && khd -e "mode activate default"
+LAUNCHER - w	    : open -a Safari.app && khd -e "mode activate default"
 
-SWITCHER - return   : open -a iTerm2.app && khd -e "mode activate default"
-SWITCHER - w	    : open -a Safari.app && khd -e "mode activate default"
-SWITCHER - a	    : open -a Adobe\ Illustrator.app && khd -e "mode activate default"
-SWITCHER - p	    : open -a Adobe\ Photoshop\ CS6.app && khd -e "mode activate default"
-SWITCHER - i	    : open -a Adobe\ InDesign\ CS6.app && khd -e "mode activate default"
+LAUNCHER - a	    : kwmc space -fExperimental 2 && \
+                      open -a Adobe\ Illustrator.app && khd -e "mode activate default"
+
+LAUNCHER - p	    : kwmc space -fExperimental 2 && \
+                      open -a Adobe\ Photoshop\ CS6.app && khd -e "mode activate default"
+
+LAUNCHER - i	    : kwmc space -fExperimental 2 && \
+                      open -a Adobe\ InDesign\ CS6.app && khd -e "mode activate default"
+
+LAUNCHER - g	    : kwmc space -fExperimental 2 && \
+                      open -a OmniGraffle.app && khd -e "mode activate default"
 
 # Move spaces
 SWITCHER - 1            :   kwmc space -fExperimental 1
