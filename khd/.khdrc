@@ -55,9 +55,13 @@ ctrl + shift + cmd + alt - r	:   kwmc tree rotate 90
 
 
 #TODO: difference between `kwmc space -t` and `kwmc config tiling [bsp | monocle | float ]` ?
-ctrl + shift + cmd + alt - a	:   kwmc space -t bsp
-ctrl + shift + cmd + alt - s	:   kwmc space -t monocle
-ctrl + shift + cmd + alt - d	:   kwmc space -t float
+# ctrl + shift + cmd + alt - a	:   kwmc space -t bsp
+# ctrl + shift + cmd + alt - s	:   kwmc space -t monocle
+# ctrl + shift + cmd + alt - d	:   kwmc space -t float
+
+# window fullscreen keeps  bsp-tree intact
+ctrl + shift + cmd + alt - s	:   kwmc window -z fullscreen
+# kwmc window -z parent
 
 
 # Move window focus
