@@ -7,10 +7,11 @@ kwmc rule properties={role="AXDialog"} owner="Firefox"
 /* The following commands create rules that
  * blacklists an application from tiling */
 kwmc rule properties={float="true"} owner="Photoshop"
-kwmc rule properties={float="true"} owner="Illustrator"
+kwmc rule properties={float="true"} owner="Adobe Illustrator"
 kwmc rule properties={float="true"} owner="InDesign"
+kwmc rule properties={float="true"} owner="OmniGraffle 6"
+
 kwmc rule properties={float="true"} owner="App Store"
-kwmc rule properties={float="true"} owner="OmniGraffle"
 kwmc rule properties={float="true"} name="Preferences"
 kwmc rule properties={float="true"} owner="System Preferences"
 kwmc rule properties={float="true"} owner="The Unarchiver"
@@ -19,8 +20,8 @@ kwmc rule properties={float="true"} owner="Calculator"
 kwmc rule properties={float="true"} owner="Finder" name="Copy"
 
 /* Captures an application to the given screen */
-kwmc rule properties={display="1"} owner="iTunes"
+kwmc rule properties={display="1"} owner="Mail"
+kwmc rule properties={display="1"} owner="Messages"
 
 /* Set Applications into specific spaces */
-// kwmc rule properties={space="2"} owner="Slack"
 // kwmc rule properties={space="2"} owner="Messages"
