@@ -5,7 +5,8 @@ khd kwm on
 khd mode default color 0xddd5c4a1
 khd mode RESIZE color 0xddd75f5f
 khd mode SWITCHER color 0xddbdd322
-khd mode PADDING color 0xddb16286
+khd mode MARGIN color 0xddb16286
+
 # khd mode swap color 0xdd458588
 # khd mode tree color 0xddfabd2f
 # khd mode info color 0xddcd950c
@@ -19,16 +20,17 @@ ctrl + shift + cmd + alt - f	:   khd -e "mode activate SWITCHER"
 
 # return to DEFAULT mode with ESC key
 SWITCHER - 0x35			:   khd -e "mode activate default"
+LAUNCHER - 0x35			:   khd -e "mode activate default"
 RESIZE - 0x35			:   khd -e "mode activate default"
-PADDING  - 0x35			:   khd -e "mode activate default"
+MARGIN  - 0x35			:   khd -e "mode activate default"
 # ytd + ctrl - 0x35		 :   khd -e "mode activate DEFAULT"
 # swap + ctrl - 0x35        	 :   khd -e "mode activate DEFAULT"
 # tree + ctrl - 0x35        	 :   khd -e "mode activate DEFAULT"
 
 # resize window
 SWITCHER - s			:   khd -e "mode activate RESIZE"
-# manipulate padding (is really the margin) around windows
-SWITCHER - p			:   khd -e "mode activate PADDING"
+# manipulate margin around windows
+SWITCHER - m			:   khd -e "mode activate MARGIN"
 
 # SWITCHER - a           	 :   khd -e "mode activate swap"
 # SWITCHER - d           	 :   khd -e "mode activate tree"
@@ -153,22 +155,22 @@ SWITCHER + shift - c    :   kwmc window -m space right;\
 
 
 
-PADDING - x		:   kwmc space -g increase horizontal
-PADDING - y		:   kwmc space -g increase vertical
-PADDING + shift - x	:   kwmc space -g decrease horizontal
-PADDING + shift - y	:   kwmc space -g decrease vertical
+MARGIN - x		:   kwmc space -g increase horizontal
+MARGIN - y		:   kwmc space -g increase vertical
+MARGIN + shift - x	:   kwmc space -g decrease horizontal
+MARGIN + shift - y	:   kwmc space -g decrease vertical
 
-PADDING - h		:   kwmc space -p increase left
-PADDING - j	        :   kwmc space -p increase bottom
-PADDING - k	        :   kwmc space -p increase top
-PADDING - l	        :   kwmc space -p increase right
-PADDING - p		:   kwmc space -p increase all
+MARGIN - h		:   kwmc space -p increase left
+MARGIN - j	        :   kwmc space -p increase bottom
+MARGIN - k	        :   kwmc space -p increase top
+MARGIN - l	        :   kwmc space -p increase right
+MARGIN - p		:   kwmc space -p increase all
 
-PADDING + shift - h	:   kwmc space -p decrease left
-PADDING + shift - l	:   kwmc space -p decrease right
-PADDING + shift - k	:   kwmc space -p decrease top
-PADDING + shift - j	:   kwmc space -p decrease bottom
-PADDING + shift - p	:   kwmc space -p decrease all
+MARGIN + shift - h	:   kwmc space -p decrease left
+MARGIN + shift - l	:   kwmc space -p decrease right
+MARGIN + shift - k	:   kwmc space -p decrease top
+MARGIN + shift - j	:   kwmc space -p decrease bottom
+MARGIN + shift - p	:   kwmc space -p decrease all
 
 
 
