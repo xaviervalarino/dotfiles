@@ -17,7 +17,8 @@ khd mode MARGIN color 0xddb16286
 # toggle between modes
 # TODO: decide whether to use top level "switcher" mode
 
-ctrl + shift + cmd + alt - f	:   khd -e "mode activate SWITCHER"
+ctrl + shift + cmd + alt - f	:   khd -e "mode activate SWITCHER";\
+		                    sleep 2; [ $(khd -e "print mode") == "SWITCHER" ] && khd -e "mode activate default"
 
 # return to DEFAULT mode with ESC key
 SWITCHER - 0x35			:   khd -e "mode activate default"
