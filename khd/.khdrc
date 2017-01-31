@@ -43,8 +43,8 @@ SWITCHER - m			:   khd -e "mode activate MARGIN"
 # Top level commands ------------------------------------------------
 
 # reload Khd config
-ctrl + shift + cmd + alt - e	: khd -e "reload" && \
-			          kwmc config reload && \
+ctrl + shift + cmd + alt - e	: khd -e "reload";\
+			          kwmc config reload;\
 				  terminal-notifier \
 				    -title "Kwm & Khd" \
 				    -subtitle "Restarting at $(date '+%r')"
@@ -102,33 +102,31 @@ SWITCHER - o	:   kwmc window -m display next
 #     {mode}: optimal | vertical | horizontal
 
 # launch applications
-SWITCHER - return   : khd -e "mode activate LAUNCHER"
-LAUNCHER - return   : open -a iTerm2.app && khd -e "mode activate default"
-LAUNCHER - w	    : open -a Safari.app && khd -e "mode activate default"
+SWITCHER - return   :	khd -e "mode activate LAUNCHER"
+LAUNCHER - return   :	open -a iTerm2.app; khd -e "mode activate default"
+LAUNCHER - w	    :	open -a Safari.app; khd -e "mode activate default"
 
-LAUNCHER - a	    : kwmc space -fExperimental 2 && \
-                      open -a Adobe\ Illustrator.app && khd -e "mode activate default"
+LAUNCHER - a	    :	kwmc space -fExperimental 2;\
+		        open -a Adobe\ Illustrator.app; khd -e "mode activate default"
 
-LAUNCHER - p	    : kwmc space -fExperimental 2 && \
-                      open -a Adobe\ Photoshop\ CS6.app && khd -e "mode activate default"
+LAUNCHER - p	    :	kwmc space -fExperimental 2;\
+                     	open -a Adobe\ Photoshop\ CS6.app; khd -e "mode activate default"
 
-LAUNCHER - i	    : kwmc space -fExperimental 2 && \
-                      open -a Adobe\ InDesign\ CS6.app && khd -e "mode activate default"
+LAUNCHER - i	    :	kwmc space -fExperimental 2;\
+                     	open -a Adobe\ InDesign\ CS6.app; khd -e "mode activate default"
 
-LAUNCHER - g	    : kwmc space -fExperimental 2 && \
-                      open -a OmniGraffle.app && khd -e "mode activate default"
+LAUNCHER - g	    :	kwmc space -fExperimental 2;\
+                     	open -a OmniGraffle.app; khd -e "mode activate default"
 
 # Move spaces
-SWITCHER - 1            :   kwmc space -fExperimental 1
-SWITCHER - 2            :   kwmc space -fExperimental 2
-SWITCHER - 3            :   kwmc space -fExperimental 3
-SWITCHER - 4            :   kwmc space -fExperimental 4
-# SWITCHER - 5            :   kwmc space -fExperimental 5
-# SWITCHER - 6            :   kwmc space -fExperimental 6
+SWITCHER - 1        :   kwmc space -fExperimental 1
+SWITCHER - 2        :   kwmc space -fExperimental 2
+SWITCHER - 3        :   kwmc space -fExperimental 3
+SWITCHER - 4        :   kwmc space -fExperimental 4
 
-SWITCHER - z            :   kwmc space -fExperimental left
-SWITCHER - c            :   kwmc space -fExperimental right
-SWITCHER - f            :   kwmc space -fExperimental previous
+SWITCHER - z	    :   kwmc space -fExperimental left
+SWITCHER - c        :   kwmc space -fExperimental right
+SWITCHER - f        :   kwmc space -fExperimental previous
 
 SWITCHER + shift - z    :   kwmc window -m space left;\
                             kwmc space -fExperimental left
