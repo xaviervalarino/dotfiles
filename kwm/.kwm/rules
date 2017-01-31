@@ -6,9 +6,9 @@ kwmc rule properties={role="AXDialog"} owner="firefox"
 
 /* The following commands create rules that
  * blacklists an application from tiling */
-kwmc rule properties={float="true"} owner="Photoshop"
-kwmc rule properties={float="true"} owner="Adobe Illustrator"
-kwmc rule properties={float="true"} owner="InDesign"
+kwmc rule properties={float="true"} owner=".*Photoshop*."
+kwmc rule properties={float="true"} owner=".*Adobe Illustrator*."
+kwmc rule properties={float="true"} owner=".*InDesign*."
 kwmc rule properties={float="true"} owner="OmniGraffle 6"
 
 kwmc rule properties={float="true"} owner="App Store"
