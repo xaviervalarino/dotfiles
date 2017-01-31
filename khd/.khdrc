@@ -119,20 +119,33 @@ LAUNCHER - g	    :	kwmc space -fExperimental 2;\
                      	open -a OmniGraffle.app; khd -e "mode activate default"
 
 # Move spaces
-SWITCHER - 1        :   kwmc space -fExperimental 1
-SWITCHER - 2        :   kwmc space -fExperimental 2
-SWITCHER - 3        :   kwmc space -fExperimental 3
-SWITCHER - 4        :   kwmc space -fExperimental 4
+ctrl + shift + cmd + alt - 1	:   kwmc space -fExperimental 1
+ctrl + shift + cmd + alt - 2	:   kwmc space -fExperimental 2
+ctrl + shift + cmd + alt - 3	:   kwmc space -fExperimental 3
+ctrl + shift + cmd + alt - 4    :   kwmc space -fExperimental 4
 
-SWITCHER - z	    :   kwmc space -fExperimental left
-SWITCHER - c        :   kwmc space -fExperimental right
-SWITCHER - f        :   kwmc space -fExperimental previous
+ctrl + shift + cmd + alt - z	:   kwmc spac -fExperimental left
+ctrl + shift + cmd + alt - c    :   kwmc space -fExperimental right
+ctrl + shift + cmd + alt - f    :   kwmc space -fExperimental previous
 
-SWITCHER + shift - z    :   kwmc window -m space left;\
-                            kwmc space -fExperimental left
+SWITCHER - 1			:   kwmc window -m space 1;\
+			            kwmc space -fExperimental 1;\
+				    khd -e "mode active default"
+SWITCHER - 2			:   kwmc window -m space 2;\
+			            kwmc space -fExperimental 2;\
+			            khd -e "mode active default"
+SWITCHER - 3			:   kwmc window -m space 3;\
+			            kwmc space -fExperimental 3;\
+			            khd -e "mode active default"
+SWITCHER - 4			:   kwmc window -m space 4;\
+			            kwmc space -fExperimental 4;\
+			            khd -e "mode active default"
 
-SWITCHER + shift - c    :   kwmc window -m space right;\
-                            kwmc space -fExperimental right
+SWITCHER - z			:   kwmc window -m space left;\
+				    kwmc space -fExperimental left
+
+SWITCHER - c    		:   kwmc window -m space right;\
+			            kwmc space -fExperimental right
 
 # SWITCHER + shift - 1    :   kwmc display -f 0
 # SWITCHER + shift - 2    :   kwmc display -f 1
