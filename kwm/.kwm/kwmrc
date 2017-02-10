@@ -21,6 +21,9 @@ kwmc config standy-on-float on              // Focus-follows-mouse disabled when
 kwmc config focus-follows-mouse off         // dont autoraise windows
 kwmc config mouse-follows-focus on          // center mouse on focused window
 
+// TODO: make this only for Space 2; as this only seems to cause issues for those applications
+kwmc config center-on-float off             // Do not center windows when made floating
+
 /*
     Allows a window to be moved by dragging,
     when a modifier key and left-click is held down.
