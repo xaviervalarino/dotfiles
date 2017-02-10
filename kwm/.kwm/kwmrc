@@ -16,10 +16,10 @@ kwmc config cycle-focus on          // Allow window focus to wrap-around
 
 // MOUSE / FOCUS =======================================================
 
-kwmc config lock-to-container off    // Set Focus-follows-mouse-mode to autoraise
-kwmc config standy-on-float on      // Focus-follows-mouse disabled when floating window has focus
-kwmc config focus-follows-mouse off   // dont autoraise windows
-kwmc config mouse-follows-focus off  // center mouse on focused window
+kwmc config lock-to-container off           // Set Focus-follows-mouse-mode to autoraise
+kwmc config standy-on-float on              // Focus-follows-mouse disabled when floating window has focus
+kwmc config focus-follows-mouse off         // dont autoraise windows
+kwmc config mouse-follows-focus on          // center mouse on focused window
 
 /*
     Allows a window to be moved by dragging,
