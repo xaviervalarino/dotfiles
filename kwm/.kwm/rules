@@ -22,6 +22,3 @@ kwmc rule properties={float="true"} owner="Finder" name="Copy"
 /* Captures an application to the given screen */
 kwmc rule properties={display="1"} owner="Mail"
 kwmc rule properties={display="1"} owner="Messages"
-
-/* Set Applications into specific spaces */
-// kwmc rule properties={space="2"} owner="Messages"
