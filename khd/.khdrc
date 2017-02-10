@@ -126,7 +126,7 @@ ctrl + shift + cmd + alt - 4    :   kwmc space -fExperimental 4
 
 ctrl + shift + cmd + alt - z	:   kwmc spac -fExperimental left
 ctrl + shift + cmd + alt - c    :   kwmc space -fExperimental right
-ctrl + shift + cmd + alt - f    :   kwmc space -fExperimental previous
+ctrl + shift + cmd + alt - x    :   kwmc space -fExperimental previous
 
 SWITCHER - 1			:   kwmc window -m space 1;\
 			            kwmc space -fExperimental 1;\
