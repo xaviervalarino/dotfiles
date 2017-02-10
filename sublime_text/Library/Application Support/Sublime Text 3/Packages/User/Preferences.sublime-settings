@@ -8,7 +8,8 @@
 	"ignored_packages":
 	[
 		"Handlebars",
-		"Markdown"
+		"Markdown",
+		"Vintage"
 	],
 	"line_padding_bottom": 3,
 	"line_padding_top": 3,
