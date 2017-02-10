@@ -47,7 +47,6 @@ kwmc config border marked radius 6
 
 // INCLUDES ============================================================
 
-include bindings
 include rules
 
 // vim:syntax=rc
