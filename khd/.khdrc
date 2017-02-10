@@ -18,7 +18,9 @@ khd mode MARGIN color 0xddb16286
 # TODO: decide whether to use top level "switcher" mode
 
 ctrl + shift + cmd + alt - f	:   khd -e "mode activate SWITCHER";\
-		                    sleep 2; [ $(khd -e "print mode") == "SWITCHER" ] && khd -e "mode activate default"
+		                    sleep 1;\
+				    [ $(khd -e "print mode") == "SWITCHER" ] &&\
+				    khd -e "mode activate default"
 
 # return to DEFAULT mode with ESC key
 SWITCHER - 0x35			:   khd -e "mode activate default"
@@ -245,6 +247,7 @@ MARGIN + shift - p	:   kwmc space -p decrease all
 
 
 # vi-mode for non-terminal applications
+# =====================================
 
 # remap left-control h/j/k/l -> arrow keys
 lctrl - h         ![Terminal,iTerm2] :   khd -p "- left"
