@@ -269,13 +269,15 @@ lctrl - u         ![Terminal,iTerm2] :  khd -p "cmd - z"
 
 lctrl - n         ![Terminal,iTerm2] :  khd -p "cmd - z"
 
+
 # Make search in Safari more like Vim
 # ===================================
 # lctrl + /	    --> open search
 # lctrl + n	    --> next match
 # lctrl + shift + n --> previous search
 lctrl - 0x2C	    [Safari]	     :	khd -p "cmd - f"
-lctrl - 0X2D	    [Safari]	     :	khd -p "return"
+# TODO: this doesn't work all the time
+# lctrl - n	    [Safari]	     :	khd -p "return"
 lctrl + shift - n   [Safari]	     :	khd -p "shift - return"
 
 
