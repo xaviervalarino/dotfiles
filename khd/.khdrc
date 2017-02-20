@@ -206,11 +206,13 @@ LAUNCHER - g	    :	kwmc space -fExperimental 2;\
 # Manipulate Margins
 # ==================
 
+# Inner margins
 MARGIN - x		:   kwmc space -g increase horizontal
 MARGIN - y		:   kwmc space -g increase vertical
 MARGIN + shift - x	:   kwmc space -g decrease horizontal
 MARGIN + shift - y	:   kwmc space -g decrease vertical
 
+# Outer margins
 MARGIN - h		:   kwmc space -p increase left
 MARGIN - j	        :   kwmc space -p increase bottom
 MARGIN - k	        :   kwmc space -p increase top
