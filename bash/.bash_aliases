@@ -72,9 +72,6 @@ alias ll='ls -lhA'
 alias la='ls -A'
 alias l='ls -CF'
 
-# TODO: collision with internal command `tr`
-# alias tr='tree -L '
-
 # moving around dir
 alias ~='cd ~'
 alias ..='cd ..'
