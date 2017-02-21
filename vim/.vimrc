@@ -145,8 +145,8 @@ vnoremap // y/<C-R>"<CR>"
 nnoremap \ :noh<CR>
 
 
-"===============================================================================
 " SAVING
+"===============================================================================
 
 set noswapfile                       " Turn off swapfile
 autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
