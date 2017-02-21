@@ -211,7 +211,7 @@ set splitright
 :map + <C-W>>
 
 
-" PLUGINS SETUPS
+" PLUGIN SETUP
 "===============================================================================
 
 let delimitMate_expand_cr = 1                       " Expand brackets
