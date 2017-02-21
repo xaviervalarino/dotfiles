@@ -25,7 +25,7 @@ Plug 'junegunn/limelight.vim'           " Highlight text based on focus
 " Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
 Plug 'tommcdo/vim-exchange'             " Easily exchange text
 Plug 'matze/vim-move'                   " Easily move lines & v-lines around
-Plug 'tpope/vim-surround'               " Modify quotes, parens, or tags
+Plug 'tpope/vim-surround'               " Modify quotes, parenthesis, or tags
 Plug 'Raimondi/delimitMate'             " Insert Mode completion for quotes, etc
 Plug 'tpope/vim-commentary'             " Change lines into comments
 Plug 'tpope/vim-repeat'                 " repeat mappings with Dot command
@@ -35,8 +35,7 @@ Plug 'ap/vim-css-color'                 " Color highlights in CSS
 Plug 'ciaranm/detectindent'             " Detect tab settings in a file
 Plug 'airblade/vim-gitgutter'           " Git diff in SignColumn
 Plug 'scrooloose/syntastic'             " Sytax linting
-Plug 'Valloric/YouCompleteMe'
-" Plug 'marijnh/tern_for_vim'           " Needed for YouCompleteMe?
+Plug 'Valloric/YouCompleteMe'           " Tab code-completion
 Plug 'rking/ag.vim'                     " Ag search in Vim
 " Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, tag, etc finder
 Plug 'vim-scripts/TaskList.vim'         " Show all TODOs in a file
