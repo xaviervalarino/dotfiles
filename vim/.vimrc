@@ -151,7 +151,7 @@ set cursorline                       " Highlight current line
 set t_Co=256                         " Set 256 Colors
 set encoding=utf8                    " Set char encoding inside Vim
 set noshowmode                       " Hide mode line (controlled by Airline)
-set wildmenu                         " Show completion menu for command line
+set wildmode=list:longest,full       " Show completion menu for command line
 set synmaxcol=120                    " Set low column width for syntax highlight (stops slow down)
 
 colorscheme base16-atelier-sulphurpool
