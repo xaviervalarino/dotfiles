@@ -62,7 +62,7 @@ set  virtualedit+=block             " Allow cursor to move anywhere in V-BLOCK m
 " set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
 
 " Remap 'jj' to escape in Insert Mode
-inoremap jj <Esc>
+" inoremap jj <Esc>
 
 " Remove timeout for <escape> i.e. <caps> key
 set ttimeout
