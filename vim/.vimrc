@@ -71,9 +71,6 @@ set ttimeoutlen=100
 " Automatically cd into the directory that the file is in
 " autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
-" Syntax highlight YAML front matter as a comment in Markdown files
-autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
-
 
 " COMMAND LINE MODE
 "===============================================================================
@@ -122,6 +119,9 @@ set undolevels=1000         " Max number of set changes that can be undone
 " Set Git commit msg width to 72 chars & enable formatoptions in Insert Mode
 " TODO: does this need augroup
 autocmd FileType gitcommit setl textwidth=72 fo-=l
+
+" Syntax highlight YAML front matter as a comment in Markdown files
+autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
 
 
 " SEARCH
