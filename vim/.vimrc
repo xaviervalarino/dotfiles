@@ -55,6 +55,7 @@ set backspace=indent,eol,start       " Make backspace behave normally
 set nrformats=                       " Treat all numerals as decimal, regardless of padded zeros
 set spell spelllang=en_us            " Spell checking
 set autowrite                        " Save file when modified (esp. nice when switching buffers)
+set linebreak                        " Break lines on word
 
 " set  virtualedit+=block             " Allow cursor to move anywhere in V-BLOCK mode
 
