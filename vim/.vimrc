@@ -107,6 +107,16 @@ autocmd FileType css  setl sw=2 sts=2
 autocmd BufReadPost * DetectIndent
 
 
+" PERSISTENT UNDO
+"===============================================================================
+
+set undofile                " Save undo's after file closes
+set undodir=~/.vim/undo     " Directory where Undo history file are saved
+                            " NOTE! Vim will not create this dir
+set undoreload=10000        " Max number lines to save on a buffer reload
+set undolevels=1000         " Max number of set changes that can be undone
+
+
 " FILE SPECIFIC
 "===============================================================================
 
