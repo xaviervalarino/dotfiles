@@ -56,7 +56,7 @@ set spell spelllang=en_us            " Spell checking
 set autowrite                        " Save file when modified (esp. nice when switching buffers)
 set linebreak                        " Break lines on word
 
-" set  virtualedit+=block             " Allow cursor to move anywhere in V-BLOCK mode
+set  virtualedit+=block             " Allow cursor to move anywhere in V-BLOCK mode
 
 " TODO fix clipboard settings
 " set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
