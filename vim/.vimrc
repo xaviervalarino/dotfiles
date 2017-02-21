@@ -216,8 +216,14 @@ set splitright
 
 let delimitMate_expand_cr = 1                       " Expand brackets
 let javascript_enable_domhtmlcss = 1                " Enable HTML/CSS syntax in JS
-" TODO: collision with Vim-Move and Split Navigation
-let g:move_key_modifier = 'C'                       " Vim move modifier key (CTRL)
+
+let g:move_map_keys = 0 " Set Vim-move mapping to `Esc+` for iTerm2"
+
+vmap j <Plug>MoveBlockDown
+vmap k <Plug>MoveBlockUp
+nmap j <Plug>MoveLineDown
+nmap k <Plug>MoveLineUp
+
 let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroom
 
 " YouCompleteMe auto-completion -------------------------------------------------
