@@ -95,10 +95,9 @@ set smarttab        " <Tab> in front of a line inserts spaces according to 'sw'
 set expandtab       " In Insert, use the appropriate number of spaces for a <Tab>
 
 " Specific filetype tab settings
-autocmd FileType js   setl sw=4 sts=4
-autocmd FileType jade setl sw=2 sts=2
-autocmd FileType css  setl sw=2 sts=2
+autocmd FileType javascript   setl sw=4 sts=4
 
+autocmd FileType css          setl sw=2 sts=2
 " Run detectIndent whenever a file is opened
 autocmd BufReadPost * DetectIndent
 
