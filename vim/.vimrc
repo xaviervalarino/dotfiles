@@ -163,6 +163,14 @@ set noshowmode                       " Hide mode line (controlled by Airline)
 set wildmode=list:longest,full       " Show completion menu for command line
 set synmaxcol=120                    " Set low column width for syntax highlight (stops slow down)
 
+augroup CursorLine
+    au!
+    au VimEnter * setlocal cursorline
+    au WinEnter * setlocal cursorline
+    au BufWinEnter * setlocal cursorline
+    au WinLeave * setlocal nocursorline
+augroup END
+
 colorscheme base16-atelier-sulphurpool
 let base16colorspace=256
 
