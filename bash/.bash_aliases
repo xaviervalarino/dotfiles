@@ -56,6 +56,10 @@ fi
 ### UNIVERSAL  ALIASES ###
 ##########################
 
+# Keep myself from making stupid mistakes,
+# I should be using `trash` 90% instead
+alias rm='rm -I'
+
 # Manual change Theme
 alias light='terminal_theme light'
 alias dark='terminal_theme dark'
