@@ -7,6 +7,11 @@ currentFocus=$($kwmc read focus)
 currentMouse=$($kwmc read mouse-follows)
 tag=$($kwmc query space active mode)
 
+if [ "$tag" = 'Connection failed!' ]; then
+  # Kwm is probably disabled
+  tag="[off]"
+fi
+
 if [ "$1" = 'quit' ]; then
   # killall kwm
   $brew services stop kwm
@@ -50,6 +55,8 @@ if [ "$1" = 'toggle-mouse-follows' ]; then
   $kwmc config focus mouse-follows $value
   exit
 fi
+
+# User Interface -----------------------------------------------------
 
 echo "kwm $tag | dropdown=false"
 
