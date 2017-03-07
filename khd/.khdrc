@@ -84,8 +84,8 @@ ctrl + shift + cmd + alt - h	:   kwmc window -f west
 ctrl + shift + cmd + alt - l	:   kwmc window -f east
 ctrl + shift + cmd + alt - j	:   kwmc window -f south
 ctrl + shift + cmd + alt - k	:   kwmc window -f north
-ctrl + shift + cmd + alt - n	:   kwmc window -fm prev
-ctrl + shift + cmd + alt - m	:   kwmc window -fm next
+ctrl + shift + cmd + alt - n	:   kwmc window -f prev
+ctrl + shift + cmd + alt - m	:   kwmc window -f next
 
 # swap window locations
 switcher - h	:   kwmc window -s west
