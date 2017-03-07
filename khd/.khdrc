@@ -3,10 +3,10 @@ khd kwm on
 
 # Set border color for different modes
 khd mode default color 0xff7dcbc4
-khd mode RESIZE color 0xddd75f5f
-khd mode SWITCHER color 0xddbdd322
-khd mode LAUNCHER color 0xdd458588
-khd mode MARGIN color 0xddb16286
+khd mode resize color 0xddd75f5f
+khd mode switcher color 0xddbdd322
+khd mode launcher color 0xdd458588
+khd mode margin color 0xddb16286
 # khd mode swap color 0xdd458588
 # khd mode tree color 0xddfabd2f
 # khd mode info color 0xddcd950c
@@ -20,11 +20,11 @@ khd mode MARGIN color 0xddb16286
 # Toggle between modes
 # TODO: set timeout for all modes if no keys are pressed?
 
-# Activate SWITCHER mode; Exit SWITCHER after 0.5 seconds
+# Activate switcher mode; Exit switcher after 0.5 seconds
 # TODO: test if hotkey has been pressed; then reset sleep timeout
-ctrl + shift + cmd + alt - f	:   khd -e "mode activate SWITCHER";\
+ctrl + shift + cmd + alt - f	:   khd -e "mode activate switcher";\
 		                    sleep 1;\
-				    [ $(khd -e "print mode") == "SWITCHER" ] &&\
+				    [ $(khd -e "print mode") == "switcher" ] &&\
 				    khd -e "mode activate default"
 
 # Reload Khd config
@@ -41,22 +41,22 @@ ctrl + shift + cmd + alt - p	: source /$HOME/.kwm/scripts/pause-kwm.sh
 ## ------------
 
 # resize window
-SWITCHER - s			:   khd -e "mode activate RESIZE"
+switcher - s			:   khd -e "mode activate resize"
 # manipulate margin around windows
-SWITCHER - m			:   khd -e "mode activate MARGIN"
-# SWITCHER - a           	 :   khd -e "mode activate swap"
-# SWITCHER - q           	 :   khd -e "mode activate info"
-# SWITCHER - d           	 :   khd -e "mode activate tree"
-# SWITCHER - w           	 :   khd -e "mode activate ytd"
+switcher - m			:   khd -e "mode activate margin"
+# switcher - a           	 :   khd -e "mode activate swap"
+# switcher - q           	 :   khd -e "mode activate info"
+# switcher - d           	 :   khd -e "mode activate tree"
+# switcher - w           	 :   khd -e "mode activate ytd"
 
 # return to all modes to  default with ESC key
-SWITCHER - 0x35			:   khd -e "mode activate default"
-LAUNCHER - 0x35			:   khd -e "mode activate default"
-RESIZE - 0x35			:   khd -e "mode activate default"
-MARGIN  - 0x35			:   khd -e "mode activate default"
-# ytd + ctrl - 0x35		 :   khd -e "mode activate DEFAULT"
-# swap + ctrl - 0x35        	 :   khd -e "mode activate DEFAULT"
-# tree + ctrl - 0x35        	 :   khd -e "mode activate DEFAULT"
+switcher - 0x35			:   khd -e "mode activate default"
+launcher - 0x35			:   khd -e "mode activate default"
+margin   - 0x35			:   khd -e "mode activate default"
+resize   - 0x35			:   khd -e "mode activate default"
+# ytd + ctrl - 0x35		 :   khd -e "mode activate default"
+# swap + ctrl - 0x35        	 :   khd -e "mode activate default"
+# tree + ctrl - 0x35        	 :   khd -e "mode activate default"
 
 ## ------------------
 ## Manipulate Windows
@@ -88,10 +88,10 @@ ctrl + shift + cmd + alt - n	:   kwmc window -fm prev
 ctrl + shift + cmd + alt - m	:   kwmc window -fm next
 
 # swap window locations
-SWITCHER - h	:   kwmc window -s west
-SWITCHER - j	:   kwmc window -s north
-SWITCHER - k	:   kwmc window -s south
-SWITCHER - l	:   kwmc window -s east
+switcher - h	:   kwmc window -s west
+switcher - j	:   kwmc window -s north
+switcher - k	:   kwmc window -s south
+switcher - l	:   kwmc window -s east
 
 ## -------------------
 ## Spaces and displays
@@ -101,7 +101,7 @@ SWITCHER - l	:   kwmc window -s east
 ctrl + shift + cmd + alt - o	:   kwmc display -f next
 
 # swap window to other display
-SWITCHER - o	:   kwmc window -m display next
+switcher - o	:   kwmc window -m display next
 
 
 ctrl + shift + cmd + alt - 1	:   kwmc space -fExperimental 1
@@ -113,64 +113,64 @@ ctrl + shift + cmd + alt - z	:   kwmc spac -fExperimental left
 ctrl + shift + cmd + alt - c    :   kwmc space -fExperimental right
 ctrl + shift + cmd + alt - x    :   kwmc space -fExperimental previous
 
-SWITCHER - 1			:   kwmc window -m space 1;\
+switcher - 1			:   kwmc window -m space 1;\
 			            kwmc space -fExperimental 1;\
 				    khd -e "mode active default"
-SWITCHER - 2			:   kwmc window -m space 2;\
+switcher - 2			:   kwmc window -m space 2;\
 			            kwmc space -fExperimental 2;\
 			            khd -e "mode active default"
-SWITCHER - 3			:   kwmc window -m space 3;\
+switcher - 3			:   kwmc window -m space 3;\
 			            kwmc space -fExperimental 3;\
 			            khd -e "mode active default"
-SWITCHER - 4			:   kwmc window -m space 4;\
+switcher - 4			:   kwmc window -m space 4;\
 			            kwmc space -fExperimental 4;\
 			            khd -e "mode active default"
 
-SWITCHER - z			:   kwmc window -m space left;\
+switcher - z			:   kwmc window -m space left;\
 				    kwmc space -fExperimental left
 
-SWITCHER - c    		:   kwmc window -m space right;\
+switcher - c    		:   kwmc window -m space right;\
 			            kwmc space -fExperimental right
 
-# SWITCHER + shift - 1    :   kwmc display -f 0
-# SWITCHER + shift - 2    :   kwmc display -f 1
-# SWITCHER + shift - 3    :   kwmc display -f 2
+# switcher + shift - 1    :   kwmc display -f 0
+# switcher + shift - 2    :   kwmc display -f 1
+# switcher + shift - 3    :   kwmc display -f 2
 
 
 # ==============
-# RESIZE windows
+# resize windows
 # ==============
 
-RESIZE - h	    	:   kwmc window -c expand 0.05 west
-RESIZE - j		:   kwmc window -c expand 0.05 south
-RESIZE - k		:   kwmc window -c expand 0.05 north
-RESIZE - l		:   kwmc window -c expand 0.05 east
+resize - h	    	:   kwmc window -c expand 0.05 west
+resize - j		:   kwmc window -c expand 0.05 south
+resize - k		:   kwmc window -c expand 0.05 north
+resize - l		:   kwmc window -c expand 0.05 east
 
 #TODO: query if window in corner; then resize key reduces in that direction
-RESIZE + shift - h   	:   kwmc window -c reduce 0.05 west
-RESIZE + shift - j	:   kwmc window -c reduce 0.05 south
-RESIZE + shift - k	:   kwmc window -c reduce 0.05 north
-RESIZE + shift - l	:   kwmc window -c reduce 0.05 east
+resize + shift - h   	:   kwmc window -c reduce 0.05 west
+resize + shift - j	:   kwmc window -c reduce 0.05 south
+resize + shift - k	:   kwmc window -c reduce 0.05 north
+resize + shift - l	:   kwmc window -c reduce 0.05 east
 
 
 # =========================
-# LAUNCHER for applications
+# launcher for applications
 # =========================
 
-SWITCHER - return   :	khd -e "mode activate LAUNCHER"
-LAUNCHER - return   :	open -a iTerm2.app; khd -e "mode activate default"
-LAUNCHER - w	    :	open -a Safari.app; khd -e "mode activate default"
+switcher - return   :	khd -e "mode activate launcher"
+launcher - return   :	open -a iTerm2.app; khd -e "mode activate default"
+launcher - w	    :	open -a Safari.app; khd -e "mode activate default"
 
-LAUNCHER - a	    :	kwmc space -fExperimental 2;\
+launcher - a	    :	kwmc space -fExperimental 2;\
 		        open -a Adobe\ Illustrator.app; khd -e "mode activate default"
 
-LAUNCHER - p	    :	kwmc space -fExperimental 2;\
+launcher - p	    :	kwmc space -fExperimental 2;\
                      	open -a Adobe\ Photoshop\ CS6.app; khd -e "mode activate default"
 
-LAUNCHER - i	    :	kwmc space -fExperimental 2;\
+launcher - i	    :	kwmc space -fExperimental 2;\
                      	open -a Adobe\ InDesign\ CS6.app; khd -e "mode activate default"
 
-LAUNCHER - g	    :	kwmc space -fExperimental 2;\
+launcher - g	    :	kwmc space -fExperimental 2;\
                      	open -a OmniGraffle.app; khd -e "mode activate default"
 
 
@@ -207,25 +207,25 @@ LAUNCHER - g	    :	kwmc space -fExperimental 2;\
 # ==================
 
 # Inner margins
-MARGIN - x		:   kwmc space -g increase horizontal
-MARGIN - y		:   kwmc space -g increase vertical
-MARGIN - z		:   kwmc space -g increase all
-MARGIN + shift - x	:   kwmc space -g decrease horizontal
-MARGIN + shift - y	:   kwmc space -g decrease vertical
-MARGIN + shift - z	:   kwmc space -g decrease all
+margin - x		:   kwmc space -g increase horizontal
+margin - y		:   kwmc space -g increase vertical
+margin - z		:   kwmc space -g increase all
+margin + shift - x	:   kwmc space -g decrease horizontal
+margin + shift - y	:   kwmc space -g decrease vertical
+margin + shift - z	:   kwmc space -g decrease all
 
 # Outer margins
-MARGIN - h		:   kwmc space -p increase left
-MARGIN - j	        :   kwmc space -p increase bottom
-MARGIN - k	        :   kwmc space -p increase top
-MARGIN - l	        :   kwmc space -p increase right
-MARGIN - p		:   kwmc space -p increase all
+margin - h		:   kwmc space -p increase left
+margin - j	        :   kwmc space -p increase bottom
+margin - k	        :   kwmc space -p increase top
+margin - l	        :   kwmc space -p increase right
+margin - p		:   kwmc space -p increase all
 
-MARGIN + shift - h	:   kwmc space -p decrease left
-MARGIN + shift - l	:   kwmc space -p decrease right
-MARGIN + shift - k	:   kwmc space -p decrease top
-MARGIN + shift - j	:   kwmc space -p decrease bottom
-MARGIN + shift - p	:   kwmc space -p decrease all
+margin + shift - h	:   kwmc space -p decrease left
+margin + shift - l	:   kwmc space -p decrease right
+margin + shift - k	:   kwmc space -p decrease top
+margin + shift - j	:   kwmc space -p decrease bottom
+margin + shift - p	:   kwmc space -p decrease all
 
 
 # =====================================
