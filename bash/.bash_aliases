@@ -58,7 +58,7 @@ fi
 
 # Keep myself from making stupid mistakes,
 # I should be using `trash` 90% instead
-alias rm='rm -I'
+alias rm='rm -i'
 
 # Manual change Theme
 alias light='terminal_theme light'
