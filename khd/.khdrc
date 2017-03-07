@@ -9,8 +9,6 @@ khd mode launcher color 0xdd458588
 khd mode margin color 0xddb16286
 # khd mode swap color 0xdd458588
 # khd mode tree color 0xddfabd2f
-# khd mode info color 0xddcd950c
-# khd mode ytd color 0xddd75f5f
 
 
 # ==================
@@ -45,16 +43,13 @@ switcher - s			:   khd -e "mode activate resize"
 # manipulate margin around windows
 switcher - m			:   khd -e "mode activate margin"
 # switcher - a           	 :   khd -e "mode activate swap"
-# switcher - q           	 :   khd -e "mode activate info"
 # switcher - d           	 :   khd -e "mode activate tree"
-# switcher - w           	 :   khd -e "mode activate ytd"
 
 # return to all modes to  default with ESC key
 switcher - 0x35			:   khd -e "mode activate default"
 launcher - 0x35			:   khd -e "mode activate default"
 margin   - 0x35			:   khd -e "mode activate default"
 resize   - 0x35			:   khd -e "mode activate default"
-# ytd + ctrl - 0x35		 :   khd -e "mode activate default"
 # swap + ctrl - 0x35        	 :   khd -e "mode activate default"
 # tree + ctrl - 0x35        	 :   khd -e "mode activate default"
 
@@ -281,7 +276,37 @@ lctrl - 0x2C	    [Safari]	     :	khd -p "cmd - f"
 lctrl + shift - n   [Safari]	     :	khd -p "shift - return"
 
 
-# TO REVIEW #######################################################
+# =========
+# TO REVIEW
+# =========
+
+# # swap mode
+# swap - h                :   kwmc window -s west
+# swap - j                :   kwmc window -s south
+# swap - k                :   kwmc window -s north
+# swap - l                :   kwmc window -s east
+# swap - m                :   kwmc window -s mark
+
+# swap + shift - l        :   kwmc window -m east
+# swap + shift - k        :   kwmc window -m north
+# swap + shift - j        :   kwmc window -m south
+# swap + shift - h        :   kwmc window -m west
+# swap + shift - m        :   kwmc window -m mark
+
+# swap - 1                :   kwmc window -m space 1
+# swap - 2                :   kwmc window -m space 2
+# swap - 3                :   kwmc window -m space 3
+# swap - 4                :   kwmc window -m space 4
+# swap - 5                :   kwmc window -m space 5
+
+# swap - z                :   kwmc window -m space left
+# swap - c                :   kwmc window -m space right
+
+# swap + shift - 1        :   kwmc window -m display 0
+# swap + shift - 2        :   kwmc window -m display 1
+# swap + shift - 3        :   kwmc window -m display 2
+
+
 
 # # tree mode
 # tree - f                :   kwmc window -z fullscreen
@@ -311,37 +336,9 @@ lctrl + shift - n   [Safari]	     :	khd -p "shift - return"
 # tree + shift - o        :   kwmc window -s next
 
 
-
 # # default
 # cmd + alt + ctrl - m    :   kwmc window -mk focused
 # cmd + alt + ctrl - h    :   kwmc window -mk west wrap
 # cmd + alt + ctrl - l    :   kwmc window -mk east wrap
 # cmd + alt + ctrl - j    :   kwmc window -mk south wrap
 # cmd + alt + ctrl - k    :   kwmc window -mk north wrap
-
-# cmd - 0x2A              :   khd -w "aasvi93@hotmail.com"
-# cmd - 7                 :   khd -w "\\"
-# cmd - 8                 :   khd -w "{"
-# cmd - 9                 :   khd -w "}"
-
-
-#
-# # ytd mode
-# # A simple local media-server for youtube
-# # https://github.com/koekeishiya/ytd
-#
-# ytd - x                 :   ytc play;\
-#                             khd -e "mode activate default"
-
-# ytd - s                 :   ytc mkfav;\
-#                             khd -e "mode activate default"
-
-# # 0x32 == <
-# ytd - 0x32              :   ytc fav
-# ytd - z                 :   ytc prev
-# ytd - c                 :   ytc next
-# ytd - v                 :   ytc stop
-# ytd - d                 :   ytc voldown
-# ytd - a                 :   ytc volup
-# ytd - right             :   ytc seekfw
-# ytd - left              :   ytc seekbk
