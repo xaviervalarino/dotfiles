@@ -28,13 +28,13 @@ ctrl + shift + cmd + alt - f	:   khd -e "mode activate switcher";\
 				    khd -e "mode activate default"
 
 # Reload Khd config
-ctrl + shift + cmd + alt - e	: khd -e "reload";\
+switcher - e	: khd -e "reload";\
 			          kwmc config reload;\
 				  terminal-notifier \
 				    -title "Kwm & Khd" \
 				    -subtitle "Restarting at $(date '+%r')"
 
-ctrl + shift + cmd + alt - p	: source /$HOME/.kwm/scripts/pause-kwm.sh
+switcher - p	: source /$HOME/.kwm/scripts/pause-kwm.sh
 
 ## ------------
 ## Switch modes
