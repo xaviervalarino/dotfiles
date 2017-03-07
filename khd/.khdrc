@@ -2,11 +2,15 @@
 khd kwm on
 
 # Set border color for different modes
-khd mode default color 0xff7dcbc4
-khd mode resize color 0xddd75f5f
-khd mode switcher color 0xddbdd322
-khd mode launcher color 0xdd458588
-khd mode margin color 0xddb16286
+# ====================================
+# Using Base-16 Atelier Sulphurpool colorscheme
+# https://atelierbram.github.io/syntax-highlighting/atelier-schemes/sulphurpool/
+
+khd mode default  color 0xff22a2c9  # Turquoise
+khd mode switcher color 0xff6679cc  # Purple
+khd mode launcher color 0xff5e6687  # Cool Gray
+khd mode resize   color 0xffc94922  # Red
+khd mode margin   color 0xffac9739  # Green
 # khd mode swap color 0xdd458588
 # khd mode tree color 0xddfabd2f
 
