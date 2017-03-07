@@ -97,6 +97,7 @@ alias cless='color_less'
 alias subl='sublime'
 
 # Git aliases
+alias g='git'
 alias st='git status'
 alias log='git log --graph --decorate --pretty=oneline --abbrev-commit'
 alias com='git commit'
