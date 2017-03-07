@@ -10,25 +10,8 @@ Set up the Caps Lock key to act as ESC when pressed and HYPER (ctrl + cmd + alt 
     ```
 1. Set Caps Lock to **'No Action'** under  `System Preferences > Keyboard > Modifier Keys...`
 1. In Seil, set Caps to keycode `80` (F19)
-1. In Karabiner:
-    1. Copy and paste code snippet into `private.xml` under `Misc & Uninstall`.
-        ``` xml
-        <?xml version="1.0"?>
-        <root>
-            <item>
-                <name>F19 to Hyper</name>
-                <appendix>(F19 to Hyper (ctrl+shift+cmd+opt) + F19 Only, send escape)</appendix>
-                <identifier>private.f192f19_escape</identifier>
-                <autogen>
-                    --KeyOverlaidModifier--
-                    KeyCode::F19,
-                    KeyCode::COMMAND_L,
-                    ModifierFlag:: OPTION_L |ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L,
-                    KeyCode::ESCAPE
-                </autogen>
-            </item>
-        </root>
-        ```
+1. In Dotfiles, use `stow` to add `private.xml` in Karabiner:
+    1. `cd ~/dotfiles/; stow karabiner`
     1. Reload and enable
 
 Reference: [_A Modern Space Cadet_ by **Steven Losh**](http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#hyper)

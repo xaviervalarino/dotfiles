@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Setup OSX after a fresh install
 # Tweaks for a small boot SSD
 # Installs various Homebrew and NPM packages
@@ -35,7 +36,14 @@ defaults write com.apple.screencapture location /Volumes/Xavier_HD/screenshots/
 
 
 # Link home folder items
-sudo rm -v $HOME/Documents $HOME/Downloads $HOME/Pictures $HOME/Music $HOME/Movies $HOME/Public
+sudo rm -v \
+    $HOME/Documents \
+    $HOME/Downloads \
+    $HOME/Pictures \
+    $HOME/Music \
+    $HOME/Movies \
+    $HOME/Public
+
 ln -s /Volumes/Xavier_HD/home/* $HOME
 
 # TODO: Fonts and Messages do not work
@@ -51,16 +59,21 @@ ln -s /Volumes/Xavier_HD/home/* $HOME
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 brew install \
-    bar \
     bash \
     bash-completion \
     brew-cask-completion \
     coreutil \
     git \
-    koekeishiya/kwm/kwm \
+    htop \
+    khd \
+    kwm \
     neovim/neovim/neovim \
     node \
+    pandoc \
     pip-completion \
+    stow \
+    terminal-notifier \
+    the_silver_searcher \
     trash \
     tree \
     wget \
@@ -131,13 +144,13 @@ mkdir ~/.npm-global
 npm config set prefix "$HOME/.npm-global"
 
 npm i -g \
-    npm \
-    browserify \
-    jshint \
-    sass-lint \
-    gulp-cli \
-    npm-check-updates \
     base16-builder \
+    browserify \
+    gulp-cli \
+    jshint \
+    npm \
+    npm-check-updates \
+    sass-lint \
     vmd \
 
 
