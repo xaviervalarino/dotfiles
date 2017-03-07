@@ -103,6 +103,3 @@ alias log='git log --graph --decorate --pretty=oneline --abbrev-commit'
 alias com='git commit'
 alias patch='git add --patch'
 alias cached='git diff --cached'
-
-# Read markdown files in Electron
-alias md='vmd.sh'
