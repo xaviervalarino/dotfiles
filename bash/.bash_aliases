@@ -56,9 +56,15 @@ fi
 ### UNIVERSAL  ALIASES ###
 ##########################
 
-# Keep myself from making stupid mistakes,
-# I should be using `trash` 90% instead
-alias rm='rm -i'
+# refresh shell
+# TODO difference between these two files?
+# http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
+if [[ -s ~/.bash_profile ]]; then
+    shell='source ~/.bash_profile'
+# elif [[ -s ~/.bashrc ]]; then
+#     shell='source ~/.bashrc'
+fi
+alias reload=$shell
 
 # Manual change Theme
 alias light='terminal_theme light'
@@ -83,15 +89,9 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../..'
 
-# refresh shell
-# TODO difference between these two files?
-# http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
-if [[ -s ~/.bash_profile ]]; then
-    shell='source ~/.bash_profile'
-# elif [[ -s ~/.bashrc ]]; then
-#     shell='source ~/.bashrc'
-fi
-alias reload=$shell
+# Keep myself from making stupid mistakes,
+# I should be using `trash` 90% instead
+alias rm='rm -i'
 
 alias cless='color_less'
 alias subl='sublime'
