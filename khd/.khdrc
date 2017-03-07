@@ -23,7 +23,7 @@ khd mode margin color 0xddb16286
 # Activate switcher mode; Exit switcher after 0.5 seconds
 # TODO: test if hotkey has been pressed; then reset sleep timeout
 ctrl + shift + cmd + alt - f	:   khd -e "mode activate switcher";\
-		                    sleep 1;\
+				    sleep 1;\
 				    [ $(khd -e "print mode") == "switcher" ] &&\
 				    khd -e "mode activate default"
 
