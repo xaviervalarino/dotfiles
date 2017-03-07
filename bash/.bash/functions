@@ -20,6 +20,6 @@ terminal_theme(){
 # Colorize less
 color_less(){
     # TODO: fix  issue when file doesn't have `lexer`
-    # pygmentize $1 | less -R
+    pygmentize $1 | less -R
     less
 }

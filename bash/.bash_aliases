@@ -93,7 +93,7 @@ if [[ -s ~/.bash_profile ]]; then
 fi
 alias reload=$shell
 
-# alias less='color_less'
+alias cless='color_less'
 alias subl='sublime'
 
 # Git aliases
