@@ -232,42 +232,42 @@ MARGIN + shift - p	:   kwmc space -p decrease all
 # Vi-mode for non-terminal applications
 # =====================================
 
-# Remap left-control h/j/k/l -> arrow keys
-lctrl - h         ![Terminal,iTerm2] :   khd -p "- left"
-lctrl - j         ![Terminal,iTerm2] :   khd -p "- down"
-lctrl - k         ![Terminal,iTerm2] :   khd -p "- up"
-lctrl - l         ![Terminal,iTerm2] :   khd -p "- right"
+# # Remap left-control h/j/k/l -> arrow keys
+# lctrl - h         ![Terminal,iTerm2] :   khd -p "- left"
+# lctrl - j         ![Terminal,iTerm2] :   khd -p "- down"
+# lctrl - k         ![Terminal,iTerm2] :   khd -p "- up"
+# lctrl - l         ![Terminal,iTerm2] :   khd -p "- right"
 
-shift + lctrl - h ![Terminal,iTerm2] :   khd -p "shift - left"
-shift + lctrl - j ![Terminal,iTerm2] :   khd -p "shift - down"
-shift + lctrl - k ![Terminal,iTerm2] :   khd -p "shift - up"
-shift + lctrl - l ![Terminal,iTerm2] :   khd -p "shift - right"
+# shift + lctrl - h ![Terminal,iTerm2] :   khd -p "shift - left"
+# shift + lctrl - j ![Terminal,iTerm2] :   khd -p "shift - down"
+# shift + lctrl - l ![Terminal,iTerm2] :   khd -p "shift - right"
+# shift + lctrl - k ![Terminal,iTerm2] :   khd -p "shift - up"
 
-# Remap left-control 0 / 4 ---> start / end of line
-lctrl - 0         ![Terminal,iTerm2] :  khd -p "cmd - left"
-lctrl - 4         ![Terminal,iTerm2] :  khd -p "cmd - right"
+# # Remap left-control 0 / 4 ---> start / end of line
+# lctrl - 0         ![Terminal,iTerm2] :  khd -p "cmd - left"
+# lctrl - 4         ![Terminal,iTerm2] :  khd -p "cmd - right"
 
-# Remap left-control g / G ---> start / end of text
-lctrl - g         ![Terminal,iTerm2] :  khd -p "cmd - up"
-lctrl + shift - g ![Terminal,iTerm2] :  khd -p "cmd - down"
+# # Remap left-control g / G ---> start / end of text
+# lctrl - g         ![Terminal,iTerm2] :  khd -p "cmd - up"
+# lctrl + shift - g ![Terminal,iTerm2] :  khd -p "cmd - down"
 
-shift + lctrl - 0 ![Terminal,iTerm2] :  khd -p "shift + cmd - left"
-shift + lctrl - 4 ![Terminal,iTerm2] :  khd -p "shift + cmd - right"
+# shift + lctrl - 0 ![Terminal,iTerm2] :  khd -p "shift + cmd - left"
+# shift + lctrl - 4 ![Terminal,iTerm2] :  khd -p "shift + cmd - right"
 
-lctrl - b         ![Terminal,iTerm2] :  khd -p "alt - left"
-# Remap left-control b / e ---> start / end of word
-lctrl - e         ![Terminal,iTerm2] :  khd -p "alt - right"
+# lctrl - b         ![Terminal,iTerm2] :  khd -p "alt - left"
+# # Remap left-control b / e ---> start / end of word
+# lctrl - e         ![Terminal,iTerm2] :  khd -p "alt - right"
 
-shift + lctrl - b ![Terminal,iTerm2] :  khd -p "shift + alt - left"
-shift + lctrl - e ![Terminal,iTerm2] :  khd -p "shift + alt - right"
+# shift + lctrl - b ![Terminal,iTerm2] :  khd -p "shift + alt - left"
+# shift + lctrl - e ![Terminal,iTerm2] :  khd -p "shift + alt - right"
 
-# Remap left-control x -------> forward delete
-lctrl - x         ![Terminal,iTerm2] :  khd -p "- delete"
+# # Remap left-control x -------> forward delete
+# lctrl - x         ![Terminal,iTerm2] :  khd -p "- delete"
 
-# Remap left-control u -------> undo typing
-lctrl - u         ![Terminal,iTerm2] :  khd -p "cmd - z"
+# # Remap left-control u -------> undo typing
+# lctrl - u         ![Terminal,iTerm2] :  khd -p "cmd - z"
 
-lctrl - n         ![Terminal,iTerm2] :  khd -p "cmd - z"
+# lctrl - n         ![Terminal,iTerm2] :  khd -p "cmd - z"
 
 
 # Make search in Safari more like Vim
