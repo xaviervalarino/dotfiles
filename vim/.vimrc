@@ -254,8 +254,11 @@ let g:bufferline_echo = 1
 " Lightline Statusline ----------------------------------------------------------
 let g:lightline = {
   \ 'colorscheme': 'base16_ocean',
+  \ 'active': {
+  \   'right': [ ['lineinfo'], ['percent'], ['filetype']]
+  \ },
   \ 'component': {
-  \   'readonly': '%{&readonly?"":""}',
+  \   'readonly': '%{&readonly?" ⭤":""}',
   \ },
   \ 'subseparator': { 'left': '｜', 'right': '｜' }
   \ }
