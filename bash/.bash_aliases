@@ -94,6 +94,7 @@ alias .....='cd ../../../..'
 alias rm='rm -i'
 
 alias cless='color_less'
+alias tree='tree -I node_modules'
 alias subl='sublime'
 
 # Git aliases
