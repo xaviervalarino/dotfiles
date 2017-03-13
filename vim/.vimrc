@@ -90,9 +90,9 @@ filetype plugin indent on            " Turn on filetype and indent detection
 set shiftwidth=4    " {sw}  Number of spaces to use for each step of (auto)indent
 set softtabstop=4   " {sts} Number of spaces in a <Tab>
 
-set smartindent     " Do smart autoindenting when starting a new line
+set smartindent     " Do smart auto-indenting when starting a new line
 set smarttab        " <Tab> in front of a line inserts spaces according to 'sw'
-set expandtab       " In Insert, use the appropriate number of spaces for a <Tab>
+set expandtab       " In `Insert`, use the appropriate number of spaces for a <Tab>
 
 " Specific filetype tab settings
 autocmd FileType javascript   setl sw=4 sts=4
