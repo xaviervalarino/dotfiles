@@ -236,6 +236,15 @@ let javascript_enable_domhtmlcss = 1                " Enable HTML/CSS syntax in 
 
 let g:move_map_keys = 0 " Set Vim-move mapping to `Esc+` for iTerm2"
 
+" Keeps Esc from waiting for other keys to exit visual
+" For terms that send Alt as Escape sequence use the <F20> hack.
+" Reference:
+" http://vim.wikia.com/wiki/Mapping_fast_keycodes_in_terminal_Vim
+" https://github.com/matze/vim-move/issues/15
+
+set <F20>=j
+set <F21>=k
+
 vmap j <Plug>MoveBlockDown
 vmap k <Plug>MoveBlockUp
 nmap j <Plug>MoveLineDown
