@@ -22,6 +22,9 @@ if [[ $platform == 'Linux' ]]; then
 ########################
 elif [[ $platform  == 'Darwin' ]]; then
 
+    # Use quicklook form the terminal
+    alias ql='qlmanage -p "$@" >&/dev/null'
+
     # TODO: alias for showing hidden files
     # defaults write com.apple.finder AppleShowAllFiles YES
     alias bup='brew update; brew upgrade'
