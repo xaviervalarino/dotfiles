@@ -66,7 +66,7 @@ set  virtualedit+=block             " Allow cursor to move anywhere in V-BLOCK m
 
 " Remove timeout for <escape> i.e. <caps> key
 set ttimeout
-set ttimeoutlen=100
+set ttimeoutlen=0
 
 " Automatically cd into the directory that the file is in
 " autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
