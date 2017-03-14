@@ -12,6 +12,7 @@ Plug 'elzr/vim-json'
 Plug 'digitaltoad/vim-pug'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'elentok/plaintasks.vim'
+Plug 'glench/vim-jinja2-syntax'
 
 " UI & Theme -------------------------------------------------------------------
 Plug 'tpope/vim-vinegar'                " Enhance Vim's directory browser
