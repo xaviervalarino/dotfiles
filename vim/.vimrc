@@ -70,7 +70,7 @@ set ttimeout
 set ttimeoutlen=0
 
 " Automatically cd into the directory that the file is in
-" autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
 
 " COMMAND LINE MODE
