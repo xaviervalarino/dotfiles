@@ -14,6 +14,11 @@ kwmc config float-non-resizable on          // Float windows that dont rezise
 kwmc config lock-to-container on            // Dont auto size window to container
 kwmc config cycle-focus on                  // Allow window focus to wrap-around
 
+// SPACE DEFAULTS ======================================================
+
+kwmc config space 0 2 mode float            // Make space two always use float
+kwmc config space 0 2 name float_space
+
 // MOUSE / FOCUS =======================================================
 
 kwmc config lock-to-container off           // Set Focus-follows-mouse-mode to autoraise
