@@ -18,7 +18,7 @@ if [ "$1" = 'quit' ]; then
   exit
 fi
 
-if [ "$1" = 'reload' ]; then
+if [ "$1" = 'restart' ]; then
   # $kwmc config reload
   $brew services restart kwm
   exit
