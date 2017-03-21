@@ -1,28 +1,16 @@
-Documentation:
-☐ Bspwm
-☐ Better documentation in `OSX-setup.md`
-  ☐ Xmodmap (combine with OSX Karabiner)
-☐ Xmodmap
-☐ scss-lint
-☐ Tern
-☐ Agignore
-☐ Gitignore
-☐ Add new screenshots to README
-  ☐ Debian
-  ☐ OSX
+# TODO
 
-Things to fix:
-☐ make Vim default $EDITOR in OSX
-☐ $XGD_CONFIG_HOME variable is not exported?
+## Vim:
+- [ ] Remove cursor and lineNr when window looses focus:
+  * https://www.reddit.com/r/vim/comments/4aab93/weekly_vim_tips_and_tricks_thread_1/d0ypww5
+  * http://ternjs.net/doc/manual.html#configuration
+- [ ] Create custom colorscheme with darker deviding line for splits and no-contrast columnColor
+- [ ] Figure out why text is highlighted orange after `:so ~/.vimrc`
+- [ ] Install Vim-Fugitive?
+- [ ] Review GitGutter{Stage,Revert,Preview} Hunk to keybindings
+- [ ] Source bash_aliases for external commands?
 
-Vim:
-☐ Remove cursor and lineNr when window looses focus
-  https://www.reddit.com/r/vim/comments/4aab93/weekly_vim_tips_and_tricks_thread_1/d0ypww5
-  http://ternjs.net/doc/manual.html#configuration
-
-Git:
-☐ Install Vim-Fugitive
-☐ map GitGutter{Stage,Revert,Preview} Hunk to keybindings
-
-Time Themed Terminal:
-☐ sudoedit, other times terminal is called
+## Terminal:
+- [ ] timeThemedTerminal when `sudoedit`, other times terminal is called
+- [ ] make Vim default $EDITOR in OSX
+- [ ] $XGD_CONFIG_HOME variable is not exported?
