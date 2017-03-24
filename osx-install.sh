@@ -153,6 +153,29 @@ npm i -g \
     sass-lint \
     vmd \
 
+# ================
+# Symlink dotfiles
+# ================
+dotfiles=(\
+    ag \
+    bash \
+    bitbar \
+    git \
+    karabiner \
+    khd \
+    kwm \
+    nano \
+    npm \
+    sass-lint \
+    sublime_text \
+    tern \
+    vim \
+);
+for dir in "${dotfiles[@]}"
+do
+    echo stow -v $dir
+done
+
 
 # ======================
 # Create Terminal Themes
