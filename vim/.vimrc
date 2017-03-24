@@ -35,7 +35,8 @@ Plug 'tpope/vim-repeat'                 " repeat mappings with Dot command
 Plug 'ap/vim-css-color'                 " Color highlights in CSS
 Plug 'ciaranm/detectindent'             " Detect tab settings in a file
 Plug 'airblade/vim-gitgutter'           " Git diff in SignColumn
-Plug 'scrooloose/syntastic'             " Sytax linting
+Plug 'scrooloose/syntastic'             " Syntax linting
+Plug 'gcorne/vim-sass-lint'             " Sass/scss stynax linting
 Plug 'Valloric/YouCompleteMe'           " Tab code-completion
 Plug 'rking/ag.vim'                     " Ag search in Vim
 " Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, tag, etc finder
@@ -292,6 +293,11 @@ let g:syntastic_style_warning_symbol = '▶'
 
 " Make warnings yellow
 highlight SyntasticWarningSign ctermfg = 3
+
+" Lint sass/scss files
+let g:syntastic_sass_checkers=["sasslint"]
+let g:syntastic_scss_checkers=["sasslint"]
+let g:sass_lint_config = '~/.sass-lint.yml'
 
 " Goyo --------------------------------------------------------------------------
 function! s:goyo_enter()
