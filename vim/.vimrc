@@ -286,10 +286,10 @@ let g:ctrlp_working_path= 0                         " Disable working dir settin
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
 " Syntastic ---------------------------------------------------------------------
-let g:syntastic_error_symbol = '▶'
-let g:syntastic_style_error_symbol = '▶'
-let g:syntastic_warning_symbol = '▶'
-let g:syntastic_style_warning_symbol = '▶'
+let g:syntastic_error_symbol = '●'
+let g:syntastic_style_error_symbol = '●'
+let g:syntastic_warning_symbol = '●'
+let g:syntastic_style_warning_symbol = '●'
 
 " Make warnings yellow
 highlight SyntasticWarningSign ctermfg = 3
