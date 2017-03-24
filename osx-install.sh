@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Setup OSX after a fresh install
 # Tweaks for a small boot SSD
