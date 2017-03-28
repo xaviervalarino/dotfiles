@@ -65,19 +65,20 @@ if [[ $(uname)  == 'Darwin' ]]; then
 
     eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
 
-    # Make GNU Coreutils default in OSX
-    export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-    export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 fi
 
 
 # PATH ---------------------------------------------------------------------------
 
+# Make GNU Coreutils default in OSX
+export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
+
 # Global NPM
-export PATH="$HOME/.npm-global/bin:$PATH"
+export PATH=$PATH:$HOME/.npm-global/bin
 
 # Add Rust programs to path
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$PATH:$HOME/.cargo/bin
 
 # --------------------------------------------------------------------------------
 
