@@ -26,8 +26,9 @@ fi
 # COMPLETIONS --------------------------------------------------------------------
 
 # If possible, add tab completion for many more commands
-[ -f /etc/bash_completion ] && source /etc/bash_completion        # linux
-[ -f ~/.git-completion.bash ] && source ~/.git-completion.bash    # mac
+[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
+
+# PS1 ----------------------------------------------------------------------------
 
 # Add git branches to PS1
 [ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
@@ -57,9 +58,6 @@ source ~/perl5/perlbrew/etc/bashrc
 # Homebrew -----------------------------------------------------------------------
 
 if [[ $(uname)  == 'Darwin' ]]; then
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        source $(brew --prefix)/etc/bash_completion
-    fi
     # non-brewed cpan modules are installed to the Cellar by default
     # `local::lib` installs them to perl5 dir
 
