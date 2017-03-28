@@ -12,20 +12,18 @@ if [ "$tag" = 'Connection failed!' ]; then
   tag="[off]"
 fi
 
-if [ "$1" = 'quit' ]; then
-  # killall kwm
-  $brew services stop kwm
-  exit
-fi
-
 if [ "$1" = 'restart' ]; then
-  # $kwmc config reload
   $brew services restart kwm
   exit
 fi
 
-if [ "$1" = 'refresh' ]; then
-  $kwmc tree -c refresh
+if [ "$1" = 'reload' ]; then
+  $kwmc config reload
+  exit
+fi
+
+if [ "$1" = 'quit' ]; then
+  $brew services stop kwm
   exit
 fi
 
@@ -78,6 +76,6 @@ echo "$mouse Mouse Follows Focus | bash=$0 param1=toggle-mouse-follows terminal=
 
 echo "---"
 
-echo "Refresh kwm | bash=$0 param1=refresh terminal=false"
-echo "Reload kwm | bash=$0 param1=reload terminal=false"
-echo "Quit kwm | bash=$0 param1=quit terminal=false"
+echo "Refresh kwm | bash=$0 param1='restart' terminal=false"
+echo "Reload kwmrc & khdrc | bash=$0 param1='reload' terminal=false"
+echo "Quit kwm | bash=$0 param1='quit' terminal=false"
