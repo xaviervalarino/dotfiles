@@ -33,22 +33,15 @@ fi
 # Add git branches to PS1
 [ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
 
-# PS1 ----------------------------------------------------------------------------
-
-# Bold and color username@hostname in  yellow, working dir in blue, bang in yellow
-# PS1="${debian_chroot:+($debian_chroot)}${BYellow}\u@\h: ${BBlue}\w${RESET} ${BYellow}\$${RESET} "
-# TODO combine bash_colors with git_ps1
-PS1="${BPurple}─────────$RESET "
-# PS1="$BBlue\w$RESET $BPurple$(printf "%$(tput cols;)s" | tr ' ' ─) $(__git_ps1 "(%s)")$RESET\n$BYellow> $RESET"
-
- # prompt() {
- #    path="$BBlue\w$RESET "
- #    width="$(($(tput cols)-$($path | wc -c)))"
- #    dash='\xe2\x80\x94'
- #    line="$BPurple$(printf "%*s" $width | tr ' ' -)$RESET" #─
- #    PS1="$path $width $line$(__git_ps1 "(%s)")\n$BYellow> $RESET"
- # }
-# PROMPT_COMMAND=prompt
+prompt() {
+    path="$Black$On_Blue \W"
+    # TODO: change git PS1 color depending on `status`
+    git="$Black$On_Purple $(__git_ps1 "(%s)") $RESET"
+    # symbol=$(echo -e "\xe2\x9a\xa1\xef\xb8\x8f") # ⚡️ lightning bolt emoji
+    symbol=$Yellow$(echo -e " \xe2\x9d\x96\x0a")$RESET # ❖ diamond unicode symbol
+    PS1="$path $git\n$symbol "
+}
+PROMPT_COMMAND=prompt
 
 # Perl ---------------------------------------------------------------------------
 
