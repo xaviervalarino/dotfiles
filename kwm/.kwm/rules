@@ -1,24 +1,34 @@
-/* Tile windows that do not get tiled by default.
+/*
+ * Tile windows that do not get tiled by default.
  */
-kwmc rule properties={role="AXDialog"} owner="iTerm2"
-kwmc rule properties={role="AXDialog"} owner="firefox"
+kwmc rule owner="iTerm2"                 properties={role="AXDialog"}
+kwmc rule owner="firefox"                properties={role="AXDialog"}
 
+/*
+ *  Treat all Finder dialogs as floating windows
+ */
+kwmc rule owner="Finder" role="AXDialog" properties={float="true"}
 
-/* The following commands create rules that
- * blacklists an application from tiling */
-kwmc rule properties={float="true"} owner=".*Photoshop*."
-kwmc rule properties={float="true"} owner=".*Adobe Illustrator*."
-kwmc rule properties={float="true"} owner=".*InDesign*."
-kwmc rule properties={float="true"} owner="OmniGraffle 6"
+/*
+ * blacklist applications from tiling
+ */
+kwmc rule  owner=".*Photoshop.*"         properties={float="true"}
+kwmc rule  owner=".*Adobe Illustrator.*" properties={float="true"}
+kwmc rule  owner=".*InDesign.*"          properties={float="true"}
+kwmc rule  owner="OmniGraffle 6"         properties={float="true"}
 
-kwmc rule properties={float="true"} owner="App Store"
-kwmc rule properties={float="true"} name="Preferences"
-kwmc rule properties={float="true"} owner="System Preferences"
-kwmc rule properties={float="true"} owner="The Unarchiver"
-kwmc rule properties={float="true"} owner="Archive Utility"
-kwmc rule properties={float="true"} owner="Calculator"
-kwmc rule properties={float="true"} owner="Finder" name="Copy"
+kwmc rule  owner="App Store"             properties={float="true"}
+kwmc rule  name="Preferences"            properties={float="true"}
+kwmc rule  owner="System Preferences"    properties={float="true"}
+kwmc rule  owner="The Unarchiver"        properties={float="true"}
+kwmc rule  owner="Archive Utility"       properties={float="true"}
+kwmc rule  owner="Calculator"            properties={float="true"}
+kwmc rule  owner="Finder" name="Copy"    properties={float="true"}
 
-/* Captures an application to the given screen */
-kwmc rule properties={display="1"} owner="Mail"
-kwmc rule properties={display="1"} owner="Messages"
+/*
+ * Captures an application to the given screen
+ */
+kwmc rule  owner="Mail"                  properties={display="1"}
+kwmc rule  owner="Messages"              properties={display="1"}
+
+/* vim:syntax=rc */
