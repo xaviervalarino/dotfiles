@@ -17,7 +17,6 @@ Plug 'glench/vim-jinja2-syntax'
 " UI & Theme -------------------------------------------------------------------
 Plug 'tpope/vim-vinegar'                " Enhance Vim's directory browser
 Plug 'bling/vim-bufferline'             " List buffers in command bar
-Plug 'itchyny/lightline.vim'            " Enhanced Statusline
 Plug 'felixjung/vim-base16-lightline'   " Base16 Lightline colorscheme
 Plug 'junegunn/goyo.vim'                " Focus writing mode
 Plug 'junegunn/limelight.vim'           " Highlight text based on focus
@@ -183,18 +182,12 @@ let base16colorspace=256
 " Set the background to ENV $THEME
 if $THEME == 'light'
   set background=light
-  hi LineNr ctermbg=White
-  hi SignColumn ctermbg=White
-  hi CursorLineNr ctermfg=14 ctermbg=21
   hi GitGutterAdd          ctermbg=White
   hi GitGutterChange       ctermbg=White
   hi GitGutterDelete       ctermbg=White
   hi GitGutterChangeDelete ctermbg=White
 else
   set background=dark
-  hi LineNr ctermbg=0
-  hi SignColumn ctermbg=0
-  hi CursorLineNr ctermfg=14 ctermbg=18
   hi GitGutterAdd          ctermbg=0
   hi GitGutterChange       ctermbg=0
   hi GitGutterDelete       ctermbg=0
@@ -267,7 +260,7 @@ let g:bufferline_echo = 1
 
 " Lightline Statusline ----------------------------------------------------------
 let g:lightline = {
-  \ 'colorscheme': 'base16_ocean',
+  \ 'colorscheme': 'base16_sulphurpool',
   \ 'active': {
   \   'right': [ ['lineinfo'], ['percent'], ['filetype']]
   \ },
