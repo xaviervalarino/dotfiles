@@ -249,8 +249,6 @@ vmap k <Plug>MoveBlockUp
 nmap j <Plug>MoveLineDown
 nmap k <Plug>MoveLineUp
 
-let g:vimroom_sidebar_height = 0                    " Remove statusbar in Vimroom
-
 " YouCompleteMe auto-completion -------------------------------------------------
 set omnifunc=syntaxcomplete#Complete                " Turn on omnicompletion
 let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for complete
