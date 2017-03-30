@@ -4,22 +4,23 @@
 call plug#begin('~/.vim/plugged')
 
 " Syntax highlighting ----------------------------------------------------------
-Plug 'othree/html5.vim'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'elzr/vim-json'
-Plug 'digitaltoad/vim-pug'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'elentok/plaintasks.vim'
-Plug 'glench/vim-jinja2-syntax'
+Plug 'othree/html5.vim', { 'for': 'html' }
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
+Plug 'elzr/vim-json', { 'for': 'json' }
+Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
+Plug 'mustache/vim-mustache-handlebars', { 'for': [ 'mustache', 'handlebars' ] }
+" Plug 'elentok/plaintasks.vim', { 'for': 'todo' }
+Plug 'glench/vim-jinja2-syntax', " { 'for': 'jinja'}
 
 " UI & Theme -------------------------------------------------------------------
-Plug 'tpope/vim-vinegar'                " Enhance Vim's directory browser
-Plug 'bling/vim-bufferline'             " List buffers in command bar
-Plug 'felixjung/vim-base16-lightline'   " Base16 Lightline colorscheme
-Plug 'junegunn/goyo.vim'                " Focus writing mode
-Plug 'junegunn/limelight.vim'           " Highlight text based on focus
+Plug 'tpope/vim-vinegar'                            " Enhance Vim's directory browser
+Plug 'bling/vim-bufferline'                         " List buffers in command bar
+Plug 'itchyny/lightline.vim'                        " Enhanced Statusline
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }          " Focus writing mode
+" TODO: fix limelight cterm bg color in colorscheme
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight'} " Highlight text based on focus
 
 " Text manipulation ------------------------------------------------------------
 " Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
@@ -31,15 +32,15 @@ Plug 'tpope/vim-commentary'             " Change lines into comments
 Plug 'tpope/vim-repeat'                 " repeat mappings with Dot command
 
 " Integrated development environment -------------------------------------------
-Plug 'ap/vim-css-color'                 " Color highlights in CSS
-Plug 'ciaranm/detectindent'             " Detect tab settings in a file
-Plug 'airblade/vim-gitgutter'           " Git diff in SignColumn
-Plug 'scrooloose/syntastic'             " Syntax linting
-Plug 'gcorne/vim-sass-lint'             " Sass/scss stynax linting
-Plug 'Valloric/YouCompleteMe'           " Tab code-completion
-Plug 'rking/ag.vim'                     " Ag search in Vim
-" Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, tag, etc finder
-Plug 'vim-scripts/TaskList.vim'         " Show all TODOs in a file
+Plug 'ap/vim-css-color'                                   " Color highlights in CSS
+Plug 'ciaranm/detectindent'                               " Detect tab settings in a file
+Plug 'airblade/vim-gitgutter'                             " Git diff in SignColumn
+Plug 'scrooloose/syntastic'                               " Syntax linting
+Plug 'gcorne/vim-sass-lint', { 'for': [ 'sass', 'scss' ]} " Sass/scss stynax linting
+Plug 'Valloric/YouCompleteMe'                             " Tab code-completion
+Plug 'rking/ag.vim'                                       " Ag search in Vim
+" Plug 'ctrlpvim/ctrlp.vim'                                 " Fuzzy file, buffer, tag, etc finder
+Plug 'vim-scripts/TaskList.vim'                           " Show all TODOs in a file
 
 "Add plugins to &runtimepath
 call plug#end()
