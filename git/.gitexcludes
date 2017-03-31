@@ -36,8 +36,8 @@
 ehthumbs.db
 Thumbs.db
 
-# NPM
-#####
+# NPM #
+#######
 node_modules/*
 
 # source:
