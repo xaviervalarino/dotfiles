@@ -107,3 +107,6 @@ alias log='git log --graph --decorate --pretty=oneline --abbrev-commit'
 alias com='git commit'
 alias patch='git add --patch'
 alias cached='git diff --cached'
+
+# install cached versions of NPM packages
+alias npmi='npm install --cache-min Infinity'
