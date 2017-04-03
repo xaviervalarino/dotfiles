@@ -43,6 +43,7 @@ node_modules/*
 # Coverage Reports #
 ####################
 .nyc_output
+coverage/
 
 # source:
 # https://help.github.com/articles/ignoring-files/#create-a-global-gitignore
