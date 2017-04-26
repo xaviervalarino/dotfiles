@@ -61,6 +61,8 @@ set linebreak                        " Break lines on word
 
 set  virtualedit+=block             " Allow cursor to move anywhere in V-BLOCK mode
 
+" Use the same symbols as Textmate and InDesign for tabstops and EOLs
+set listchars=tab:▸\ ,eol:¬
 " TODO fix clipboard settings
 " set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
 
