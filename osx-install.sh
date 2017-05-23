@@ -86,6 +86,7 @@ brew cask install \
     Caskroom/versions/omnigraffle6 \
     awareness \
     balsamiq-mockups \
+    betterzip \
     cheatsheet \
     eleston-chromium \
     filezilla \
