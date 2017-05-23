@@ -94,13 +94,13 @@ brew cask install \
     fontforge \
     handbrake \
     itsycal \
-    whichspace \
     karabiner \
     seil \
     sublime-text \
     the-unarchiver \
     transmission \
     vlc \
+    whichspace \
 
 # TODO: need OAuth API token if searching casks frequently?
 
