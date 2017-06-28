@@ -51,7 +51,6 @@ elif [[ $platform  == 'Darwin' ]]; then
     alias writer='open -a /Applications/iA\ Writer.app'
     alias write='writer'
 
-    alias cask='brew cask'
     alias diff='colordiff'
 fi
 
