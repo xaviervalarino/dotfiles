@@ -9,7 +9,9 @@ iterm2_profile() {
 terminal_theme(){
     # Change iterm profile with time of day
     if [[ $(uname) == 'Darwin' ]]; then
-        iterm2_profile 'Sulphurpool ${type}'
+        # Capitalize first letter
+        type="$(tr '[:lower:]' '[:upper:]' <<< ${1:0:1})${1:1}"
+        iterm2_profile "Sulphurpool-${type}"
     # else
         # printf string to set urxvt border color
     fi
