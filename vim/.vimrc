@@ -294,15 +294,18 @@ let g:syntastic_scss_checkers=["sasslint"]
 let g:sass_lint_config = '~/.sass-lint.yml'
 
 " Goyo --------------------------------------------------------------------------
+"
+let g:goyo_linenr=1
+
 function! s:goyo_enter()
   set showmode
   set scrolloff=999 " Center the cursor like a typewriter
-  Limelight
+  " Limelight
 endfunction
 
 function! s:goyo_leave()
   set scrolloff=5
-  Limelight!
+  " Limelight!
 endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
