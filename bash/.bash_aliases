@@ -42,7 +42,7 @@ elif [[ $platform  == 'Darwin' ]]; then
     # launch application
     alias finder='open .'
     alias thunar='finder'
-    alias ps='open -a  /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app'
+    # alias ps='open -a  /Applications/Adobe\ Photoshop\ CS6/Adobe\ Photoshop\ CS6.app'
     alias ai='open -a  /Applications/Adobe\ Illustrator\ CS6/Adobe\ Illustrator.app'
     alias graffle='open -a /Applications/OmniGraffle.app'
     alias chromium='open -a  /Applications/Chromium.app'
