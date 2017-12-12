@@ -1,4 +1,7 @@
 # TODO
+- [ ] Add `chunkwm` and `skhd` to the repo
+- [ ] Update README doc
+- [ ] Update OSX-Install doc
 
 ## Vim:
 - [ ] Remove cursor and lineNr when window looses focus:
