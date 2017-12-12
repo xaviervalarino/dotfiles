@@ -1,8 +1,18 @@
 #! /bin/bash
 
+# Set iTerm titlebar text
+iterm2_title() {
+  echo -e "\033];$1\007"
+}
+
 # Set iTerm profile by name
 iterm2_profile() {
   echo -e "\033]50;SetProfile=$1\a"; clear;
+
+  # set terminal titlebar no text by default
+  iterm2_title " "
+
+  clear;
 }
 
 # Set Terminal color by passing the arg `light` or `dark`
