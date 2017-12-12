@@ -30,6 +30,9 @@ Plug 'tpope/vim-surround'               " Modify quotes, parenthesis, or tags
 Plug 'Raimondi/delimitMate'             " Insert Mode completion for quotes, etc
 Plug 'tpope/vim-commentary'             " Change lines into comments
 Plug 'tpope/vim-repeat'                 " repeat mappings with Dot command
+Plug 'reedes/vim-pencil'                " Writing plugin to control text wrapping and formatting
+
+Plug 'reedes/vim-wordy'                 " Highlight repetitive and jargon words in prose
 
 " Integrated development environment -------------------------------------------
 Plug 'ap/vim-css-color'                                   " Color highlights in CSS
@@ -292,6 +295,26 @@ highlight SyntasticWarningSign ctermfg = 3
 let g:syntastic_sass_checkers=["sasslint"]
 let g:syntastic_scss_checkers=["sasslint"]
 let g:sass_lint_config = '~/.sass-lint.yml'
+
+" Pencil -------------------------------------------------------------------------
+let g:pencil#wrapModeDefault = 'soft'
+
+function! Prose()
+  call pencil#init()
+
+  " replace common punctuation
+  iabbrev <buffer> -- –
+  iabbrev <buffer> --- —
+  iabbrev <buffer> << «
+  iabbrev <buffer> >> »
+
+endfunction
+
+" automatically initialize buffer by file type
+autocmd FileType markdown,mkd,mk,text call Prose()
+
+" invoke manually by command for other file types
+command! -nargs=0 Prose call Prose()
 
 " Goyo --------------------------------------------------------------------------
 "
