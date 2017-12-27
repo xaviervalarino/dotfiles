@@ -1,16 +1,17 @@
 # Personal Dotfiles
-Dotfiles for Mac OSX and Debian Jessie.
+Dotfiles for Mac OSX and (previously) Debian Jessie.
 
-```
-Arcane items in my OSX setup:
+Items in my OSX setup:
 
-kwm   -- tiling windows manager
-khd   -- hotkey daemon
-vim   -- modal text editor
-```
+* [**chunkwm**](https://github.com/koekeishiya/chunkwm): tiling windows manager
+* [**skhd**](https://github.com/koekeishiya/skhd): hotkey daemon
+* **vim**: modal text editor
 
 # Installation
 I use [`stow`](https://www.gnu.org/software/stow/) to manage my dotfiles.
 
+There a laundry list of things to do on a fresh install of OSX/MacOS:
+[OSX-setup](OSX-setup.md)
+
 ## Disclaimer
-These files are for personal use, your mileage may vary.
+These files are for personal use—your mileage may vary.

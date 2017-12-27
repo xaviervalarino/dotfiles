@@ -65,8 +65,8 @@ brew install \
     coreutil \
     git \
     htop \
-    khd \
-    kwm \
+    skhd \
+    chunkwm \
     neovim/neovim/neovim \
     node \
     pandoc \

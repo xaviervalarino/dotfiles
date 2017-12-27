@@ -1,10 +1,26 @@
 # OSX Setup
 A list of things to do on a fresh install of OSX
 
-## Turn Caps Lock into the Hyper key
-Set up the Caps Lock key to act as ESC when pressed and HYPER (ctrl + cmd + alt + shift) when held down.
+## Run the script
+Run [`osx-install.sh`](osx-install.sh).
 
-1. First, if you haven't already, install Seil and Karabiner:
+This will perform a couple of different actions:
+* Disable local Time Machine images
+* Turn off Hibernation and Sleep
+* Delete the Sleep image file
+* Set `noatime`
+* Set screenshots save location to `~/screenshots/` directory
+* Move and symlink various folders to a secondary hardrive
+* Install [Homebrew](https://brew.sh), [Homebrew Cask](https://caskroom.github.io) and various packages
+* Install Perlbrew
+* Clone this dotfiles directory and install config files with `stow`
+* Move NPM global packages to the home directory
+* Add _Base-16 Atelier Sulphurpool_ terminal theme
+
+## Turn Caps Lock into the LALT key
+Set up the Caps Lock key to act as ESC when pressed and Left ALT when held down.
+
+1. First, if not already installed, get Seil and Karabiner:
     ```
     brew cask install seil karabiner
     ```
@@ -17,15 +33,10 @@ Set up the Caps Lock key to act as ESC when pressed and HYPER (ctrl + cmd + alt 
 Reference: [_A Modern Space Cadet_ by **Steven Losh**](http://stevelosh.com/blog/2012/10/a-modern-space-cadet/#hyper)
 
 
-## Windows management with Kwm and Hotkeys with Khd
-Use Kwm to manage windows with binary space partitioning. Use Khd to capture hotkeys for moving/arranging windows and launching applications.
+## Windows management with Chunkwm and Hotkeys with Skhd
+[Chunkwm](https://github.com/koekeishiya/chunkwm) is used to manage application windows. [Skhd](https://github.com/koekeishiya/skhd) is used to map hotkeys that move, arrange, and resize windows.
 
-If Khd hotkeys do not seem to be working, check the error log:
-```
-tail -f /tmp/khd.out
-```
+## Hotkeys for switching spaces
+Change default hotkeys for switching Mission Control spaces under `System Preferences > Keyboard > Shortcuts > Mission Control`:
 
-If the error is something along the lines of `/bin/bash: kwmc: command not found`, then Khd probably does not see itself in `$PATH`  ([Issue #9](https://github.com/koekeishiya/khd/issues/9)). Fix this by running:
-```
-sudo launchctl config user path /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-```
+!['System Preferences Mission Control Shortcut Keys'](./img/system-pref-shortcuts.png)

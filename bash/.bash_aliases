@@ -29,9 +29,9 @@ elif [[ $platform  == 'Darwin' ]]; then
     # defaults write com.apple.finder AppleShowAllFiles YES
     alias bup='brew update; brew upgrade'
 
-    # aliases for Kwm tiling window manager
-    alias kwm='brew services restart kwm'
-    alias kstop='brew services stop kwm'
+    # aliases for chunkwm tiling window manager
+    alias chunkwm='brew services restart chunkwm'
+    alias chunkstop='brew services stop chunkwm'
 
     # copy and pasting
     alias copy='pbcopy'
