@@ -109,13 +109,6 @@ brew cask install \
 # brew tap caskroom/fonts
 
 
-# =========================
-# Install borderless iTerm2
-# =========================
-git clone https://github.com/jaredculp/iterm2-borderless-padding.git
-./install.sh 15 15
-
-
 # ======================
 # Set up Perl & Perlbrew
 # ======================
