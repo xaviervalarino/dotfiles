@@ -27,7 +27,7 @@ elif [[ $platform  == 'Darwin' ]]; then
 
     # TODO: alias for showing hidden files
     # defaults write com.apple.finder AppleShowAllFiles YES
-    alias bup='brew update; brew upgrade'
+    alias bup='brew update; brew upgrade --cleanup'
 
     # aliases for chunkwm tiling window manager
     alias chunkwm='brew services restart chunkwm'
