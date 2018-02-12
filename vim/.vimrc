@@ -107,7 +107,7 @@ set breakindent     " Visually indent wrapped lines of text
 " Specific filetype tab settings
 autocmd FileType javascript   setl sw=4 sts=4
 
-autocmd FileType css,scss     setl sw=2 sts=2
+autocmd FileType css,scss,yaml setl sw=2 sts=2
 " Run detectIndent whenever a file is opened
 autocmd BufReadPost * DetectIndent
 
