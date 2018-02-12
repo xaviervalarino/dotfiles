@@ -43,7 +43,7 @@ Plug 'gcorne/vim-sass-lint', { 'for': [ 'sass', 'scss' ]} " Sass/scss stynax lin
 Plug 'Valloric/YouCompleteMe'                             " Tab code-completion
 Plug 'rking/ag.vim'                                       " Ag search in Vim
 " Plug 'ctrlpvim/ctrlp.vim'                                 " Fuzzy file, buffer, tag, etc finder
-Plug 'vim-scripts/TaskList.vim'                           " Show all TODOs in a file
+" Plug 'vim-scripts/TaskList.vim'                           " Show all TODOs in a file
 
 "Add plugins to &runtimepath
 call plug#end()
