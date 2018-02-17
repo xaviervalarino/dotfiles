@@ -91,16 +91,16 @@ ctrl + cmd - 1  : chunkc tiling::window --send-to-monitor 1; chunkc tiling::moni
 ctrl + cmd - 2  : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
 
 # increase region size
-ralt + shift - a : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge west
-ralt + shift - s : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge south
-ralt + shift - w : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge north
-ralt + shift - d : chunkc tiling::window --use-temporary-ratio 0.1 --adjust-window-edge east
+ralt + shift - a : chunkc tiling::window --use-temporary-ratio 0.03 --adjust-window-edge west
+ralt + shift - s : chunkc tiling::window --use-temporary-ratio 0.03 --adjust-window-edge south
+ralt + shift - w : chunkc tiling::window --use-temporary-ratio 0.03 --adjust-window-edge north
+ralt + shift - d : chunkc tiling::window --use-temporary-ratio 0.03 --adjust-window-edge east
 
 # decrease region size
-ralt + cmd - a : chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge west
-ralt + cmd - s : chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge south
-ralt + cmd - w : chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge north
-ralt + cmd - d : chunkc tiling::window --use-temporary-ratio -0.05 --adjust-window-edge east
+ralt + cmd - a : chunkc tiling::window --use-temporary-ratio -0.03 --adjust-window-edge west
+ralt + cmd - s : chunkc tiling::window --use-temporary-ratio -0.03 --adjust-window-edge south
+ralt + cmd - w : chunkc tiling::window --use-temporary-ratio -0.03 --adjust-window-edge north
+ralt + cmd - d : chunkc tiling::window --use-temporary-ratio -0.03 --adjust-window-edge east
 
 # set insertion point for focused container
 ralt + ctrl - f : chunkc tiling::window --use-insertion-point cancel
