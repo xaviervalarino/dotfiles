@@ -62,40 +62,55 @@ brew install \
     bash \
     bash-completion \
     brew-cask-completion \
-    coreutil \
-    git \
-    htop \
-    skhd \
+    calc \
     chunkwm \
+    colordiff \
+    coreutil \
+    docker \
+    ffmpeg \
+    fontconfig \
+    git \
+    html2text \
+    htop \
+    imagemagick \
+    m-cli \
+    macvim \
+    mps \
+    mps-youtube \
+    mpv \
     neovim/neovim/neovim \
     node \
     pandoc \
-    pip-completion \
+    ranger \
+    skhd \
     stow \
     terminal-notifier \
     the_silver_searcher \
     trash \
     tree \
+    utimer \
+    vim \
+    watch \
     wget \
-
+    youtube-dl \
 
 # Casks
 brew tap caskroom/cask
 
 brew cask install \
-    Caskroom/versions/omnigraffle6 \
-    awareness \
     balsamiq-mockups \
-    betterzip \
     cheatsheet \
+    docker \
     eleston-chromium \
     filezilla \
-    firefox \
+    firefoxdeveloperedition \
     flux \
-    fontforge \
+    grandperspective \
     handbrake \
     itsycal \
     karabiner \
+    libreoffice \
+    omnigraffle \
     seil \
     sublime-text \
     the-unarchiver \
@@ -139,12 +154,16 @@ npm config set prefix "$HOME/.npm-global"
 
 npm i -g \
     base16-builder \
+    browser-sync \
     browserify \
+    diff-so-fancy \
     gulp-cli \
+    imagemin-cli \
     jshint \
     npm \
     npm-check-updates \
     sass-lint \
+    tern \
     vmd \
 
 # ================
