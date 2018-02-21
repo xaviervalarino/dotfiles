@@ -35,3 +35,10 @@ color_less(){
     pygmentize $1 | less -R
     less
 }
+
+# Get process uptime
+ps_time(){
+  PID=$(pgrep -i $1)
+  # TODO: if no PID, check pidof?
+  [ ${#PID} -gt 0 ] && ps -o etime= -p $PID || exit 1 'no PID found'
+}

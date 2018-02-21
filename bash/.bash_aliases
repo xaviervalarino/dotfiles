@@ -106,5 +106,8 @@ alias com='git commit'
 alias patch='git add --patch'
 alias cached='git diff --cached'
 
+# Check process uptime
+alias ps_time='ps_time'
+
 # install cached versions of NPM packages
 alias npmi='npm install --cache-min Infinity'
