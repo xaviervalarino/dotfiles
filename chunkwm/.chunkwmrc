@@ -59,8 +59,8 @@ chunkc set bsp_split_mode                optimal
 chunkc set bsp_split_ratio               0.5
 
 chunkc set window_focus_cycle            monitor
-chunkc set mouse_follows_focus           intrinsic
-chunkc set mouse_modifier                cmd
+chunkc set mouse_follows_focus           all
+chunkc set mouse_modifier                cmd shift
 chunkc set window_float_next             0
 chunkc set window_float_center           1
 chunkc set window_region_locked          1
@@ -98,7 +98,7 @@ chunkc set focused_border_skip_floating  1
 #
 
 chunkc core::load tiling.so
-chunkc core::load ffm.so
+# chunkc core::load ffm.so
 chunkc core::load border.so
 
 # Tiling Windows
