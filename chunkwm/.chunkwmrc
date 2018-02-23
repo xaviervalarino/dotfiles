@@ -1,6 +1,21 @@
 #!/bin/bash
 
 #
+# NOTE: specify the absolutepath of the file to use for logging.
+#       'stdout' and 'stderr' are valid values.
+#
+
+chunkc core::log_file stdout
+
+#
+# NOTE: specify the desired level of logging.
+#
+#       - none, debug, warn, error
+#
+
+chunkc core::log_level error
+
+#
 # NOTE: specify the absolutepath to the directory to use when
 #       loading a plugin. '~' expansion is supported.
 #
@@ -12,7 +27,7 @@ chunkc core::plugin_dir /usr/local/opt/chunkwm/share/chunkwm/plugins
 #       and automatically reload any '.so' file that is changed.
 #
 
-chunkc core::hotload 1
+chunkc core::hotload 0
 
 #
 # NOTE: The following are config variables for the chunkwm-tiling plugin
