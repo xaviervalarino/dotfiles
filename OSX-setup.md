@@ -40,3 +40,11 @@ Reference: [_A Modern Space Cadet_ by **Steven Losh**](http://stevelosh.com/blog
 Change default hotkeys for switching Mission Control spaces under `System Preferences > Keyboard > Shortcuts > Mission Control`:
 
 !['System Preferences Mission Control Shortcut Keys'](./img/system-pref-shortcuts.png)
+
+## Set Java for Legacy Applications
+**TODO**: write simple steps and script to perform the actions in the reference below:
+
+
+#### Reference:
+* https://apple.stackexchange.com/questions/180899/adobe-illustrator-cs6-with-java-8/180909#180909
+* https://oliverdowling.com.au/2015/10/09/oracles-jre-8-on-mac-os-x-el-capitan/
