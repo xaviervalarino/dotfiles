@@ -1,7 +1,5 @@
 # TODO
-- [ ] Add `chunkwm` and `skhd` to the repo
 - [ ] Update README doc
-- [ ] Update OSX-Install doc
 
 ## Vim:
 - [ ] Remove cursor and lineNr when window looses focus:
@@ -10,7 +8,7 @@
 - [ ] Create custom colorscheme with darker deviding line for splits and no-contrast columnColor
 - [ ] Figure out why text is highlighted orange after `:so ~/.vimrc`
 - [ ] Install Vim-Fugitive?
-- [ ] Review GitGutter{Stage,Revert,Preview} Hunk to keybindings
+- [ ] Review GitGutter{Stage,Revert,Preview} Hunk and set to keybindings
 - [ ] Source bash_aliases for external commands?
 
 ## Terminal:
