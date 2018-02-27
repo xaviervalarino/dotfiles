@@ -29,7 +29,7 @@ elif [[ $platform  == 'Darwin' ]]; then
     alias bup='brew update; brew upgrade --cleanup'
 
     # aliases for chunkwm tiling window manager
-    alias chunkwm='brew services restart chunkwm'
+    alias chunk='brew services restart chunkwm'
     alias chunkstop='brew services stop chunkwm'
 
     # copy and pasting
