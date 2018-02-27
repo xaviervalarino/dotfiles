@@ -80,3 +80,6 @@ export PATH=$PATH:$HOME/.cargo/bin
 #   elif [[ -s ~/.bashrc ]]; then
 #     shell='source ~/.bashrc'
 # fi
+
+# Turn on extglob wildcards
+shopt -s extglob
