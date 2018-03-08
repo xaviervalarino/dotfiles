@@ -19,7 +19,7 @@ Plug 'tpope/vim-vinegar'                            " Enhance Vim's directory br
 Plug 'bling/vim-bufferline'                         " List buffers in command bar
 Plug 'itchyny/lightline.vim'                        " Enhanced Statusline
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }          " Focus writing mode
-" TODO: fix limelight cterm bg color in colorscheme
+Plug 'arcticicestudio/nord-vim'                     " Nord colorscheme
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight'} " Highlight text based on focus
 
 " Text manipulation ------------------------------------------------------------
@@ -167,43 +167,55 @@ autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
 syntax on
 set number                           " Show line numbers
 set laststatus=2                     " Always show statusbar (between windows)
-set cursorline                       " Highlight current line
-set t_Co=256                         " Set 256 Colors
+" set cursorline                       " Highlight current line
+" set t_Co=256                         " Set 256 Colors
 set encoding=utf8                    " Set char encoding inside Vim
 set noshowmode                       " Hide mode line (since we are using Lightline statusbar)
 set wildmode=list:longest,full       " Show completion menu for command line
 " set synmaxcol=120                    " Set low column width for syntax highlight (stops slow down)
 
+" hi LineNr ctermbg=0
+" hi SignColumn ctermbg=0
+" hi CursorLineNr ctermfg=14 ctermbg=18
+
 augroup CursorLine
-    au!
-    au VimEnter * setlocal cursorline
-    au WinEnter * setlocal cursorline
-    au BufWinEnter * setlocal cursorline
-    au WinLeave * setlocal nocursorline
+ au!
+ au VimEnter * setlocal cursorline
+ au WinEnter * setlocal cursorline
+ au BufWinEnter * setlocal cursorline
+ au WinLeave * setlocal nocursorline
 augroup END
 
-colorscheme base16-atelier-sulphurpool
-let base16colorspace=256
+" TODO change colorscheme when entering/leaving Modes
+" " Default Colors for CursorLine
+" highlight  CursorLine ctermbg=DarkGray ctermfg=None
 
-"TODO: colorscheme needs some serious overhaul
+" " Change Color when entering Insert Mode
+" autocmd InsertEnter * highlight  CursorLine ctermbg=Black ctermfg=None
+
+" " Revert Color to default when leaving Insert Mode
+" autocmd InsertLeave * highlight  CursorLine ctermbg=DarkGray ctermfg=None
+
+
+" TODO: colorscheme needs some serious overhaul
 " Set the background to ENV $THEME
-if $THEME == 'light'
-  set background=light
-  hi GitGutterAdd          ctermbg=White
-  hi GitGutterChange       ctermbg=White
-  hi GitGutterDelete       ctermbg=White
-  hi GitGutterChangeDelete ctermbg=White
-else
-  set background=dark
-  hi GitGutterAdd          ctermbg=0
-  hi GitGutterChange       ctermbg=0
-  hi GitGutterDelete       ctermbg=0
-  hi GitGutterChangeDelete ctermbg=0
-endif
+" if $THEME == 'light'
+"  set background=light
+"  hi GitGutterAdd          ctermbg=White
+"  hi GitGutterChange       ctermbg=White
+"  hi GitGutterDelete       ctermbg=White
+"  hi GitGutterChangeDelete ctermbg=White
+" else
+"  set background=dark
+"  hi GitGutterAdd          ctermbg=0
+"  hi GitGutterChange       ctermbg=0
+"  hi GitGutterDelete       ctermbg=0
+"  hi GitGutterChangeDelete ctermbg=0
+" endif
 
 " Make search text darker
-hi search ctermfg=0
-hi WildMenu ctermfg=0
+" hi search ctermfg=0
+" hi WildMenu ctermfg=0
 
 
 " NAVIGATION
@@ -272,15 +284,20 @@ let g:bufferline_echo = 1
 
 " Lightline Statusline ----------------------------------------------------------
 let g:lightline = {
-  \ 'colorscheme': 'base16_sulphurpool',
-  \ 'active': {
-  \   'right': [ ['lineinfo'], ['percent'], ['filetype']]
-  \ },
-  \ 'component': {
-  \   'readonly': '%{&readonly?" ⭤":""}',
-  \ },
-  \ 'subseparator': { 'left': '｜', 'right': '｜' }
-  \ }
+   \ 'colorscheme': 'nord',
+   \ 'active': {
+   \   'right': [ ['lineinfo'], ['percent'], ['filetype']],
+   \   'left': [ [ 'mode', 'paste' ],
+   \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+   \ },
+   \ 'component': {
+   \   'readonly': '%{&readonly?" ⭤":""}'
+   \ },
+   \ 'component_function': {
+   \   'gitgranch': 'fugitive#head'
+   \ },
+   \ 'subseparator': { 'left': '｜', 'right': '｜' }
+   \ }
 
 " CtrlP settings ----------------------------------------------------------------
 let g:ctrlp_match_window = 'bottom,order:ttb'       " Order matching top to bottom
@@ -297,7 +314,7 @@ let g:syntastic_warning_symbol = '●'
 let g:syntastic_style_warning_symbol = '●'
 
 " Make warnings yellow
-highlight SyntasticWarningSign ctermfg = 3
+" highlight SyntasticWarningSign ctermfg = 3
 
 " Lint sass/scss files
 let g:syntastic_sass_checkers=["sasslint"]
@@ -341,3 +358,14 @@ endfunction
 
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
+
+" Nord Colorscheme ---------------------------------------------------------------------
+
+colorscheme nord
+set termguicolors
+highlight Comment cterm=italic
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+let g:nord_uniform_status_lines = 1
+let g:nord_uniform_diff_background = 1
+
