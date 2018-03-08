@@ -126,13 +126,18 @@ set undolevels=1000         " Max number of set changes that can be undone
 " FILE SPECIFIC
 "===============================================================================
 
+" GIT
 " Set Git commit msg width to 72 chars & enable formatoptions in Insert Mode
 " TODO: does this need augroup
 autocmd FileType gitcommit setl textwidth=72 fo-=l
 
+" MARKDOWN
 " Syntax highlight YAML front matter as a comment in Markdown files
 autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
 
+" Turn on bold and italic
+hi! link markdownItalic Italic
+hi! link markdownBold Bold
 
 " SEARCH
 "===============================================================================
