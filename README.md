@@ -7,9 +7,10 @@ Items in my OSX setup:
 * [**skhd**](https://github.com/koekeishiya/skhd): hotkey daemon
 * **vim**: modal text editor
 
-# Installation
+## Installation
 I use [`stow`](https://www.gnu.org/software/stow/) to manage my dotfiles.
 
+### macOS/OSX
 There a laundry list of things to do on a fresh install of OSX/MacOS:
 [OSX-setup](OSX-setup.md)
 
