@@ -134,6 +134,19 @@ brew cleanup
 
 # TODO: need OAuth API token if searching casks frequently?
 
+
+# ================
+# TODO: set up vim
+# ================
+
+# Install VimPlug
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# Create undo directory
+mkdir -p $HOME/.vim/undo
+
+
 # ======================
 # Set up Perl & Perlbrew
 # ======================
