@@ -159,6 +159,24 @@ else
 	git clone git@github.com:xaviervalarino/dotfiles.git
 fi
 
+dotfiles=(\
+    ag \
+    bash \
+    chunkwm \
+    git \
+    nano \
+    npm \
+    skhd \
+    sublime_text \
+    tern \
+    vim \
+)
+
+for config in "${dotfiles[@]}"
+do
+    stow -v -d $dotDir $config
+done
+
 
 # ======================
 # Set up Node JS and NPM
@@ -184,27 +202,5 @@ npm i -g \
     tern \
     vmd \
 
-# ================
-# Symlink dotfiles
-# ================
-dotfiles=(\
-    ag \
-    bash \
-    bitbar \
-    git \
-    karabiner \
-    khd \
-    kwm \
-    nano \
-    npm \
-    sass-lint \
-    sublime_text \
-    tern \
-    vim \
-);
-for dir in "${dotfiles[@]}"
-do
-    echo stow -v $dir
-done
 
 
