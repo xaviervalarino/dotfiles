@@ -16,7 +16,7 @@ HISTFILESIZE=5000
 
 
 # write command to histfile after each command
-export PROMPT_COMMAND="history -a"
+HIST_CMD="history -a"
 # "history -r" reads the histfile after each command
 
 # THEME -----------------------------------------------------------------------
@@ -44,11 +44,11 @@ prompt() {
     path="$blk$bakblu \W"
     # TODO: change git PS1 color depending on `status`
     git="$blk$bakpur $(__git_ps1 "(%s)") $reset"
-    # symbol=$(echo -e "\xe2\x9a\xa1\xef\xb8\x8f") # ⚡️ lightning bolt emoji
-    symbol=$bldylw$(echo -e " \xe2\x9d\x96\x0a")$reset # ❖ diamond unicode symbol
+    # run `printf {unicode_character} | hexdump to get the values
+    symbol=$bldylw$(echo -e "\xe2\x9d\xaf\x0a")$reset # arrow `❯` unicode symbol
     PS1="$path $git\n$symbol "
 }
-PROMPT_COMMAND=prompt
+PROMPT_COMMAND="$HIST_CMD; prompt"
 
 # Perl ------------------------------------------------------------------------
 
