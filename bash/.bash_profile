@@ -23,11 +23,11 @@ export PROMPT_COMMAND="history -a"
 
 # set theme based on time of day
 hour=`date +"%H"`
-if [ $hour -gt 7 ] && [ $hour -lt 16 ]; then
-    terminal_theme light
-else
-    terminal_theme dark
-fi
+# if [ $hour -gt 7 ] && [ $hour -lt 16 ]; then
+#     terminal_theme light
+# else
+#     terminal_theme dark
+# fi
 
 # COMPLETIONS -----------------------------------------------------------------
 
