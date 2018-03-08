@@ -12,7 +12,12 @@ HISTCONTROL=ignoreboth:erasedups
 
 # use a larger history file
 HISTSIZE=1000
-HISTFILESIZE=2000
+HISTFILESIZE=5000
+
+
+# write command to histfile after each command
+export PROMPT_COMMAND="history -a"
+# "history -r" reads the histfile after each command
 
 # THEME -----------------------------------------------------------------------
 
