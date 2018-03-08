@@ -3,6 +3,11 @@
 
 ## Vim:
 - [ ] Cleanup `vimrc`
+- [ ] Add shortcut for rotating split/vsplit
+  * Currently:
+    * `<C-w> J` moves vertical to bottom
+    * `<C-w> L` moves horizontal to right
+    * `<C-w><C-r>` rotates (swaps) splits
 - [ ] Remove cursor and lineNr when window looses focus:
   * https://www.reddit.com/r/vim/comments/4aab93/weekly_vim_tips_and_tricks_thread_1/d0ypww5
   * http://ternjs.net/doc/manual.html#configuration
@@ -14,6 +19,7 @@
 
 ## Terminal:
 - [ ] Add note about `tic xterm-256color-italic.terminfo`
+  - Add tic to `osx-install.sh`
 - [ ] timeThemedTerminal when `sudoedit`, other times terminal is called
 - [ ] make Vim default $EDITOR in OSX
 - [ ] $XGD_CONFIG_HOME variable is not exported?
