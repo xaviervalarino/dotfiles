@@ -10,9 +10,20 @@ Items in my OSX setup:
 ## Installation
 I use [`stow`](https://www.gnu.org/software/stow/) to manage my dotfiles.
 
+Note: run the application first to create the config directories before stowing. This will keep stow from symlinking the whole directory and picking up unwanted files (_e.g._, Vim, Sublime Text)
+
+### VIM
+**TODO**: add cURL for Vim plugin installation
+
+Create `.vim` dir before running stow
+Create `.vim/undo` dir
+
+```
+mkdir ~/.vim
+```
+
+
+
 ### macOS/OSX
 There a laundry list of things to do on a fresh install of OSX/MacOS:
 [OSX-setup](OSX-setup.md)
-
-## Disclaimer
-These files are for personal use—your mileage may vary.
