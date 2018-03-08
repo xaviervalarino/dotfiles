@@ -138,7 +138,7 @@ brew cleanup
 # Set up Perl & Perlbrew
 # ======================
 
-\curl -L https://install.perlbrew.pl | bash
+# curl -L https://install.perlbrew.pl | bash
 
 
 # ================
