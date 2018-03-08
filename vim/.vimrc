@@ -342,7 +342,7 @@ autocmd FileType markdown,mkd,mk,text call Prose()
 command! -nargs=0 Prose call Prose()
 
 " Goyo --------------------------------------------------------------------------
-"
+
 let g:goyo_linenr=1
 
 function! s:goyo_enter()
