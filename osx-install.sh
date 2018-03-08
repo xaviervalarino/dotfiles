@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# TODO:
+# - add IF macOS or OSX?
+# - add IF brew already installed
+# - Set up RSA key, add public key to clipboard and open github?
+
 # Setup OSX after a fresh install
 # Tweaks for a small boot SSD
 # Installs various Homebrew and NPM packages
