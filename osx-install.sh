@@ -65,7 +65,7 @@ brew install \
     calc \
     chunkwm \
     colordiff \
-    coreutil \
+    coreutils \
     docker \
     ffmpeg \
     fontconfig \
@@ -73,16 +73,16 @@ brew install \
     html2text \
     htop \
     imagemagick \
+    koekeishiya/formulae/skhd --with-purify \
     m-cli \
     macvim \
-    mps \
     mps-youtube \
     mpv \
-    neovim/neovim/neovim \
+    neovim \
     node \
     pandoc \
     ranger \
-    skhd \
+    redshift \
     stow \
     terminal-notifier \
     the_silver_searcher \
@@ -101,22 +101,23 @@ brew cask install \
     balsamiq-mockups \
     cheatsheet \
     docker \
-    eleston-chromium \
-    filezilla \
-    firefoxdeveloperedition \
-    flux \
+    eloston-chromium \
+    firefox-developer-edition \
     grandperspective \
     handbrake \
+    iterm2 \
     itsycal \
-    karabiner \
+    karabiner-elements \
+    kitty \
     libreoffice \
     omnigraffle \
-    seil \
+    onyx \
     sublime-text \
     the-unarchiver \
     transmission \
     vlc \
-    whichspace \
+
+brew cleanup
 
 # TODO: need OAuth API token if searching casks frequently?
 
