@@ -141,16 +141,16 @@ brew cleanup
 \curl -L https://install.perlbrew.pl | bash
 
 
-# ==============
-# Clone dotfiles
-# ==============
+# ================
+# Symlink dotfiles
+# ================
 
 #TODO: need to gen RSA key?
-ssh-keygen -t rsa -b 4096 -C "xvalarino@gmail.com"
-eval "$(ssh-agent -s)"
-ssh-add ~/.ssh/id_rsa
-pbcopy < ~/.ssh/id_rsa.pub
-echo "Public RSA key copied to clipboard"
+# ssh-keygen -t rsa -b 4096 -C "xvalarino@gmail.com"
+# eval "$(ssh-agent -s)"
+# ssh-add ~/.ssh/id_rsa
+# pbcopy < ~/.ssh/id_rsa.pub
+# echo "Public RSA key copied to clipboard"
 
 git clone git@github.com:xaviervalarino/dotfiles.git
 
