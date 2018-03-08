@@ -112,6 +112,7 @@ chunkc core::load purify.so
 
 # Tiling Windows
 chunkc tiling::rule --owner kitty --state tile
+chunkc tiling::rule --owner Alacritty --state tile
 
 # Floating Windows
 chunkc tiling::rule --owner Finder --name Copy --state float
