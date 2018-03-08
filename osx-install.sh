@@ -159,8 +159,11 @@ git clone git@github.com:xaviervalarino/dotfiles.git
 # Set up Node JS and NPM
 # ======================
 
-mkdir ~/.npm-global
-npm config set prefix "$HOME/.npm-global"
+npm_dir=$HOME/.npm-global
+
+if [ ! -d $npm_dir ] && mkdir $npm_dir
+
+npm config set prefix $npm_dir
 
 npm i -g \
     base16-builder \
