@@ -32,6 +32,7 @@ hour=`date +"%H"`
 # COMPLETIONS -----------------------------------------------------------------
 
 # If possible, add tab completion for many more commands
+# TODO: bash completions are very slow
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 
 # PS1 -------------------------------------------------------------------------
@@ -71,7 +72,7 @@ PROMPT_COMMAND=prompt
 export PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
 export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 
-# Global NPM
+# Add Global NPM CLI modules to $PATH
 export PATH=$PATH:$HOME/.npm-global/bin
 
 # Add Rust programs to path
