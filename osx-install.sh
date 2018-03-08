@@ -10,47 +10,40 @@
 # =======================
 
 # Disable local Time Machine image
-sudo tmutil disablelocal
+# sudo tmutil disablelocal
 
 # Turn off hibernation and sleep
-sudo pmset -a hibernatemode 0
-sudo pmset -a disksleep 0
+# sudo pmset -a hibernatemode 0
+# sudo pmset -a disksleep 0
 
 # Delete, sleep image, create zero space file and lock it
-sudo rm /var/vm/sleepimage
-sudo touch /Private/var/vm/sleepimage
-sudo chflags uchg /Private/var/vm/sleepimage
+# sudo rm /var/vm/sleepimage
+# sudo touch /Private/var/vm/sleepimage
+# sudo chflags uchg /Private/var/vm/sleepimage
 
 # Set noatime
 # TODO: cat XML >  com.noatime.root.plist
-sudo chown root:wheel /Library/LaunchDaemons/com.noatime.root.plist
-mount | grep " /"
+# sudo chown root:wheel /Library/LaunchDaemons/com.noatime.root.plist
+# mount | grep " /"
 # Should come up noatime after restart
-ls
 
 # Write screenshot to another location
-if [ ! -d /Volumes/Xavier_HD/screenshots ]; then
-    mkdir /Volumes/Xavier_HD/screenshots
-fi
-defaults write com.apple.screencapture location /Volumes/Xavier_HD/screenshots/
+# if [ ! -d /Volumes/Xavier_HD/screenshots ]; then
+#     mkdir /Volumes/Xavier_HD/screenshots
+# fi
+# defaults write com.apple.screencapture location /Volumes/Xavier_HD/screenshots/
 
 
 # Link home folder items
-sudo rm -v \
-    $HOME/Documents \
-    $HOME/Downloads \
-    $HOME/Pictures \
-    $HOME/Music \
-    $HOME/Movies \
-    $HOME/Public
+# sudo rm -v \
+#    $HOME/Documents \
+#    $HOME/Downloads \
+#    $HOME/Pictures \
+#    $HOME/Music \
+#    $HOME/Movies \
+#    $HOME/Public
 
-ln -s /Volumes/Xavier_HD/home/* $HOME
-
-# TODO: Fonts and Messages do not work
-# http://apple.stackexchange.com/questions/262501/symlinking-fonts-and-messages-folders-to-2nd-hdd-does-not-seem-to-work
-# Links large Library items (Fonts, Mail, Messages) to external HDD
-# ln -s /Volumes/Xavier_HD/lib_items/* $HOME/Library
-
+# ln -s /Volumes/Xavier_HD/home/* $HOME
 
 # =======================================
 # Homebrew packages and Cask applications
