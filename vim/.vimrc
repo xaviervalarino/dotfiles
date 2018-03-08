@@ -35,13 +35,14 @@ Plug 'reedes/vim-pencil'                " Writing plugin to control text wrappin
 Plug 'reedes/vim-wordy'                 " Highlight repetitive and jargon words in prose
 
 " Integrated development environment -------------------------------------------
-Plug 'ap/vim-css-color'                                   " Color highlights in CSS
-Plug 'ciaranm/detectindent'                               " Detect tab settings in a file
-Plug 'airblade/vim-gitgutter'                             " Git diff in SignColumn
-Plug 'scrooloose/syntastic'                               " Syntax linting
-Plug 'gcorne/vim-sass-lint', { 'for': [ 'sass', 'scss' ]} " Sass/scss stynax linting
-Plug 'Valloric/YouCompleteMe'                             " Tab code-completion
-Plug 'rking/ag.vim'                                       " Ag search in Vim
+Plug 'ap/vim-css-color'                                     " Color highlights in CSS
+Plug 'ciaranm/detectindent'                                 " Detect tab settings in a file
+Plug 'airblade/vim-gitgutter'                               " Git diff in SignColumn
+Plug 'scrooloose/syntastic'                                 " Syntax linting
+Plug 'gcorne/vim-sass-lint', { 'for': [ 'sass', 'scss' ]}   " Sass/scss stynax linting
+Plug 'Valloric/YouCompleteMe'                               " Tab code-completion
+Plug 'rking/ag.vim'                                         " Ag search in Vim
+Plug 'tpope/vim-fugitive'                                   " Git intergration
 " Plug 'ctrlpvim/ctrlp.vim'                                 " Fuzzy file, buffer, tag, etc finder
 " Plug 'vim-scripts/TaskList.vim'                           " Show all TODOs in a file
 
@@ -117,7 +118,7 @@ autocmd BufReadPost * DetectIndent
 
 set undofile                " Save undo's after file closes
 set undodir=~/.vim/undo     " Directory where Undo history file are saved
-                            " NOTE! Vim will not create this dir
+" NOTE! Vim will not create this dir
 set undoreload=10000        " Max number lines to save on a buffer reload
 set undolevels=1000         " Max number of set changes that can be undone
 
