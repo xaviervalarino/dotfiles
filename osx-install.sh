@@ -152,7 +152,12 @@ brew cleanup
 # pbcopy < ~/.ssh/id_rsa.pub
 # echo "Public RSA key copied to clipboard"
 
-git clone git@github.com:xaviervalarino/dotfiles.git
+dotDir=$HOME/dotfiles
+if [ -d $dotDir ];then
+	(cd dotDir; git pull)
+else
+	git clone git@github.com:xaviervalarino/dotfiles.git
+fi
 
 
 # ======================
