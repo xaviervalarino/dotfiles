@@ -2,8 +2,8 @@
 # Source other files -------------------------------------------------------------
 
 source $HOME/.bash_aliases
-source $HOME/.bash/color
-source $HOME/.bash/functions
+source $HOME/.config/bash/color
+source $HOME/.config/bash/functions
 
 # HISTORY ------------------------------------------------------------------------
 
@@ -34,11 +34,11 @@ fi
 [ -f ~/.config/git/git-prompt.sh ] && source ~/.config/git/git-prompt.sh
 
 prompt() {
-    path="$Black$On_Blue \W"
+    path="$blk$bakblu \W"
     # TODO: change git PS1 color depending on `status`
-    git="$Black$On_Purple $(__git_ps1 "(%s)") $RESET"
+    git="$blk$bakpur $(__git_ps1 "(%s)") $reset"
     # symbol=$(echo -e "\xe2\x9a\xa1\xef\xb8\x8f") # ⚡️ lightning bolt emoji
-    symbol=$Yellow$(echo -e " \xe2\x9d\x96\x0a")$RESET # ❖ diamond unicode symbol
+    symbol=$bldylw$(echo -e " \xe2\x9d\x96\x0a")$reset # ❖ diamond unicode symbol
     PS1="$path $git\n$symbol "
 }
 PROMPT_COMMAND=prompt
