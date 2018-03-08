@@ -52,17 +52,17 @@ PROMPT_COMMAND=prompt
 # Perl ------------------------------------------------------------------------
 
 # Load local perl modules (perlbrew)
-source ~/perl5/perlbrew/etc/bashrc
+# source ~/perl5/perlbrew/etc/bashrc
 
 # Homebrew --------------------------------------------------------------------
 
-if [[ $(uname)  == 'Darwin' ]]; then
+# if [[ $(uname)  == 'Darwin' ]]; then
     # non-brewed cpan modules are installed to the Cellar by default
     # `local::lib` installs them to perl5 dir
 
-    eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+    # eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
 
-fi
+# fi
 
 
 # PATH ------------------------------------------------------------------------
@@ -75,7 +75,7 @@ export MANPATH=/usr/local/opt/coreutils/libexec/gnuman:$MANPATH
 export PATH=$PATH:$HOME/.npm-global/bin
 
 # Add Rust programs to path
-export PATH=$PATH:$HOME/.cargo/bin
+# export PATH=$PATH:$HOME/.cargo/bin
 
 # -----------------------------------------------------------------------------
 
