@@ -52,11 +52,27 @@ ln -s /Volumes/Xavier_HD/home/* $HOME
 # ln -s /Volumes/Xavier_HD/lib_items/* $HOME/Library
 
 
-# ==============================
-# Homebrew and Cask Applications
-# ==============================
+# =======================================
+# Homebrew packages and Cask applications
+# =======================================
 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if ! type $"brew" > /dev/null; then
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
+
+taps=(
+    caskroom/cask \
+    caskroom/versions \
+    crisidev/hombrew-chunkwm \
+)
+for tap in $taps
+do
+    brew tap $tap
+done
+
+# TODO: is cask actually useful for installing fonts?
+# brew tap caskroom/fonts
+
 
 brew install \
     bash \
@@ -95,7 +111,6 @@ brew install \
     youtube-dl \
 
 # Casks
-brew tap caskroom/cask
 
 brew cask install \
     balsamiq-mockups \
@@ -120,10 +135,6 @@ brew cask install \
 brew cleanup
 
 # TODO: need OAuth API token if searching casks frequently?
-
-# TODO: is cask actually useful for installing fonts?
-# brew tap caskroom/fonts
-
 
 # ======================
 # Set up Perl & Perlbrew
