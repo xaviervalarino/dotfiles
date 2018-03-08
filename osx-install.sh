@@ -200,20 +200,3 @@ do
 done
 
 
-# ======================
-# Create Terminal Themes
-# ======================
-
-base16-builder -s atelier-sulphurpool -t iterm2 -b light > sulphurpool-light.itermcolors
-base16-builder -s atelier-sulphurpool -t iterm2 -b dark > sulphurpool-dark.itermcolors
-base16-builder -s atelier-sulphurpool -b dark > base16-ateliersulphurpool.dark.sh
-base16-builder -s atelier-sulphurpool -t -b dark > base16-ateliersulphurpool.dark.sh
-
-# if ! .config; mkdir .config
-mkdir $HOME/.config/base16-shell
-base16-builder -s atelier-sulphurpool -t shell -b dark > $HOME/.config/base16-shell/base16-ateliersulphurpool.dark.sh
-base16-builder -s atelier-sulphurpool -t shell -b light > $HOME/.config/base16-shell/base16-ateliersulphurpool.light.sh
-
-# Make executable
-for file in base16-ateliersulphurpool.*; do chmod +x $file; done
-
