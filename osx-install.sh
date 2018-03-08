@@ -203,4 +203,8 @@ npm i -g \
     vmd \
 
 
+# =================
+# Install Ruby Gems
+# =================
 
+gem install iStats
