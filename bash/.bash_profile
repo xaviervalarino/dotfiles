@@ -31,7 +31,7 @@ fi
 # PS1 ----------------------------------------------------------------------------
 
 # Add git branches to PS1
-[ -f ~/.git-prompt.sh ] && source ~/.git-prompt.sh
+[ -f ~/.config/git/git-prompt.sh ] && source ~/.config/git/git-prompt.sh
 
 prompt() {
     path="$Black$On_Blue \W"
