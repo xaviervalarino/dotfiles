@@ -357,6 +357,7 @@ function! s:goyo_enter()
 endfunction
 
 function! s:goyo_leave()
+  colorscheme nord
   set scrolloff=5
   " Limelight!
 endfunction
