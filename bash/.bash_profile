@@ -22,7 +22,7 @@ HIST_CMD="history -a"
 # THEME -----------------------------------------------------------------------
 
 # set theme based on time of day
-hour=`date +"%H"`
+# hour=`date +"%H"`
 # if [ $hour -gt 7 ] && [ $hour -lt 16 ]; then
 #     terminal_theme light
 # else
