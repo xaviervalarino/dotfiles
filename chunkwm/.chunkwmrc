@@ -44,11 +44,11 @@ chunkc set global_desktop_offset_left    15
 chunkc set global_desktop_offset_right   15
 chunkc set global_desktop_offset_gap     15
 
-chunkc set 1_desktop_offset_top          50
-chunkc set 1_desktop_offset_bottom       50
-chunkc set 1_desktop_offset_left         50
-chunkc set 1_desktop_offset_right        50
-chunkc set 1_desktop_offset_gap          15
+# chunkc set 1_desktop_offset_top          50
+# chunkc set 1_desktop_offset_bottom       50
+# chunkc set 1_desktop_offset_left         50
+# chunkc set 1_desktop_offset_right        50
+# chunkc set 1_desktop_offset_gap          15
 
 chunkc set desktop_padding_step_size     10.0
 chunkc set desktop_gap_step_size         5.0
