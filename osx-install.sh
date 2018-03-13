@@ -95,6 +95,7 @@ brew install \
     neovim \
     node \
     pandoc \
+	pidof \
     ranger \
     redshift \
     stow \
