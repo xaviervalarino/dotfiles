@@ -22,8 +22,6 @@ Create `.vim/undo` dir
 mkdir ~/.vim
 ```
 
-
-
 ### macOS/OSX
 There a laundry list of things to do on a fresh install of OSX/MacOS:
 [OSX-setup](OSX-setup.md)

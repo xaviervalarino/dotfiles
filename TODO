@@ -20,6 +20,10 @@
 ## Terminal:
 - [ ] Add note about `tic xterm-256color-italic.terminfo`
   - Add tic to `osx-install.sh`
-- [ ] timeThemedTerminal when `sudoedit`, other times terminal is called
+- [ ] Add note about iTerm2 `Esc+` for Meta key
 - [ ] make Vim default $EDITOR in OSX
 - [ ] $XGD_CONFIG_HOME variable is not exported?
+
+## MacOS
+- [ ] Change notes about _Karabiner/Seil_ to _Karabiner Elements_ for MacOS
+  - [ ] Add Note about changing CAPS to ESC on keypress and L_ALT on hold
