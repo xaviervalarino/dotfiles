@@ -63,7 +63,7 @@ taps=(
     caskroom/versions \
     crisidev/hombrew-chunkwm \
 )
-for tap in $taps
+for tap in ${taps[@]}
 do
     brew tap $tap
 done
