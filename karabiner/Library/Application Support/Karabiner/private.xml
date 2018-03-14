@@ -15,7 +15,7 @@
     </item>
     -->
     <item>
-        <name>F19 to Left Command</name>
+        <name>F19 to Right Command</name>
         <appendix>(Hold F19 to OPTION_R; F19 only send escape)</appendix>
         <identifier>private.f192f19_escape</identifier>
         <autogen>
