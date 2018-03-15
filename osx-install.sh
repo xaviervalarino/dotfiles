@@ -54,8 +54,8 @@
 # Homebrew packages and Cask applications
 # =======================================
 
-if ! type $"brew" > /dev/null; then
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if ! type $"brew" &> /dev/null; then
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 taps=(
@@ -95,7 +95,7 @@ brew install \
     neovim \
     node \
     pandoc \
-	pidof \
+    pidof \
     ranger \
     redshift \
     stow \
@@ -168,9 +168,9 @@ mkdir -p $HOME/.vim/undo
 
 dotDir=$HOME/dotfiles
 if [ -d $dotDir ];then
-	(cd dotDir; git pull)
+    (cd $dotDir; git pull)
 else
-	git clone git@github.com:xaviervalarino/dotfiles.git
+    git clone git@github.com:xaviervalarino/dotfiles.git
 fi
 
 dotfiles=(\
