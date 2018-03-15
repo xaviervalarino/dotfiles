@@ -126,6 +126,7 @@ brew cask install \
     libreoffice \
     omnigraffle \
     onyx \
+    sketch \
     sublime-text \
     the-unarchiver \
     transmission \
@@ -203,7 +204,6 @@ if [ ! -d $npm_dir ] && mkdir $npm_dir
 npm config set prefix $npm_dir
 
 npm i -g \
-    base16-builder \
     browser-sync \
     browserify \
     diff-so-fancy \
@@ -222,3 +222,10 @@ npm i -g \
 # =================
 
 gem install iStats
+
+
+# =======================
+# Install Python packages
+# =======================
+
+pip3 install pygments
