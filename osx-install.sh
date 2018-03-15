@@ -61,6 +61,8 @@ fi
 taps=(
     caskroom/cask \
     caskroom/versions \
+    caskroom/drivers \
+    # TODO: this tap always tries to download crisidev/homebrew-hombrew-crisidev from github
     crisidev/hombrew-chunkwm \
 )
 for tap in ${taps[@]}
@@ -87,6 +89,7 @@ brew install \
     html2text \
     htop \
     imagemagick \
+    # TODO: This option is passed to all listed packaged
     koekeishiya/formulae/skhd --with-purify \
     m-cli \
     macvim \
@@ -166,7 +169,7 @@ fi
 # Symlink dotfiles
 # ================
 
-#TODO: need to gen RSA key?
+#TODO: add this to notes need to gen RSA key?
 # ssh-keygen -t rsa -b 4096 -C "xvalarino@gmail.com"
 # eval "$(ssh-agent -s)"
 # ssh-add ~/.ssh/id_rsa
