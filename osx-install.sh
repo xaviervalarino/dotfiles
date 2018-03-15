@@ -183,23 +183,26 @@ else
     git clone git@github.com:xaviervalarino/dotfiles.git
 fi
 
-dotfiles=(\
-    ag \
-    bash \
-    chunkwm \
-    git \
-    nano \
-    npm \
-    skhd \
-    sublime_text \
-    tern \
-    vim \
-)
-
-for config in "${dotfiles[@]}"
-do
-    stow -v -d $dotDir $config
-done
+# TODO: consider moving this out, it causes too many issues
+# some of the application need to be run before `stow`
+#
+# dotfiles=(\
+#     ag \
+#     bash \
+#     chunkwm \
+#     git \
+#     nano \
+#     npm \
+#     skhd \
+#     sublime_text \
+#     tern \
+#     vim \
+# )
+#
+# for config in "${dotfiles[@]}"
+# do
+#     stow -v -d $dotDir $config
+# done
 
 
 # ======================
