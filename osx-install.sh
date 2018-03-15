@@ -142,11 +142,17 @@ brew cleanup
 # ================
 
 # Install VimPlug
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+vimPlugFile='~/.vim/autoload/plug.vim';\
+if [ ! -f $vimPlugFile ]; then
+    curl -fLo $vimPlugFile --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
 
+vimUndo=$HOME/.vim/undo
 # Create undo directory
-mkdir -p $HOME/.vim/undo
+if [ ! -d $vimUndo ]; then
+    mkdir -p $vimUndo
+fi
 
 
 # ======================
@@ -199,7 +205,7 @@ done
 
 npm_dir=$HOME/.npm-global
 
-if [ ! -d $npm_dir ] && mkdir $npm_dir
+[ ! -d $npm_dir ] && mkdir $npm_dir
 
 npm config set prefix $npm_dir
 
