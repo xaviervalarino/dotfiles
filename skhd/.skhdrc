@@ -81,8 +81,8 @@ ralt + shift - 4 : chunkc tiling::window --send-to-desktop 4
 # focus monitor
 ralt + cmd - z  : chunkc tiling::monitor -f prev
 ralt + cmd - c  : chunkc tiling::monitor -f next
-ralt + cmd - 1  : chunkc tiling::monitor -f 1
-ralt + cmd - 2  : chunkc tiling::monitor -f 2
+ralt + cmd - o  : chunkc tiling::monitor -f 1
+ralt + cmd - p  : chunkc tiling::monitor -f 2
 
 # send window to monitor and follow focus
 ctrl + cmd - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
