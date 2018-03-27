@@ -79,7 +79,6 @@ brew install \
     bash-completion \
     brew-cask-completion \
     calc \
-    chunkwm \
     colordiff \
     coreutils \
     docker \
@@ -89,8 +88,7 @@ brew install \
     html2text \
     htop \
     imagemagick \
-    # TODO: This option is passed to all listed packaged
-    koekeishiya/formulae/skhd --with-purify \
+    koekeishiya/formulae/skhd \
     m-cli \
     macvim \
     mps-youtube \
@@ -99,6 +97,7 @@ brew install \
     node \
     pandoc \
     pidof \
+    pv \
     ranger \
     redshift \
     stow \
@@ -111,6 +110,9 @@ brew install \
     watch \
     wget \
     youtube-dl \
+
+# Install chunkwm seperately with install flag
+brew install chunkwm -with-purify\
 
 # Casks
 
