@@ -25,3 +25,14 @@ mkdir -p ~/.vim/undo
 ### macOS/OSX
 There a laundry list of things to do on a fresh install of OSX/MacOS:
 [OSX-setup](OSX-setup.md)
+
+### Add **bold** and _italic_ type to terminal
+To enable bold and italic type in terminal, compile `xterm-256color.terminfo` file using `tic`, outputting to `~/.terminfo`
+```
+tic -o ~/.terminfo xterm-256color.terminfo
+```
+
+Then set the terminal profile to `xterm-256color`. To check if it worked, run:
+```
+echo `tput sitm`italics`tput ritm` `tput smso`standout`tput rmso`
+```
