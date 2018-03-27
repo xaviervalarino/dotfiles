@@ -44,7 +44,6 @@ Plug 'Valloric/YouCompleteMe'                               " Tab code-completio
 Plug 'rking/ag.vim'                                         " Ag search in Vim
 Plug 'tpope/vim-fugitive'                                   " Git intergration
 " Plug 'ctrlpvim/ctrlp.vim'                                 " Fuzzy file, buffer, tag, etc finder
-" Plug 'vim-scripts/TaskList.vim'                           " Show all TODOs in a file
 
 "Add plugins to &runtimepath
 call plug#end()
