@@ -192,15 +192,12 @@ augroup CursorLine
  au WinLeave * setlocal nocursorline
 augroup END
 
-" TODO change colorscheme when entering/leaving Modes
-" " Default Colors for CursorLine
-" highlight  CursorLine ctermbg=DarkGray ctermfg=None
-
-" " Change Color when entering Insert Mode
-" autocmd InsertEnter * highlight  CursorLine ctermbg=Black ctermfg=None
-
-" " Revert Color to default when leaving Insert Mode
-" autocmd InsertLeave * highlight  CursorLine ctermbg=DarkGray ctermfg=None
+" change cursor shape depending on mode
+" use block for 'Normal' and Beam for 'Insert'
+if exists('&t_SI')
+    let &t_SI .= "\<Esc>[5 q"
+    let &t_EI .= "\<Esc>[1 q"
+endif
 
 
 " TODO: colorscheme needs some serious overhaul
