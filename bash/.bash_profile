@@ -90,3 +90,6 @@ export PATH=$PATH:$HOME/.npm-global/bin
 
 # Turn on extglob wildcards
 shopt -s extglob
+
+# turn off special handling of ._* files in tar, etc.
+COPYFILE_DISABLE=1; export COPYFILE_DISABLE
