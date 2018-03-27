@@ -367,11 +367,13 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
 " Nord Colorscheme ---------------------------------------------------------------------
 
-colorscheme nord
 set termguicolors
+" comment_bightness needs to be set before the call to nord colorscheme
+let g:nord_comment_brightness = 7
+colorscheme nord
+
 highlight Comment cterm=italic
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_status_lines = 1
 let g:nord_uniform_diff_background = 1
-
