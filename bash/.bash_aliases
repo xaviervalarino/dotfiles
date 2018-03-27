@@ -92,7 +92,7 @@ alias .....='cd ../../../..'
 
 # Keep myself from making stupid mistakes,
 # I should be using `trash` 90% instead
-alias rm='rm -i'
+alias rm='rm -Iv'
 
 alias cless='color_less'
 alias tree='tree -I node_modules'
