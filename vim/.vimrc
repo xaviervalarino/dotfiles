@@ -172,7 +172,6 @@ autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
 syntax on
 set number                           " Show line numbers
 set laststatus=2                     " Always show statusbar (between windows)
-" set cursorline                       " Highlight current line
 " set t_Co=256                         " Set 256 Colors
 set title                            " Show filename in titlebar
 set encoding=utf8                    " Set char encoding inside Vim
@@ -180,10 +179,8 @@ set noshowmode                       " Hide mode line (since we are using Lightl
 set wildmode=list:longest,full       " Show completion menu for command line
 " set synmaxcol=120                    " Set low column width for syntax highlight (stops slow down)
 
-" hi LineNr ctermbg=0
-" hi SignColumn ctermbg=0
-" hi CursorLineNr ctermfg=14 ctermbg=18
 
+" Cursorline, only in active window
 augroup CursorLine
  au!
  au VimEnter * setlocal cursorline
