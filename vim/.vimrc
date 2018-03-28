@@ -169,6 +169,7 @@ set title                            " Show filename in titlebar
 set encoding=utf8                    " Set char encoding inside Vim
 set noshowmode                       " Hide mode line (since we are using Lightline statusbar)
 set wildmode=list:longest,full       " Show completion menu for command line
+set fillchars=vert:\│                " Change vertical divider to tall pipe char
 
 " Cursorline, only in active window
 augroup CursorLine
