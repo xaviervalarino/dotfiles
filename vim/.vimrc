@@ -70,9 +70,6 @@ set listchars=tab:▸\ ,eol:¬
 " TODO fix clipboard settings
 " set clipboard=unnamedplus            " Add X11 to the copy register (e.g. <+y>)
 
-" Remap 'jj' to escape in Insert Mode
-" inoremap jj <Esc>
-
 " Remove timeout for <escape> i.e. <caps> key
 set ttimeout
 set ttimeoutlen=0
@@ -172,13 +169,10 @@ autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
 syntax on
 set number                           " Show line numbers
 set laststatus=2                     " Always show statusbar (between windows)
-" set t_Co=256                         " Set 256 Colors
 set title                            " Show filename in titlebar
 set encoding=utf8                    " Set char encoding inside Vim
 set noshowmode                       " Hide mode line (since we are using Lightline statusbar)
 set wildmode=list:longest,full       " Show completion menu for command line
-" set synmaxcol=120                    " Set low column width for syntax highlight (stops slow down)
-
 
 " Cursorline, only in active window
 augroup CursorLine
@@ -195,27 +189,6 @@ if exists('&t_SI')
     let &t_SI .= "\<Esc>[5 q"
     let &t_EI .= "\<Esc>[1 q"
 endif
-
-
-" TODO: colorscheme needs some serious overhaul
-" Set the background to ENV $THEME
-" if $THEME == 'light'
-"  set background=light
-"  hi GitGutterAdd          ctermbg=White
-"  hi GitGutterChange       ctermbg=White
-"  hi GitGutterDelete       ctermbg=White
-"  hi GitGutterChangeDelete ctermbg=White
-" else
-"  set background=dark
-"  hi GitGutterAdd          ctermbg=0
-"  hi GitGutterChange       ctermbg=0
-"  hi GitGutterDelete       ctermbg=0
-"  hi GitGutterChangeDelete ctermbg=0
-" endif
-
-" Make search text darker
-" hi search ctermfg=0
-" hi WildMenu ctermfg=0
 
 
 " NAVIGATION
