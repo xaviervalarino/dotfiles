@@ -132,10 +132,6 @@ autocmd FileType gitcommit setl textwidth=72 fo-=l
 " Syntax highlight YAML front matter as a comment in Markdown files
 autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
 
-" Turn on bold and italic
-hi! link markdownItalic Italic
-hi! link markdownBold Bold
-
 " SEARCH
 "===============================================================================
 
@@ -336,12 +332,13 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " Nord Colorscheme ---------------------------------------------------------------------
 
 set termguicolors
-" comment_bightness needs to be set before the call to nord colorscheme
+" Nord let commands need to set before the call to Nord colorscheme
 let g:nord_comment_brightness = 7
-colorscheme nord
-
-highlight Comment cterm=italic
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 let g:nord_uniform_status_lines = 1
 let g:nord_uniform_diff_background = 1
+
+highlight Comment cterm=italic
+
+colorscheme nord
