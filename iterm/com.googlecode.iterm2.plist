@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AllowClipboardAccess</key>
+	<false/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>AppleScrollAnimationEnabled</key>
@@ -373,11 +375,17 @@
 	<true/>
 	<key>DimOnlyText</key>
 	<true/>
+	<key>DisableWindowSizeSnap</key>
+	<true/>
 	<key>EnableDivisionView</key>
+	<false/>
+	<key>EnableProxyIcon</key>
 	<false/>
 	<key>HideActivityIndicator</key>
 	<false/>
 	<key>HideScrollbar</key>
+	<true/>
+	<key>HideTab</key>
 	<true/>
 	<key>HideTabCloseButton</key>
 	<true/>
@@ -385,6 +393,8 @@
 	<true/>
 	<key>HotkeyMigratedFromSingleToMulti</key>
 	<true/>
+	<key>JobName</key>
+	<false/>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
@@ -406,7 +416,7 @@
 	gAKACoAN0xAJChEVGVdOUy5rZXlzoxITFIADgASABaMWFxiABoAHgAiACVpJZGVudGlm
 	aWVyVVdpZHRoVkhpZGRlblEwI0BowAAAAAAACNIhIiMkWiRjbGFzc25hbWVYJGNsYXNz
 	ZXNcTlNEaWN0aW9uYXJ5oiMlWE5TT2JqZWN00xAJCicrGaMSExSAA4AEgAWjLC0YgAuA
-	DIAIgAlRMSNAdKGdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
+	DIAIgAlRMSNAc7Gdsi0OVtIhIjM0Xk5TTXV0YWJsZUFycmF5ozM1JVdOU0FycmF5XxAP
 	TlNLZXllZEFyY2hpdmVy0Tg5VUFycmF5gAEACAARABoAIwAtADIANwBGAEwAUQBcAGMA
 	ZgBoAGoAbABzAHsAfwCBAIMAhQCJAIsAjQCPAJEAnACiAKkAqwC0ALUAugDFAM4A2wDe
 	AOcA7gDyAPQA9gD4APwA/gEAAQIBBAEGAQ8BFAEjAScBLwFBAUQBSgAAAAAAAAIBAAAA
@@ -427,12 +437,20 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>487 241 445 312 0 0 1920 1058 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>284 174 796 473 0 0 1280 778 </string>
+	<string>35 570 918 401 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>650 396 613 366 0 0 1280 778 </string>
+	<string>0 0 1280 778 0 0 1280 778 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>17 400 1245 358 0 0 1280 778 </string>
+	<string>15 15 1250 748 0 0 1280 778 </string>
+	<key>NSWindow Frame iTerm Window 2</key>
+	<string>647 15 618 748 0 0 1280 778 </string>
+	<key>NSWindow Frame iTerm Window 3</key>
+	<string>967 15 461 506 0 0 1920 1058 </string>
+	<key>NSWindow Frame iTerm Window 4</key>
+	<string>1120 -1 160 195 0 0 1280 778 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -678,6 +696,8 @@
 				<key>Red Component</key>
 				<real>0.20252507925033569</real>
 			</dict>
+			<key>Blink Allowed</key>
+			<false/>
 			<key>Blinking Cursor</key>
 			<true/>
 			<key>Blur</key>
@@ -745,7 +765,7 @@
 			<key>Custom Command</key>
 			<string>No</string>
 			<key>Custom Directory</key>
-			<string>No</string>
+			<string>Recycle</string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
@@ -1087,7 +1107,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>InputMono-Regular 14</string>
+			<string>InputMonoNarrow-Regular 14</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1132,6 +1152,8 @@
 			<string></string>
 			<key>Silence Bell</key>
 			<false/>
+			<key>Space</key>
+			<integer>0</integer>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tab Color</key>
@@ -1150,17 +1172,30 @@
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
-			<string>xterm-256color-italic</string>
+			<string>xterm-256color</string>
 			<key>Thin Strokes</key>
 			<integer>3</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
+			<key>Underline Color</key>
+			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
+				<key>Blue Component</key>
+				<real>0.32156862745098042</real>
+				<key>Color Space</key>
+				<string>sRGB</string>
+				<key>Green Component</key>
+				<real>0.25882352941176473</real>
+				<key>Red Component</key>
+				<real>0.23137254901960785</real>
+			</dict>
 			<key>Unicode Normalization</key>
 			<integer>0</integer>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
-			<true/>
+			<false/>
 			<key>Use Bright Bold</key>
 			<true/>
 			<key>Use Italic Font</key>
@@ -1168,9 +1203,11 @@
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Use Tab Color</key>
-			<true/>
+			<false/>
+			<key>Use Underline Color</key>
+			<false/>
 			<key>Vertical Spacing</key>
-			<real>1</real>
+			<real>0.99548192771084321</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
@@ -1179,6 +1216,8 @@
 			<string>/Users/xavier</string>
 		</dict>
 	</array>
+	<key>NoSyncHaveUsedCopyMode</key>
+	<true/>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
@@ -1187,8 +1226,16 @@
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>542723272.81670201</real>
+	<key>OpenArrangementAtStartup</key>
+	<false/>
+	<key>OpenNoWindowsAtStartup</key>
+	<false/>
+	<key>PMPrintingExpandedStateForPrint2</key>
+	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -1224,6 +1271,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>~/.config/iterm</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedAlternateAppNameKey</key>
@@ -1233,24 +1282,38 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-03-14T13:30:52Z</date>
+	<date>2018-03-28T05:40:37Z</date>
 	<key>SUSendProfileInfo</key>
+	<false/>
+	<key>ShowBookmarkName</key>
+	<false/>
+	<key>ShowFullScreenTabBar</key>
+	<false/>
+	<key>SmartPlacement</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.27497495993589749</real>
 	<key>StretchTabsToFillBar</key>
 	<true/>
 	<key>TabStyle</key>
-	<integer>0</integer>
+	<integer>1</integer>
+	<key>TabViewType</key>
+	<integer>1</integer>
 	<key>TerminalMargin</key>
 	<integer>15</integer>
 	<key>TerminalVMargin</key>
 	<integer>15</integer>
+	<key>UseBorder</key>
+	<false/>
 	<key>WindowNumber</key>
 	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
 	<string>3.1.5</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>
