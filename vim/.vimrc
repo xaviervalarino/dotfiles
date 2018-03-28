@@ -101,6 +101,7 @@ set smarttab        " <Tab> in front of a line inserts spaces according to 'sw'
 set expandtab       " In `Insert`, use the appropriate number of spaces for a <Tab>
 
 set breakindent     " Visually indent wrapped lines of text
+set whichwrap+=<,>,[,]  " Wrap on these characters
 
 " Specific filetype tab settings
 autocmd FileType javascript   setl sw=4 sts=4
