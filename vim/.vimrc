@@ -225,7 +225,10 @@ endfunction
 " PLUGIN SETUP
 "===============================================================================
 
-let delimitMate_expand_cr = 1                       " Expand brackets
+let delimitMate_expand_cr = 2                       " Expand <CR>
+let delimitMate_expand_space = 1                    " Expand spaces
+let delimitMate_jump_expansion = 1                  " Jump to closing delimiter
+
 let javascript_enable_domhtmlcss = 1                " Enable HTML/CSS syntax in JS
 
 let g:move_map_keys = 0 " Set Vim-move mapping to `Esc+` for iTerm2"
