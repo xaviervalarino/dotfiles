@@ -26,7 +26,8 @@ elif [[ $platform  == 'Darwin' ]]; then
     alias ql='qlmanage -p "$@" >&/dev/null'
 
     # TODO: alias for showing hidden files
-    alias bup='brew update; brew upgrade --cleanup'
+    alias bup='brew update; brew upgrade --cleanup; brew cask upgrade; brew cask cleanup'
+    alias cask='brew cask'
 
     # aliases for chunkwm tiling window manager
     alias chunk='brew services restart chunkwm'
