@@ -68,8 +68,8 @@ fi
 alias reload=$shell
 
 # Manual change Theme
-alias light='terminal_theme light'
-alias dark='terminal_theme dark'
+# alias light='terminal_theme light'
+# alias dark='terminal_theme dark'
 
 # grep with color
 alias grep='grep --color=auto'
