@@ -48,7 +48,7 @@ prompt() {
     symbol=$bldylw$(echo -e "\xe2\x9d\xaf\x0a")$reset # arrow `❯` unicode symbol
     PS1="$path $git\n$symbol "
 }
-PROMPT_COMMAND="$HIST_CMD; prompt"
+PROMPT_COMMAND="iterm2_title $PWD; $HIST_CMD; prompt"
 
 # Perl ------------------------------------------------------------------------
 
