@@ -43,7 +43,16 @@ HIST_CMD="history -a"
 prompt() {
     path="$blk$bakblu \W"
     # TODO: change git PS1 color depending on `status`
-    git="$blk$bakpur $(__git_ps1 "(%s)") $reset"
+    # git="$blk$bakpur $(__git_ps1 "(%s)") $reset"
+
+    # Set git PS1 if in a repo
+    branch=$(__git_ps1 "(%s)")
+    if [[ "$branch" ]]; then
+        git="$pur$branch $reset"
+    else
+        git=""
+    fi
+
     # run `printf {unicode_character} | hexdump to get the values
     symbol=$bldylw$(echo -e "\xe2\x9d\xaf\x0a")$reset # arrow `❯` unicode symbol
     PS1="$path $git\n$symbol "
