@@ -63,7 +63,7 @@ set autowrite                        " Save file when modified (esp. nice when s
 set hidden                           " Enable unsaved buffers
 set linebreak                        " Break lines on word
 
-set  virtualedit+=block             " Allow cursor to move anywhere in V-BLOCK mode
+set  virtualedit+=block,onemore     " Allow cursor to move anywhere in V-BLOCK mode
 
 " Use the same symbols as Textmate and InDesign for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
