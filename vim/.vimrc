@@ -86,21 +86,20 @@ cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
 
-
 " INDENTATION
 "===============================================================================
 
 filetype plugin indent on            " Turn on filetype and indent detection
 
 " Default to soft tabs, 4 spaces
-set shiftwidth=4    " {sw}  Number of spaces to use for each step of (auto)indent
-set softtabstop=4   " {sts} Number of spaces in a <Tab>
+set shiftwidth=4        " {sw}  Number of spaces to use for each step of (auto)indent
+set softtabstop=4       " {sts} Number of spaces in a <Tab>
 
-set smartindent     " Do smart auto-indenting when starting a new line
-set smarttab        " <Tab> in front of a line inserts spaces according to 'sw'
-set expandtab       " In `Insert`, use the appropriate number of spaces for a <Tab>
+set smartindent         " Do smart auto-indenting when starting a new line
+set smarttab            " <Tab> in front of a line inserts spaces according to 'sw'
+set expandtab           " In `Insert`, use the appropriate number of spaces for a <Tab>
 
-set breakindent     " Visually indent wrapped lines of text
+set breakindent         " Visually indent wrapped lines of text
 set whichwrap+=<,>,[,]  " Wrap on these characters
 
 " Specific filetype tab settings
@@ -116,7 +115,7 @@ autocmd BufReadPost * DetectIndent
 
 set undofile                " Save undo's after file closes
 set undodir=~/.vim/undo     " Directory where Undo history file are saved
-" NOTE! Vim will not create this dir
+                            " NOTE! Vim will not create this dir
 set undoreload=10000        " Max number lines to save on a buffer reload
 set undolevels=1000         " Max number of set changes that can be undone
 
@@ -126,7 +125,7 @@ set undolevels=1000         " Max number of set changes that can be undone
 
 " GIT
 " Set Git commit msg width to 72 chars & enable formatoptions in Insert Mode
-" TODO: does this need augroup
+" TODO: does this need augroup?
 autocmd FileType gitcommit setl textwidth=72 fo-=l
 
 " MARKDOWN
