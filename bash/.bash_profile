@@ -55,7 +55,8 @@ prompt() {
 
     # run `printf {unicode_character} | hexdump to get the values
     symbol=$bldylw$(echo -e "\xe2\x9d\xaf\x0a")$reset # arrow `❯` unicode symbol
-    PS1="$path $git\n$symbol "
+    # PS1="$path $git\n$symbol "
+    PS1="$symbol $git"
 }
 PROMPT_COMMAND="iterm2_title $PWD; $HIST_CMD; prompt"
 
