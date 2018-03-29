@@ -195,7 +195,7 @@ endif
 map <tab> :bn<cr>
 map <S-tab> :bp<cr>
 
-" Window Splits auto-completion -------------------------------------------------
+" Window Splits auto-completion ------------------------------------------------
 
 " Easier split navigations
 nnoremap <C-J> <C-W><C-J>
@@ -247,15 +247,15 @@ vmap k <Plug>MoveBlockUp
 nmap j <Plug>MoveLineDown
 nmap k <Plug>MoveLineUp
 
-" YouCompleteMe auto-completion -------------------------------------------------
+" YouCompleteMe auto-completion ------------------------------------------------
 set omnifunc=syntaxcomplete#Complete                " Turn on omnicompletion
 let g:ycm_key_list_previous_completion = ['<Up>']   " Remove <s-Tab> for complete
 set completeopt-=preview                            " Remove preview window
 
-" Bufferline --------------------------------------------------------------------
+" Bufferline -------------------------------------------------------------------
 let g:bufferline_echo = 1
 
-" Lightline Statusline ----------------------------------------------------------
+" Lightline Statusline ---------------------------------------------------------
 let g:lightline = {
    \ 'colorscheme': 'nord',
    \ 'active': {
@@ -272,7 +272,7 @@ let g:lightline = {
    \ 'subseparator': { 'left': '｜', 'right': '｜' }
    \ }
 
-" CtrlP settings ----------------------------------------------------------------
+" CtrlP settings ---------------------------------------------------------------
 let g:ctrlp_match_window = 'bottom,order:ttb' " Order matching top to bottom
 let g:ctrlp_switch_buffer = 0                 " Open file in new buffer
 let g:ctrlp_working_path= 0                   " Disable working dir settings
@@ -280,7 +280,7 @@ let g:ctrlp_working_path= 0                   " Disable working dir settings
 " Search with ag 'silver searcher'
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
-" Syntastic ---------------------------------------------------------------------
+" Syntastic --------------------------------------------------------------------
 let g:syntastic_error_symbol = '●'
 let g:syntastic_style_error_symbol = '●'
 let g:syntastic_warning_symbol = '●'
@@ -294,7 +294,7 @@ let g:syntastic_sass_checkers=["sasslint"]
 let g:syntastic_scss_checkers=["sasslint"]
 let g:sass_lint_config = '~/.sass-lint.yml'
 
-" Pencil -------------------------------------------------------------------------
+" Pencil -----------------------------------------------------------------------
 let g:pencil#wrapModeDefault = 'soft'
 
 function! Prose()
@@ -314,7 +314,7 @@ autocmd FileType markdown,mkd,mk,text call Prose()
 " invoke manually by command for other file types
 command! -nargs=0 Prose call Prose()
 
-" Goyo --------------------------------------------------------------------------
+" Goyo -------------------------------------------------------------------------
 
 let g:goyo_linenr=1
 
@@ -333,7 +333,7 @@ endfunction
 autocmd! User GoyoEnter nested call <SID>goyo_enter()
 autocmd! User GoyoLeave nested call <SID>goyo_leave()
 
-" Nord Colorscheme ---------------------------------------------------------------------
+" Nord Colorscheme -------------------------------------------------------------
 
 set termguicolors
 " Nord let commands need to set before the call to Nord colorscheme
