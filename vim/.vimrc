@@ -23,28 +23,27 @@ Plug 'arcticicestudio/nord-vim'                     " Nord colorscheme
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight'} " Highlight text based on focus
 
 " Text manipulation ------------------------------------------------------------
-" Plug 'terryma/vim-multiple-cursors'   " TODO: 'gc' offer this functionality?
-Plug 'tommcdo/vim-exchange'             " Easily exchange text
-Plug 'matze/vim-move'                   " Easily move lines & v-lines around
-Plug 'tpope/vim-surround'               " Modify quotes, parenthesis, or tags
-Plug 'Raimondi/delimitMate'             " Insert Mode completion for quotes, etc
-Plug 'tpope/vim-commentary'             " Change lines into comments
-Plug 'tpope/vim-repeat'                 " repeat mappings with Dot command
-Plug 'godlygeek/tabular'                " Text filtering and alignment
-Plug 'reedes/vim-pencil'                " Writing plugin to control text wrapping and formatting
-
-Plug 'reedes/vim-wordy'                 " Highlight repetitive and jargon words in prose
+" Plug 'terryma/vim-multiple-cursors' " TODO: 'gc' offer this functionality?
+Plug 'tommcdo/vim-exchange'           " Easily exchange text
+Plug 'matze/vim-move'                 " Easily move lines & v-lines around
+Plug 'tpope/vim-surround'             " Modify quotes, parenthesis, or tags
+Plug 'Raimondi/delimitMate'           " Insert Mode completion for quotes, etc
+Plug 'tpope/vim-commentary'           " Change lines into comments
+Plug 'tpope/vim-repeat'               " Repeat mappings with Dot command
+Plug 'godlygeek/tabular'              " Text filtering and alignment
+Plug 'reedes/vim-pencil'              " Writing plugin to control text wrapping and formatting
+Plug 'reedes/vim-wordy'               " Highlight repetitive and jargon words in prose
 
 " Integrated development environment -------------------------------------------
-Plug 'ap/vim-css-color'                                     " Color highlights in CSS
-Plug 'ciaranm/detectindent'                                 " Detect tab settings in a file
-Plug 'airblade/vim-gitgutter'                               " Git diff in SignColumn
-Plug 'scrooloose/syntastic'                                 " Syntax linting
-Plug 'gcorne/vim-sass-lint', { 'for': [ 'sass', 'scss' ]}   " Sass/scss stynax linting
-Plug 'Valloric/YouCompleteMe'                               " Tab code-completion
-Plug 'rking/ag.vim'                                         " Ag search in Vim
-Plug 'tpope/vim-fugitive'                                   " Git intergration
-" Plug 'ctrlpvim/ctrlp.vim'                                 " Fuzzy file, buffer, tag, etc finder
+Plug 'ap/vim-css-color'                                    " Color highlights in CSS
+Plug 'ciaranm/detectindent'                                " Detect tab settings in a file
+Plug 'airblade/vim-gitgutter'                              " Git diff in SignColumn
+Plug 'scrooloose/syntastic'                                " Syntax linting
+Plug 'gcorne/vim-sass-lint', { 'for': [ 'sass', 'scss' ]}  " Sass/scss stynax linting
+Plug 'Valloric/YouCompleteMe'                              " Tab code-completion
+Plug 'rking/ag.vim'                                        " Ag search in Vim
+Plug 'tpope/vim-fugitive'                                  " Git intergration
+" Plug 'ctrlpvim/ctrlp.vim'                                " Fuzzy file, buffer, tag, etc finder
 Plug 'iamcco/markdown-preview.vim'
 
 "Add plugins to &runtimepath
@@ -54,15 +53,15 @@ call plug#end()
 " GENERAL
 "===============================================================================
 
-set nocompatible                     " Be iMproved
-set history=5000                     " Default history is 20
-set mouse=a                          " Enable mouse
-set backspace=indent,eol,start       " Make backspace behave normally
-set nrformats=                       " Treat all numerals as decimal, regardless of padded zeros
-set spell spelllang=en_us            " Spell checking
-set autowrite                        " Save file when modified (esp. nice when switching buffers)
-set hidden                           " Enable unsaved buffers
-set linebreak                        " Break lines on word
+set nocompatible               " Be iMproved
+set history=5000               " Default history is 20
+set mouse=a                    " Enable mouse
+set backspace=indent,eol,start " Make backspace behave normally
+set nrformats=                 " Treat all numerals as decimal, regardless of padded zeros
+set spell spelllang=en_us      " Spell checking
+set autowrite                  " Save file when modified (esp. nice when switching buffers)
+set hidden                     " Enable unsaved buffers
+set linebreak                  " Break lines on word
 
 set  virtualedit+=block,onemore     " Allow cursor to move anywhere in V-BLOCK mode
 
@@ -136,12 +135,12 @@ autocmd BufNewFile,BufRead *.md syntax match Comment /\%^---\_.\{-}---$/
 " SEARCH
 "===============================================================================
 
-set hlsearch                         " Highlight search results
-set incsearch                        " Do incremental searching
-set showmatch                        " Highlight matching bracket
-set ignorecase                       " Ignore case in search patterns
-set smartcase                        " Override `ignorecase` if search contains upper
-" set gdefault                        " Set search to Global by default
+set hlsearch   " Highlight search results
+set incsearch  " Do incremental searching
+set showmatch  " Highlight matching bracket
+set ignorecase " Ignore case in search patterns
+set smartcase  " Override `ignorecase` if search contains upper
+" set gdefault " Set search to Global by default
 
 " Center search in the middle of the screen
 map N Nzz
@@ -156,21 +155,21 @@ nnoremap \ :noh<CR>
 " SAVING
 "===============================================================================
 
-set noswapfile                       " Turn off swapfile
-autocmd BufWritePre * :%s/\s\+$//e   " Remove trailing whitespace on save
+set noswapfile                     " Turn off swapfile
+autocmd BufWritePre * :%s/\s\+$//e " Remove trailing whitespace on save
 
 
 " UI & THEME
 "===============================================================================
 
 syntax on
-set number                           " Show line numbers
-set laststatus=2                     " Always show statusbar (between windows)
-set title                            " Show filename in titlebar
-set encoding=utf8                    " Set char encoding inside Vim
-set noshowmode                       " Hide mode line (since we are using Lightline statusbar)
-set wildmode=list:longest,full       " Show completion menu for command line
-set fillchars=vert:\│                " Change vertical divider to tall pipe char
+set number                     " Show line numbers
+set laststatus=2               " Always show statusbar (between windows)
+set title                      " Show filename in titlebar
+set encoding=utf8              " Set char encoding inside Vim
+set noshowmode                 " Hide mode line (since we are using Lightline statusbar)
+set wildmode=list:longest,full " Show completion menu for command line
+set fillchars=vert:\│          " Change vertical divider to tall pipe char
 
 " Cursorline, only in active window
 augroup CursorLine
@@ -226,11 +225,11 @@ endfunction
 " PLUGIN SETUP
 "===============================================================================
 
-let delimitMate_expand_cr = 2                       " Expand <CR>
-let delimitMate_expand_space = 1                    " Expand spaces
-let delimitMate_jump_expansion = 1                  " Jump to closing delimiter
+let delimitMate_expand_cr = 2        " Expand <CR>
+let delimitMate_expand_space = 1     " Expand spaces
+let delimitMate_jump_expansion = 1   " Jump to closing delimiter
 
-let javascript_enable_domhtmlcss = 1                " Enable HTML/CSS syntax in JS
+let javascript_enable_domhtmlcss = 1 " Enable HTML/CSS syntax in JS
 
 let g:move_map_keys = 0 " Set Vim-move mapping to `Esc+` for iTerm2"
 
@@ -274,9 +273,9 @@ let g:lightline = {
    \ }
 
 " CtrlP settings ----------------------------------------------------------------
-let g:ctrlp_match_window = 'bottom,order:ttb'       " Order matching top to bottom
-let g:ctrlp_switch_buffer = 0                       " Open file in new buffer
-let g:ctrlp_working_path= 0                         " Disable working dir settings
+let g:ctrlp_match_window = 'bottom,order:ttb' " Order matching top to bottom
+let g:ctrlp_switch_buffer = 0                 " Open file in new buffer
+let g:ctrlp_working_path= 0                   " Disable working dir settings
 
 " Search with ag 'silver searcher'
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
