@@ -30,6 +30,7 @@ Plug 'tpope/vim-surround'               " Modify quotes, parenthesis, or tags
 Plug 'Raimondi/delimitMate'             " Insert Mode completion for quotes, etc
 Plug 'tpope/vim-commentary'             " Change lines into comments
 Plug 'tpope/vim-repeat'                 " repeat mappings with Dot command
+Plug 'godlygeek/tabular'                " Text filtering and alignment
 Plug 'reedes/vim-pencil'                " Writing plugin to control text wrapping and formatting
 
 Plug 'reedes/vim-wordy'                 " Highlight repetitive and jargon words in prose
