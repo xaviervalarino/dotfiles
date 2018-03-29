@@ -62,6 +62,7 @@ set spell spelllang=en_us      " Spell checking
 set autowrite                  " Save file when modified (esp. nice when switching buffers)
 set hidden                     " Enable unsaved buffers
 set linebreak                  " Break lines on word
+set autoread                   " Reload files changed outside vim
 
 set  virtualedit+=block,onemore     " Allow cursor to move anywhere in V-BLOCK mode
 
