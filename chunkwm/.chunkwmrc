@@ -38,17 +38,27 @@ chunkc set global_desktop_mode           bsp
 
 # chunkc set 1_desktop_tree                ~/.chunkwm_layouts/dev_1
 
-chunkc set global_desktop_offset_top     15
-chunkc set global_desktop_offset_bottom  15
-chunkc set global_desktop_offset_left    15
-chunkc set global_desktop_offset_right   15
-chunkc set global_desktop_offset_gap     15
+chunkc set global_desktop_offset_top        10
+chunkc set global_desktop_offset_bottom     10
+chunkc set global_desktop_offset_left       10
+chunkc set global_desktop_offset_right      10
+chunkc set global_desktop_offset_gap        10
 
-# chunkc set 1_desktop_offset_top          50
-# chunkc set 1_desktop_offset_bottom       50
-# chunkc set 1_desktop_offset_left         50
-# chunkc set 1_desktop_offset_right        50
-# chunkc set 1_desktop_offset_gap          15
+# use larger gaps if external monitor is plugged in
+MONITOR_COUNT=`system_profiler SPDisplaysDataType | grep -c Resolution`
+if [ $MONITOR_COUNT  -eq 2 ]
+then
+    # For all six Desktops
+    for DESKTOP in {1..6}
+    do
+        terminal-notifier -message "$DESKTOP"
+        chunkc set ${DESKTOP}_desktop_offset_top        40
+        chunkc set ${DESKTOP}_desktop_offset_bottom     40
+        chunkc set ${DESKTOP}_desktop_offset_left       40
+        chunkc set ${DESKTOP}_desktop_offset_right      40
+        chunkc set ${DESKTOP}_desktop_offset_gap        30
+    done
+fi
 
 chunkc set desktop_padding_step_size     10.0
 chunkc set desktop_gap_step_size         5.0
