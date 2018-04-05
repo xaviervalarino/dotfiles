@@ -51,7 +51,6 @@ then
     # For all six Desktops
     for DESKTOP in {1..6}
     do
-        terminal-notifier -message "$DESKTOP"
         chunkc set ${DESKTOP}_desktop_offset_top        40
         chunkc set ${DESKTOP}_desktop_offset_bottom     40
         chunkc set ${DESKTOP}_desktop_offset_left       40
