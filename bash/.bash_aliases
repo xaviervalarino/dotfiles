@@ -91,6 +91,13 @@ alias ...='cd ../../'
 alias ....='cd ../../../'
 alias .....='cd ../../../..'
 
+# Tell me what is going on
+alias mv='mv -v'
+
+# Make common ops easier
+alias mkdir='mkdir -p'
+alias cp='cp -rv'
+
 # Keep myself from making stupid mistakes,
 # I should be using `trash` 90% instead
 alias rm='rm -Iv'
