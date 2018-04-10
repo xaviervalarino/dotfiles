@@ -77,6 +77,10 @@ ralt + shift - 1 : chunkc tiling::window --send-to-desktop 1
 ralt + shift - 2 : chunkc tiling::window --send-to-desktop 2
 ralt + shift - 3 : chunkc tiling::window --send-to-desktop 3
 ralt + shift - 4 : chunkc tiling::window --send-to-desktop 4
+ralt + shift - 5 : chunkc tiling::window --send-to-desktop 5
+ralt + shift - 6 : chunkc tiling::window --send-to-desktop 6
+ralt + shift - 7 : chunkc tiling::window --send-to-desktop 7
+ralt + shift - 8 : chunkc tiling::window --send-to-desktop 8
 
 # focus monitor
 ralt + cmd - z  : chunkc tiling::monitor -f prev
