@@ -98,6 +98,9 @@ alias mv='mv -v'
 alias mkdir='mkdir -p'
 alias cp='cp -rv'
 
+# Create dir and enter it
+function mkcd() { mkdir -p "$1" && cd "$1"; }
+
 # Keep myself from making stupid mistakes,
 # I should be using `trash` 90% instead
 alias rm='rm -Iv'
