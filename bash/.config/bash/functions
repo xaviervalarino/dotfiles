@@ -42,3 +42,35 @@ ps_time(){
   # TODO: if no PID, check pidof?
   [ ${#PID} -gt 0 ] && ps -o etime= -p $PID || exit 1 'no PID found'
 }
+
+# "TODAY'S WORKING FILE"
+# Creates a new copy of the working file with
+# today's date and opens it
+#
+# ARGUMENTS:
+# $1: original file to be copied
+# $2: if supplied, the new project_name
+
+# Note: supplied filename *must* follow this naming convention
+# client_marker : 2 character abbreviation for client
+# date          : 4 character date (should be in MMDD format)
+# project_name  : any number of characters used to express the
+#		  filename and the project type
+
+twf () {
+  dir=$(dirname $1)
+  filename=$(basename $1)
+  client_marker=${filename/${filename:2}}
+  today=$(date +%m%d)
+
+  if [ -z $2 ];then
+    project_name=${filename/${filename:0:6}}
+  else
+    project_name=$2
+  fi
+
+  new_file="$dir/${client_marker}${today}${project_name}"
+
+  cp -v $1 $new_file
+  open $new_file
+}
