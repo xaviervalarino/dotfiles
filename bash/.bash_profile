@@ -40,13 +40,43 @@ HIST_CMD="history -a"
 # Add git branches to PS1
 [ -f ~/.config/git/git-prompt.sh ] && source ~/.config/git/git-prompt.sh
 
+# Options for __git_ps1
+#
+#   GIT_PS1_SHOWDIRTYSTATE      : shows unstaged (*) and staged (+)
+#   GIT_PS1_SHOWUNTRACKEDFILES  : show if something is stashed ($)
+#   GIT_PS1_SHOWUNTRACKEDFILES  : show if there are untracked files (%)
+#   GIT_PS1_SHOWUPSTREAM="auto" : see difference between HEAD and upstream
+#                               : (<) behind upstream
+#                               : (>) ahead of upstream
+#                               : (<>) diverged
+#                               : (=) no difference
+#
+# See git/contrib/completion/git-prompt.sh for more info:
+# https://github.com/git/git/blob/1eaabe34fc6f486367a176207420378f587d3b48/contrib/completion/git-prompt.sh#L21
+# GIT_PS1_SHOWDIRTYSTATE=1
+GIT_PS1_SHOWUPSTREAM="auto"
+
 prompt() {
-    path="$blk$bakblu \W"
+    path="$blk$bakblu \W $reset"
     # TODO: change git PS1 color depending on `status`
-    git="$blk$bakpur $(__git_ps1 "(%s)") $reset"
+    branch=$(__git_ps1 "%s")
+    if [[ "$branch" ]]; then
+        if [[ $branch = *"<"* ]]; then
+            color=$bakylw
+        elif [[ $branch = *">"* ]]; then
+            color=$bakpur
+        elif [[ $branch = *"="* ]]; then
+            color=$bakgrn
+        elif [[ $branch = *"<>"* ]]; then
+            color=$bakred
+        fi
+        git="$blk$color ${branch% *} $reset"
+    else
+        git=""
+    fi
     # run `printf {unicode_character} | hexdump to get the values
     symbol=$bldylw$(echo -e "\xe2\x9d\xaf\x0a")$reset # arrow `❯` unicode symbol
-    PS1="$path $git\n$symbol "
+    PS1="$path$git\n$symbol "
 }
 PROMPT_COMMAND="iterm2_title $PWD; $HIST_CMD; prompt"
 
