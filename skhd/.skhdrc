@@ -152,8 +152,8 @@ ralt + cmd - t: chunkc tiling::window --toggle float;\
                 chunkc tiling::window --grid-layout 4:4:1:1:2:2
 
 # change layout of desktop
-ralt + ctrl- a : chunkc tiling::desktop --layout bsp
-ralt + ctrl- s : chunkc tiling::desktop --layout monocle
-ralt + ctrl- d : chunkc tiling::desktop --layout float
+ralt + ctrl - a : chunkc tiling::desktop --layout bsp
+ralt + ctrl - s : chunkc tiling::desktop --layout monocle
+ralt + ctrl - d : chunkc tiling::desktop --layout float
 
 ralt + ctrl - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
