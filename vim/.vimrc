@@ -363,3 +363,9 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+" Yoshua  Wyuts clipboard
+vmap <C-c> "+yi<ESC>
+vmap <C-x> "+c<ESC>
+vmap <C-v> c<ESC>"+p
+imap <C-v> <C-r><C-o>+
