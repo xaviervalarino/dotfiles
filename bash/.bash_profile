@@ -61,16 +61,18 @@ prompt() {
     # TODO: change git PS1 color depending on `status`
     branch=$(__git_ps1 "%s")
     if [[ "$branch" ]]; then
-        if [[ $branch = *"<"* ]]; then
-            color=$bakylw
-        elif [[ $branch = *">"* ]]; then
-            color=$bakpur
+        if [[ $branch = *"<>"* ]]; then
+            color=$bakred
         elif [[ $branch = *"="* ]]; then
             color=$bakgrn
-        elif [[ $branch = *"<>"* ]]; then
-            color=$bakred
+        elif [[ $branch = *">"* ]]; then
+            color=$bakpur
+        elif [[ $branch = *"<"* ]]; then
+            color=$bakylw
         fi
-        git="$blk$color ${branch% *} $reset"
+        # Add appropriate color and strip SHOWUPSTREAM symbols
+        git="$blk$color ${branch%%[<>=]*} $reset"
+        # git="$blk$color $branch $reset"
     else
         git=""
     fi
