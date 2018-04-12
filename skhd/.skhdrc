@@ -157,3 +157,7 @@ ralt + ctrl - s : chunkc tiling::desktop --layout monocle
 ralt + ctrl - d : chunkc tiling::desktop --layout float
 
 ralt + ctrl - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
+
+# restart chunkwm
+ralt + shift + cmd - r : terminal-notifier -message 'Restarting chunkwm';\
+                         brew services restart chunkwm
