@@ -1,22 +1,21 @@
 #!usr/bin/env bash
 
 # Set iTerm titlebar text
-iterm2_title() {
+iterm2_title () {
   echo -e "\033];$1\007"
 }
 
 # Set iTerm profile by name
-iterm2_profile() {
+iterm2_profile () {
   echo -e "\033]50;SetProfile=$1\a"; clear;
 
   # set terminal titlebar no text by default
-  iterm2_title " "
-
+  # iterm2_title " "
   clear;
 }
 
 # Set Terminal color by passing the arg `light` or `dark`
-terminal_theme(){
+terminal_theme () {
     # Change iterm profile with time of day
     if [[ $(uname) == 'Darwin' ]]; then
         # Capitalize first letter
@@ -30,14 +29,13 @@ terminal_theme(){
 }
 
 # Colorize less
-color_less(){
+cless () {
     # TODO: fix  issue when file doesn't have `lexer`
     pygmentize $1 | less -R
-    less
 }
 
 # Get process uptime
-ps_time(){
+ps_time () {
   PID=$(pgrep -i $1)
   # TODO: if no PID, check pidof?
   [ ${#PID} -gt 0 ] && ps -o etime= -p $PID || exit 1 'no PID found'
