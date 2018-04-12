@@ -62,6 +62,7 @@ fi
 # TODO difference between these two files?
 # http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
 if [[ -s ~/.bash_profile ]]; then
+    # TODO: use `bash -login` instead?
     shell='source ~/.bash_profile'
 # elif [[ -s ~/.bashrc ]]; then
 #     shell='source ~/.bashrc'
@@ -105,7 +106,6 @@ function mkcd() { mkdir -p "$1" && cd "$1"; }
 # I should be using `trash` 90% instead
 alias rm='rm -Iv'
 
-alias cless='color_less'
 alias tree='tree -I node_modules'
 alias subl='sublime'
 
@@ -116,9 +116,6 @@ alias log='git log --graph --decorate --pretty=oneline --abbrev-commit'
 alias com='git commit'
 alias patch='git add --patch'
 alias cached='git diff --cached'
-
-# Check process uptime
-alias ps_time='ps_time'
 
 # install cached versions of NPM packages
 alias npmi='npm install --cache-min Infinity'
