@@ -15,18 +15,18 @@ iterm2_profile () {
 }
 
 # Set Terminal color by passing the arg `light` or `dark`
-terminal_theme () {
-    # Change iterm profile with time of day
-    if [[ $(uname) == 'Darwin' ]]; then
-        # Capitalize first letter
-        type="$(tr '[:lower:]' '[:upper:]' <<< ${1:0:1})${1:1}"
-        iterm2_profile "Sulphurpool-${type}"
-    # else
-        # printf string to set urxvt border color
-    fi
-    . ~/.config/base16-shell/base16-ateliersulphurpool.$1.sh
-    export THEME=$1
-}
+# terminal_theme () {
+#     # Change iterm profile with time of day
+#     if [[ $(uname) == 'Darwin' ]]; then
+#         # Capitalize first letter
+#         type="$(tr '[:lower:]' '[:upper:]' <<< ${1:0:1})${1:1}"
+#         iterm2_profile "Sulphurpool-${type}"
+#     # else
+#         # printf string to set urxvt border color
+#     fi
+#     . ~/.config/base16-shell/base16-ateliersulphurpool.$1.sh
+#     export THEME=$1
+# }
 
 # Colorize less
 cless () {
