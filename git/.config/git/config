@@ -10,7 +10,7 @@
   ci = commit
 [core]
 	editor = vim
-	excludesfile = /Users/xavier/.config/git/gitexcludes
+	excludesfile = /Users/xavier/.config/git/excludes
 [push]
 	default = simple
 [pager]
