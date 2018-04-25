@@ -35,14 +35,14 @@ Plug 'reedes/vim-pencil'              " Writing plugin to control text wrapping 
 Plug 'reedes/vim-wordy'               " Highlight repetitive and jargon words in prose
 
 " Integrated development environment -------------------------------------------
-Plug 'ap/vim-css-color'                                    " Color highlights in CSS
-Plug 'ciaranm/detectindent'                                " Detect tab settings in a file
-Plug 'airblade/vim-gitgutter'                              " Git diff in SignColumn
-Plug 'scrooloose/syntastic'                                " Syntax linting
-Plug 'gcorne/vim-sass-lint', { 'for': [ 'sass', 'scss' ]}  " Sass/scss stynax linting
-Plug 'Valloric/YouCompleteMe'                              " Tab code-completion
-Plug 'rking/ag.vim'                                        " Ag search in Vim
-Plug 'tpope/vim-fugitive'                                  " Git intergration
+Plug 'ap/vim-css-color'                                   " Color highlights in CSS
+Plug 'ciaranm/detectindent'                               " Detect tab settings in a file
+Plug 'airblade/vim-gitgutter'                             " Git diff in SignColumn
+Plug 'neomake/neomake'                                    " Async synstax checker
+Plug 'gcorne/vim-sass-lint', { 'for': [ 'sass', 'scss' ]} " Sass/scss stynax linting
+Plug 'Valloric/YouCompleteMe'                             " Tab code-completion
+Plug 'rking/ag.vim'                                       " Ag search in Vim
+Plug 'tpope/vim-fugitive'                                 " Git intergration
 " Plug 'ctrlpvim/ctrlp.vim'                                " Fuzzy file, buffer, tag, etc finder
 Plug 'iamcco/markdown-preview.vim'
 
@@ -281,19 +281,19 @@ let g:ctrlp_working_path= 0                   " Disable working dir settings
 " Search with ag 'silver searcher'
 let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
 
-" Syntastic --------------------------------------------------------------------
-let g:syntastic_error_symbol = '●'
-let g:syntastic_style_error_symbol = '●'
-let g:syntastic_warning_symbol = '●'
-let g:syntastic_style_warning_symbol = '●'
+" Neomake ----------------------------------------------------------------------
+" When writing a buffer (no delay).
+" call neomake#configure#automake('w')
 
-" Make warnings yellow
-" highlight SyntasticWarningSign ctermfg = 3
+" When writing a buffer (no delay), and on normal mode changes (after 750ms).
+" call neomake#configure#automake('nw', 750)
 
-" Lint sass/scss files
-let g:syntastic_sass_checkers=["sasslint"]
-let g:syntastic_scss_checkers=["sasslint"]
-let g:sass_lint_config = '~/.sass-lint.yml'
+" When reading a buffer (after 1s), and when writing (no delay).
+" call neomake#configure#automake('rw', 1000)
+
+" Full config: when writing or reading a buffer, and on changes in insert and
+" normal mode (after 1s; no delay when writing).
+call neomake#configure#automake('nrwi', 500)
 
 " Pencil -----------------------------------------------------------------------
 let g:pencil#wrapModeDefault = 'soft'
