@@ -121,18 +121,18 @@ chunkc core::load border.so
 chunkc core::load purify.so
 
 # Tiling Windows
-chunkc tiling::rule --owner kitty --state tile
-chunkc tiling::rule --owner Alacritty --state tile
+chunkc tiling::rule --owner kitty --state tile &
+chunkc tiling::rule --owner Alacritty --state tile &
 
 # Floating Windows
-chunkc tiling::rule --owner Finder --name Copy --state float
-chunkc tiling::rule --owner Finder --name Trash --state float
-chunkc tiling::rule --owner Calculator --state float
-chunkc tiling::rule --owner \"System Preferences\" --state float
-chunkc tiling::rule --owner \"Archive Utility\" --state float
+chunkc tiling::rule --owner Finder --name Copy --state float &
+chunkc tiling::rule --owner Finder --name Trash --state float &
+chunkc tiling::rule --owner Calculator --state float &
+chunkc tiling::rule --owner \"System Preferences\" --state float &
+chunkc tiling::rule --owner \"Archive Utility\" --state float &
 
-chunkc tiling::rule --owner  \".*Illustrator.*\" --state float
-chunkc tiling::rule --owner  Photoshop --state float
+chunkc tiling::rule --owner  \".*Illustrator.*\" --state float &
+chunkc tiling::rule --owner  Photoshop --state float &
 
 # always float email responses
 # chunkc tiling::rule --owner  Mail --except \"^Inbox.*\)\" --state float --desktop 1
