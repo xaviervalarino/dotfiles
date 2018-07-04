@@ -133,6 +133,7 @@ chunkc tiling::rule --owner \"Archive Utility\" --state float
 
 chunkc tiling::rule --owner  \".*Illustrator.*\" --state float
 chunkc tiling::rule --owner  Photoshop --state float
+chunkc tiling::rule --owner  InDesign --state float
 
 # always float email responses
 # chunkc tiling::rule --owner  Mail --except \"^Inbox.*\)\" --state float --desktop 1
