@@ -61,14 +61,20 @@ prompt() {
     # TODO: change git PS1 color depending on `status`
     branch=$(__git_ps1 "%s")
     if [[ "$branch" ]]; then
+        # Diverged from origin
         if [[ $branch = *"<>"* ]]; then
             color=$bakred
+        # Up to date with origin
         elif [[ $branch = *"="* ]]; then
             color=$bakgrn
+        # Ahead of origin
         elif [[ $branch = *">"* ]]; then
             color=$bakpur
+        # Behind origin
         elif [[ $branch = *"<"* ]]; then
             color=$bakylw
+        # No origin to compare
+        else color=$bakwht
         fi
         # Add appropriate color and strip SHOWUPSTREAM symbols
         git="$blk$color ${branch%%[<>=]*} $reset"
