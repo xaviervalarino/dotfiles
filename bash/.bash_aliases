@@ -122,3 +122,6 @@ alias npmi='npm install --cache-min Infinity'
 
 # Open vim in focus mode as if it where iA writer
 alias goyo='vim -c Goyo'
+
+# Today's budget balance
+alias tbb='hledger balance -e `date -d "+1 day" +%F` --depth=2'
