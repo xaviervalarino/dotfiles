@@ -13,7 +13,8 @@ Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': [ 'mustache', 'handlebars' ] }
 " Plug 'elentok/plaintasks.vim', { 'for': 'todo' }
 Plug 'glench/vim-jinja2-syntax', " { 'for': 'jinja'}
-
+Plug 'ledger/vim-ledger', { 'for': 'ledger' }
+"
 " UI & Theme -------------------------------------------------------------------
 Plug 'tpope/vim-vinegar'                            " Enhance Vim's directory browser
 Plug 'bling/vim-bufferline'                         " List buffers in command bar
