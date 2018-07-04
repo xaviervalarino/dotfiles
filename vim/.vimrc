@@ -24,16 +24,17 @@ Plug 'arcticicestudio/nord-vim'                     " Nord colorscheme
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight'} " Highlight text based on focus
 
 " Text manipulation ------------------------------------------------------------
-" Plug 'terryma/vim-multiple-cursors' " TODO: 'gc' offer this functionality?
-Plug 'tommcdo/vim-exchange'           " Easily exchange text
-Plug 'matze/vim-move'                 " Easily move lines & v-lines around
-Plug 'tpope/vim-surround'             " Modify quotes, parenthesis, or tags
-Plug 'Raimondi/delimitMate'           " Insert Mode completion for quotes, etc
-Plug 'tpope/vim-commentary'           " Change lines into comments
-Plug 'tpope/vim-repeat'               " Repeat mappings with Dot command
-Plug 'godlygeek/tabular'              " Text filtering and alignment
-Plug 'reedes/vim-pencil'              " Writing plugin to control text wrapping and formatting
-Plug 'reedes/vim-wordy'               " Highlight repetitive and jargon words in prose
+" Plug 'terryma/vim-multiple-cursors'             " TODO: 'gc' offer this functionality?
+Plug 'tommcdo/vim-exchange'                     " Easily exchange text
+Plug 'matze/vim-move'                           " Easily move lines & v-lines around
+Plug 'tpope/vim-surround'                       " Modify quotes, parenthesis, or tags
+Plug 'Raimondi/delimitMate'                     " Insert Mode completion for quotes, etc
+Plug 'tpope/vim-commentary'                     " Change lines into comments
+Plug 'tpope/vim-repeat'                         " Repeat mappings with Dot command
+Plug 'godlygeek/tabular'                        " Text filtering and alignment
+Plug 'reedes/vim-pencil', { 'for': 'markdown' } " Writing plugin to control text wrapping and formatting
+Plug 'reedes/vim-wordy', { 'for': 'markdown' }  " Highlight repetitive and jargon words in prose
+Plug 'tpope/vim-speeddating'                    " Increment dates times and more
 
 " Integrated development environment -------------------------------------------
 Plug 'ap/vim-css-color'                                   " Color highlights in CSS
