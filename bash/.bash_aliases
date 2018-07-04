@@ -119,3 +119,6 @@ alias cached='git diff --cached'
 
 # install cached versions of NPM packages
 alias npmi='npm install --cache-min Infinity'
+
+# Open vim in focus mode as if it where iA writer
+alias goyo='vim -c Goyo'
