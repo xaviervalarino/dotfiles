@@ -5,7 +5,7 @@
 #       'stdout' and 'stderr' are valid values.
 #
 
-chunkc core::log_file stdout
+chunkc core::log_file /tmp/chunkwm_log
 
 #
 # NOTE: specify the desired level of logging.
