@@ -375,3 +375,6 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+" Ledger -----------------------------------------------------------------------
+let g:ledger_bin='/usr/local/bin/hledger'
