@@ -78,6 +78,19 @@ set ttimeoutlen=0
 autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 
 
+" Yoshua  Wyuts clipboard
+" set clipboard^=unnamed,unnamedplus
+" TODO: maybe use leader here
+" Copy visual selection
+vmap <C-c> "+yi<ESC>
+" Cut visual selection
+vmap <C-x> "+c<ESC>
+" Paste to visual selection
+vmap <C-v> "+p
+" Paste in normal mode
+" imap <C-v> <C-r><C-o>+
+
+
 " COMMAND LINE MODE
 "===============================================================================
 
@@ -362,9 +375,3 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
-
-" Yoshua  Wyuts clipboard
-vmap <C-c> "+yi<ESC>
-vmap <C-x> "+c<ESC>
-vmap <C-v> c<ESC>"+p
-imap <C-v> <C-r><C-o>+
