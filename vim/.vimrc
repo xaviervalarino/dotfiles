@@ -6,19 +6,10 @@ endif
 
 " PLUGINS
 "===============================================================================
-
 call plug#begin('~/.vim/plugged')
 
 " Syntax highlighting ----------------------------------------------------------
-Plug 'othree/html5.vim', { 'for': 'html' }
-Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' }
-Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'digitaltoad/vim-pug', { 'for': 'pug' }
-Plug 'mustache/vim-mustache-handlebars', { 'for': [ 'mustache', 'handlebars' ] }
-" Plug 'elentok/plaintasks.vim', { 'for': 'todo' }
-Plug 'glench/vim-jinja2-syntax', " { 'for': 'jinja'}
+Plug 'sheerun/vim-polyglot'
 Plug 'ledger/vim-ledger', { 'for': 'ledger' }
 "
 " UI & Theme -------------------------------------------------------------------
