@@ -38,7 +38,6 @@ Plug 'ap/vim-css-color'                                   " Color highlights in 
 Plug 'ciaranm/detectindent'                               " Detect tab settings in a file
 Plug 'airblade/vim-gitgutter'                             " Git diff in SignColumn
 Plug 'neomake/neomake'                                    " Async synstax checker
-Plug 'gcorne/vim-sass-lint', { 'for': [ 'sass', 'scss' ]} " Sass/scss stynax linting
 Plug 'Valloric/YouCompleteMe'                             " Tab code-completion
 Plug 'rking/ag.vim'                                       " Ag search in Vim
 Plug 'tpope/vim-fugitive'                                 " Git intergration
