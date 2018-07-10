@@ -13,11 +13,11 @@ Plug 'sheerun/vim-polyglot'
 Plug 'ledger/vim-ledger', { 'for': 'ledger' }
 "
 " UI & Theme -------------------------------------------------------------------
-Plug 'tpope/vim-vinegar'                            " Enhance Vim's directory browser
-Plug 'bling/vim-bufferline'                         " List buffers in command bar
-Plug 'itchyny/lightline.vim'                        " Enhanced Statusline
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }          " Focus writing mode
 Plug 'arcticicestudio/nord-vim'                     " Nord colorscheme
+Plug 'itchyny/lightline.vim'                        " Enhanced Statusline
+Plug 'bling/vim-bufferline'                         " List buffers in command bar
+Plug 'tpope/vim-vinegar'                            " Enhance Vim's directory browser
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }          " Focus writing mode
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight'} " Highlight text based on focus
 
 " Text manipulation ------------------------------------------------------------
