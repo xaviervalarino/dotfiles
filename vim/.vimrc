@@ -1,9 +1,3 @@
-" Quick fix: suppress error message printed for python3
-" https://github.com/vim/vim/issues/3117#issuecomment-402622616
-if has('python3')
-  silent! python3 1
-endif
-
 " PLUGINS
 "===============================================================================
 call plug#begin('~/.vim/plugged')
