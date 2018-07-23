@@ -38,3 +38,5 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[interactive]
+	; diffFilter = diff-so-fancy --patch-mode | less --tabs=4 -RFX
