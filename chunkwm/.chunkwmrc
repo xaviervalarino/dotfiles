@@ -135,6 +135,9 @@ chunkc tiling::rule --owner  \".*Illustrator.*\" --state float
 chunkc tiling::rule --owner  Photoshop --state float
 chunkc tiling::rule --owner  InDesign --state float
 
+# Always Float Safari Preferences window
+chunkc tiling:rule --owner Safari --name "(General|Tabs|AutoFill|Passwords|Search|Security|Privacy|Websites|Extensions|Advanced)" --state float
+
 # always float email responses
 # chunkc tiling::rule --owner  Mail --except \"^Inbox.*\)\" --state float --desktop 1
 
