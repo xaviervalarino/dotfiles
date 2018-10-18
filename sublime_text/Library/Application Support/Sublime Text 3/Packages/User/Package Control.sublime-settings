@@ -17,7 +17,6 @@
 		"HTML-CSS-JS Prettify",
 		"Jade",
 		"JavaScriptNext - ES6 Syntax",
-		"Markdown Preview",
 		"MarkdownEditing",
 		"Nunjucks Syntax",
 		"Package Control",
@@ -29,6 +28,7 @@
 		"SublimeLinter-csslint",
 		"SublimeLinter-jshint",
 		"TrailingSpaces",
-		"Typewriter"
+		"Typewriter",
+		"MarkdownPreview"
 	]
 }
