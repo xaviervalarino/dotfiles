@@ -46,7 +46,8 @@ elif [[ $platform  == 'Darwin' ]]; then
     alias ai='open -a  /Applications/Adobe\ Illustrator\ CS6/Adobe\ Illustrator.app'
     alias graffle='open -a /Applications/OmniGraffle.app'
     alias chromium='open -a  /Applications/Chromium.app'
-    alias firefox='open -a /Applications/Firefox.app'
+    alias firefox='open -a /Applications/Firefox\ Developer\ Edition.app'
+    alias fx=firefox
     alias sublime='open -a /Applications/Sublime\ Text.app'
     alias writer='open -a /Applications/iA\ Writer.app'
     alias write='writer'
