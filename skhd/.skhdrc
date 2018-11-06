@@ -155,3 +155,8 @@ ralt + ctrl - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
 # restart chunkwm
 ralt + shift + cmd - r : terminal-notifier -message 'Restarting chunkwm';\
                          brew services restart chunkwm
+
+# Stop accidentally activating 'Secure Keyboard Entry' while in iTerm
+cmd + alt - s [
+          "iTerm2" : terminal-notifier -message 'Would have been secure keyboard entry'
+]
