@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/home2/valarino/public_html'
+let g:netrw_dirhist_2='/home2/valarino/public_html/cgi-bin'
+let g:netrw_dirhist_3='/home2/valarino/public_html/xavier'
+let g:netrw_dirhist_4='/home2/valarino/public_html'
+let g:netrw_dirhist_5='/home2/valarino'
+let g:netrw_dirhist_6='/home2/valarino/public_html/xavier/laravel/css'
+let g:netrw_dirhist_7='/home2/valarino/public_html/xavier/laravel'
