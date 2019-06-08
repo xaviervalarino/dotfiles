@@ -1,162 +1,405 @@
-## NOTE(koekeishiya): A list of all built-in modifier and literal keywords can
-#                     be found at https://github.com/koekeishiya/skhd/issues/1
+# Modified from https://github.com/alyssais configuration.
+# https://gist.github.com/pkazmier/213d9dce6b1ea313eaf0a17b017c2b08
 #
-#                     A hotkey is written according to the following rules:
+# The following configuration heavily leverages modal keymaps to minimize the
+# pollution of global keybindings. In addition, the modal keymaps facilitate # the consistent use of the same keybindings across different modes. For
+# example, this configuration uses 'h', 'l', 'j', and 'k' to represent west,
+# east, south, and north when: changing focus, warping windows, resizing
+# windows, swapping windows, and moving floating windows. Those four keys are
+# mapped differently depending on the current mode to provide a consistent user
+# experience.
 #
-#                       hotkey   = <keysym> ':' <command> |
-#                                  <keysym> '->' ':' <command>
+# Six different modes are provided in this configuration in addition to the
+# default mode. The modes are tailored to their respective operations. Common
+# operations are generally available without the need of any modifier keys.
+# When modifier keys are used, they are for infrequent actions or size related
+# actions. Entry into the modal system is via Ctrl - Space, which enters FOCUS
+# mode. From there, any of the other modes can be activated with a single
+# keypress.
 #
-#                       keysym   = <mod> '-' <key> | <key>
+# The following is a high-level summary of the keybindngs:
 #
-#                       mod      = 'built-in mod keyword' | <mod> '+' <mod>
+# GLOBAL KEYBINDINGS:
+#                    hyper - space    Enter FOCUS mode
+#                   hyper - return    Open an iTerm
 #
-#                       key      = <literal> | <keycode>
 #
-#                       literal  = 'single letter or built-in keyword'
+# KEYBINDINGS AVAILABLE IN ALL MODES:
+#                            escape    Exit current mode
+#                                 f    Enter FOCUS mode
+#                                 g    Enter GRID mode
+#                                 s    Enter SWAP mode
+#                                 r    Enter RESIZE mode
+#                                 w    Enter WARP mode
+#                         shift - w    Enter WARP NO FOLLOW mode
 #
-#                       keycode  = 'apple keyboard kVK_<Key> values (0x3C)'
+#                                 q    Close window
+#                                 e    Equalize window sizes
+#                                 m    Toggle fullscreen
+#                                 o    Toggle offset
+#                                 p    Toggle parent zoom
+#                                 i    Toggle split
+#                                 t    Toggle float
+#                                 x    Mirror horizontal
+#                                 y    Mirror vertical
+#                             space    Rotate desktop 90
+#                     shift - space    Rotate desktop 270
 #
-#                       ->       = keypress is not consumed by skhd
 #
-#                       command  = command is executed through '$SHELL -c' and
-#                                  follows valid shell syntax. if the $SHELL environment
-#                                  variable is not set, it will default to '/bin/bash'.
-#                                  when bash is used, the ';' delimeter can be specified
-#                                  to chain commands.
+# FOCUS MODE KEYBINDINGS:
+#                return, h, j, k, l    Focus window (biggest, west, south, north, east)
+#                  cmd + h, j, k, l    Set insertion point (west, south, north, east)
+# 1, 2, 3, 4, 5, 6 tab, shift - tab    Focus desktop (1, 2, 3, 4, 5, 6, next, prev)
+#   cmd + 1, 2, 3, tab, shift - tab    Focus desktop (1, 2, next, prev)
+#                           cmd - t    Float next window
+#                      cmd - return    Cancel insertion point and float next window
+#                     cmd + b, m, f    Set desktop layout mode (bsp, monacle, float)
 #
-#                                  to allow a command to extend into multiple lines,
-#                                  prepend '\' at the end of the previous line.
 #
-#                                  an EOL character signifies the end of the bind.
+# WARP MODE KEYBINDINGS:
+#                return, h, j, k, l    Warp window (biggest, west, south, north, east)
+# 1, 2, 3, 4, 5, 6 tab, shift - tab    Warp to desktop (1, 2, 3, 4, 5, 6 next, prev) and follow
+#   cmd + 1, 2, 3, tab, shift - tab    Warp to monitor (1, 2, 3, next, prev) and follow
+#
+#
+# WARP NO FOLLOW MODE KEYBINDINGS:
+#                return, h, j, k, l    Warp window (biggest, west, south, north, east)
+# 1, 2, 3, 4, 5, 6 tab, shift - tab    Warp to monitor (1, 2, 3, 4, 5, 6 next, prev) and do not follow
+#   cmd + 1, 2, 3, tab, shift - tab    Warp to desktop (1, 2, 3, next, prev) and do not follow
+#
+#
+# SWAP MODE KEYBINDINGS:
+#                return, h, j, k, l    Swap window (biggest, west, south, north, east)
+#
+#
+# RESIZE MODE KEYBINDINGS:
+#                        h, j, k, l    Increase/Desease window (west, south, north, east)
+#                shift + h, j, k, l    Increment window size by larger amount (west, south, north, east)
+#
+#
+# GRID MODE KEYBINDINGS:
+#                return, h, j, k, l    Resize & move floating window (center, left, bottom, top, right)
+#        shift + return, h, j, k, l    Resize smaller & move floating window (center, left, bottom, top, right)
+#          cmd + return, h, j, k, l    Resize even smaller & move floating window (center, top-left, bottom-left, bottom-right, top-right)
+
+# MODES
+#
+# Default mode, hide border
+:: default  : chunkc border::color 0x00000000;
+
+# Focus mode
+:: focus  @ : ~/setWindowBorder.sh;
+
+# Floating window layout
+:: grid   @ : chunkc border::color 0xff56b6c2 ;
+
+# Swap windows
+:: swap   @ : chunkc border::color 0xffc678dd ;
+
+# Warp and send to desktop/monitors
+:: warp   @ : chunkc border::color 0xffe5c07b ;
+
+# Same, but don't follow focus
+:: warpnf @ : chunkc border::color 0xffd19a66 ;
+
+# Resize window operations
+:: resize @ : chunkc border::color 0xff98c379 ;
 
 
-# # open terminal, blazingly fast compared to iTerm/Hyper
-# cmd - return : open -na /Applications/Kitty.app
+# CTRL-SPACE is the global hotkey to toggle in/out of modal mode. Entry is
+# always to FOCUS mode. Getting out of any mode can also be done with ESCAPE.
+default                                 < hyper - space     ; focus
+focus, grid, swap, warp, warpnf, resize < hyper - space     ; default
+focus, grid, swap, warp, warpnf, resize < escape            ; default
 
-# close focused window
-ralt - w : chunkc tiling::window --close
+# Once in FOCUS mode (or any other mode other than default), you can switch
+# modes with single keystroke. (mnemonic: letter corresponds to first letter of
+# mode name, with exception of warpnf, which is a variant invoked with shift)
+focus, grid, swap, warp, warpnf, resize < f                 ; focus
+focus, grid, swap, warp, warpnf, resize < g                 ; grid
+focus, grid, swap, warp, warpnf, resize < s                 ; swap
+focus, grid, swap, warp, warpnf, resize < r                 ; resize
+focus, grid, swap, warp, warpnf, resize < w                 ; warp
+focus, grid, swap, warp, warpnf, resize < shift - w         ; warpnf
 
-# focus window
-ralt - h : chunkc tiling::window --focus west
-ralt - j : chunkc tiling::window --focus south
-ralt - k : chunkc tiling::window --focus north
-ralt - l : chunkc tiling::window --focus east
+# The following keybindings are available in all modes.
+focus, grid, swap, warp, warpnf, resize < space             : chunkc tiling::desktop --rotate 90
+focus, grid, swap, warp, warpnf, resize < shift - space     : chunkc tiling::desktop --rotate 270
+focus, grid, swap, warp, warpnf, resize < x                 : chunkc tiling::desktop --mirror horizontal       # mnemonic: x-axis
+focus, grid, swap, warp, warpnf, resize < y                 : chunkc tiling::desktop --mirror vertical         # mnemonic: y-axis
+focus, grid, swap, warp, warpnf, resize < o                 : chunkc tiling::desktop --toggle offset           # mnemonic: _o_ffset
+focus, grid, swap, warp, warpnf, resize < e                 : chunkc tiling::desktop --equalize                # mnemonic: _e_qualize
+focus, grid, swap, warp, warpnf, resize < m                 : chunkc tiling::window --toggle fullscreen        # mnemonic: monacle
+focus, grid, swap, warp, warpnf, resize < cmd - m           : chunkc tiling::window --toggle native-fullscreen
+focus, grid, swap, warp, warpnf, resize < q                 : chunkc tiling::window --close                    # mnemonic: _q_uit
+focus, grid, swap, warp, warpnf, resize < p                 : chunkc tiling::window --toggle parent            # mnemonic: _p_arent
+focus, grid, swap, warp, warpnf, resize < i                 : chunkc tiling::window --toggle split             # mnemonic: couldn't think of one!
+focus, grid, swap, warp, warpnf, resize < t                 : chunkc tiling::window --toggle float;\
+                                                              ~/setWindowBorder.sh                             # mnemonic: floa_t_
+focus, grid, swap, warp, warpnf, resize < backspace         : brew services restart chunkwm                    # restart chunkwm
 
-ralt - z : chunkc tiling::window --focus prev
-ralt - x : chunkc tiling::window --focus next
+# Global hotkeys which I limit so as to not pollute the global namespace
+# default         < ctrl - return     : open -na iTerm
+# default         < cmd - return      : chunkc set window_float_next 1; open -na iTerm
 
-# equalize size of windows
-shift + ralt - 0 : chunkc tiling::desktop --equalize
+# Change focus using standard vi directional keys. Enter changes focus to the
+# biggest window. You'll see this theme repeated over and over again. Since this
+# is such a common operation, no modifier keys are used.
+focus           < k                 : chunkc tiling::window --focus north
+focus           < j                 : chunkc tiling::window --focus south
+focus           < l                 : chunkc tiling::window --focus east
+focus           < h                 : chunkc tiling::window --focus west
+focus           < return            : chunkc tiling::window --focus biggest
 
-# swap window
-ralt + shift - h : chunkc tiling::window --swap west
-ralt + shift - j : chunkc tiling::window --swap south
-ralt + shift - k : chunkc tiling::window --swap north
-ralt + shift - l : chunkc tiling::window --swap east
+# Change the next insertion point to be something other than the default (left)
+# using standard vi directional keys with the Cmd modifier. In addition, to
+# make the next window a floating window, we bind cmd - t (using same mnemonic
+# as above). As these operations are intended for the next window that is
+# opened, we exit FOCUS mode immediately. Finally, to cancel any of these
+# "next" window operations, we bind cmd - return.
+focus           < cmd - k           : chunkc tiling::window --use-insertion-point north;\
+                                      skhd -k "hyper - space"
+focus           < cmd - j           : chunkc tiling::window --use-insertion-point south;\
+                                      skhd -k "hyper - space"
+focus           < cmd - l           : chunkc tiling::window --use-insertion-point east;\
+                                      skhd -k "hyper - space"
+focus           < cmd - h           : chunkc tiling::window --use-insertion-point west;\
+                                      skhd -k "hyper - space"
+focus           < cmd - t           : chunkc set window_float_next 1;\
+                                      skhd -k "hyper - space"
+focus           < cmd - return      : chunkc tiling::window --use-insertion-point cancel;\
+                                      chunkc set window_float_next 0;\
+                                      skhd -k "hyper - space"
 
-# move window
-ralt + cmd - h : chunkc tiling::window --warp west
-ralt + cmd - j : chunkc tiling::window --warp south
-ralt + cmd - k : chunkc tiling::window --warp north
-ralt + cmd - l : chunkc tiling::window --warp east
+# Prefix the above with cmd to change the desktop focus using numbers
+# corresponding to desktop or cycle through the monitors using tab and shift -
+# tab combination. Note: we do not use chunkwm's fast desktop switching as it
+# requires chunk-sa (which injects code into the Dock.app). Instead, we fake
+# this by sending keystrokes to mission control, but in order to do so, me must
+# exit FOCUS mode, send the global mission control keystroke, and then re-enter
+# FOCUS mode, so we remain in focus mode. It's very likely that you'll want to
+# change focus of windows after switching desktops, which is why we want to get
+# back to FOCUS mode. Finally, due timing issues, we introduce a sleep as the
+# standard mode commands are executed before mission control is done with its
+# animation. Direct jumping to a window is faster than cycling through
+# desktops, so the sleep delays are different.
+focus           < 1                 : skhd -k "hyper - space";\
+                                      skhd -k "ctrl - 1";\
+                                      skhd -k "hyper - space";\
+                                      sleep 0.4;\
+                                      chunkc border::color 0xffe06c75;
 
-# move floating windows / windows on a floating space
-ralt + shift - up     : chunkc tiling::window --warp-floating fullscreen
-shift + ralt - left   : chunkc tiling::window --warp-floating left
-shift + ralt - right  : chunkc tiling::window --warp-floating right
-shift + cmd - left   : chunkc tiling::window --warp-floating top-left
-shift + cmd - right  : chunkc tiling::window --warp-floating top-right
-shift + ctrl - left  : chunkc tiling::window --warp-floating bottom-left
-shift + ctrl - right : chunkc tiling::window --warp-floating bottom-right
+focus           < 2                 : skhd -k "hyper - space"; \
+                                      skhd -k "ctrl - 2"; \
+                                      skhd -k "hyper - space"; \
+                                      sleep 0.4; \
+                                      chunkc border::color 0xffe06c75;
 
-# send window to desktop
-ralt + shift - x : chunkc tiling::window --send-to-desktop $(chunkc get _last_active_desktop)
-ralt + shift - z : chunkc tiling::window --send-to-desktop prev
-ralt + shift - c : chunkc tiling::window --send-to-desktop next
-ralt + shift - 1 : chunkc tiling::window --send-to-desktop 1
-ralt + shift - 2 : chunkc tiling::window --send-to-desktop 2
-ralt + shift - 3 : chunkc tiling::window --send-to-desktop 3
-ralt + shift - 4 : chunkc tiling::window --send-to-desktop 4
-ralt + shift - 5 : chunkc tiling::window --send-to-desktop 5
-ralt + shift - 6 : chunkc tiling::window --send-to-desktop 6
-ralt + shift - 7 : chunkc tiling::window --send-to-desktop 7
-ralt + shift - 8 : chunkc tiling::window --send-to-desktop 8
+focus           < 3                 : skhd -k "hyper - space";\
+                                      skhd -k "ctrl - 3";\
+                                      skhd -k "hyper - space";\
+                                      sleep 0.4;\
+                                      chunkc border::color 0xffe06c75;
 
-# focus monitor
-ralt + cmd - z  : chunkc tiling::monitor -f prev
-ralt + cmd - c  : chunkc tiling::monitor -f next
-ralt + cmd - o  : chunkc tiling::monitor -f 1
-ralt + cmd - p  : chunkc tiling::monitor -f 2
+focus           < 4                 : skhd -k "hyper - space";\
+                                      skhd -k "ctrl - 4";\
+                                      skhd -k "hyper - space";\
+                                      sleep 0.4;\
+                                      chunkc border::color 0xffe06c75;
 
-# send window to monitor and follow focus
-ctrl + cmd - z  : chunkc tiling::window --send-to-monitor prev; chunkc tiling::monitor -f prev
-ctrl + cmd - c  : chunkc tiling::window --send-to-monitor next; chunkc tiling::monitor -f next
-ctrl + cmd - 1  : chunkc tiling::window --send-to-monitor 1; chunkc tiling::monitor -f 1
-ctrl + cmd - 2  : chunkc tiling::window --send-to-monitor 2; chunkc tiling::monitor -f 2
+focus           < 5                 : skhd -k "hyper - space";\
+                                      skhd -k "ctrl - 5";\
+                                      skhd -k "hyper - space";\
+                                      sleep 0.4;\
+                                      chunkc border::color 0xffe06c75;
 
-# Resize regions (increase & decrease)
-ralt + shift - a : chunkc tiling::window --use-temporary-ratio 0.03 --adjust-window-edge west;  chunkc tiling::window --use-temporary-ratio -0.03 --adjust-window-edge east
-ralt + shift - s : chunkc tiling::window --use-temporary-ratio 0.03 --adjust-window-edge south; chunkc tiling::window --use-temporary-ratio -0.03 --adjust-window-edge north
-ralt + shift - w : chunkc tiling::window --use-temporary-ratio 0.03 --adjust-window-edge north; chunkc tiling::window --use-temporary-ratio -0.03 --adjust-window-edge south
-ralt + shift - d : chunkc tiling::window --use-temporary-ratio 0.03 --adjust-window-edge east;  chunkc tiling::window --use-temporary-ratio -0.03 --adjust-window-edge west
+focus           < 6                 : skhd -k "hyper - space";\
+                                      skhd -k "ctrl - 6";\
+                                      skhd -k "hyper - space";\
+                                      sleep 0.4;\
+                                      chunkc border::color 0xffe06c75;
 
-# set insertion point for focused container
-ralt + ctrl - f : chunkc tiling::window --use-insertion-point cancel
-ralt + ctrl - h : chunkc tiling::window --use-insertion-point west
-ralt + ctrl - j : chunkc tiling::window --use-insertion-point south
-ralt + ctrl - k : chunkc tiling::window --use-insertion-point north
-ralt + ctrl - l : chunkc tiling::window --use-insertion-point east
+focus           < tab               : skhd -k "hyper - space";\
+                                      skhd -k "ctrl - right";\
+                                      skhd -k "hyper - space";\
+                                      sleep 0.75;\
+                                      chunkc border::color 0xffe06c75;
 
-# rotate tree
-ralt - r : chunkc tiling::desktop --rotate 90
+focus           < shift - tab       : skhd -k "hyper - space";\
+                                      skhd -k "ctrl - left";\
+                                      skhd -k "hyper - space";\
+                                      sleep 0.75;\
+                                      chunkc border::color 0xffe06c75;
 
-# mirror tree y-axis
-ralt - y : chunkc tiling::desktop --mirror vertical
+# Change the monitor focus using numbers corresponding to monitor or cycle
+# through the monitors using tab and shift - tab combination. You'll see this
+# pattern repeated when we get WARP moded as well. The non-modified keys will
+# warp to a monitor, and prefixing with cmd will warp to desktop. Again, the
+# goal was to aim for consistency.
+focus           < cmd - 1           : chunkc tiling::monitor -f 1
+focus           < cmd - 2           : chunkc tiling::monitor -f 2
+focus           < cmd - tab         : chunkc tiling::monitor -f next
+focus           < cmd + shift - tab : chunkc tiling::monitor -f prev
 
-# mirror tree x-axis
-ralt - x : chunkc tiling::desktop --mirror horizontal
 
-# toggle desktop offset
-ralt - a : chunkc tiling::desktop --toggle offset
+# Change the layout mode of a desktop to one of the three supported modes.
+focus           < cmd - b           : chunkc tiling::desktop --layout bsp       # mnemonic: _b_sp
+focus           < cmd - m           : chunkc tiling::desktop --layout monocle   # mnemonic: _m_onacle
+focus           < cmd - f           : chunkc tiling::desktop --layout float     # mnemonic: _f_loat
 
-# toggle window fullscreen
-ralt - f : chunkc tiling::window --toggle fullscreen
+# Grid mode bindings are to resize and place floating windows on your desktop
+# in well known positions. The standard non-modified keys are used to resize
+# the window to the top-half, bottom-half, right-half, left-half, and center of
+# screen respectively.
+grid            < k                 : chunkc tiling::window --grid-layout 2:1:0:0:1:1
+grid            < j                 : chunkc tiling::window --grid-layout 2:1:0:1:1:1
+grid            < l                 : chunkc tiling::window --grid-layout 1:2:1:0:1:1
+grid            < h                 : chunkc tiling::window --grid-layout 1:2:0:0:1:1
+grid            < return            : chunkc tiling::window --grid-layout 6:6:1:1:4:4
 
-# toggle window native fullscreen
-ralt + shift - f : chunkc tiling::window --toggle native-fullscreen
+# Prefix the above with shift modifier to resize a bit smaller: top-third,
+# bottom-third, left-third, right-third, and smaller center.
+grid            < shift - k         : chunkc tiling::window --grid-layout 3:1:0:0:1:1
+grid            < shift - j         : chunkc tiling::window --grid-layout 3:1:0:2:1:1
+grid            < shift - l         : chunkc tiling::window --grid-layout 1:3:2:0:1:1
+grid            < shift - h         : chunkc tiling::window --grid-layout 1:3:0:0:1:1
+grid            < shift - return    : chunkc tiling::window --grid-layout 4:4:1:1:2:2
 
-# toggle window parent zoom
-ralt - d : chunkc tiling::window --toggle parent
+# Prefix with cmd to resize even smaller and place in corners or center.
+grid            < cmd - k           : chunkc tiling::window --grid-layout 5:5:4:4:1:1
+grid            < cmd - j           : chunkc tiling::window --grid-layout 5:5:0:4:1:1
+grid            < cmd - l           : chunkc tiling::window --grid-layout 5:5:4:0:1:1
+grid            < cmd - h           : chunkc tiling::window --grid-layout 5:5:0:0:1:1
+grid            < cmd - return      : chunkc tiling::window --grid-layout 6:6:2:2:2:2
 
-# toggle window split type
-ralt - e : chunkc tiling::window --toggle split
+# Swap windows using standard vi directional keys.
+swap            < k                 : chunkc tiling::window --swap north
+swap            < j                 : chunkc tiling::window --swap south
+swap            < l                 : chunkc tiling::window --swap east
+swap            < h                 : chunkc tiling::window --swap west
+swap            < return            : chunkc tiling::window --swap biggest
 
-# float / unfloat window
-ralt - t : chunkc tiling::window --toggle float
+# Warp windows using standard vi directional keys. These bindings are the same
+# whether you are in WARP or WARPNF mode.
+warp, warpnf    < k                 : chunkc tiling::window --warp north
+warp, warpnf    < j                 : chunkc tiling::window --warp south
+warp, warpnf    < l                 : chunkc tiling::window --warp east
+warp, warpnf    < h                 : chunkc tiling::window --warp west
+warp, warpnf    < return            : chunkc tiling::window --warp biggest
 
-# toggle sticky, float and resize to picture-in-picture size
-ralt - s : chunkc tiling::window --toggle sticky;\
-          chunkc tiling::window --warp-floating pip-right
+# Warp window to monitor and follow.
+warp            < cmd - 1                 : chunkc tiling::window --send-to-monitor 1;\
+                                            chunkc tiling::monitor -f 1;
+warp            < cmd - 2                 : chunkc tiling::window --send-to-monitor 2;\
+                                            chunkc tiling::monitor -f 2;
+warp            < cmd - tab               : chunkc tiling::window --send-to-monitor next;\
+                                            chunkc tiling::monitor -f next;
+warp            < cmd + shift - tab       : chunkc tiling::window --send-to-monitor prev;\
+                                            chunkc tiling::monitor -f prev;
 
-# float next window to be tiled
-ralt + shift - t : chunkc set window_float_next 1
+# Prefix with cmd to warp window to desktop and follow.
+warp            < 1                      : chunkc tiling::window --send-to-desktop 1;\
+                                           skhd -k "hyper - space";\
+                                           skhd -k " - 1";\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "w";\
+                                           sleep 0.4;\
+                                           chunkc border::color 0xff98c379;
 
-# float/unfloat window to center of screen
-ralt + cmd - t: chunkc tiling::window --toggle float;\
-                chunkc tiling::window --grid-layout 4:4:1:1:2:2
+warp            < 2                      : chunkc tiling::window --send-to-desktop 2;\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "ctrl - 2";\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "w";\
+                                           sleep 0.4;\
+                                           chunkc border::color 0xff98c379;
 
-# change layout of desktop
-ralt + ctrl - a : chunkc tiling::desktop --layout bsp
-ralt + ctrl - s : chunkc tiling::desktop --layout monocle
-ralt + ctrl - d : chunkc tiling::desktop --layout float
+warp            < 3                      : chunkc tiling::window --send-to-desktop 3;\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "ctrl - 3";\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "w";\
+                                           sleep 0.4;\
+                                           chunkc border::color 0xff98c379;
 
-ralt + ctrl - w : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/dev_1
+warp            < 4                      : chunkc tiling::window --send-to-desktop 4;\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "ctrl - 4";\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "w";\
+                                           sleep 0.4;\
+                                           chunkc border::color 0xff98c379;
 
-# restart chunkwm
-ralt + shift + cmd - r : terminal-notifier -message 'Restarting chunkwm';\
-                         brew services restart chunkwm
+warp            < 5                      : chunkc tiling::window --send-to-desktop 5;\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "ctrl - 5";\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "w";\
+                                           sleep 0.4;\
+                                           chunkc border::color 0xff98c379;
 
-# Stop accidentally activating 'Secure Keyboard Entry' while in iTerm
-cmd + alt - s [
-          "iTerm2" : terminal-notifier -message 'Would have been secure keyboard entry'
-]
+warp            < 6                      : chunkc tiling::window --send-to-desktop 6;\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "ctrl - 6";\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "w";\
+                                           sleep 0.4;\
+                                           chunkc border::color 0xff98c379;
+
+warp            < tab                    : chunkc tiling::window --send-to-desktop next;\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "ctrl - right";\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "w";\
+                                           sleep 0.75;\
+                                           chunkc border::color 0xff98c379;
+
+warp            < shift - tab            : chunkc tiling::window --send-to-desktop prev;\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "ctrl - left";\
+                                           skhd -k "hyper - space";\
+                                           skhd -k "w";\
+                                           sleep 0.75;\
+                                           chunkc border::color 0xff98c379;
+
+# Warp window to monitor, but do NOT follow.
+warpnf          < cmd - 1                : chunkc tiling::window --send-to-monitor 1
+warpnf          < cmd - 2                : chunkc tiling::window --send-to-monitor 2
+warpnf          < cmd - tab              : chunkc tiling::window --send-to-monitor next
+warpnf          < cmd + shift - tab      : chunkc tiling::window --send-to-monitor prev
+
+# Prefix with cmd to warp windown to monitor, but do NOT follow.
+warpnf          < 1                      : chunkc tiling::window --send-to-desktop 1
+warpnf          < 2                      : chunkc tiling::window --send-to-desktop 2
+warpnf          < 3                      : chunkc tiling::window --send-to-desktop 3
+warpnf          < 4                      : chunkc tiling::window --send-to-desktop 4
+warpnf          < 5                      : chunkc tiling::window --send-to-desktop 5
+warpnf          < 6                      : chunkc tiling::window --send-to-desktop 6
+warpnf          < tab                    : chunkc tiling::window --send-to-desktop next
+warpnf          < shift - tab            : chunkc tiling::window --send-to-desktop prev
+
+# Increase size of window using standard vi directional keys.
+resize            < h : chunkc tiling::window --use-temporary-ratio  0.02 --adjust-window-edge west;\
+                        chunkc tiling::window --use-temporary-ratio -0.02 --adjust-window-edge east;
+
+resize            < j : chunkc tiling::window --use-temporary-ratio  0.02 --adjust-window-edge south;\
+                        chunkc tiling::window --use-temporary-ratio -0.02 --adjust-window-edge north;
+
+resize            < k : chunkc tiling::window --use-temporary-ratio  0.02 --adjust-window-edge north;\
+                        chunkc tiling::window --use-temporary-ratio -0.02 --adjust-window-edge south;
+
+resize            < l : chunkc tiling::window --use-temporary-ratio  0.02 --adjust-window-edge east;\
+                        chunkc tiling::window --use-temporary-ratio -0.02 --adjust-window-edge west;
+
+# Increment window size by a larger amount
+resize            < shift  - h : chunkc tiling::window --use-temporary-ratio  0.06 --adjust-window-edge west;\
+                                 chunkc tiling::window --use-temporary-ratio -0.06 --adjust-window-edge east;
+
+resize            < shift  - j : chunkc tiling::window --use-temporary-ratio  0.06 --adjust-window-edge south;\
+                                 chunkc tiling::window --use-temporary-ratio -0.06 --adjust-window-edge north;
+
+resize            < shift  - k : chunkc tiling::window --use-temporary-ratio  0.06 --adjust-window-edge north;\
+                                 chunkc tiling::window --use-temporary-ratio -0.06 --adjust-window-edge south;
+
+resize            < shift  - l : chunkc tiling::window --use-temporary-ratio  0.06 --adjust-window-edge east;\
+                                 chunkc tiling::window --use-temporary-ratio -0.06 --adjust-window-edge west;
