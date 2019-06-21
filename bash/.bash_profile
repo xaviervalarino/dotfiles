@@ -58,6 +58,7 @@ GIT_PS1_SHOWUPSTREAM="auto"
 
 prompt() {
     path="$blk$bakblu \W $reset"
+
     # TODO: change git PS1 color depending on `status`
     branch=$(__git_ps1 "%s")
     if [[ "$branch" ]]; then
@@ -78,12 +79,14 @@ prompt() {
         fi
         # Add appropriate color and strip SHOWUPSTREAM symbols
         git="$blk$color ${branch%%[<>=]*} $reset"
-        # git="$blk$color $branch $reset"
     else
         git=""
     fi
-    # run `printf {unicode_character} | hexdump to get the values
-    symbol=$bldylw$(echo -e "\xe2\x9d\xaf\x0a")$reset # arrow `❯` unicode symbol
+
+    # Add arrow '❯' unicode symbol
+    # Note to self: run `printf {unicode_character} | hexdump` to get the value
+    symbol=$bldylw$(echo -e "\xe2\x9d\xaf\x0a")$reset
+
     PS1="$path$git\n$symbol "
 }
 PROMPT_COMMAND="iterm2_title $PWD; $HIST_CMD; prompt"
