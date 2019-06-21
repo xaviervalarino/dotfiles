@@ -83,11 +83,18 @@ prompt() {
         git=""
     fi
 
+    # show number of jobs, if there are any
+    if [[ -n $(jobs -p) ]]; then
+        job_count="$blk$bakwht \j $reset"
+    else
+        job_count=""
+    fi
+
     # Add arrow '❯' unicode symbol
     # Note to self: run `printf {unicode_character} | hexdump` to get the value
     symbol=$bldylw$(echo -e "\xe2\x9d\xaf\x0a")$reset
 
-    PS1="$path$git\n$symbol "
+    PS1="$path$git$job_count\n$symbol "
 }
 PROMPT_COMMAND="iterm2_title $PWD; $HIST_CMD; prompt"
 
