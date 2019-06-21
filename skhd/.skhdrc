@@ -36,6 +36,7 @@
 #                                 q    Close window
 #                                 e    Equalize window sizes
 #                                 m    Toggle fullscreen
+#                           cmd - m    Toggle native fullscreen
 #                                 o    Toggle offset
 #                                 p    Toggle parent zoom
 #                                 i    Toggle split
