@@ -1,0 +1,42 @@
+[user]
+  name = Xavier Valarino
+  username = xaviervalarino
+  email = xvalarino@gmail.com
+[alias]
+  st = status
+  co = checkout
+  br = branch
+  up = rebase
+  ci = commit
+[core]
+	editor = vim
+	excludesfile = /Users/xavier/.config/git/excludes
+[push]
+	default = simple
+[pager]
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[interactive]
+	; diffFilter = diff-so-fancy --patch-mode | less --tabs=4 -RFX

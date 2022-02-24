@@ -1,0 +1,23 @@
+{
+	"afn_use_project_root": true,
+	"bold_folder_labels": true,
+	"caret_style": "phase",
+	"color_scheme": "Packages/Color Scheme - Default/Mariana.tmTheme",
+	"font_size": 14,
+	"highlight_line": true,
+	"ignored_packages":
+	[
+		"Handlebars",
+		"Markdown"
+	],
+	"line_padding_bottom": 3,
+	"line_padding_top": 3,
+	"overlay_scroll_bars": "enabled",
+	"show_full_path": true,
+	"tab_size": 2,
+	"theme": "Adaptive.sublime-theme",
+	"trailing_spaces_include_current_line": false,
+	"trailing_spaces_trim_on_save": true,
+	"translate_tabs_to_spaces": true,
+	"use_tab_stops": true
+}

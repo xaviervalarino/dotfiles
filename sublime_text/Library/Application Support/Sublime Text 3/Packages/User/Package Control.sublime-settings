@@ -1,0 +1,34 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AutoFileName",
+		"BracketHighlighter",
+		"Calculate",
+		"Color Highlighter",
+		"ColorPicker",
+		"CSS3",
+		"Dotfiles Syntax Highlighting",
+		"FileDiffs",
+		"Handlebars",
+		"HTML-CSS-JS Prettify",
+		"Jade",
+		"JavaScriptNext - ES6 Syntax",
+		"MarkdownEditing",
+		"Nunjucks Syntax",
+		"Package Control",
+		"Sass",
+		"SCSS",
+		"SideBarEnhancements",
+		"SublimeLinter",
+		"SublimeLinter-contrib-scss-lint",
+		"SublimeLinter-csslint",
+		"SublimeLinter-jshint",
+		"TrailingSpaces",
+		"Typewriter",
+		"MarkdownPreview"
+	]
+}

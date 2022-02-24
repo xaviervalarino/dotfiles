@@ -1,0 +1,29 @@
+# TODO
+- [ ] Update README doc
+
+## Vim:
+- [ ] Cleanup `vimrc`
+- [ ] Add shortcut for rotating split/vsplit
+  * Currently:
+    * `<C-w> J` moves vertical to bottom
+    * `<C-w> L` moves horizontal to right
+    * `<C-w><C-r>` rotates (swaps) splits
+- [ ] Remove cursor and lineNr when window looses focus:
+  * https://www.reddit.com/r/vim/comments/4aab93/weekly_vim_tips_and_tricks_thread_1/d0ypww5
+  * http://ternjs.net/doc/manual.html#configuration
+- [ ] Create custom colorscheme with darker deviding line for splits and no-contrast columnColor
+- [ ] Figure out why text is highlighted orange after `:so ~/.vimrc`
+- [ ] Review Vim-Fugitive?
+- [ ] Review GitGutter{Stage,Revert,Preview} Hunk and set to keybindings
+- [ ] Source bash_aliases for external commands?
+
+## Terminal:
+- [ ] Add note about `tic xterm-256color-italic.terminfo`
+  - Add tic to `osx-install.sh`
+- [ ] Add note about iTerm2 `Esc+` for Meta key
+- [ ] make Vim default $EDITOR in OSX
+- [ ] $XGD_CONFIG_HOME variable is not exported?
+
+## MacOS
+- [ ] Change notes about _Karabiner/Seil_ to _Karabiner Elements_ for MacOS
+  - [ ] Add Note about changing CAPS to ESC on keypress and L_ALT on hold

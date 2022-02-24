@@ -1,0 +1,10 @@
+files:
+  include: '**/*.s+(a|c)ss'
+options:
+  formatter: stylish
+  merge-default-rules: true
+
+rules:
+  empty-line-between-blocks: 0
+  no-color-keywords: 0
+  property-sort-order: 0
