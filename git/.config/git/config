@@ -13,8 +13,8 @@
   unstage = reset HEAD --
   last = log -1 HEAD
 [core]
-	editor = vim
-	excludesfile = /Users/xavier/.config/git/excludes
+  editor = nvim
+  excludesfile = /Users/xavier/.config/git/excludes
 [push]
 	default = simple
 [pager]
