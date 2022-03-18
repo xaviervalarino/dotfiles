@@ -3,11 +3,15 @@
   username = xaviervalarino
   email = xvalarino@gmail.com
 [alias]
-  st = status
-  co = checkout
   br = branch
-  up = rebase
   ci = commit
+  co = checkout
+  st = status --branch
+  up = rebase
+  ammend = commit --amend
+  cached = diff --cached
+  unstage = reset HEAD --
+  last = log -1 HEAD
 [core]
 	editor = vim
 	excludesfile = /Users/xavier/.config/git/excludes
