@@ -1,15 +1,19 @@
 local nvim_lsp_ok, nvim_lsp = pcall(require, 'lspconfig')
 if not nvim_lsp_ok then return end
 
+require 'rc.language-server.style'
+
 local servers = {
   bashls = true,
   eslint = true,
   cssls = true,
   html = true,
-  jsonls = true,
-  sumneko_lua = require 'rc.language-server.sumneko_lua',
-  tsserver = true,
+  jsonls = require 'rc.language-server.servers.jsonls',
+  sumneko_lua = require 'rc.language-server.servers.sumneko_lua',
+  tsserver = require 'rc.language-server.servers.tsserver',
 }
+
+require 'rc.language-server.servers.null-ls'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
