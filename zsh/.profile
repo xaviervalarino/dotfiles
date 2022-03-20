@@ -1,5 +1,7 @@
 source $HOME/.aliases
 
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # PATH
 XDG_CONFIG_HOME="$HOME/.config"
 XDG_DATA_HOME="$HOME/.local/share"
