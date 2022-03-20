@@ -1,4 +1,6 @@
-local nvim_lsp = require 'lspconfig'
+local nvim_lsp_ok, nvim_lsp = pcall(require, 'lspconfig')
+if not nvim_lsp_ok then return end
+
 local servers = {
   bashls = true,
   eslint = true,
