@@ -4,6 +4,8 @@ if not luasnip_ok then return end
 local cmp_ok, cmp = pcall(require, "cmp")
 if not cmp_ok then return end
 
+require("luasnip.loaders.from_vscode").lazy_load()
+
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
