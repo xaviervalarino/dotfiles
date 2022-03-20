@@ -4,14 +4,14 @@ local lspkind = require 'lspkind'
 cmp.setup{
   snippet = {
     expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
+      require('luasnip').lsp_expand(args.body)
     end,
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'npm' },
     { name = 'path' },
-    { name = 'vsnip' },
+    { name = 'luasnip' },
     { name = 'buffer', keyword_length = 4 },
   }),
   formatting = {
@@ -22,7 +22,7 @@ cmp.setup{
         nvim_lua = '[api]',
         buffer = '[buf]',
         npm = '[npm]',
-        vsnip = '[snip]',
+        luasnip = '[snip]',
         path = '[path]',
       }
     })
