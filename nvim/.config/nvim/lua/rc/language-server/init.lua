@@ -35,9 +35,9 @@ local on_attach = function(_, bufnr)
   buf_nnoremap('gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
   buf_nnoremap('<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
   -- buf_nnoremap('<leader>rr', ':LspRestart<CR>')
-  buf_nnoremap('[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>')
-  buf_nnoremap(']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>')
-  buf_nnoremap('<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>')
+  buf_nnoremap('[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
+  buf_nnoremap(']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
+  buf_nnoremap('<space>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>')
   buf_nnoremap('<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
 end
 
