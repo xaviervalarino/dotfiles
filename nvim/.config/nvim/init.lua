@@ -1,7 +1,5 @@
 local set = vim.opt
-local global = vim.g
 local window = vim.wo
-local cmd = vim.cmd
 
 set.termguicolors = true
 set.linebreak = true
@@ -41,7 +39,7 @@ set.splitbelow = true
 set.splitright = true
 
 -- Completion --------------------------
-global.completeopt = 'menu,menuone,noselect'
+set.completeopt = { 'menu,menuone,noselect' }
 
 
 -- Package Config --------------------
