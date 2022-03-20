@@ -3,6 +3,7 @@ local window = vim.wo
 
 set.termguicolors = true
 set.linebreak = true
+set.laststatus = 3
 
 set.mouse = 'a'
 
