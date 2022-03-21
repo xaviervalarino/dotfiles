@@ -1,9 +1,7 @@
-local status_ok, paq = pcall(require, 'paq')
-if not status_ok then
-  return
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  Packer_bootstrap = vim.fn.system({ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path })
 end
-
-local cmd = vim.cmd
 
 local function simple_setup(pkg_name)
   local pkg_status_ok, pkg = pcall(require, pkg_name)
@@ -12,55 +10,64 @@ local function simple_setup(pkg_name)
   end
 end
 
-cmd [[
-  augroup package_config
+vim.cmd([[
+  augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PaqSync
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
   augroup end
-]]
+]])
 
-paq {
-  'savq/paq-nvim';
-  'nvim-lua/plenary.nvim';   -- dependency of git signs & telescope
+local packages = {
+  'wbthomason/packer.nvim',
 
-  { 'windwp/nvim-autopairs', run = simple_setup 'nvim-autopairs' };
-  'lewis6991/gitsigns.nvim';
-  'tpope/vim-surround';
-  'tpope/vim-fugitive';
-  'lukas-reineke/indent-blankline.nvim';
+  { 'windwp/nvim-autopairs', run = simple_setup 'nvim-autopairs' },
+  { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } },
+  'tpope/vim-surround',
+  'tpope/vim-fugitive',
+  'lukas-reineke/indent-blankline.nvim',
 
   -- Treesitter
-  { 'nvim-treesitter/nvim-treesitter', run = function () cmd('TSUpdate') end };
-  'nvim-treesitter/playground';
-  'windwp/nvim-ts-autotag';
+  { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+  'nvim-treesitter/playground',
+  'windwp/nvim-ts-autotag',
 
   -- lsp
-  'neovim/nvim-lspconfig';
-  'onsails/lspkind-nvim';
-  'jose-elias-alvarez/null-ls.nvim';
+  'neovim/nvim-lspconfig',
+  'onsails/lspkind-nvim',
+  'jose-elias-alvarez/null-ls.nvim',
 
   -- completion plugins
-  'hrsh7th/nvim-cmp'; -- completion plugin
-  'hrsh7th/cmp-buffer'; -- buffer completion
-  'hrsh7th/cmp-path'; -- path completion
-  'hrsh7th/cmp-cmdline'; -- cmdline completion
-  'hrsh7th/cmp-nvim-lsp';
-  'saadparwaiz1/cmp_luasnip'; -- snippet completion
+  'hrsh7th/nvim-cmp', -- completion plugin
+  'hrsh7th/cmp-buffer', -- buffer completion
+  'hrsh7th/cmp-path', -- path completion
+  'hrsh7th/cmp-cmdline', -- cmdline completion
+  'hrsh7th/cmp-nvim-lsp',
+  'saadparwaiz1/cmp_luasnip', -- snippet completion
 
   -- snippets
-  'L3MON4D3/LuaSnip'; -- snippet engine
-  'rafamadriz/friendly-snippets'; -- collection of snippets
+  'L3MON4D3/LuaSnip', -- snippet engine
+  'rafamadriz/friendly-snippets', -- collection of snippets
 
-  'nvim-telescope/telescope.nvim';
+  { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' },
 
   -- theme
-  'kyazdani42/nvim-web-devicons';
-  { 'catppuccin/nvim', as = 'catppuccin' };
-  'tjdevries/express_line.nvim';
-  'j-hui/fidget.nvim';
+  'kyazdani42/nvim-web-devicons',
+  { 'catppuccin/nvim', as = 'catppuccin' },
+  'tjdevries/express_line.nvim',
 
-  { 'folke/zen-mode.nvim', run = simple_setup 'zen-mode' };
-  'ThePrimeagen/harpoon';
-  { 'folke/which-key.nvim', run = simple_setup 'which-key' };
-  { 'numToStr/Comment.nvim', run = simple_setup 'Comment' };
+  'j-hui/fidget.nvim',
+  { 'folke/zen-mode.nvim', run = simple_setup 'zen-mode' },
+  'ThePrimeagen/harpoon',
+  { 'folke/which-key.nvim', run = simple_setup 'which-key' },
+  { 'numToStr/Comment.nvim', run = simple_setup 'Comment' },
 }
+
+return require('packer').startup(function(use)
+  for _, package in pairs(packages) do
+    use(package)
+  end
+
+  if Packer_bootstrap then
+    require('packer').sync()
+  end
+end)
