@@ -17,9 +17,6 @@ window.signcolumn = 'yes'
 -- Search ------------------------------
 set.ignorecase = true
 set.smartcase = true
--- Show partial off-screen results in preview window for :substitute
-set.inccommand = 'split'
-
 
 -- Save / Swap / Undo ------------------
 -- Leave buffers open in the background
