@@ -1,5 +1,6 @@
 source $HOME/.aliases
-ftpath+="$(brew --prefix)/share/zsh/site-functions"
+
+fpath+="$(brew --prefix)/share/zsh/site-functions"
 
 #------------------------------------------
 # Activate zsh completions
