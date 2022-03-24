@@ -1,5 +1,3 @@
-source $HOME/.aliases
-
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # PATH

@@ -1,3 +1,4 @@
+source $HOME/.aliases
 ftpath+="$(brew --prefix)/share/zsh/site-functions"
 
 #------------------------------------------
