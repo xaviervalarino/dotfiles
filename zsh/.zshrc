@@ -1,5 +1,7 @@
 source $HOME/.profile
 
+ftpath+="$(brew --prefix)/share/zsh/site-functions"
+
 #------------------------------------------
 # Activate zsh completions
 autoload -Uz compinit
