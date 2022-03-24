@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 # Core
 # `brew leaves --installed-on-request`
@@ -41,9 +41,7 @@ CASKS=(
 )
 
 printf "%s\n" "Installing core packages..."
-brew install ${CORE[@]}
+brew install "${CORE[@]}"
 
 printf "%s\n" "Installing casks..."
-brew install --cask ${CASKS[@]}
-
-
+brew install --cask "${CASKS[@]}"
