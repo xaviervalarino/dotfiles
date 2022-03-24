@@ -19,26 +19,35 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-local on_attach = function(_, bufnr)
-
-  local function buf_nnoremap(lhs, rhs)
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', lhs, rhs, opts)
+local create_keymaps = function(bufnr, lsp_keymaps)
+  local function buf_map(mode, lhs, rhs)
+    local opts = { buffer = bufnr, noremap = true, silent = true, }
+    vim.keymap.set(mode, lhs, rhs, opts)
   end
-  -- mappings
-  -- buf_set_keymap('i', '<C-s>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
 
-  buf_nnoremap('gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
-  -- note: many servers do not implement this method
-  buf_nnoremap('gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
-  buf_nnoremap('K',  '<cmd>lua vim.lsp.buf.hover()<CR>')
-  buf_nnoremap('gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-  buf_nnoremap('<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-  -- buf_nnoremap('<leader>rr', ':LspRestart<CR>')
-  buf_nnoremap('[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>')
-  buf_nnoremap(']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
-  buf_nnoremap('<space>q', '<cmd>lua vim.diagnostic.set_loclist()<CR>')
-  buf_nnoremap('<leader>f', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+  local keymaps = vim.tbl_extend('force', {
+    { 'n', 'gd', vim.lsp.buf.definition },
+    -- note: many servers do not implement this method
+    { 'n', 'gD', vim.lsp.buf.declaration },
+    { 'n', 'K', vim.lsp.buf.hover },
+    { 'n', 'gi',  vim.lsp.buf.implementation },
+    { 'n', '<leader>rn',  vim.lsp.buf.rename },
+    { 'n', '<leader>rr', ':LspRestart<CR>' },
+    { 'n', '[d', vim.diagnostic.goto_prev },
+    { 'n', ']d', vim.diagnostic.goto_next },
+    { 'n', '<space>q', vim.diagnostic.setloclist },
+    { 'n', '<leader>f', vim.lsp.buf.formatting },
+    { 'i', '<C-s>', vim.lsp.buf.signature_help },
+  }, lsp_keymaps or {})
+
+  for _, args in pairs(keymaps) do
+    buf_map(unpack(args))
+  end
+end
+
+local on_attach = function(_, bufnr)
+  -- mappings
+  create_keymaps(bufnr)
 end
 
 local setup_server = function(server, config)
