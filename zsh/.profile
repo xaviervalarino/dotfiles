@@ -19,5 +19,5 @@ PATH="$PATH:$HOME/.local/tools/lua-language-server/bin/macOS"
 # Personal scripts
 PATH="$PATH:$HOME/scripts"
 
-BAT_THEME="zenburn"
 EDITOR=/usr/local/bin/nvim
+export BAT_THEME="catppuccin"
