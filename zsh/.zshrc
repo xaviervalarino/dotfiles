@@ -47,3 +47,6 @@ PROMPT='%(1j.[%j] .)%(?.%F{magenta}.%F{red})${PURE_PROMPT_SYMBOL:-〉}%f'
 # keyboard mappings for command-line editing
 # e.g., <CTRL+P> to go back in history
 bindkey -e
+
+# Make key commands like <CTRL+W> delete just the directory, not the whole line 
+WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
