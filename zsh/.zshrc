@@ -33,7 +33,7 @@ setopt EXTENDED_HISTORY
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
 ## Add arg completion as menu (requires `compinit` to be run)
-zstyle ':completion:*:*:cdr:*:*' menu selection
+zstyle ':completion:*' menu selection
 
 #------------------------------------------
 # Prompt
