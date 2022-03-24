@@ -1,6 +1,8 @@
 source $HOME/.aliases
 
-fpath+="$(brew --prefix)/share/zsh/site-functions"
+if type brew &>/dev/null; then
+  fpath+=$(brew --prefix)/share/zsh/site-functions
+fi
 
 #------------------------------------------
 # Activate zsh completions
