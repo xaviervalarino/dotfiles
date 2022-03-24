@@ -3,7 +3,7 @@ alias ls="ls -Gh"
 alias mkdir="mkdir -p"
 alias pomodoro="utimer -t 25s && say 'beep boop, times up'"
 alias ql="qlmanage -p"
-alias reload="exec zsh"
+alias reload="source ~/.zshrc"
 alias stow="stow --verbose"
 alias vim="nvim"
 
