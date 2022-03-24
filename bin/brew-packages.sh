@@ -14,6 +14,7 @@ CORE=(
   n
   neovim
   pidof
+  pure
   ripgrep
   shellcheck
   stow

@@ -37,7 +37,6 @@ zstyle ':completion:*' menu selection
 
 #------------------------------------------
 # Prompt
-fpath+="$XDG_CONFIG_HOME/zsh/functions/pure"
 autoload -Uz promptinit
 promptinit
 zstyle :prompt:pure:git:branch color cyan
