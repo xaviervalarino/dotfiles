@@ -1,5 +1,3 @@
-source $HOME/.profile
-
 ftpath+="$(brew --prefix)/share/zsh/site-functions"
 
 #------------------------------------------
