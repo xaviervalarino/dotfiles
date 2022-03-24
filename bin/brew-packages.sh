@@ -4,21 +4,28 @@
 # `brew leaves --installed-on-request`
 CORE=(
   bat
+  coreutils
   fd
   fzf
+  gh
   git
   git-delta
+  glow
+  imagemagick
   lua-language-server
   luajit
   m-cli
+  mkcert
   n
   neovim
+  nss
   pidof
+  pstree
   pure
   ripgrep
+  rust
   shellcheck
   stow
-  the_silver_searcher
   tldr
   trash
   tree
