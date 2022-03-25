@@ -14,4 +14,9 @@ export XDG_DATA_HOME=$HOME/.local/share
 
 export EDITOR=/usr/local/bin/nvim
 
-export BAT_THEME="catppuccin"
+
+case $ITERM_PROFILE in
+  'Github light') BAT_THEME=GitHub     ;;
+  *)              BAT_THEME=catppuccin ;;
+esac
+export BAT_THEME
