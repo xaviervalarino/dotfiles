@@ -25,11 +25,6 @@ setopt HIST_IGNORE_DUPS
 setopt EXTENDED_HISTORY   
 
 #------------------------------------------
-# Init command-line fuzzy finder
-## https://github.com/junegunn/fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-#------------------------------------------
 # Remember recent directories with `cdr`
 ## https://jlk.fjfi.cvut.cz/arch/manpages/man/zshcontrib.0#REMEMBERING_RECENT_DIRECTORIES
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
@@ -52,3 +47,8 @@ bindkey -e
 
 # Make key commands like <CTRL+W> delete just the directory, not the whole line 
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+#------------------------------------------
+# Init command-line fuzzy finder
+## https://github.com/junegunn/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
