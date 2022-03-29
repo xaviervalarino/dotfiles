@@ -1,22 +1,9 @@
-local global = vim.g
-local cmd = vim.cmd
-
-local function map(mode, lhs, rhs, opts)
-  -- TODO consider not having silent be the default
-  local options = {
-    noremap = true,
-    silent = true,
-  }
-  if opts then
-    options = vim.tbl_deep_extend('force', options, opts)
-  end
-  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
-end
+local map = require('rc.util').keymap
 
 -- Remap leader
 map('', '<Space>', '<Nop>')
-global.mapleader = ' '
-global.maplocalleader = ' '
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- Make Y yank to the end of the line (behave like other capital letters)
 map('n', 'Y', 'y$')
@@ -42,7 +29,7 @@ map('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 -- Jumplist mutations
 -- TODO: need to look into this one more
 -- map('n', 'k', "v:count > 5 ? 'm\'' .v:count : . 'k'" , {noremap = true, expr = true, silent = true})
-cmd [[
+vim.cmd [[
   nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
   nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 ]]
