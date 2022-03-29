@@ -35,6 +35,7 @@ local packages = {
   'neovim/nvim-lspconfig',
   'onsails/lspkind-nvim',
   'jose-elias-alvarez/null-ls.nvim',
+  'jose-elias-alvarez/nvim-lsp-ts-utils',
 
   -- completion plugins
   'hrsh7th/nvim-cmp', -- completion plugin
