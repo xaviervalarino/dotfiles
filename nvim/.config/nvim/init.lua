@@ -40,6 +40,7 @@ set.completeopt = { 'menu,menuone,noselect' }
 -- Package Config --------------------
 require 'rc.plugins'
 require 'rc.completion'
+require 'rc.snippets'
 require 'rc.colorscheme'
 require 'rc.git-signs'
 require 'rc.indent-blankline'
