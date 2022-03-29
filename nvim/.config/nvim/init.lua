@@ -13,7 +13,6 @@ set.relativenumber = true
 set.number = true
 window.signcolumn = 'yes'
 
-
 -- Search ------------------------------
 set.ignorecase = true
 set.smartcase = true
@@ -24,7 +23,6 @@ set.hidden = true
 -- Turn off swap and turn on undo history
 set.swapfile = false
 set.undofile = true
-
 
 -- Tabs --------------------------------
 set.shiftwidth = 2
@@ -38,7 +36,6 @@ set.splitright = true
 
 -- Completion --------------------------
 set.completeopt = { 'menu,menuone,noselect' }
-
 
 -- Package Config --------------------
 require 'rc.plugins'

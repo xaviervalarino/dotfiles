@@ -1,4 +1,4 @@
-require 'indent_blankline'.setup{
+require('indent_blankline').setup {
   char_hightlight = 'LineNr',
   use_treesitter = true,
   -- show_trailing_blankline_indent = false,
@@ -18,6 +18,6 @@ require 'indent_blankline'.setup{
     '^object',
     '^table',
     'block',
-    'arguments'
-  }
+    'arguments',
+  },
 }

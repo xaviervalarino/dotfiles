@@ -4,10 +4,10 @@ table.insert(runtime_path, 'lua/?/init.lua')
 
 return {
   settings = {
-    Lua ={
+    Lua = {
       runtime = {
         version = 'LuaJIT',
-        path = runtime_path
+        path = runtime_path,
       },
       diagnostics = {
         globals = { 'vim' },
@@ -15,11 +15,11 @@ return {
       workspace = {
         library = {
           vim.api.nvim_get_runtime_file('', true),
-        }
+        },
       },
       telemetry = {
-        enable = false
+        enable = false,
       },
-    }
-  }
+    },
+  },
 }

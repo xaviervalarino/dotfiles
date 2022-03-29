@@ -10,12 +10,13 @@ local formatting = null_ls.builtins.formatting
 local M = {}
 
 function M.setup(opts)
-  null_ls.setup({
+  null_ls.setup {
     debug = true,
     on_attach = opts.on_attach,
     sources = {
       code_actions.xo,
       diagnostics.xo,
+      formatting.stylua,
       formatting.prettier,
       -- null_ls.builtins.diagnostics.eslint_d,
       -- null_ls.builtins.code_actions.eslint_d,
@@ -23,7 +24,7 @@ function M.setup(opts)
       --   extra_args = { '--single-quote', '--jsx-single-quote' }
       -- }
     },
-  })
+  }
 end
 
 return M

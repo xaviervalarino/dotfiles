@@ -1,12 +1,12 @@
-require 'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
   highlight = {
-    enable = true
+    enable = true,
   },
   indent = {
-    enable = true
+    enable = true,
   },
   autotag = {
-    enable = true
+    enable = true,
   },
   ensure_installed = {
     'bash',
@@ -34,5 +34,5 @@ require 'nvim-treesitter.configs'.setup {
       goto_node = '<cr>',
       show_help = '?',
     },
-  }
+  },
 }

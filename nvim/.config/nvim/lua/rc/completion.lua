@@ -1,24 +1,28 @@
 local cmp_ok, cmp = pcall(require, 'cmp')
-if not cmp_ok then return end
+if not cmp_ok then
+  return
+end
 
 local lspkind_ok, lspkind = pcall(require, 'lspkind')
-if not lspkind_ok then return end
+if not lspkind_ok then
+  return
+end
 
-cmp.setup{
+cmp.setup {
   snippet = {
     expand = function(args)
       require('luasnip').lsp_expand(args.body)
     end,
   },
-  sources = cmp.config.sources({
+  sources = cmp.config.sources {
     { name = 'nvim_lsp' },
     { name = 'npm' },
     { name = 'path' },
     { name = 'luasnip' },
     { name = 'buffer', keyword_length = 4 },
-  }),
+  },
   formatting = {
-    format = lspkind.cmp_format({
+    format = lspkind.cmp_format {
       mode = 'symbol_text',
       menu = {
         nvim_lsp = '[LSP]',
@@ -27,8 +31,8 @@ cmp.setup{
         npm = '[npm]',
         luasnip = '[snip]',
         path = '[path]',
-      }
-    })
+      },
+    },
   },
   mapping = {
     ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
@@ -38,16 +42,16 @@ cmp.setup{
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    ['<C-e>'] = cmp.mapping({
+    ['<C-e>'] = cmp.mapping {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
-    }),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    },
+    ['<CR>'] = cmp.mapping.confirm { select = true },
   },
   experimental = {
-    ghost_text = true
+    ghost_text = true,
   },
 }
 
-local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' }}))
+local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = '' } })
