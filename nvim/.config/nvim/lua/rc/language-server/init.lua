@@ -3,18 +3,23 @@ if not nvim_lsp_ok then
   return
 end
 
-local config = { default = require 'rc.language-server.default' }
 local null_ls = require 'rc.language-server.null-ls'
 
-local servers = {
-  bashls = config.default,
-  cssls = config.default,
-  eslint = {
+local config = {
+  default = require 'rc.language-server.default',
+  disable_formatting = {
     on_attach = function(client)
       client.resolved_capabilities.document_formatting = false
     end,
   },
-  html = config.default,
+}
+
+local servers = {
+  bashls = config.default,
+  cssls = config.default,
+  -- disable formatting since null_ls --> Prettier is being used
+  eslint = config.disable_formatting,
+  html = config.disable_formatting,
   jsonls = require 'rc.language-server.jsonls',
   sumneko_lua = require('lua-dev').setup(),
   tsserver = require 'rc.language-server.tsserver',
