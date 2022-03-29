@@ -5,7 +5,7 @@ require 'indent_blankline'.setup{
   -- show_end_of_line = true,
   buftype_exclude = { 'terminal', 'help', 'nofile' },
   show_current_context = true,
-  show_current_context_start = true,
+  -- show_current_context_start = true,
   show_first_indent_level = false,
   context_patterns = {
     'class',
