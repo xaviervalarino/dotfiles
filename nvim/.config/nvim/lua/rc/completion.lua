@@ -46,7 +46,7 @@ cmp.setup {
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     },
-    -- ['<CR>'] = cmp.mapping.confirm { select = true },
+    ['<CR>'] = cmp.mapping.confirm { select = true },
     ['<Tab>'] = cmp.mapping.confirm { select = true },
     ['<S-Tab>'] = cmp.mapping.confirm { select = true },
     cmp.setup.cmdline('/', { sources = { name = 'buffer' } }),
