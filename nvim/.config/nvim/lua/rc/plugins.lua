@@ -23,6 +23,7 @@ local packages = {
   { 'windwp/nvim-autopairs', run = simple_setup 'nvim-autopairs' },
   { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } },
   'tpope/vim-surround',
+  'tpope/vim-repeat',
   'tpope/vim-fugitive',
   'lukas-reineke/indent-blankline.nvim',
 
@@ -36,6 +37,7 @@ local packages = {
   'onsails/lspkind-nvim',
   'jose-elias-alvarez/null-ls.nvim',
   'jose-elias-alvarez/nvim-lsp-ts-utils',
+  'folke/lua-dev.nvim',
 
   -- completion plugins
   'hrsh7th/nvim-cmp', -- completion plugin
