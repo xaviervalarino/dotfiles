@@ -51,10 +51,22 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping.confirm { select = true },
     cmp.setup.cmdline('/', { sources = { name = 'buffer' } }),
   },
+  -- documentation = {
+  --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  -- },
   experimental = {
     ghost_text = true,
   },
 }
+
+-- TODO
+-- cmp.setup.cmdline('/', { sources = { name = 'buffer' } })
+-- cmp.setup.cmdline(':', {
+--   sources = cmp.config.sources {
+--     { name = 'path' },
+--     { name = 'cmdline' },
+--   },
+-- })
 
 local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
 cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = '' } })
