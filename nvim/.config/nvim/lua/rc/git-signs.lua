@@ -1,14 +1,11 @@
+local create_buf_keymap = require('rc.util').create_buf_keymap
+
 require('gitsigns').setup {
   signs = {},
   numhl = true,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
-
-    local function map(mode, l, r, opts)
-      opts = opts or {}
-      opts.buffer = bufnr
-      vim.keymap.set(mode, l, r, opts)
-    end
+    local map = create_buf_keymap(bufnr)
 
     -- Navigation
     map('n', ']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
