@@ -69,7 +69,9 @@ local packages = {
   'j-hui/fidget.nvim',
   { 'folke/zen-mode.nvim', run = simple_setup 'zen-mode' },
   'ThePrimeagen/harpoon',
-  { 'folke/which-key.nvim', run = simple_setup 'which-key' },
+  -- { 'folke/which-key.nvim', run = simple_setup 'which-key' },
+  -- tracking PR https://github.com/folke/which-key.nvim/pull/253
+  { 'xiyaowong/which-key.nvim', run = simple_setup 'which-key' },
   { 'numToStr/Comment.nvim', run = simple_setup 'Comment' },
 }
 
