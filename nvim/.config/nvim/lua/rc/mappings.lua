@@ -48,3 +48,8 @@ map('n', '*', '*N')
 -- Change word then replace other occurences with `.` (by using cgn)
 map('n', 'cn', '*``cgn')
 map('n', 'cN', '*``cgN')
+
+-- Convenience for find/replace inside a visual area
+-- prepopulates cmd mode with wrapping `\%V` guards
+-- use <C-e> to move to replacement pattern
+map('v', ':s', ':s/\\%V\\%V/<Left><Left><Left><Left>')
