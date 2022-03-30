@@ -75,12 +75,21 @@ local packages = {
   { 'numToStr/Comment.nvim', run = simple_setup 'Comment' },
 }
 
-return require('packer').startup(function(use)
-  for _, package in pairs(packages) do
-    use(package)
-  end
+return require('packer').startup {
+  function(use)
+    for _, package in pairs(packages) do
+      use(package)
+    end
 
-  if Packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+    if Packer_bootstrap then
+      require('packer').sync()
+    end
+  end,
+  config = {
+    display = {
+      open_fn = function()
+        return require('packer.util').float { border = 'single' }
+      end,
+    },
+  },
+}
