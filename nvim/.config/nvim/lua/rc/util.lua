@@ -1,4 +1,4 @@
-local M, mt = {}, {}
+local M, keymap, mt = {}, {}, {}
 
 local function split(str)
   if #str > 0 then
@@ -6,27 +6,30 @@ local function split(str)
   end
 end
 
-local function keymap(mode, lhs, rhs, opts)
-  local options = vim.tbl_extend('keep', opts or {}, { silent = true })
-  vim.keymap.set(mode, lhs, rhs, options)
+-- metatable is used to create and initialize mode-specific keymaps
+function mt:__call(mode, lhs, rhs, opts)
+  opts = opts or {}
+  opts.silent = true
+  vim.keymap.set(mode, lhs, rhs, opts)
 end
 
--- add metatable function for creating mode specific keymaps
+-- returns mode-specific keymap, eg. nmap, vmap, inmap
+-- see :h map-mode
 function mt:__index(key)
-  if key:find 'map$' then
-    local mode = { split(key:gsub('map', '')) }
+  if key:find '[n|v|s|x|o|m|i|l|c|t]' or key == '' then
+    local mode = { split(key) }
     return function(lhs, rhs, opts)
       keymap(mode, lhs, rhs, opts)
     end
   end
 end
 
-setmetatable(M, mt)
+setmetatable(keymap, mt)
 
 function M.create_keymaps(...)
   local keymaps = {}
   for _, mode in ipairs { ... } do
-    table.insert(keymaps, M[mode .. 'map'])
+    table.insert(keymaps, keymap[mode])
   end
   return unpack(keymaps)
 end
