@@ -3,14 +3,7 @@ if not status_ok then
   return
 end
 
-local create_buf_keymap = require('rc.util').create_buf_keymap
-
-local keymaps = {
-  { 'n', 'gs', ':TSLspOrganize<CR>' },
-  { 'n', 'gr', ':TSLspRenameFile<CR>' },
-  { 'n', 'gI', ':TSLspImportAll<CR>' },
-  { 'n', 'gi', ':TSLspImportCurrent<CR>' },
-}
+local buf_keymaps = require('rc.util').buf_create_keymaps 'n'
 
 return {
   init_options = require('nvim-lsp-ts-utils').init_options,
@@ -18,10 +11,12 @@ return {
     client.resolved_capabilities.document_formatting = false
   end,
   on_attach = function(client, bufnr)
-    local buf_map = create_buf_keymap(bufnr)
+    local nmap = buf_keymaps(bufnr)
     ts_utils.setup(client)
-    for _, keymap in ipairs(keymaps) do
-      buf_map(unpack(keymap))
-    end
+
+    nmap('gs', ':TSLspOrganize<CR>')
+    nmap('gr', ':TSLspRenameFile<CR>')
+    nmap('gI', ':TSLspImportAll<CR>')
+    nmap('gi', ':TSLspImportCurrent<CR>')
   end,
 }

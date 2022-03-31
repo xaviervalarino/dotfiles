@@ -8,7 +8,7 @@ if not cmp_ok then
   return
 end
 
-local map = require('rc.util').keymap
+local ismap = require('rc.util').create_keymaps 'is'
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
@@ -48,9 +48,6 @@ _G.s_tab_complete = function()
   return ''
 end
 
-map('i', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-map('s', '<Tab>', 'v:lua.tab_complete()', { expr = true })
-map('i', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
-map('s', '<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
-map('i', '<C-E>', '<Plug>luasnip-next-choice')
-map('s', '<C-E>', '<Plug>luasnip-next-choice')
+ismap('<Tab>', 'v:lua.tab_complete()', { expr = true })
+ismap('<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
+ismap('<C-E>', '<Plug>luasnip-next-choice')

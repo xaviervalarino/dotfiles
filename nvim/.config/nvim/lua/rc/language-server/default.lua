@@ -1,7 +1,5 @@
-local create_buf_map = require('rc.util').create_buf_keymap
 local M = {}
-
-local count = 1
+local buf_keymaps = require('rc.util').buf_create_keymaps 'n'
 
 require 'rc.language-server.style'
 
@@ -24,34 +22,29 @@ local function lsp_format_document()
   ]]
 end
 
-local keymaps = {
-  { 'n', 'gd', vim.lsp.buf.definition, { desc = 'Go to definition' } },
-  -- note: many servers do not implement this method
-  -- { 'n', 'gD', function () return print(vim.inspect(vim.lsp.buf.declaration)) end },
-  { 'n', 'K', vim.lsp.buf.hover },
-  { 'n', 'gi', vim.lsp.buf.implementation, { desc = 'Implementation' } },
-  { 'n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename reference' } },
-  { 'n', '<leader>rr', ':LspRestart<CR>' },
-  { 'n', '<leader>d', vim.diagnostic.open_float, { desc = 'Current diagnostic' } },
-  { 'n', '[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' } },
-  { 'n', ']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' } },
-  { 'n', '<leader>q', vim.diagnostic.setloclist },
-  { 'n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' } },
-  { 'n', 'gr', vim.lsp.buf.references, { desc = 'List references' } },
-  { 'n', '<leader>f', vim.lsp.buf.formatting },
-  { 'n', '<C-s>', vim.lsp.buf.signature_help },
-}
-
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
 
 function M.on_attach(client, bufnr)
-  -- mappings
-  local buf_map = create_buf_map(bufnr)
-  for _, args in pairs(keymaps) do
-    buf_map(unpack(args))
-  end
+  local nmap = buf_keymaps(bufnr)
+
+  nmap('<leader>ca', 'vim.lsp.buf.code_action', { desc = 'Code action' })
+  nmap('gd', vim.lsp.buf.definition, { desc = 'Go to definition' })
+  -- note: many servers do not implement this method
+  nmap('gD', vim.lsp.buf.declaration)
+  nmap('K', vim.lsp.buf.hover)
+  nmap('gi', vim.lsp.buf.implementation, { desc = 'Implementation' })
+  nmap('<leader>rn', vim.lsp.buf.rename, { desc = 'Rename reference' })
+  nmap('<leader>rr', ':LspRestart<CR>')
+  nmap('<leader>d', vim.diagnostic.open_float, { desc = 'Current diagnostic' })
+  nmap('[d', vim.diagnostic.goto_prev, { desc = 'Previous diagnostic' })
+  nmap(']d', vim.diagnostic.goto_next, { desc = 'Next diagnostic' })
+  nmap('<leader>q', vim.diagnostic.setloclist)
+  nmap('<leader>ca', vim.lsp.buf.code_action, { desc = 'Code action' })
+  nmap('gr', vim.lsp.buf.references, { desc = 'List references' })
+  nmap('<leader>f', vim.lsp.buf.formatting)
+  nmap('<C-s>', vim.lsp.buf.signature_help)
 
   if client.resolved_capabilities.document_highlight then
     lsp_highlight_document()
