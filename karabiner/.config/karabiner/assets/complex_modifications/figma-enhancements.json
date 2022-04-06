@@ -8,7 +8,7 @@
           "conditions": [
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": ["^com\\.figma\\.Desktop$"]
+              "bundle_identifiers": ["com.figma.Desktop"]
             }
           ],
           "from": {
