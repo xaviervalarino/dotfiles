@@ -8,17 +8,13 @@
           "conditions": [
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": [
-                "^com\\.figma\\.Desktop$"
-              ]
+              "bundle_identifiers": ["^com\\.figma\\.Desktop$"]
             }
           ],
           "from": {
             "key_code": "d",
             "modifiers": {
-              "mandatory": [
-                "left_control"
-              ]
+              "mandatory": ["left_control"]
             }
           },
           "to": [

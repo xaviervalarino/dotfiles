@@ -1,4 +1,3 @@
-
 {
   "title": "Mouse button forward + back",
   "rules": [
@@ -9,17 +8,13 @@
           "from": {
             "pointing_button": "button4",
             "modifiers": {
-              "optional": [
-                "any"
-              ]
+              "optional": ["any"]
             }
           },
           "to": [
             {
               "key_code": "open_bracket",
-              "modifiers": [
-                "command"
-              ]
+              "modifiers": ["command"]
             }
           ],
           "type": "basic"
@@ -33,17 +28,13 @@
           "from": {
             "pointing_button": "button5",
             "modifiers": {
-              "optional": [
-                "any"
-              ]
+              "optional": ["any"]
             }
           },
           "to": [
             {
               "key_code": "close_bracket",
-              "modifiers": [
-                "command"
-              ]
+              "modifiers": ["command"]
             }
           ],
           "type": "basic"
