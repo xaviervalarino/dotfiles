@@ -1,5 +1,5 @@
 -- Mode mapping are created through a metatable
-local map, imap, nmap, vmap = require('rc.util').create_keymaps('', 'i', 'n', 'v')
+local map, imap, nmap, vmap, nvmap = require('rc.util').create_keymaps('', 'i', 'n', 'v', 'nv')
 
 -- Remap leader
 map('<Space>', '<Nop>')
@@ -54,6 +54,11 @@ nmap('cN', '*``cgN')
 -- prepopulates cmd mode with wrapping `\%V` guards
 -- use <C-e> to move to replacement pattern
 vmap(':s', ':s/\\%V\\%V/<Left><Left><Left><Left>')
+
+-- Tabularize on markers : = ,
+nvmap('<leader>a:', ':Tab /:\zs<CR>')
+nvmap('<leader>a=', ':Tab /=\zs<CR>')
+nvmap('<leader>a,', ':Tab /,\zs<CR>')
 
 -- Fugitive mappings
 nmap('<leader>gs', ':G<CR>', { desc = 'Open Git status' })

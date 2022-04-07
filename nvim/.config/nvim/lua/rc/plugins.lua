@@ -32,6 +32,7 @@ local packages = {
   'tpope/vim-surround',
   'tpope/vim-repeat',
   'tpope/vim-fugitive',
+  'godlygeek/tabular',
   'lukas-reineke/indent-blankline.nvim',
 
   -- Treesitter
