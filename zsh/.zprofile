@@ -6,7 +6,7 @@ path+=$HOME/.cargo/bin
 
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-path+=$PATH:/usr/local/sbin
+path+=/usr/local/sbin
 
 # Personal scripts
 path+=$HOME/scripts
