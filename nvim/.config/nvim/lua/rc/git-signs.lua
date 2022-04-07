@@ -10,8 +10,17 @@ require('gitsigns').setup {
     -- stylua: ignore start
 
     -- Navigation
-    nmap(']c', "&diff ? ']c' : '<cmd>Gitsigns next_hunk<CR>'", { expr = true })
-    nmap('[c', "&diff ? '[c' : '<cmd>Gitsigns prev_hunk<CR>'", { expr = true })
+    nmap(']c', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, { expr = true }, { desc = 'Go to next hunk'})
+
+    nmap('[c', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true, desc = 'Go to previous hunk'})
 
     -- Actions
     nvmap('<leader>hs', ':Gitsigns stage_hunk<CR>')
