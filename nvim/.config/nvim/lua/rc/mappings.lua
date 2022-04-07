@@ -64,3 +64,6 @@ nvmap('<leader>a,', ':Tab /,\zs<CR>')
 nmap('<leader>gs', ':G<CR>', { desc = 'Open Git status' })
 nmap('<leader>gh', ':diffget //3<CR>', { desc = 'Select left diff' })
 nmap('<leader>gj', ':diffget //2<CR>', { desc = 'Select right diff' })
+
+-- Set CWD to buffer (manual :set autochdir)
+nmap('<leader>cd', ':cd %:h<CR>', { desc = 'Set working directory to buffer' })
