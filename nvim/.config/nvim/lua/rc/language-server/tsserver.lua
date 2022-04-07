@@ -14,9 +14,12 @@ return {
     local nmap = buf_keymaps(bufnr)
     ts_utils.setup(client)
 
-    nmap('gs', ':TSLspOrganize<CR>')
-    nmap('gr', ':TSLspRenameFile<CR>')
-    nmap('gI', ':TSLspImportAll<CR>')
-    nmap('gi', ':TSLspImportCurrent<CR>')
+    -- stylua: ignore start
+    nmap('<leader>o',   ':TSLspOrganize<CR>',          { desc = 'Organize imports' })
+    nmap('<leader>rf',  ':TSLspRenameFile<CR>',        { desc = 'Rename file' })
+    nmap('<leader>I',   ':TSLspImportAll<CR>',         { desc = 'Import all packages' })
+    nmap('<leader>ic',  ':TSLspImportCurrent<CR>',     { desc = 'Import current package' })
+    nmap('<leader>th',  ':TSLspToggleInlayHints<CR>',  { desc = 'Toggle inlayed hints (Typescript)' })
+    -- stylua: ignore end
   end,
 }
