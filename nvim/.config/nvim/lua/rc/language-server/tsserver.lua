@@ -10,9 +10,11 @@ return {
   on_init = function(client)
     client.resolved_capabilities.document_formatting = false
   end,
-  on_attach = function(client, bufnr)
+  on_attach = function(_, bufnr)
     local nmap = buf_keymaps(bufnr)
-    ts_utils.setup(client)
+    ts_utils.setup {
+      auto_inlay_hints = false,
+    }
 
     -- stylua: ignore start
     nmap('<leader>o',   ':TSLspOrganize<CR>',          { desc = 'Organize imports' })
