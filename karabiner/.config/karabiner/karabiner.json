@@ -16,33 +16,7 @@
                 },
                 "rules": [
                     {
-                        "description": "caps_lock + any => right_control",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_control"
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "escape"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Caps + Shift + HJKL → Home / PgDn / PgUp / End",
+                        "description": "⇪ + ⇧ + HJKL → Home / PgDn / PgUp / End",
                         "manipulators": [
                             {
                                 "from": {
@@ -127,7 +101,7 @@
                         ]
                     },
                     {
-                        "description": "Caps + HJKL → Vim arrow keys",
+                        "description": "⇪ + HJKL → Vim arrow keys",
                         "manipulators": [
                             {
                                 "from": {
@@ -208,13 +182,56 @@
                         ]
                     },
                     {
-                        "description": "Figma: CTRL + D → delete_forward",
+                        "description": "Figma: Mouse button4 → Go up one layer (⇧ + ⏎)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift"
+                                        ]
+                                    },
+                                    "pointing_button": "button4"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "return_or_enter",
+                                        "modifiers": "shift"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Figma: Mouse button5 → Go down one layer [⏎]",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "left_shift"
+                                        ]
+                                    },
+                                    "pointing_button": "button5"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "return_or_enter"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Figma: ⌃ + D → delete_forward",
                         "manipulators": [
                             {
                                 "conditions": [
                                     {
                                         "bundle_identifiers": [
-                                            "^com\\.figma\\.Desktop$"
+                                            "com.figma.Desktop"
                                         ],
                                         "type": "frontmost_application_if"
                                     }
@@ -237,7 +254,7 @@
                         ]
                     },
                     {
-                        "description": "Fn Row: caps_lock + Num Row => F1...F12",
+                        "description": "Fn Row: ⇪ + Num Row => F1...F12",
                         "manipulators": [
                             {
                                 "from": {
@@ -470,18 +487,13 @@
                         ]
                     },
                     {
-                        "description": "Mouse button4 → command + [",
+                        "description": "Mouse button4 → ⌘ + [",
                         "manipulators": [
                             {
                                 "from": {
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    },
                                     "pointing_button": "button4"
                                 },
-                                "to": [
+                                "to_if_alone": [
                                     {
                                         "key_code": "open_bracket",
                                         "modifiers": [
@@ -494,49 +506,18 @@
                         ]
                     },
                     {
-                        "description": "Mouse button5 → command + ]",
+                        "description": "Mouse button5 → ⌘ + ]",
                         "manipulators": [
                             {
                                 "from": {
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    },
                                     "pointing_button": "button5"
                                 },
-                                "to": [
+                                "to_if_alone": [
                                     {
                                         "key_code": "close_bracket",
                                         "modifiers": [
                                             "command"
                                         ]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "caps_lock + any => right_control",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_control"
-                                    }
-                                ],
-                                "to_if_alone": [
-                                    {
-                                        "key_code": "escape"
                                     }
                                 ],
                                 "type": "basic"
@@ -552,7 +533,6 @@
                                         "bundle_identifiers": [
                                             "com.tinyspeck.slackmacgap"
                                         ],
-                                        "description": "Only for Slack",
                                         "type": "frontmost_application_if"
                                     }
                                 ],
@@ -571,6 +551,32 @@
                                             "command",
                                             "shift"
                                         ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "⇪ + any → right_control",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_control"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "escape"
                                     }
                                 ],
                                 "type": "basic"
