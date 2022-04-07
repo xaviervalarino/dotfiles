@@ -17,6 +17,44 @@ require('nvim-treesitter.configs').setup {
     'lua',
     'yaml',
   },
+  keymaps = {
+    ['af'] = '@function.outer',
+    ['if'] = '@function.inner',
+  },
+  textobjects = {
+    lsp_interop = {
+      enable = true,
+      border = 'single',
+      peek_definition_code = {
+        ['<leader>df'] = '@function.outer',
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        [']m'] = '@function.outer',
+      },
+      goto_next_end = {
+        [']M'] = '@function.outer',
+      },
+      goto_previous_start = {
+        ['[m'] = '@function.outer',
+      },
+      goto_previous_end = {
+        ['[M'] = '@function.outer',
+      },
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ['<leader>a'] = '@parameter.inner',
+      },
+      swap_previous = {
+        ['<leader>A'] = '@parameter.inner',
+      },
+    },
+  },
   playground = {
     enable = true,
     disable = {},

@@ -37,6 +37,7 @@ local packages = {
 
   -- Treesitter
   { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' },
+  'nvim-treesitter/nvim-treesitter-textobjects',
   'nvim-treesitter/playground',
   'windwp/nvim-ts-autotag',
 
