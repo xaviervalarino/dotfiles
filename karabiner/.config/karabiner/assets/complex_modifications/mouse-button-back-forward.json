@@ -6,12 +6,9 @@
       "manipulators": [
         {
           "from": {
-            "pointing_button": "button4",
-            "modifiers": {
-              "optional": ["any"]
-            }
+            "pointing_button": "button4"
           },
-          "to": [
+          "to_if_alone": [
             {
               "key_code": "open_bracket",
               "modifiers": ["command"]
@@ -26,12 +23,9 @@
       "manipulators": [
         {
           "from": {
-            "pointing_button": "button5",
-            "modifiers": {
-              "optional": ["any"]
-            }
+            "pointing_button": "button5"
           },
-          "to": [
+          "to_if_alone": [
             {
               "key_code": "close_bracket",
               "modifiers": ["command"]
