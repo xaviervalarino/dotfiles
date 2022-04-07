@@ -17,8 +17,6 @@ local config = {
 local servers = {
   bashls = config.default,
   cssls = config.default,
-  -- disable formatting since null_ls --> Prettier is being used
-  eslint = config.disable_formatting,
   html = config.disable_formatting,
   jsonls = require 'rc.language-server.jsonls',
   sumneko_lua = require('lua-dev').setup(),

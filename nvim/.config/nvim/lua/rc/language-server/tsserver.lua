@@ -6,6 +6,7 @@ end
 local buf_keymaps = require('rc.util').buf_create_keymaps 'n'
 
 return {
+  single_file_support = true,
   init_options = require('nvim-lsp-ts-utils').init_options,
   on_init = function(client)
     client.resolved_capabilities.document_formatting = false
