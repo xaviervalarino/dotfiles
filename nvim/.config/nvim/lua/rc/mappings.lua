@@ -54,3 +54,8 @@ nmap('cN', '*``cgN')
 -- prepopulates cmd mode with wrapping `\%V` guards
 -- use <C-e> to move to replacement pattern
 vmap(':s', ':s/\\%V\\%V/<Left><Left><Left><Left>')
+
+-- Fugitive mappings
+nmap('<leader>gs', ':G<CR>', { desc = 'Open Git status' })
+nmap('<leader>gh', ':diffget //3<CR>', { desc = 'Select left diff' })
+nmap('<leader>gj', ':diffget //2<CR>', { desc = 'Select right diff' })
