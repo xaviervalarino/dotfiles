@@ -2,7 +2,7 @@
   "title": "Figma Enhancements",
   "rules": [
     {
-      "description": "Figma: CTRL + D → delete_forward",
+      "description": "Figma: ⌃ + D → delete_forward",
       "manipulators": [
         {
           "conditions": [

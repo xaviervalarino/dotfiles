@@ -2,7 +2,7 @@
   "title": "Function Keys: F1...F12",
   "rules": [
     {
-      "description": "Fn Row: caps_lock + Num Row => F1...F12",
+      "description": "Fn Row: ⇪ + Num Row => F1...F12",
       "manipulators": [
         {
           "from": {

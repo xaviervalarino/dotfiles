@@ -1,8 +1,8 @@
 {
-  "title": "caps_lock + any => right_control",
+  "title": "⇪ + any → right_control, ESC if alone",
   "rules": [
     {
-      "description": "caps_lock + any => right_control",
+      "description": "⇪ + any → right_control",
       "manipulators": [
         {
           "from": {

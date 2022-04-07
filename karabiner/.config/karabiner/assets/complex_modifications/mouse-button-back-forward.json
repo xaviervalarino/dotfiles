@@ -1,8 +1,8 @@
 {
-  "title": "Mouse button forward + back",
+  "title": "Mouse forward + back buttons",
   "rules": [
     {
-      "description": "Mouse button4 → command + [",
+      "description": "Mouse button4 → ⌘ + [",
       "manipulators": [
         {
           "from": {
@@ -22,7 +22,7 @@
       ]
     },
     {
-      "description": "Mouse button5 → command + ]",
+      "description": "Mouse button5 → ⌘ + ]",
       "manipulators": [
         {
           "from": {

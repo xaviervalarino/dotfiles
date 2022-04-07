@@ -2,7 +2,7 @@
   "title": "Caps Navigational Keys",
   "rules": [
     {
-      "description": "Caps + Shift + HJKL → Home / PgDn / PgUp / End",
+      "description": "⇪ + ⇧ + HJKL → Home / PgDn / PgUp / End",
       "manipulators": [
         {
           "from": {
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "description": "Caps + HJKL → Vim arrow keys",
+      "description": "⇪ + HJKL → Vim arrow keys",
       "manipulators": [
         {
           "from": {
