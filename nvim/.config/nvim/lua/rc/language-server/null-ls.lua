@@ -16,6 +16,7 @@ function M.setup(opts)
     sources = {
       code_actions.xo,
       diagnostics.xo,
+      diagnostics.shellcheck,
       formatting.stylua,
       formatting.prettier,
     },
