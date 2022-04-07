@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+usage(){
+cat << EOM
+Convert all pages of a PDF to SVGs using \`pdf2svg\`
+
+USAGE:
+pdf2svgs pdf_file [output_directory]
+EOM
+}
+
+if [[ -z $* || $* == '-h' || $* == '--help' ]]; then
+  usage >&2
+  exit 1
+fi
+
+if [[ -z $1 ]]; then
+  echo 'Error: no PDF specified' >&2
+  exit 1
+else 
+  pdffile=$1
+fi
+
+if [[ -d $2 ]]; then
+  outdir="$2";
+else 
+  outdir="./"
+fi
+
+declare -i pages
+pages=$(pdfinfo "$pdffile" | grep Pages | sed  's/Pages: *//g')
+
+for ((page=1 ; page <=pages ; ++page )); do
+  # Make the number the same length as the last page
+  number=$(printf "%0${#pages}d\n" "$page")
+  name=$(basename "$pdffile" .pdf)
+  output=$(realpath --relative-to="$PWD" "$outdir/$number-$name.svg")
+
+  echo Creating "$output"
+  pdf2svg "$pdffile" "$output" "$page"
+done

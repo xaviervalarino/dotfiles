@@ -8,6 +8,9 @@ path+=$HOME/.cargo/bin
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 path+=$PATH:/usr/local/sbin
 
+# Personal scripts
+path+=$HOME/scripts
+
 # Exports
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
