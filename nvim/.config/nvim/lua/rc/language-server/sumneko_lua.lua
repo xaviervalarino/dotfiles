@@ -13,7 +13,7 @@ local project_config = {
     settings = {
       Lua = {
         runtime = {
-          version = 'Lua 5.4',
+          version = vim.fn.system('hs -c _VERSION'):gsub('[\n\r]', ''),
           path = vim.fn.system 'hs -c package.path',
         },
         diagnostics = { globals = { 'hs' } },
