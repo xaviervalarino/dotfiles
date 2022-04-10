@@ -7,6 +7,7 @@ local buffer_path = vim.fn.expand '%:p'
 -- eg: if hs -c => 'can't access Hammerspoon message port Hammerspoon; is it running with the ipc module loaded?'
 -- print(vim.fn.system 'hs -c package.path')
 
+local hs_version = vim.fn.system('hs -c _VERSION'):gsub('[\n\r]', '')
 local hs_path = vim.split(vim.fn.system('hs -c package.path'):gsub('[\n\r]', ''), ';')
 table.insert(hs_path, 'lua/?.lua')
 table.insert(hs_path, 'lua/?/init.lua')
@@ -17,7 +18,7 @@ local project_config = {
     settings = {
       Lua = {
         runtime = {
-          version = vim.fn.system('hs -c _VERSION'):gsub('[\n\r]', ''),
+          version = hs_version,
           path = hs_path,
         },
         diagnostics = { globals = { 'hs' } },
