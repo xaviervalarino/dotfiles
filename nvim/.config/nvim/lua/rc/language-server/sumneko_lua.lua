@@ -9,8 +9,6 @@ local buffer_path = vim.fn.expand '%:p'
 
 local hs_version = vim.fn.system('hs -c _VERSION'):gsub('[\n\r]', '')
 local hs_path = vim.split(vim.fn.system('hs -c package.path'):gsub('[\n\r]', ''), ';')
-table.insert(hs_path, 'lua/?.lua')
-table.insert(hs_path, 'lua/?/init.lua')
 
 local project_config = {
   ['.config/nvim'] = require('lua-dev').setup(),
