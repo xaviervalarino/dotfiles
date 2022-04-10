@@ -1,23 +1,20 @@
 local M = {}
 local buffer_path = vim.fn.expand '%:p'
 
--- TODO: add a check if:
--- * Hammerspoon is installed?
--- * Hammerspoon IPC is active?
--- eg: if hs -c => 'can't access Hammerspoon message port Hammerspoon; is it running with the ipc module loaded?'
--- print(vim.fn.system 'hs -c package.path')
+-- Neovim config files
+if buffer_path:match '.config/nvim' then
+  M = require('lua-dev').setup()
+end
 
-local hs_version = vim.fn.system('hs -c _VERSION'):gsub('[\n\r]', '')
-local hs_path = vim.split(vim.fn.system('hs -c package.path'):gsub('[\n\r]', ''), ';')
-
-local project_config = {
-  ['.config/nvim'] = require('lua-dev').setup(),
-  ['.hammerspoon'] = {
+-- Hammerspoon config files
+-- make sure HS is running and IPC command is available
+if buffer_path:match '.hammerspoon' and os.execute 'pgrep Hammerspoon && hs' == 0 then
+  M = {
     settings = {
       Lua = {
         runtime = {
-          version = hs_version,
-          path = hs_path,
+          version = vim.fn.system('hs -c _VERSION'):gsub('[\n\r]', ''),
+          path = vim.split(vim.fn.system('hs -c package.path'):gsub('[\n\r]', ''), ';'),
         },
         diagnostics = { globals = { 'hs' } },
         workspace = {
@@ -27,13 +24,7 @@ local project_config = {
         },
       },
     },
-  },
-}
-
-for dir, config in pairs(project_config) do
-  if buffer_path:match(dir) then
-    M = config
-  end
+  }
 end
 
 return M
