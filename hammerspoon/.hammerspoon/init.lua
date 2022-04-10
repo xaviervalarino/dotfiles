@@ -10,3 +10,5 @@ hs.ipc.cliInstall()
 hs.hotkey.bind({ 'ctrl', 'shift' }, 'r', function()
   hs.reload()
 end)
+
+hs.alert 'Hammerspoon loaded'
