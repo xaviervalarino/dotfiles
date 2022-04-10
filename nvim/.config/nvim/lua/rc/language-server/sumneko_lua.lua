@@ -1,25 +1,36 @@
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, 'lua/?.lua')
-table.insert(runtime_path, 'lua/?/init.lua')
+local M = {}
+local buffer_path = vim.fn.expand '%:p'
 
-return {
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-        path = runtime_path,
-      },
-      diagnostics = {
-        globals = { 'vim' },
-      },
-      workspace = {
-        library = {
-          vim.api.nvim_get_runtime_file('', true),
+-- TODO: add a check if:
+-- * Hammerspoon is installed?
+-- * Hammerspoon IPC is active?
+-- eg: if hs -c => 'can't access Hammerspoon message port Hammerspoon; is it running with the ipc module loaded?'
+-- print(vim.fn.system 'hs -c package.path')
+
+local project_config = {
+  ['.config/nvim'] = require('lua-dev').setup(),
+  ['.hammerspoon'] = {
+    settings = {
+      Lua = {
+        runtime = {
+          version = 'Lua 5.4',
+          path = vim.fn.system 'hs -c package.path',
         },
-      },
-      telemetry = {
-        enable = false,
+        diagnostics = { globals = { 'hs' } },
+        workspace = {
+          library = {
+            string.format('%s/.hammerspoon/Spoons/EmmyLua.spoon/annotations', os.getenv 'HOME'),
+          },
+        },
       },
     },
   },
 }
+
+for dir, config in pairs(project_config) do
+  if buffer_path:match(dir) then
+    M = config
+  end
+end
+
+return M

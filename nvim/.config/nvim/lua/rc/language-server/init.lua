@@ -19,7 +19,7 @@ local servers = {
   cssls = config.default,
   html = config.disable_formatting,
   jsonls = require 'rc.language-server.jsonls',
-  sumneko_lua = require('lua-dev').setup(),
+  sumneko_lua = require 'rc.language-server.sumneko_lua',
   tsserver = require 'rc.language-server.tsserver',
 }
 
