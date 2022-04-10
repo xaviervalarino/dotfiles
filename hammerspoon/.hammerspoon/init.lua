@@ -6,3 +6,7 @@
 -- `hs` to start REPL
 -- `hs -c "{lua cmd}"` to run commands
 hs.ipc.cliInstall()
+
+hs.hotkey.bind({ 'ctrl', 'shift' }, 'r', function()
+  hs.reload()
+end)
