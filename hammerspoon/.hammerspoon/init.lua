@@ -11,4 +11,8 @@ hs.hotkey.bind({ 'ctrl', 'shift' }, 'r', function()
   hs.reload()
 end)
 
+hs.hotkey.bind({ 'ctrl', 'shift' }, 'c', function()
+  hs.window.focusedWindow():centerOnScreen()
+end)
+
 hs.alert 'Hammerspoon loaded'
