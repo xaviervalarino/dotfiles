@@ -8,7 +8,7 @@ end
 
 -- Hammerspoon config files
 -- make sure HS is running and IPC command is available
-if buffer_path:match '.hammerspoon' and os.execute 'pgrep Hammerspoon && hs' == 0 then
+if buffer_path:match '.hammerspoon' and os.execute 'hs -a' == 0 then
   M = {
     settings = {
       Lua = {
