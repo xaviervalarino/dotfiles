@@ -21,6 +21,18 @@ local mgmt = modes:create('h', 'hammerspoon')
 mgmt:chord('c', hs.toggleConsole)
 mgmt:chord('r', hs.reload)
 
+-- App launcher -----------------------------------------------------
+local app = modes:create('a', 'app launcher')
+
+app:chord('a', app_select 'Activity Monitor')
+app:chord('c', app_select 'Google Chrome')
+app:chord('x', app_select 'Firefox Developer Edition')
+app:chord('f', app_select 'Figma')
+app:chord('s', app_select 'Slack')
+app:chord('i', app_select 'Miro')
+app:chord('shift', 'f', app_select 'Finder')
+app:chord('t', app_select 'iTerm')
+
 -- Manage windows ---------------------------------------------------
 local wm = modes:create('w', 'window manager')
 
