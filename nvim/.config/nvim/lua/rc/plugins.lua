@@ -40,6 +40,7 @@ local packages = {
   'nvim-treesitter/nvim-treesitter-textobjects',
   'nvim-treesitter/playground',
   'windwp/nvim-ts-autotag',
+  { 'lewis6991/spellsitter.nvim', config = simple_setup 'spellsitter' },
 
   -- lsp
   'neovim/nvim-lspconfig',

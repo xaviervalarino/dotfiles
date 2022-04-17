@@ -6,6 +6,7 @@ set.linebreak = true
 set.laststatus = 3
 
 set.mouse = 'a'
+set.spell = true
 
 -- Left column -------------------------
 set.breakindent = true
