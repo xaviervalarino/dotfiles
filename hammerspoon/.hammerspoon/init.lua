@@ -31,4 +31,5 @@ wm:chord('m', function()
   hs.window.focusedWindow():maximize()
 end)
 
-hs.alert 'Hammerspoon loaded'
+---------------------------------------------------------------------
+require('util').alert '🔨 loaded'
