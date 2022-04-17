@@ -14,12 +14,13 @@ end
 
 -- Hammerspoon config files
 -- make sure HS is running and IPC command is available
-if buffer_path:match '.hammerspoon' and os.execute 'hs -a' == 0 then
+if buffer_path:match '.hammerspoon' and os.execute 'which hs' == 0 then
+  -- TODO: use coroutine to async loading this LSP while waiting for HS runtime info
   local hs_dev = {
     settings = {
       Lua = {
         runtime = {
-          version = vim.fn.system('hs -c _VERSION'):gsub('[\n\r]', ''),
+          version = vim.fn.system('hs -A -c _VERSION'):gsub('[\n\r]', ''),
           path = vim.split(vim.fn.system('hs -c package.path'):gsub('[\n\r]', ''), ';'),
         },
         diagnostics = { globals = { 'hs' } },
