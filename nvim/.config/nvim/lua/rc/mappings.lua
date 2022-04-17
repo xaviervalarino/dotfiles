@@ -53,7 +53,7 @@ nmap('cN', '*``cgN')
 -- Convenience for find/replace inside a visual area
 -- prepopulates cmd mode with wrapping `\%V` guards
 -- use <C-e> to move to replacement pattern
-vmap(':s', ':s/\\%V\\%V/<Left><Left><Left><Left>')
+vmap('<leader>s', ':s/\\%V\\%V/<Left><Left><Left><Left>')
 
 -- Tabularize on markers : = ,
 nvmap('<leader>a:', ':Tab /:\zs<CR>')
