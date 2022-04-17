@@ -27,7 +27,7 @@ require('gitsigns').setup {
     nvmap('<leader>hr',  ':Gitsigns reset_hunk<CR>',                    { desc = 'Reset hunk' })
     nmap('<leader>hS',   gs.stage_buffer,                               { desc = 'Stage buffer' })
     nmap('<leader>hu',   gs.undo_stage_hunk,                            { desc = 'Undo stage hunk' })
-    nmap('<leader>hR',   gs.reset_buffer,                               { desc = 'Reset all hunks in bufer' })
+    nmap('<leader>hR',   gs.reset_buffer,                               { desc = 'Reset all hunks in buffer' })
     nmap('<leader>hp',   gs.preview_hunk,                               { desc = 'Preview hunk' })
     nmap('<leader>hb',   function() gs.blame_line { full = true } end,  { desc = 'Blame line floating window' })
     nmap('<leader>tb',   gs.toggle_current_line_blame,                  { desc = 'Toggle line blame' })
