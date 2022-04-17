@@ -33,6 +33,12 @@ app:chord('i', app_select 'Miro')
 app:chord('shift', 'f', app_select 'Finder')
 app:chord('t', app_select 'iTerm')
 
+app:chord('m', goto_chrome_tab 'mail.google.com')
+app:chord('c', goto_chrome_tab 'calendar.google.com')
+app:chord('shift', 'm', goto_chrome_tab 'meet.google.com')
+app:chord('o', goto_chrome_tab 'app.shortcut.com')
+app:chord('n', goto_chrome_tab 'nts.live')
+
 -- Manage windows ---------------------------------------------------
 local wm = modes:create('w', 'window manager')
 
