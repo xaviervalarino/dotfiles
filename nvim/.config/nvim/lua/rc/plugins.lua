@@ -27,7 +27,7 @@ vim.cmd [[
 local packages = {
   'wbthomason/packer.nvim',
 
-  { 'windwp/nvim-autopairs', run = simple_setup 'nvim-autopairs' },
+  { 'windwp/nvim-autopairs', config = simple_setup 'nvim-autopairs' },
   { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } },
   'tpope/vim-surround',
   'tpope/vim-repeat',
@@ -70,12 +70,12 @@ local packages = {
   'tjdevries/express_line.nvim',
 
   'j-hui/fidget.nvim',
-  { 'folke/zen-mode.nvim', run = simple_setup 'zen-mode' },
+  { 'folke/zen-mode.nvim', config = simple_setup 'zen-mode' },
   'ThePrimeagen/harpoon',
-  -- { 'folke/which-key.nvim', run = simple_setup 'which-key' },
+  -- { 'folke/which-key.nvim', config = simple_setup 'which-key' },
   -- tracking PR https://github.com/folke/which-key.nvim/pull/253
-  { 'xiyaowong/which-key.nvim', run = simple_setup 'which-key' },
-  { 'numToStr/Comment.nvim', run = simple_setup 'Comment' },
+  { 'xiyaowong/which-key.nvim', config = simple_setup 'which-key' },
+  { 'numToStr/Comment.nvim', config = simple_setup 'Comment' },
 }
 
 return require('packer').startup {
