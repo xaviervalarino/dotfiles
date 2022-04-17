@@ -21,8 +21,14 @@ local mgmt = modes:create('h', 'hammerspoon')
 mgmt:chord('c', hs.toggleConsole)
 mgmt:chord('r', hs.reload)
 
-hs.hotkey.bind({ 'ctrl', 'shift' }, 'c', function()
+-- Manage windows ---------------------------------------------------
+local wm = modes:create('w', 'window manager')
+
+wm:chord('c', function()
   hs.window.focusedWindow():centerOnScreen()
+end)
+wm:chord('m', function()
+  hs.window.focusedWindow():maximize()
 end)
 
 hs.alert 'Hammerspoon loaded'
