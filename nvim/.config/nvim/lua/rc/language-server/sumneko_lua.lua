@@ -1,15 +1,21 @@
-local M = {}
+local M = {
+  on_init = function(client)
+    client.resolved_capabilities.document_formatting = false
+  end,
+}
+
 local buffer_path = vim.fn.expand '%:p'
 
 -- Neovim config files
 if buffer_path:match '.config/nvim' then
-  M = require('lua-dev').setup()
+  local lua_dev = require('lua-dev').setup()
+  M = vim.tbl_deep_extend('keep', M, lua_dev)
 end
 
 -- Hammerspoon config files
 -- make sure HS is running and IPC command is available
 if buffer_path:match '.hammerspoon' and os.execute 'hs -a' == 0 then
-  M = {
+  local hs_dev = {
     settings = {
       Lua = {
         runtime = {
@@ -25,6 +31,7 @@ if buffer_path:match '.hammerspoon' and os.execute 'hs -a' == 0 then
       },
     },
   }
+  M = vim.tbl_deep_extend('keep', M, hs_dev)
 end
 
 return M
