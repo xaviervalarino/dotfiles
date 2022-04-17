@@ -1,3 +1,5 @@
+hs.console.clearConsole()
+
 -- Load Hammerspoon annotations for Sumneko LSP
 -- TODO: this doesn't need to be run on every startup
 -- hs.loadSpoon 'EmmyLua'
