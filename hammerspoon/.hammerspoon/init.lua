@@ -9,9 +9,17 @@ hs.console.clearConsole()
 -- `hs -c "{lua cmd}"` to run commands
 hs.ipc.cliInstall()
 
-hs.hotkey.bind({ 'ctrl', 'shift' }, 'r', function()
-  hs.reload()
-end)
+local Modes = require 'keymodes'
+local switcher = require 'switcher'
+
+local app_select = switcher.app_select
+local goto_chrome_tab = switcher.goto_chrome_tab
+local modes = Modes:new('ctrl', 'space')
+
+-- Manage hammerspoon -----------------------------------------------
+local mgmt = modes:create('h', 'hammerspoon')
+mgmt:chord('c', hs.toggleConsole)
+mgmt:chord('r', hs.reload)
 
 hs.hotkey.bind({ 'ctrl', 'shift' }, 'c', function()
   hs.window.focusedWindow():centerOnScreen()
