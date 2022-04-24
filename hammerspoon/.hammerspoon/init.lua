@@ -49,5 +49,9 @@ wm:chord('m', function()
   hs.window.focusedWindow():maximize()
 end)
 
+wm:chord('w', function()
+  hs.spaces.toggleMissionControl()
+end)
+
 ---------------------------------------------------------------------
 require('util').alert '🔨 loaded'
