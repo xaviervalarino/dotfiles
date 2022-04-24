@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-cd $SCRIPT_DIR && cd .. || exit 1
+cd "$SCRIPT_DIR" && cd .. || exit 1
 
 stow -Rv zsh
 # export ENV
