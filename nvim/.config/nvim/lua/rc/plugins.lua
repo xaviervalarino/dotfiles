@@ -1,13 +1,6 @@
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  Packer_bootstrap = vim.fn.system {
-    'git',
-    'clone',
-    '--depth',
-    '1',
-    'https://github.com/wbthomason/packer.nvim',
-    install_path,
-  }
+  vim.fn.execute('!git clone --depth 1 https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
 local function simple_setup(pkg_name)
@@ -82,10 +75,6 @@ return require('packer').startup {
   function(use)
     for _, package in pairs(packages) do
       use(package)
-    end
-
-    if Packer_bootstrap then
-      require('packer').sync()
     end
   end,
   config = {
