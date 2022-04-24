@@ -93,6 +93,9 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
 
+# Dock: remove all icons
+defaults write com.apple.dock persistent-apps -array
+
 # Dock: set to left
 defaults write com.apple.dock "orientation" -string "left"
 
