@@ -19,7 +19,6 @@ if ! which brew > /dev/null; then
 else
   echo "Homebrew already installed, skipping"
 fi
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 msg "Cloning dotfiles"
 if [[ ! -d "$HOME/dotfiles" ]]; then
@@ -28,7 +27,7 @@ else
   echo "Dotfiles directory already exists"
 fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$( $(which brew) shellenv)"
 brew bundle install
 ./defaults.mac.sh
 ./configs.sh

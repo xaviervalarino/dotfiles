@@ -1,5 +1,5 @@
 # Homebrew
-eval "$(/opt/homebrew/bin/brew shellenv)"
+eval "$( $(which brew) shellenv)"
 
 # Rust
 path+=$HOME/.cargo/bin
