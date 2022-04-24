@@ -15,7 +15,6 @@ done
 
 msg "Installing Homebrew"
 if ! which brew > /dev/null; then
-  echo installing
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   echo "Homebrew already installed, skipping"
@@ -30,11 +29,9 @@ else
 fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
-
-cd "$HOME/dotfiles" || exit
-# defaults
-./setup/defaults.mac.sh
-# TODO: all the stow commands and anything else
-./setup/configs.sh
+brew bundle install
+./defaults.mac.sh
+./configs.sh
+./npm.sh
 
 msg "Finished"
