@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Place the user back where they were before
+# since this script needs to be run in the shell, and not a subshell
+# e.g., source ./script vs. ./script
+USR_LOCATION=$PWD
+trap "cd $USR_LOCATION" EXIT INT
+
 msg () {
   printf "\n%s\n" "$1"
 }
@@ -14,7 +20,7 @@ until eval xcode-select -p &> /dev/null; do
 done
 
 msg "Installing Homebrew"
-if ! which brew > /dev/null; then
+if ! which brew &> /dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
   echo "Homebrew already installed, skipping"
@@ -28,9 +34,10 @@ else
 fi
 
 eval "$( $(which brew) shellenv)"
-brew bundle install
-./defaults.mac.sh
-./configs.sh
-./npm.sh
+cd $HOME/dotfiles || exit 1
+brew bundle install --verbose
+./setup/defaults.mac.sh
+./setup/configs.sh
+./setup/npm.sh
 
 msg "Finished"

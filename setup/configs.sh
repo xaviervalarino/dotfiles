@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
-cd .. || exit 1
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+cd $SCRIPT_DIR && cd .. || exit 1
 
 stow -Rv zsh
 # export ENV
 source "$HOME/.zprofile"
 # set up zsh history dir
 mkdir -p "$XDG_DATA_HOME/zsh"
+[ -f "$HOME/.zsh_history" ] && rm -v "$HOME/.zsh_history"
+
+# fuzzy finder
+yes | /usr/local/opt/fzf/install
 
 stow -Rv iterm
 # iterm: use custom config directory
