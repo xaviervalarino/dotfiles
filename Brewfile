@@ -1,4 +1,4 @@
-machine=`uname -n`.chomp.sub(/\..*/,"") 
+machine=`uname -n`.chomp.sub(/\..*/,"") == "track-xrv" ? "work" : "personal"
 
 tap "homebrew/bundle"
 tap "homebrew/cask"
@@ -42,8 +42,7 @@ cask "iterm2"
 cask "karabiner-elements"
 cask "bitwarden"
 
-# Work
-if machine == "track-xrv"
+if machine == "work"
   brew "mkcert"
   brew "nss"
   cask "slack"
@@ -51,8 +50,7 @@ if machine == "track-xrv"
   cask "google-chrome"
 end
 
-# Personal
-if machine == "TimeBandit"
+if machine == "personal"
   mas "Affinity Designer", id: 824171161
   cask "Affinity Publisher"
   cask "Affinity Photo"
