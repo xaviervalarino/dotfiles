@@ -7,9 +7,10 @@ if ! which node > /dev/null; then volta install node@latest; fi
 # Install global packages
 npm install -g \
   bash-language-server \
-  typescript-language-server \
+  prettier \
   typescript \
-  vscode-langservers-extracted \
+  typescript-language-server \
+  vscode-langservers-extracted 
 
 # Check what was installed
 npm ls -g
