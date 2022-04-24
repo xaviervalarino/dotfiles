@@ -33,7 +33,13 @@ else
   echo "Dotfiles directory already exists"
 fi
 
-eval "$( $(which brew) shellenv)"
+if [ "$(uname -m)" = "arm64" ]; then
+  brew=/opt/homebrew/bin/brew
+else
+  brew=/usr/local/bin/brew
+fi
+eval "$($brew shellenv)"
+
 cd $HOME/dotfiles || exit 1
 brew bundle install --verbose
 ./setup/defaults.mac.sh

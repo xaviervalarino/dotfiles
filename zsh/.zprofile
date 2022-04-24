@@ -1,5 +1,10 @@
 # Homebrew
-eval "$( $(which brew) shellenv)"
+if [ "$(uname -m)" = "arm64" ]; then
+  brew=/opt/homebrew/bin/brew
+else
+  brew=/usr/local/bin/brew
+fi
+eval "$($brew shellenv)"
 
 # Rust
 path+=$HOME/.cargo/bin
