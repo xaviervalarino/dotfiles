@@ -52,8 +52,8 @@ end
 
 if machine == "personal"
   mas "Affinity Designer", id: 824171161
-  cask "Affinity Publisher"
-  cask "Affinity Photo"
+  cask "affinity-publisher"
+  cask "affinity-photo"
 end
 
 # vim:ft=ruby

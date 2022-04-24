@@ -1245,6 +1245,24 @@
         "options": {
           "full_name": "bitwarden"
         }
+      },
+      "affinity-publisher": {
+        "version": "1.10.5",
+        "options": {
+          "full_name": "affinity-publisher"
+        }
+      },
+      "affinity-photo": {
+        "version": "1.10.5",
+        "options": {
+          "full_name": "affinity-photo"
+        }
+      }
+    },
+    "mas": {
+      "Affinity Designer": {
+        "id": "824171161",
+        "version": "1.10.5"
       }
     }
   },
@@ -1257,6 +1275,14 @@
         "CLT": "13.0.0.0.1.1627064638",
         "Xcode": "13.2.1",
         "macOS": "12.3.1"
+      },
+      "big_sur": {
+        "HOMEBREW_VERSION": "3.4.7",
+        "HOMEBREW_PREFIX": "/usr/local",
+        "Homebrew/homebrew-core": "6c461b45e1ae2b1f23472f8907ad333656d06777",
+        "CLT": "12.5.0.0.1.1617976050",
+        "Xcode": "12.5.1",
+        "macOS": "11.2.3"
       }
     }
   }
