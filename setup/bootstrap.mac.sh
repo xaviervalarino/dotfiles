@@ -44,6 +44,6 @@ cd $HOME/dotfiles || exit 1
 brew bundle install --verbose
 ./setup/defaults.mac.sh
 ./setup/configs.sh
-./setup/npm.sh
+./setup/node.sh
 
 msg "Finished"

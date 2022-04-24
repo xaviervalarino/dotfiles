@@ -52,3 +52,9 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 # Init command-line fuzzy finder
 ## https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Node (managed through Volta)
+# Note that Volta does not search `.zprofile` when running `setup`
+export VOLTA_HOME="$XDG_DATA_HOME/volta"
+path+=$VOLTA_HOME/bin
+
