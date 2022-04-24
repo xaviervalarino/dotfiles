@@ -5,7 +5,7 @@ I use [`stow`](https://www.gnu.org/software/stow/) to manage my dotfiles. If you
 
 ## Bootstrap
 ```sh
-source <(curl -s http://github.com/xaviervalarino/dotfiles/setup/bootstrap.mac.sh)
+source <(curl -s https://raw.githubusercontent.com/xaviervalarino/dotfiles/main/setup/bootstrap.mac.sh)
 ```
 
 
