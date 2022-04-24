@@ -2,7 +2,6 @@
 
 npm install -g \
   bash-language-server \
-  prettier_d_slim \
   typescript-language-server \
   typescript \
   vscode-langservers-extracted \
