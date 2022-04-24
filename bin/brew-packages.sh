@@ -8,14 +8,15 @@ CORE=(
   fd
   fzf
   gh
+  gh
   git
   git-delta
   glow
   imagemagick
   lua-language-server
-  luajit
   m-cli
   mkcert
+  moreutils
   n
   neovim
   nss
@@ -34,10 +35,15 @@ CORE=(
 )
 
 CASKS=(
-  font-iosevka
+  figma
+  google-chrome
   hammerspoon 
+  homebrew/cask-fonts/font-iosevka
+  homebrew/cask-versions/firefox-developer-edition
   iterm2 
   karabiner-elements 
+  miro
+  slack
 )
 
 printf "%s\n" "Installing core packages..."
