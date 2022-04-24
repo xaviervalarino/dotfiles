@@ -22,6 +22,8 @@ stow -Rv karabiner
 stow -Rv hammerspoon
 
 stow -Rv bat
+bat cache --build
+
 stow -Rv git
 stow -Rv js
 stow -Rv scripts
