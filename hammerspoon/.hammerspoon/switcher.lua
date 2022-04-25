@@ -48,4 +48,15 @@ function M.goto_chrome_tab(uri)
   end
 end
 
+function M.detach_chrome_tab()
+  hs.osascript [[
+    tell application "Google Chrome"
+      set theURL to URL of active tab of window 1
+      close active tab of window 1
+      make new window
+      set URL of active tab of window 1 to theURL
+    end tell
+  ]]
+end
+
 return M

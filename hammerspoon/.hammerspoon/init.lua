@@ -14,6 +14,7 @@ local switcher = require 'switcher'
 
 local app_select = switcher.app_select
 local goto_chrome_tab = switcher.goto_chrome_tab
+local detach_chrome_tab = switcher.detach_chrome_tab
 local modes = Modes:new('ctrl', 'space')
 
 -- Manage hammerspoon -----------------------------------------------
@@ -42,6 +43,8 @@ app:chord('n', goto_chrome_tab 'nts.live')
 
 -- Manage windows ---------------------------------------------------
 local wm = modes:create('w', 'window manager')
+
+wm:chord('b', detach_chrome_tab)
 
 wm:chord('c', function()
   hs.window.focusedWindow():centerOnScreen()
