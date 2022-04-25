@@ -18,11 +18,6 @@ Install secondary symbol font used in iterm/neovim:
 
 [Download - Symbols-2048-em Nerd Font Complete.ttf](https://github.com/ryanoasis/nerd-fonts/raw/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf)
 
-### NodeJS + LSP
-
-Use [`n`](https://github.com/tj/n) to install lts and latest versions of Node.
-Then run `./setup/npm.sh` to install language-servers for Nvim.
-
 ### Browser Extensions
 
 Extensions for Firefox and Chrome
