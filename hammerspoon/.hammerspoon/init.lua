@@ -50,6 +50,12 @@ wm:chord('m', function()
   hs.window.focusedWindow():maximize()
 end)
 
+wm:chord('n', function()
+  local w = hs.window.focusedWindow()
+  local screen = w:screen()
+  w:move(w:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
+end)
+
 wm:chord('w', function()
   hs.spaces.toggleMissionControl()
 end)
