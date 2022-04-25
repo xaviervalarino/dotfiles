@@ -1,6 +1,6 @@
 Bootstrapping
 * [ ] Script for cargo and gem packages?
-* [ ] N / NodeJs: user persmissions for /usr/local/?
+* [ ] ~~N / NodeJs: user persmissions for /usr/local/?~~
 
 Hammerspoon
 * [ ] Moving windows
@@ -15,4 +15,4 @@ Nvim
 * [ ] Telescope config
 * [ ] Async for HS Lua LSP
 * [ ] Migrate to Lua autocmd
-* [ ] Install language servers
+* [x] Install language servers
