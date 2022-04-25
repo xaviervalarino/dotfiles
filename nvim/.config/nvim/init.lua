@@ -8,6 +8,17 @@ set.laststatus = 3
 set.mouse = 'a'
 set.spell = true
 
+set.showbreak = '↪\\'
+set.listchars:append {
+  space = '·',
+  tab = '→\\ ',
+  eol = '¬',
+  nbsp = '␣',
+  trail = '•',
+  extends = '⟩',
+  precedes = '⟨',
+}
+
 -- Left column -------------------------
 set.breakindent = true
 set.relativenumber = true
