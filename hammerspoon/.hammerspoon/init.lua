@@ -23,6 +23,7 @@ mgmt:chord('r', hs.reload)
 
 -- App launcher -----------------------------------------------------
 local app = modes:create('a', 'app launcher')
+local work = hs.execute('uname -n'):find 'trax'
 
 app:chord('a', app_select 'Activity Monitor')
 app:chord('c', app_select 'Google Chrome')
@@ -33,8 +34,8 @@ app:chord('i', app_select 'Miro')
 app:chord('shift', 'f', app_select 'Finder')
 app:chord('t', app_select 'iTerm')
 
-app:chord('m', goto_chrome_tab 'mail.google.com')
-app:chord('c', goto_chrome_tab 'calendar.google.com')
+app:chord('m', work and goto_chrome_tab 'mail.google.com' or app_select 'Mail')
+app:chord('c', work and goto_chrome_tab 'calendar.google.com' or app_select 'Calendar')
 app:chord('shift', 'm', goto_chrome_tab 'meet.google.com')
 app:chord('o', goto_chrome_tab 'app.shortcut.com')
 app:chord('n', goto_chrome_tab 'nts.live')
