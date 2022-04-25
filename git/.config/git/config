@@ -8,7 +8,9 @@
   co = checkout
   st = status --branch
   up = rebase
+  ri = rebase --interactive
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  patch = add --patch
   ammend = commit --amend
   cached = diff --cached
   unstage = reset HEAD --
