@@ -19,6 +19,8 @@ defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$XDG_CONFIG_HOME
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
 
 stow -Rv karabiner
+launchctl kickstart -k "gui/$(id -u)/org.pqrs.karabiner.karabiner_console_user_server"
+
 stow -Rv hammerspoon
 
 stow -Rv bat
