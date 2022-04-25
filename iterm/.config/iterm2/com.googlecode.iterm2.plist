@@ -1178,13 +1178,13 @@
 			<key>Name</key>
 			<string>Catpuccin</string>
 			<key>Non Ascii Font</key>
-			<string>SymbolsNerdFontComplete-2048-em 18</string>
+			<string>SymbolsNerdFontComplete-2048-em 20</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Non-ASCII Ligatures</key>
 			<false/>
 			<key>Normal Font</key>
-			<string>Iosevka 18</string>
+			<string>Iosevka-Term 20</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
 			<key>Prompt Before Closing 2</key>
