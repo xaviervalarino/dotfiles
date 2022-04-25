@@ -50,5 +50,4 @@ Install extensions:
 Settings:
 - Turn off Saved passwords:
   - Firefox://about:preferences#privacy --- turn off **about:preferences#privacy** > "Ask to save logins and passwords for websites
-"
   - Chrome://settings/passwords --- turn off "Offer to save passwords"
