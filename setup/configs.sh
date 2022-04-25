@@ -14,6 +14,7 @@ mkdir -p "$XDG_DATA_HOME/zsh"
 yes | /usr/local/opt/fzf/install
 
 stow -Rv iterm
+mkdir -p "$XDG_CONFIG_HOME/iterm2/"
 # iterm: use custom config directory
 defaults write com.googlecode.iterm2 PrefsCustomFolder -string "$XDG_CONFIG_HOME/iterm2/"
 defaults write com.googlecode.iterm2 LoadPrefsFromCustomFolder -bool true
