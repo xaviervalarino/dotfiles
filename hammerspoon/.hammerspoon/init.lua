@@ -26,6 +26,8 @@ mgmt:chord('r', hs.reload)
 local app = modes:create('a', 'app launcher')
 local work = hs.execute('uname -n'):find 'trax'
 
+hs.hotkey.bind('shift-cmd', ',', app_select 'System Preferences')
+
 app:chord('a', app_select 'Activity Monitor')
 app:chord('c', app_select 'Google Chrome')
 app:chord('x', app_select 'Firefox Developer Edition')
