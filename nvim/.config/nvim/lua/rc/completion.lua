@@ -14,6 +14,10 @@ cmp.setup {
       require('luasnip').lsp_expand(args.body)
     end,
   },
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
   sources = cmp.config.sources {
     { name = 'nvim_lsp' },
     { name = 'npm' },
@@ -35,11 +39,11 @@ cmp.setup {
     },
   },
   mapping = {
-    ['<C-n>'] = cmp.mapping(cmp.mapping.select_next_item()),
-    ['<C-p>'] = cmp.mapping(cmp.mapping.select_prev_item()),
-    ['<C-d>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-    ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+    ['<C-n>'] = cmp.mapping.select_next_item(),
+    ['<C-p>'] = cmp.mapping.select_prev_item(),
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-y>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
@@ -53,9 +57,6 @@ cmp.setup {
     ['<S-Tab>'] = cmp.mapping.confirm { select = true },
     cmp.setup.cmdline('/', { sources = { name = 'buffer' } }),
   },
-  -- documentation = {
-  --   border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-  -- },
   experimental = {
     ghost_text = true,
   },
