@@ -30,6 +30,8 @@ stow -Rv git
 stow -Rv js
 stow -Rv scripts
 stow -Rv stylua
+cargo install stylua
+
 stow -Rv nvim
 # TODO: set up nvim
 # nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
