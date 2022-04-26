@@ -1,4 +1,4 @@
-machine=`uname -n`.chomp.sub(/\..*/,"") == "track-xrv" ? "work" : "personal"
+machine=`uname -n`.chomp.sub(/\..*/,"") == "trax" ? "work" : "personal"
 
 tap "homebrew/bundle"
 tap "homebrew/cask"
