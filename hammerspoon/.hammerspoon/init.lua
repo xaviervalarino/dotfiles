@@ -130,5 +130,15 @@ wm:chord('c', function()
   f.h = max.h
   win:setFrame(f)
 end)
+
+-- Handlers ---------------------------------------------------------
+local thunderbolt = hs.usb.watcher.new(function(t)
+  print 'watcher'
+  if t.productName == 'USB5742' then
+    hs.wifi.setPower(t.event == 'added')
+  end
+end)
+thunderbolt:start()
+
 ---------------------------------------------------------------------
 require('util').alert '🔨 loaded'
