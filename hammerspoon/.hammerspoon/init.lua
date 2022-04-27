@@ -133,9 +133,8 @@ end)
 
 -- Handlers ---------------------------------------------------------
 local thunderbolt = hs.usb.watcher.new(function(t)
-  print 'watcher'
-  if t.productName == 'USB5742' then
-    hs.wifi.setPower(t.event == 'added')
+  if t.productName == 'USB 10/100/1000 LAN' then
+    hs.wifi.setPower(t.eventType == 'removed')
   end
 end)
 thunderbolt:start()
