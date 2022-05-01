@@ -41,6 +41,6 @@ stow -Rv nvim
 # Note: update this to `brew --cask install font-*` when this ticket is closed:
 # https://github.com/ryanoasis/nerd-fonts/issues/479
 # TODO: not working
-# curl --LJO https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf\
-  # --output "$HOME/Library/Fonts/Symbols-1000-em Nerd Font Complete.ttf"
-open https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-1000-em%20Nerd%20Font%20Complete.ttf\
+# curl --LJO https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf\
+  # --output "$HOME/Library/Fonts/Symbols-2048-em Nerd Font Complete.ttf"
+open https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf
