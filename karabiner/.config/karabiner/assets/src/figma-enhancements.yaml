@@ -1,27 +1,7 @@
 title: Figma Enhancements
 rules:
-  - description: 'Figma: Mouse button4 → Go up one layer (⇧ + ⏎)'
-    manipulators:
-      - from:
-          pointing_button: button4
-          modifiers:
-            mandatory:
-              - left_shift
-        to:
-          - key_code: return_or_enter
-            modifiers: shift
-        type: basic
-  - description: 'Figma: Mouse button5 → Go down one layer [⏎]'
-    manipulators:
-      - from:
-          pointing_button: button5
-          modifiers:
-            mandatory:
-              - left_shift
-        to:
-          - key_code: return_or_enter
-        type: basic
 
+  # Fix forward delete when editing text
   - description: 'Figma: ⌃ + D → delete_forward'
     manipulators:
       - conditions: &in_figma
@@ -37,7 +17,63 @@ rules:
           - key_code: delete_forward
         type: basic
 
-  # Fix forward delete when editing text
+  # Mouse buttons -------------------------------------------------
+
+  - description: 'Figma: Mouse button4 → Go up one layer ( ⇧ + ⏎ )'
+    manipulators: &mouse_button4
+      - conditions: *in_figma
+        from:
+          pointing_button: button4
+        to:
+          - key_code: return_or_enter
+            modifiers: shift
+        type: basic
+
+  - description: 'Figma: ⇧ + Mouse button4 →  Move layer down ( ⌘+] )'
+    manipulators:
+      - conditions: *in_figma
+        from:
+          pointing_button: button4
+          modifiers:
+            mandatory: [ left_shift ]
+        to:
+          - key_code: 'close_bracket'
+            modifiers:  [ left_command ]
+        type: basic
+
+  - description: 'Figma: Mouse button5 → Go down one layer ( ⏎ )'
+    manipulators:
+      - conditions: *in_figma
+        from:
+          pointing_button: button5
+        to:
+          - key_code: return_or_enter
+        type: basic
+
+  - description: 'Figma: ⇧ + Mouse button5 →  Move layer up ( ⌘+[ )'
+    manipulators:
+      - conditions: *in_figma
+        from:
+          pointing_button: button5
+          modifiers: 
+            mandatory: [ left_shift ]
+        to:
+          - key_code: 'open_bracket'
+            modifiers:  [ left_command ]
+        type: basic
+
+  - description: 'Figma: Mouse button5 → Go down one layer ( ⏎ )'
+    manipulators:
+      - conditions: *in_figma
+        from:
+          pointing_button: button5
+        to:
+          - key_code: return_or_enter
+        type: basic
+
+  # Right-hand convenience ----------------------------------------
+  # note: Escape key is mapped to right_control
+  
   - description: 'Figma: right ⌃ + D →  Design panel'
     manipulators:
       - conditions: *in_figma

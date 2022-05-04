@@ -2,7 +2,7 @@
   "title": "Razer mouse buttons",
   "rules": [
     {
-      "description": "Razer button 3 in Figma → Go up one layer (⇧ + ⏎)",
+      "description": "Razer button 3 in Figma → Go up one layer ( ⇧ + ⏎ )",
       "manipulators": [
         {
           "conditions": [
@@ -36,7 +36,48 @@
       ]
     },
     {
-      "description": "Razer: button 2 in Figma → Go down one layer [⏎]",
+      "description": "Razer button 3 + ⇧ in Figma →  Move layer down ( ⌘+] )",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "identifiers": [
+                {
+                  "product_id": 146,
+                  "vendor_id": 5426
+                }
+              ],
+              "type": "device_if"
+            },
+            {
+              "bundle_identifiers": [
+                "com.figma.Desktop"
+              ],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "3",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "close_bracket",
+              "modifiers": [
+                "left_command"
+              ]
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Razer: button 2 in Figma → Go down one layer ( ⏎ )",
       "manipulators": [
         {
           "conditions": [
@@ -62,6 +103,47 @@
           "to": [
             {
               "key_code": "return_or_enter"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "Razer button 2 + ⇧ in Figma →  Move layer up ( ⌘+[ )",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "identifiers": [
+                {
+                  "product_id": 146,
+                  "vendor_id": 5426
+                }
+              ],
+              "type": "device_if"
+            },
+            {
+              "bundle_identifiers": [
+                "com.figma.Desktop"
+              ],
+              "type": "frontmost_application_if"
+            }
+          ],
+          "from": {
+            "key_code": "2",
+            "modifiers": {
+              "mandatory": [
+                "left_shift"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "open_bracket",
+              "modifiers": [
+                "left_command"
+              ]
             }
           ],
           "type": "basic"
