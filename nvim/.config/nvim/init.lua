@@ -8,10 +8,10 @@ set.laststatus = 3
 set.mouse = 'a'
 set.spell = true
 
-set.showbreak = '↪\\'
+set.showbreak = '↪'
 set.listchars:append {
   space = '·',
-  tab = '→\\ ',
+  tab = '→ ',
   eol = '¬',
   nbsp = '␣',
   trail = '•',
