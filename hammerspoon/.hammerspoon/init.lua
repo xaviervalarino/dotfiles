@@ -46,7 +46,7 @@ app:chord('n', goto_chrome_tab 'nts.live')
 -- Manage windows ---------------------------------------------------
 local wm = modes:create('w', 'window manager')
 
-wm:chord('b', detach_chrome_tab)
+wm:chord('d', detach_chrome_tab)
 
 wm:chord('c', function()
   hs.window.focusedWindow():centerOnScreen()
