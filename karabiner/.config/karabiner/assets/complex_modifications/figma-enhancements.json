@@ -79,10 +79,10 @@
         {
           "conditions": [
             {
+              "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "com.figma.Desktop"
-              ],
-              "type": "frontmost_application_if"
+              ]
             }
           ],
           "from": {
@@ -111,10 +111,10 @@
         {
           "conditions": [
             {
+              "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "com.figma.Desktop"
-              ],
-              "type": "frontmost_application_if"
+              ]
             }
           ],
           "from": {
@@ -143,10 +143,10 @@
         {
           "conditions": [
             {
+              "type": "frontmost_application_if",
               "bundle_identifiers": [
                 "com.figma.Desktop"
-              ],
-              "type": "frontmost_application_if"
+              ]
             }
           ],
           "from": {
