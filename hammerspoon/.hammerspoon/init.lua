@@ -41,6 +41,7 @@ app:chord('m', work and goto_chrome_tab 'mail.google.com' or app_select 'Mail')
 app:chord('c', work and goto_chrome_tab 'calendar.google.com' or app_select 'Calendar')
 app:chord('shift', 'm', goto_chrome_tab 'meet.google.com')
 app:chord('o', goto_chrome_tab 'app.shortcut.com')
+app:chord('d', goto_chrome_tab 'withabound.slite.com')
 app:chord('n', goto_chrome_tab 'nts.live')
 
 -- Manage windows ---------------------------------------------------
