@@ -8,19 +8,26 @@
           "conditions": [
             {
               "type": "frontmost_application_if",
-              "bundle_identifiers": ["com.tinyspeck.slackmacgap"]
+              "bundle_identifiers": [
+                "com.tinyspeck.slackmacgap"
+              ]
             }
           ],
           "from": {
             "key_code": "k",
             "modifiers": {
-              "mandatory": ["command"]
+              "mandatory": [
+                "command"
+              ]
             }
           },
           "to": [
             {
               "key_code": "u",
-              "modifiers": ["command", "shift"]
+              "modifiers": [
+                "command",
+                "shift"
+              ]
             }
           ],
           "type": "basic"

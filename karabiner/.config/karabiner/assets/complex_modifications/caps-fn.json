@@ -8,8 +8,12 @@
           "from": {
             "key_code": "1",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -23,8 +27,12 @@
           "from": {
             "key_code": "2",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -38,8 +46,12 @@
           "from": {
             "key_code": "3",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -53,8 +65,12 @@
           "from": {
             "key_code": "4",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -68,8 +84,12 @@
           "from": {
             "key_code": "5",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -83,8 +103,12 @@
           "from": {
             "key_code": "6",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -98,8 +122,12 @@
           "from": {
             "key_code": "7",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -113,8 +141,12 @@
           "from": {
             "key_code": "8",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -128,8 +160,12 @@
           "from": {
             "key_code": "9",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -143,8 +179,12 @@
           "from": {
             "key_code": "0",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -158,8 +198,12 @@
           "from": {
             "key_code": "hyphen",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [
@@ -173,8 +217,12 @@
           "from": {
             "key_code": "equal_sign",
             "modifiers": {
-              "mandatory": ["right_control"],
-              "optional": ["any"]
+              "mandatory": [
+                "right_control"
+              ],
+              "optional": [
+                "any"
+              ]
             }
           },
           "to": [

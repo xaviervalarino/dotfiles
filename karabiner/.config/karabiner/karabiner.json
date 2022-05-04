@@ -182,6 +182,32 @@
                         ]
                     },
                     {
+                        "description": "⇪ + any → right_control",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_control"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "key_code": "escape"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Figma: Mouse button4 → Go up one layer (⇧ + ⏎)",
                         "manipulators": [
                             {
@@ -247,6 +273,102 @@
                                 "to": [
                                     {
                                         "key_code": "delete_forward"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Figma: right ⌃ + D →  Design panel",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.figma.Desktop"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "d",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "8",
+                                        "modifiers": [
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Figma: right ⌃ + T →  protoType panel",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.figma.Desktop"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "t",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "9",
+                                        "modifiers": [
+                                            "left_option"
+                                        ]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Figma: right ⌃ + C →  Components panel",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.figma.Desktop"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "c",
+                                    "modifiers": {
+                                        "mandatory": [
+                                            "right_control"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "i",
+                                        "modifiers": [
+                                            "shift"
+                                        ]
                                     }
                                 ],
                                 "type": "basic"
@@ -506,18 +628,32 @@
                         ]
                     },
                     {
-                        "description": "Mouse button5 → ⌘ + ]",
+                        "description": "Razer: button 2 → Go down one layer [⏎]",
                         "manipulators": [
                             {
-                                "from": {
-                                    "pointing_button": "button5"
-                                },
-                                "to_if_alone": [
+                                "conditions": [
                                     {
-                                        "key_code": "close_bracket",
-                                        "modifiers": [
-                                            "command"
-                                        ]
+                                        "identifiers": [
+                                            {
+                                                "product_id": 146,
+                                                "vendor_id": 5426
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.figma.Desktop"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "2"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "return_or_enter"
                                     }
                                 ],
                                 "type": "basic"
@@ -558,25 +694,66 @@
                         ]
                     },
                     {
-                        "description": "⇪ + any → right_control",
+                        "description": "Razer button 3 in Figma → Go up one layer (⇧ + ⏎)",
                         "manipulators": [
                             {
-                                "from": {
-                                    "key_code": "caps_lock",
-                                    "modifiers": {
-                                        "optional": [
-                                            "any"
-                                        ]
+                                "conditions": [
+                                    {
+                                        "identifiers": [
+                                            {
+                                                "product_id": 146,
+                                                "vendor_id": 5426
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.figma.Desktop"
+                                        ],
+                                        "type": "frontmost_application_if"
                                     }
+                                ],
+                                "from": {
+                                    "key_code": "3"
                                 },
                                 "to": [
                                     {
-                                        "key_code": "right_control"
+                                        "key_code": "return_or_enter",
+                                        "modifiers": "shift"
                                     }
                                 ],
-                                "to_if_alone": [
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Razer: button 2 in Figma → Go down one layer [⏎]",
+                        "manipulators": [
+                            {
+                                "conditions": [
                                     {
-                                        "key_code": "escape"
+                                        "identifiers": [
+                                            {
+                                                "product_id": 146,
+                                                "vendor_id": 5426
+                                            }
+                                        ],
+                                        "type": "device_if"
+                                    },
+                                    {
+                                        "bundle_identifiers": [
+                                            "com.figma.Desktop"
+                                        ],
+                                        "type": "frontmost_application_if"
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "2"
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "return_or_enter"
                                     }
                                 ],
                                 "type": "basic"
@@ -665,6 +842,19 @@
                         "is_pointing_device": true,
                         "product_id": 45088,
                         "vendor_id": 1133
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 146,
+                        "vendor_id": 5426
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": false,

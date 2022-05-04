@@ -11,7 +11,9 @@
           "to_if_alone": [
             {
               "key_code": "open_bracket",
-              "modifiers": ["command"]
+              "modifiers": [
+                "command"
+              ]
             }
           ],
           "type": "basic"
@@ -28,7 +30,9 @@
           "to_if_alone": [
             {
               "key_code": "close_bracket",
-              "modifiers": ["command"]
+              "modifiers": [
+                "command"
+              ]
             }
           ],
           "type": "basic"

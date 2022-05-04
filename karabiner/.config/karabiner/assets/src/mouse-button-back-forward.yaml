@@ -1,0 +1,21 @@
+title: Mouse forward + back buttons
+rules:
+  - description: Mouse button4 → ⌘ + [
+    manipulators:
+      - from:
+          pointing_button: button4
+        to_if_alone:
+          - key_code: open_bracket
+            modifiers:
+              - command
+        type: basic
+
+  - description: Mouse button5 → ⌘ + ]
+    manipulators:
+      - from:
+          pointing_button: button5
+        to_if_alone:
+          - key_code: close_bracket
+            modifiers:
+              - command
+        type: basic

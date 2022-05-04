@@ -1,0 +1,41 @@
+#!/usr/bin/env sh
+
+if ! which yq > /dev/null; then echo 'yq is not installed'; exit 1; fi
+
+dir=$(dirname "$(readlink -f "$0")")
+
+# Initialize variables:
+verbose=0
+
+while getopts "v" opt; do
+  case "$opt" in
+    v) verbose=1 ;;
+  esac
+done
+
+shift $((OPTIND-1))
+[ "${1:-}" = "--" ] && shift
+
+
+convert () {
+  file="$(basename -- "$1")"
+  filename=${file%.*}
+  if [ $verbose -gt 0 ]; then echo "$file --> $filename.json"; fi
+  yq -o=json eval "$1" > "$dir/complex_modifications/$filename.json"
+}
+
+if [ -n "$1" ]; then
+  if [ ! -e "$1" ]; then
+    echo "$1 does not exist"
+    exit 1
+  elif [ ! -f "$1" ]; then
+    echo "$1 is not a file"
+    exit 1
+  else 
+    convert "$1"
+  fi
+else
+  for file in "$dir"/src/*.yaml; do
+    convert "$file"
+  done
+fi
