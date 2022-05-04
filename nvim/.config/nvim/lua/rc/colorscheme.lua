@@ -6,3 +6,12 @@ else
   -- profile == 'Catppuccin' (probably)
   vim.cmd [[colorscheme catppuccin]]
 end
+
+local noescroll_ok, neoscroll = pcall(require, 'neoscroll')
+if not noescroll_ok then
+  return
+end
+
+neoscroll.setup {
+  easing_function = 'cubic',
+}

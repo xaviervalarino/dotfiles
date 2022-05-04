@@ -67,6 +67,7 @@ local packages = {
   'ThePrimeagen/harpoon',
   { 'folke/which-key.nvim', config = simple_setup 'which-key' },
   { 'numToStr/Comment.nvim', config = simple_setup 'Comment' },
+  'karb94/neoscroll.nvim',
 }
 
 return require('packer').startup {
