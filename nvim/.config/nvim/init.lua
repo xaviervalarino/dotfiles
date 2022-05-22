@@ -19,10 +19,11 @@ set.listchars:append {
   precedes = '⟨',
 }
 
--- Left column -------------------------
+-- Visual -------------------------
 set.breakindent = true
 set.relativenumber = true
 set.number = true
+set.updatetime = 250
 window.signcolumn = 'yes'
 
 -- Search ------------------------------
