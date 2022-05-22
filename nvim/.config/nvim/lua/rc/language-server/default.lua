@@ -3,25 +3,6 @@ local buf_keymaps = require('rc.util').buf_create_keymaps 'n'
 
 require 'rc.language-server.style'
 
-local function lsp_highlight_document()
-  vim.cmd [[
-    augroup lsp_document_highlight
-      autocmd! * <buffer>
-      autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-      autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-    augroup END
-  ]]
-end
-
-local function lsp_format_document()
-  vim.cmd [[
-    augroup LspFormatting
-      autocmd! * <buffer>
-      autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()
-    augroup END
-  ]]
-end
-
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
@@ -49,10 +30,25 @@ function M.on_attach(client, bufnr)
   --stylua: ignore end
 
   if client.resolved_capabilities.document_highlight then
-    lsp_highlight_document()
+    local highlight_group = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
+    vim.api.nvim_create_autocmd('CursorHold', {
+      callback = vim.lsp.buf.document_highlight,
+      group = highlight_group,
+      pattern = '<buffer>',
+    })
+    vim.api.nvim_create_autocmd('CursorMoved', {
+      callback = vim.lsp.buf.clear_references,
+      group = highlight_group,
+      pattern = '<buffer>',
+    })
   end
   if client.resolved_capabilities.document_formatting then
-    lsp_format_document()
+    local lsp_formatting = vim.api.nvim_create_augroup('lsp_formatting', { clear = true })
+    vim.api.nvim_create_autocmd('BufWritePre', {
+      callback = vim.lsp.buf.formatting_sync,
+      group = lsp_formatting,
+      pattern = '<buffer>',
+    })
   end
 end
 
