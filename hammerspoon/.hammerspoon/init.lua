@@ -90,7 +90,7 @@ wm:chord('j', function()
   f.w = max.w
   f.y = max.y + (max.h / 2)
   f.h = max.h / 2
-  win:setFrame(7)
+  win:setFrame(f)
 end)
 
 wm:chord('k', function()
