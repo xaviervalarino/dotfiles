@@ -5,6 +5,7 @@ else
   brew=/usr/local/bin/brew
 fi
 eval "$($brew shellenv)"
+export HOMEBREW_NO_ENV_HINTS=true
 
 # Rust
 path+=$HOME/.cargo/bin
