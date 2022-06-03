@@ -133,12 +133,14 @@ wm:chord('c', function()
 end)
 
 -- Handlers ---------------------------------------------------------
-local thunderbolt = hs.usb.watcher.new(function(t)
+Thunderbolt = hs.usb.watcher.new(function(t)
+  print('WATCHER ' .. t.eventType)
   if t.productName == 'USB 10/100/1000 LAN' then
+    print('USB LAN ' .. t.eventType)
     hs.wifi.setPower(t.eventType == 'removed')
   end
 end)
-thunderbolt:start()
+Thunderbolt:start()
 
 ---------------------------------------------------------------------
 require('util').alert '🔨 loaded'
