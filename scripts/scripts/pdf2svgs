@@ -14,6 +14,11 @@ if [[ -z $* || $* == '-h' || $* == '--help' ]]; then
   exit 1
 fi
 
+if ! which pdf2svg; then
+  echo 'Please install pdf2svg' >&2
+  exit 1
+fi
+
 if [[ -z $1 ]]; then
   echo 'Error: no PDF specified' >&2
   exit 1
