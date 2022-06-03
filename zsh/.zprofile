@@ -20,7 +20,7 @@ path+=$HOME/scripts
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 
-export EDITOR=/usr/local/bin/nvim
+export EDITOR=$(which nvim)
 
 
 case $ITERM_PROFILE in
