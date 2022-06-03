@@ -8,6 +8,7 @@ tap "homebrew/core"
 
 brew "bat"
 brew "coreutils"
+brew "deno"
 brew "fd"
 brew "fzf"
 brew "gh"
