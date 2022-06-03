@@ -62,6 +62,16 @@ wm:chord('n', function()
   w:move(w:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
 end)
 
+-- Pull all windows into screen bounds (when unplugging secondary monitor)
+-- TODO: add callback function to thunderbolt watcher
+wm:chord('shift', 'n', function()
+  local ws = hs.window.allWindows()
+  for _, w in ipairs(ws) do
+    local screen = w:screen()
+    w:move(w:frame():toUnitRect(screen:frame()), screen:mainScreen(), true, 0)
+  end
+end)
+
 wm:chord('w', function()
   hs.spaces.toggleMissionControl()
 end)
