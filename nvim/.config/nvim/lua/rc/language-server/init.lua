@@ -18,6 +18,10 @@ local servers = {
   bashls = config.default,
   cssls = config.default,
   html = config.disable_formatting,
+  denols = {
+    root_dir = nvim_lsp.util.root_pattern 'deno.json',
+    init_options = { lint = true },
+  },
   jsonls = require 'rc.language-server.jsonls',
   sumneko_lua = require 'rc.language-server.sumneko_lua',
   tsserver = require 'rc.language-server.tsserver',
