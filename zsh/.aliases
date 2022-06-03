@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 alias g="git"
 alias ls="ls -Gh"
 alias mkdir="mkdir -p"
