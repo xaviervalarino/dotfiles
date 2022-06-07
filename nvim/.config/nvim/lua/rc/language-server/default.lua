@@ -24,6 +24,13 @@ function M.on_attach(client, bufnr)
   nmap('[d',          vim.diagnostic.goto_prev,    { desc = 'Previous diagnostic' })
   nmap(']d',          vim.diagnostic.goto_next,    { desc = 'Next diagnostic' })
   nmap('<leader>q',   vim.diagnostic.setloclist,   { desc = 'Diagnostic location list' })
+
+  nmap(
+    '<leader>so',
+    require('telescope.builtin').lsp_document_symbols,
+    { desc = 'Search document symbols'}
+  )
+
   nmap('<leader>ca',  vim.lsp.buf.code_action,     { desc = 'Code action' })
   nmap('gr',          vim.lsp.buf.references,      { desc = 'List references' })
   nmap('<leader>f',   vim.lsp.buf.formatting,      { desc = 'Format buffer' })
