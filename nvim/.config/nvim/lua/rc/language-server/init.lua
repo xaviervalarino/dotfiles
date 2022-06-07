@@ -45,4 +45,6 @@ for server, opts in pairs(servers) do
   nvim_lsp[server].setup(opts)
 end
 
-null_ls.setup(config.default)
+if null_ls then
+  null_ls.setup(config.default)
+end
