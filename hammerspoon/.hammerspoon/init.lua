@@ -68,7 +68,7 @@ wm:chord('shift', 'n', function()
   local ws = hs.window.allWindows()
   for _, w in ipairs(ws) do
     local screen = w:screen()
-    w:move(w:frame():toUnitRect(screen:frame()), screen:mainScreen(), true, 0)
+    w:move(w:frame():toUnitRect(screen:frame()), hs.screen.mainScreen(), true, 0)
   end
 end)
 
