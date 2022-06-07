@@ -30,10 +30,10 @@ nmap('j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 -- Jumplist mutations
 -- TODO: need to look into this one more
 -- nmap('k', "v:count > 5 ? 'm\'' .v:count : . 'k'" , {noremap = true, expr = true, silent = true})
-vim.cmd [[
-  nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
-  nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
-]]
+-- vim.cmd [[
+--   nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
+--   nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
+-- ]]
 
 -- Moving text
 nmap('<A-j>', ':m .+1<CR>==')
