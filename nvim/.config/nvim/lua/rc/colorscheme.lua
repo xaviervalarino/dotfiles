@@ -1,8 +1,8 @@
-if vim.env.ITERM_PROFILE == 'Github light' then
-  require('github-theme').setup {
-    theme_style = 'light',
-  }
-else
-  -- profile == 'Catppuccin' (probably)
-  vim.cmd [[colorscheme catppuccin]]
+local _, _, color = vim.env.ITERM_PROFILE:find '-(%a+)'
+for _, v in ipairs { 'latte', 'frappe', 'macchiato', 'mocha' } do
+  if color == v then
+    vim.g.catppuccin_flavour = color
+  end
 end
+
+vim.cmd [[colorscheme catppuccin]]
