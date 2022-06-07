@@ -34,3 +34,4 @@
   colorMoved = default
 [init]
   defaultBranch = main
+  templatedir = /Users/xrv/.config/git/template/
