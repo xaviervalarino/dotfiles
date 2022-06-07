@@ -55,6 +55,7 @@ local packages = {
   'rafamadriz/friendly-snippets', -- collection of snippets
 
   { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' },
+  { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
 
   -- theme
   'kyazdani42/nvim-web-devicons',

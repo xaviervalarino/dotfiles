@@ -6,6 +6,7 @@ end
 local nmap = require('rc.util').create_keymaps 'n'
 local builtin = require 'telescope.builtin'
 
+telescope.load_extension 'fzf'
 telescope.setup {
   defaults = {
     mappings = {
