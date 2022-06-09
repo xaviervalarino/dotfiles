@@ -224,6 +224,11 @@ _G.packer_plugins = {
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/tabular",
     url = "https://github.com/godlygeek/tabular"
   },
+  ["telescope-fzf-native.nvim"] = {
+    loaded = true,
+    path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
+    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/telescope.nvim",
@@ -247,7 +252,7 @@ _G.packer_plugins = {
   ["which-key.nvim"] = {
     loaded = true,
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/which-key.nvim",
-    url = "https://github.com/xiyaowong/which-key.nvim"
+    url = "https://github.com/folke/which-key.nvim"
   },
   ["zen-mode.nvim"] = {
     loaded = true,
