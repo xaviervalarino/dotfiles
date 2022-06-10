@@ -6,7 +6,7 @@ end
 --- setup package with default config
 ---@param pkg_name string plugin name supplied to `require`
 local function simple_setup(pkg_name)
-  if type(pkg_name) == string then
+  if type(pkg_name) == 'string' then
     local pkg_status_ok, pkg = pcall(require, pkg_name)
     if pkg_status_ok then
       pkg.setup {}
