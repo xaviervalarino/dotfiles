@@ -20,7 +20,7 @@ function M.on_attach(client, bufnr)
   nmap('<leader>D',   vim.lsp.buf.type_definition, { desc = 'Type definition' })
   nmap('<leader>rn',  vim.lsp.buf.rename,          { desc = 'Rename reference' })
   nmap('<leader>rr',  ':LspRestart<CR>',           { desc = 'Restart LSP' })
-  nmap('<leader>d',   vim.diagnostic.open_float,   { desc = 'Current diagnostic' })
+  -- nmap('<leader>d',   vim.diagnostic.open_float,   { desc = 'Current diagnostic' })
   nmap('[d',          vim.diagnostic.goto_prev,    { desc = 'Previous diagnostic' })
   nmap(']d',          vim.diagnostic.goto_next,    { desc = 'Next diagnostic' })
   nmap('<leader>q',   vim.diagnostic.setloclist,   { desc = 'Diagnostic location list' })
@@ -36,6 +36,13 @@ function M.on_attach(client, bufnr)
   nmap('<leader>f',   vim.lsp.buf.format,          { desc = 'Format buffer' })
   nmap('<C-s>',       vim.lsp.buf.signature_help,  { desc = 'Signature help' })
   --stylua: ignore end
+
+  local diagnostic_hover = vim.api.nvim_create_augroup('lsp_diagnostic_hover', { clear = true })
+  vim.api.nvim_create_autocmd('CursorHold', {
+    callback = vim.diagnostic.open_float,
+    group = diagnostic_hover,
+    pattern = '<buffer>',
+  })
 
   if client.server_capabilities.documentHighlightProvider then
     local highlight_group = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
