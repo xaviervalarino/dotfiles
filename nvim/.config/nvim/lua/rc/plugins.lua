@@ -46,6 +46,7 @@ local packages = {
   'jose-elias-alvarez/null-ls.nvim',
   'jose-elias-alvarez/nvim-lsp-ts-utils',
   'folke/lua-dev.nvim',
+  { 'smjonas/inc-rename.nvim', config = simple_setup 'inc_rename' },
 
   -- completion plugins
   'hrsh7th/nvim-cmp', -- completion plugin
