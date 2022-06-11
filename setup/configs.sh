@@ -23,6 +23,13 @@ stow -Rv karabiner
 launchctl kickstart -k "gui/$(id -u)/org.pqrs.karabiner.karabiner_console_user_server"
 
 stow -Rv hammerspoon
+# Set up /usr/local/ for hammerspoon CLI
+echo "Creating /usr/local dirs"
+sudo mkdir -v /usr/local/{bin,share}
+echo "Changing dirs owner to '$(whoami)'"
+sudo chown -v "$(whoami):" /usr/local/{bin,share}
+echo "Adding write privileges to dirs"
+sudo chmod -v u+w /usr/local/{bin,share}
 
 stow -Rv bat
 bat cache --build
