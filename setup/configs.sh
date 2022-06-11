@@ -11,7 +11,7 @@ mkdir -p "$XDG_DATA_HOME/zsh"
 [ -f "$HOME/.zsh_history" ] && rm -v "$HOME/.zsh_history"
 
 # fuzzy finder
-yes | /usr/local/opt/fzf/install
+yes | "$HOMEBREW_PREFIX/opt/fzf/install"
 
 stow -Rv iterm
 mkdir -p "$XDG_CONFIG_HOME/iterm2/"
