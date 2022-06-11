@@ -9,7 +9,7 @@ local config = {
   default = require 'rc.language-server.default',
   disable_formatting = {
     on_attach = function(client)
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.documentFormattingProvider = false
     end,
   },
 }

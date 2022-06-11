@@ -33,11 +33,11 @@ function M.on_attach(client, bufnr)
 
   nmap('<leader>ca',  vim.lsp.buf.code_action,     { desc = 'Code action' })
   nmap('gr',          vim.lsp.buf.references,      { desc = 'List references' })
-  nmap('<leader>f',   vim.lsp.buf.formatting,      { desc = 'Format buffer' })
+  nmap('<leader>f',   vim.lsp.buf.format,          { desc = 'Format buffer' })
   nmap('<C-s>',       vim.lsp.buf.signature_help,  { desc = 'Signature help' })
   --stylua: ignore end
 
-  if client.resolved_capabilities.document_highlight then
+  if client.server_capabilities.documentHighlightProvider then
     local highlight_group = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
     vim.api.nvim_create_autocmd('CursorHold', {
       callback = vim.lsp.buf.document_highlight,
@@ -50,10 +50,11 @@ function M.on_attach(client, bufnr)
       pattern = '<buffer>',
     })
   end
-  if client.resolved_capabilities.document_formatting then
+
+  if client.server_capabilities.documentFormattingProvider then
     local lsp_formatting = vim.api.nvim_create_augroup('lsp_formatting', { clear = true })
     vim.api.nvim_create_autocmd('BufWritePre', {
-      callback = vim.lsp.buf.formatting_sync,
+      callback = vim.lsp.buf.format,
       group = lsp_formatting,
       pattern = '<buffer>',
     })

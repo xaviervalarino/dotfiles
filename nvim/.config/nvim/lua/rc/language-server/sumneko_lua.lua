@@ -1,6 +1,6 @@
 local M = {
   on_init = function(client)
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
   end,
 }
 

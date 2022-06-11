@@ -9,7 +9,8 @@ return {
   init_options = require('nvim-lsp-ts-utils').init_options,
   root_dir = require('lspconfig').util.root_pattern 'package.json',
   on_init = function(client)
-    client.resolved_capabilities.document_formatting = false
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
   end,
   on_attach = function(_, bufnr)
     local nmap = buf_keymaps(bufnr)
