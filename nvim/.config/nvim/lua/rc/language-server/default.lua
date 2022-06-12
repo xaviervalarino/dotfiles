@@ -66,23 +66,23 @@ function M.on_attach(client, bufnr)
   if client.server_capabilities.documentHighlightProvider then
     local highlight_group = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
     vim.api.nvim_create_autocmd('CursorHold', {
-      callback = vim.lsp.buf.document_highlight,
       group = highlight_group,
-      pattern = '<buffer>',
+      buffer = 0,
+      callback = vim.lsp.buf.document_highlight,
     })
     vim.api.nvim_create_autocmd('CursorMoved', {
-      callback = vim.lsp.buf.clear_references,
       group = highlight_group,
-      pattern = '<buffer>',
+      buffer = 0,
+      callback = vim.lsp.buf.clear_references,
     })
   end
 
   if client.server_capabilities.documentFormattingProvider then
     local lsp_formatting = vim.api.nvim_create_augroup('lsp_formatting', { clear = true })
     vim.api.nvim_create_autocmd('BufWritePre', {
-      callback = vim.lsp.buf.format,
       group = lsp_formatting,
-      pattern = '<buffer>',
+      buffer = 0,
+      callback = vim.lsp.buf.formatting,
     })
   end
 end
