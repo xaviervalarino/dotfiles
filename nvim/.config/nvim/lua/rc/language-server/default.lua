@@ -39,7 +39,6 @@ function M.on_attach(client, bufnr)
   --stylua: ignore end
 
   local diagnostic_hover = vim.api.nvim_create_augroup('lsp_diagnostic_hover', { clear = true })
-  local last_diagnostic_lnum
   vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
     group = diagnostic_hover,
     buffer = 0,
@@ -49,13 +48,13 @@ function M.on_attach(client, bufnr)
       local diagnostic_count = #vim.diagnostic.get(0, { lnum = current_lnum })
       local timeout = (arg.event == 'CursorHold' and 0 or 1000)
 
-      if arg.event == 'CursorHold' and current_lnum == last_diagnostic_lnum then
+      if arg.event == 'CursorHold' and current_lnum == vim.b.last_diagnostic_lnum then
         return
       else
-        last_diagnostic_lnum = nil
+        vim.b.last_diagnostic_lnum = nil
       end
       if diagnostic_count > 0 then
-        last_diagnostic_lnum = current_lnum
+        vim.b.last_diagnostic_lnum = current_lnum
         vim.fn.timer_start(timeout, function()
           vim.diagnostic.open_float()
         end)
