@@ -18,7 +18,9 @@ telescope.setup {
   },
 }
 
-nmap('<leader><space>', builtin.buffers)
+nmap('<leader><space>', function()
+  builtin.buffers { previewer = false }
+end)
 nmap('<leader>sf', builtin.find_files)
 nmap('<leader>sb', builtin.current_buffer_fuzzy_find)
 nmap('<leader>sh', builtin.help_tags)
