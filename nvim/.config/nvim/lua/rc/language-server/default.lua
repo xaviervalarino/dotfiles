@@ -38,10 +38,28 @@ function M.on_attach(client, bufnr)
   --stylua: ignore end
 
   local diagnostic_hover = vim.api.nvim_create_augroup('lsp_diagnostic_hover', { clear = true })
-  vim.api.nvim_create_autocmd('CursorHold', {
-    callback = vim.diagnostic.open_float,
+  local last_diagnostic_lnum
+  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
     group = diagnostic_hover,
-    pattern = '<buffer>',
+    buffer = 0,
+    callback = function(arg)
+      -- note: diagnostics uses zero index for line numbers, see :h api-indexing
+      local current_lnum = vim.fn.line '.' - 1
+      local diagnostic_count = #vim.diagnostic.get(0, { lnum = current_lnum })
+      local timeout = (arg.event == 'CursorHold' and 0 or 1000)
+
+      if arg.event == 'CursorHold' and current_lnum == last_diagnostic_lnum then
+        return
+      else
+        last_diagnostic_lnum = nil
+      end
+      if diagnostic_count > 0 then
+        last_diagnostic_lnum = current_lnum
+        vim.fn.timer_start(timeout, function()
+          vim.diagnostic.open_float()
+        end)
+      end
+    end,
   })
 
   if client.server_capabilities.documentHighlightProvider then
