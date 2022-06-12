@@ -15,6 +15,7 @@ function M.on_attach(client, bufnr)
   nmap('gd',          vim.lsp.buf.definition,      { desc = 'Go to definition' })
   -- note: many servers do not implement this method
   nmap('gD',          vim.lsp.buf.declaration,     { desc = 'Go to declaration' })
+  -- TODO: no `number` on document hover
   nmap('K',           vim.lsp.buf.hover,           { desc = 'Hover symbol info' })
   nmap('gi',          vim.lsp.buf.implementation,  { desc = 'Implementation' })
   nmap('<leader>D',   vim.lsp.buf.type_definition, { desc = 'Type definition' })
