@@ -3,36 +3,43 @@ tap "homebrew/cask"
 tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
+tap "buo/cask-upgrade"
 
 brew "bat"
 brew "coreutils"
 brew "deno"
 brew "fd"
+brew "ffmpeg"
 brew "fzf"
 brew "gh"
 brew "git"
 brew "git-delta"
 brew "glow"
+brew "httpie"
 brew "imagemagick"
+brew "jq"
 brew "lua-language-server"
 brew "m-cli"
 brew "mas"
 brew "moreutils"
-brew "neovim"
+brew "mpv"
+brew "neovim", args: ["HEAD"] # riding nightly until 0.8 lands
+brew "pandoc"
 brew "pidof"
 brew "pstree"
 brew "pure"
 brew "ripgrep"
 brew "rust"
 brew "shellcheck"
+brew "speedtest-cli"
 brew "stow"
 brew "tldr"
 brew "trash"
 brew "tree"
 brew "utimer"
 brew "volta"
+brew "yq"
 brew "zsh-completions"
-brew "speedtest-cli"
 
 cask "figma"
 cask "firefox-developer-edition"
@@ -45,8 +52,10 @@ cask "zoom"
 cask "monitorcontrol"
 
 # Personal
-mas "Affinity Designer", id: 824171161
-cask "affinity-publisher"
 cask "affinity-photo"
+cask "affinity-publisher"
+cask "battle-net" # starcraft BW
+mas "Affinity Designer", id: 824171161
+mas "WhatsApp", id: 1147396723
 
 # vim:ft=ruby
