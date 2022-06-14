@@ -29,6 +29,36 @@ catppuccin.remap {
   NormalFloat = {
     bg = color.base,
   },
+  TelescopeNormal = {
+    bg = color.surface0,
+  },
+  TelescopeBorder = {
+    fg = color.surface0,
+    bg = color.surface0,
+  },
+  TelescopeSelection = {
+    bg = color.surface1,
+  },
+  TelescopePromptNormal = {
+    bg = color.subtext0,
+    fg = color.crust,
+  },
+  TelescopePromptBorder = {
+    fg = color.subtext0,
+    bg = color.subtext0,
+  },
+  TelescopeTitle = {
+    fg = color.crust,
+    bg = color.sapphire,
+  },
+  -- Hide results title
+  TelescopeResultsTitle = {
+    fg = color.surface0,
+    bg = color.surface0,
+  },
+  -- unused highlight groups
+  -- TelescopePromptTitle
+  --TelescopePreviewTitle
 }
 
 vim.cmd [[colorscheme catppuccin]]

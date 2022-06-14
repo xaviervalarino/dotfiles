@@ -9,6 +9,17 @@ local builtin = require 'telescope.builtin'
 telescope.load_extension 'fzf'
 telescope.setup {
   defaults = {
+    prompt_prefix = ' ',
+    selection_caret = ' ',
+    entry_prefix = ' ',
+    sorting_strategy = 'ascending',
+    winblend = 0,
+    layout_config = {
+      horizontal = {
+        prompt_position = 'top',
+        preview_width = 0.55,
+      },
+    },
     mappings = {
       i = {
         ['<C-u>'] = false,
