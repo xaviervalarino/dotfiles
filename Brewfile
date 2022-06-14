@@ -1,5 +1,3 @@
-machine=`uname -n`.chomp.sub(/\..*/,"") == "trax" ? "work" : "personal"
-
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-fonts"
@@ -46,18 +44,9 @@ cask "bitwarden"
 cask "zoom"
 cask "monitorcontrol"
 
-if machine == "work"
-  brew "mkcert"
-  brew "nss"
-  cask "slack"
-  cask "miro"
-  cask "google-chrome"
-end
-
-if machine == "personal"
-  mas "Affinity Designer", id: 824171161
-  cask "affinity-publisher"
-  cask "affinity-photo"
-end
+# Personal
+mas "Affinity Designer", id: 824171161
+cask "affinity-publisher"
+cask "affinity-photo"
 
 # vim:ft=ruby
