@@ -1,26 +1,27 @@
 local catppuccin = require 'catppuccin'
-local colors = require('catppuccin.api.colors').get_colors()
 
-local _, _, color = vim.env.ITERM_PROFILE:find '-(%a+)'
+local _, _, palette = vim.env.ITERM_PROFILE:find '-(%a+)'
 for _, v in ipairs { 'latte', 'frappe', 'macchiato', 'mocha' } do
-  if color == v then
-    vim.g.catppuccin_flavour = color
+  if palette == v then
+    vim.g.catppuccin_flavour = palette
   end
 end
 
+local color = require('catppuccin.api.colors').get_colors()
+
 catppuccin.remap {
   FloatBorder = {
-    fg = colors.sapphire,
-    bg = colors.base,
+    fg = color.sapphire,
+    bg = color.base,
   },
   FloatShadow = {
-    bg = colors.base,
+    bg = color.base,
   },
   FloatShadowThrough = {
-    bg = colors.base,
+    bg = color.base,
   },
   NormalFloat = {
-    bg = colors.base,
+    bg = color.base,
   },
 }
 
