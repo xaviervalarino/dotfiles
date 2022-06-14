@@ -8,6 +8,9 @@ if not lspkind_ok then
   return
 end
 
+local menu_style = cmp.config.window.bordered()
+menu_style.winhighlight = menu_style.winhighlight:gsub('(FloatBorder:)Normal', '%1FloatBorder')
+
 cmp.setup {
   snippet = {
     expand = function(args)
@@ -15,8 +18,8 @@ cmp.setup {
     end,
   },
   window = {
-    completion = cmp.config.window.bordered(),
-    documentation = cmp.config.window.bordered(),
+    completion = menu_style,
+    documentation = menu_style,
   },
   sources = cmp.config.sources {
     { name = 'nvim_lsp' },

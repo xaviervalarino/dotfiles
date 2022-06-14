@@ -10,6 +10,12 @@ end
 local color = require('catppuccin.api.colors').get_colors()
 
 catppuccin.remap {
+  CmpDocumentationBorder = {
+    fg = color.sapphire,
+  },
+  CmpDocumentation = {
+    fg = color.sapphire,
+  },
   FloatBorder = {
     fg = color.sapphire,
     bg = color.base,
