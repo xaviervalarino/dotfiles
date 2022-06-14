@@ -155,3 +155,22 @@ Thunderbolt:start()
 
 ---------------------------------------------------------------------
 require('util').alert '🔨 loaded'
+
+function fooHandler(_, msgid, data)
+  if msgid == 900 then
+    return 'version:2.0a'
+  end
+  if msgid == 100 then
+    print('fooHandler: received: ' .. data)
+
+    local jsonPosition = string.find(data, '%[')
+    print('fooHandler: found JSON at position: ' .. jsonPosition)
+
+    local jsonString = string.sub(data, jsonPosition)
+    print('fooHandler: found raw JSON string: ' .. jsonString)
+
+    local arguments = hs.json.decode(jsonString)
+    print('fooHandler: decoded JSON to table: ' .. hs.inspect(arguments))
+  end
+end
+port = hs.ipc.localPort('foo', fooHandler)
