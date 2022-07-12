@@ -9,25 +9,27 @@ end
 
 local color = require('catppuccin.api.colors').get_colors()
 
-catppuccin.remap {
-  CmpDocumentationBorder = {
-    fg = color.sapphire,
-  },
-  CmpDocumentation = {
-    fg = color.sapphire,
-  },
-  FloatBorder = {
-    fg = color.sapphire,
-    bg = color.base,
-  },
-  FloatShadow = {
-    bg = color.base,
-  },
-  FloatShadowThrough = {
-    bg = color.base,
-  },
-  NormalFloat = {
-    bg = color.base,
+catppuccin.setup {
+  color_overrides = {
+    CmpDocumentationBorder = {
+      fg = color.sapphire,
+    },
+    CmpDocumentation = {
+      fg = color.sapphire,
+    },
+    FloatBorder = {
+      fg = color.sapphire,
+      bg = color.base,
+    },
+    FloatShadow = {
+      bg = color.base,
+    },
+    FloatShadowThrough = {
+      bg = color.base,
+    },
+    NormalFloat = {
+      bg = color.base,
+    },
   },
 }
 
