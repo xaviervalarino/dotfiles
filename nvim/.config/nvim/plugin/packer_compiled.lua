@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["AutoSave.nvim"] = {
+    loaded = true,
+    path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/AutoSave.nvim",
+    url = "https://github.com/Pocco81/AutoSave.nvim"
+  },
   ["Comment.nvim"] = {
     loaded = true,
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/Comment.nvim",
@@ -139,6 +144,11 @@ _G.packer_plugins = {
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/harpoon",
     url = "https://github.com/ThePrimeagen/harpoon"
   },
+  ["inc-rename.nvim"] = {
+    loaded = true,
+    path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/inc-rename.nvim",
+    url = "https://github.com/smjonas/inc-rename.nvim"
+  },
   ["indent-blankline.nvim"] = {
     loaded = true,
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
@@ -183,6 +193,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-context"] = {
+    loaded = true,
+    path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/nvim-treesitter-context",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-context"
   },
   ["nvim-treesitter-textobjects"] = {
     loaded = true,
