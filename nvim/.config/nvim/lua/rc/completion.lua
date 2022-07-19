@@ -65,8 +65,14 @@ cmp.setup {
   },
 }
 
--- TODO
--- cmp.setup.cmdline('/', { sources = { name = 'buffer' } })
+cmp.setup.filetype({ 'markdown', 'gitcommit' }, {
+  view = {
+    entries = { name = 'wildmenu', separator = ' | ' },
+  },
+})
+
+--TODO
+--cmp.setup.cmdline('/', { sources = { name = 'buffer' } })
 -- cmp.setup.cmdline(':', {
 --   sources = cmp.config.sources {
 --     { name = 'path' },
