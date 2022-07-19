@@ -7,7 +7,7 @@ for _, v in ipairs { 'latte', 'frappe', 'macchiato', 'mocha' } do
   end
 end
 
-local color = require('catppuccin.api.colors').get_colors()
+local color = require('catppuccin.palettes').get_palette()
 
 catppuccin.setup {
   color_overrides = {
