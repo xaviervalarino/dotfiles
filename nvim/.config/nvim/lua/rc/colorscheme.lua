@@ -1,6 +1,12 @@
 local catppuccin = require 'catppuccin'
 
-local _, _, palette = vim.env.ITERM_PROFILE:find '-(%a+)'
+local _, palette
+if type(vim.env.ITERM_PROFILE) == 'string' then
+  _, _, palette = vim.env.ITERM_PROFILE:find '-(%a+)'
+else
+  palette = 'mocha'
+end
+
 for _, v in ipairs { 'latte', 'frappe', 'macchiato', 'mocha' } do
   if palette == v then
     vim.g.catppuccin_flavour = palette
