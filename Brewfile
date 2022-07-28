@@ -42,6 +42,12 @@ brew "volta"
 brew "yq"
 brew "zsh-completions"
 
+cask "mdimagesizemdimporter"
+cask "monitorcontrol"
+cask "qlimagesize"
+cask "qlmarkdown"
+cask "syntax-highlight"
+
 cask "figma"
 cask "firefox-developer-edition"
 cask "font-iosevka"
