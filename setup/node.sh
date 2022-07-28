@@ -5,7 +5,7 @@ if ! which volta > /dev/null; then echo 'Volta is missing' exit 1; fi
 if ! which node > /dev/null; then volta install node@latest; fi
 
 # Install global packages
-npm install --location=global \
+volta install \
   bash-language-server \
   prettier \
   typescript \
@@ -13,4 +13,4 @@ npm install --location=global \
   vscode-langservers-extracted 
 
 # Check what was installed
-npm ls --location=global
+volta list
