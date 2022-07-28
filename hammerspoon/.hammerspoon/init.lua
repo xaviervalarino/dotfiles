@@ -7,7 +7,10 @@ hs.console.clearConsole()
 -- allow Hammerspoon to be used through CLI
 -- `hs` to start REPL
 -- `hs -c "{lua cmd}"` to run commands
-hs.ipc.cliInstall()
+
+-- TODO: would be nice to look up $HOMEBREW_PREFIX location
+-- os.getenv'HOMEBREW_PREFIX' and hs.execute'echo $HOMEBREW_PREFIX' are note working
+hs.ipc.cliInstall('/opt/homebrew/')
 
 local Modes = require 'keymodes'
 local switcher = require 'switcher'
