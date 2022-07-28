@@ -1,4 +1,3 @@
-source $HOME/.aliases
 
 if type brew &>/dev/null; then
   fpath+=$(brew --prefix)/share/zsh/site-functions
@@ -8,6 +7,10 @@ fi
 # Activate zsh completions
 autoload -Uz compinit
 compinit
+
+#------------------------------------------
+# Aliases: some aliases require `compinit` to be loaded
+source $HOME/.aliases
 
 #------------------------------------------
 # History

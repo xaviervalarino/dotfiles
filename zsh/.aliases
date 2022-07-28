@@ -19,6 +19,23 @@ pom() {
   utimer -c "$1" && say 'beep boop, times up' 
 }
 
+function theme() {
+  case "$1" in
+    'light') colorscheme="Catppuccin-Latte" ;;
+    'midlight') colorscheme="Catppuccin-Frappe" ;;
+    'middark') colorscheme="Catppuccin-Macchiato" ;;
+    'dark') colorscheme="Catppuccin-Mocha" ;;
+    *) echo 'Themes options: light | midlight | middark | dark' >&2 ;;
+  esac
+
+  KITTY_CONFIG_DIRECTORY=$XDG_CONFIG_HOME/kitty/colorscheme/ kitty +kitten themes --reload-in all "$colorscheme"
+}
+# Autocompletion
+function _theme() {
+  compadd 'light' 'midlight' 'middark' 'dark'
+}
+compdef _theme theme
+
 heic_to_jpg() {
   extension=${2##*.}
   echo $extension
