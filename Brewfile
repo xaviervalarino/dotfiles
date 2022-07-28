@@ -4,6 +4,7 @@ tap "homebrew/cask-fonts"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
 tap "buo/cask-upgrade"
+tap "homebrew/cask-drivers"
 
 brew "bat"
 brew "coreutils"
@@ -50,6 +51,7 @@ cask "karabiner-elements"
 cask "bitwarden"
 cask "zoom"
 cask "monitorcontrol"
+cask "cameracontroller"
 
 # Personal
 cask "affinity-photo"
