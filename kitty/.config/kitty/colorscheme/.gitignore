@@ -1,0 +1,3 @@
+# only ignore config files in this directory, but not the `themes` dir
+/*.conf
+/*.conf.bak
