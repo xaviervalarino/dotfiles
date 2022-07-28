@@ -69,6 +69,10 @@ wm:chord('w', function()
   hs.spaces.toggleMissionControl()
 end)
 
+wm:chord('ctrl', 'd', function()
+  hs.spaces.toggleShowDesktop()
+end)
+
 -- https://github.com/jasonrudolph/keyboard/blob/main/hammerspoon/windows.lua
 wm:chord('h', function()
   local win = hs.window.focusedWindow()
