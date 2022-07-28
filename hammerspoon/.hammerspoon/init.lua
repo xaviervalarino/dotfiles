@@ -31,6 +31,7 @@ local work = hs.execute('uname -n'):find 'trax'
 
 hs.hotkey.bind('shift-cmd', ',', app_select 'System Preferences')
 
+app:chord('space', app_select 'kitty')
 app:chord('a', app_select 'Activity Monitor')
 app:chord('c', app_select 'Google Chrome')
 app:chord('x', app_select 'Firefox Developer Edition')
@@ -38,7 +39,6 @@ app:chord('f', app_select 'Figma')
 app:chord('s', app_select 'Slack')
 app:chord('i', app_select 'Miro')
 app:chord('shift', 'f', app_select 'Finder')
-app:chord('t', app_select 'iTerm')
 
 app:chord('m', work and goto_chrome_tab 'mail.google.com' or app_select 'Mail')
 app:chord('c', work and goto_chrome_tab 'calendar.google.com' or app_select 'Calendar')
