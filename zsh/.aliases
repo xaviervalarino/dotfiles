@@ -10,12 +10,12 @@ alias stow="stow --verbose"
 alias vim="nvim"
 alias brew_bundle="brew bundle --file=$HOME/dotfiles/Brewfile"
 
-function ps_time() {
+ps_time() {
   pid=$(pgrep -i "$1")
   ps -p "$pid" -o etime=
 }
 
-function pom() {
+pom() {
   utimer -c "$1" && say 'beep boop, times up' 
 }
 
