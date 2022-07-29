@@ -156,4 +156,4 @@ setmetatable(Statusline, {
   end,
 })
 
-vim.wo.statusline = '%!luaeval("Statusline()")'
+vim.o.statusline = '%!luaeval("Statusline()")'
