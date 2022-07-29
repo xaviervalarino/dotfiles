@@ -19,4 +19,14 @@ pom() {
   utimer -c "$1" && say 'beep boop, times up' 
 }
 
+heic_to_jpg() {
+  extension=${2##*.}
+  echo $extension
+  if [[ $extension != 'jpg' && $extension != 'jpeg' ]]; then
+    echo "Error: extension must be 'jpg' or 'jpeg'"
+  else
+    sips -s format jpeg $1 --out $2
+  fi
+}
+
 # vi:filetype=sh
