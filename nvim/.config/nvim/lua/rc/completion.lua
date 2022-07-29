@@ -35,7 +35,6 @@ cmp.setup {
         nvim_lsp = '[LSP]',
         nvim_lua = '[api]',
         buffer = '[buf]',
-        npm = '[npm]',
         luasnip = '[snip]',
         path = '[path]',
       },
