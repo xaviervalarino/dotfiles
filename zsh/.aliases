@@ -25,7 +25,7 @@ theme() {
     'midlight') colorscheme="Catppuccin-Frappe" ;;
     'middark') colorscheme="Catppuccin-Macchiato" ;;
     'dark') colorscheme="Catppuccin-Mocha" ;;
-    *) echo 'Themes options: light | midlight | middark | dark' >&2 ;;
+    *) echo 'Themes options: light | midlight | middark | dark' >&2; return 1 ;;
   esac
 
   KITTY_CONFIG_DIRECTORY=$XDG_CONFIG_HOME/kitty/colorscheme/ kitty +kitten themes --reload-in all "$colorscheme"
