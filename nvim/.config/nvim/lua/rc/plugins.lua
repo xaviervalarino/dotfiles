@@ -55,6 +55,7 @@ local packages = {
   'hrsh7th/cmp-cmdline', -- cmdline completion
   'hrsh7th/cmp-nvim-lsp',
   'saadparwaiz1/cmp_luasnip', -- snippet completion
+  'fladson/vim-kitty',
 
   -- snippets
   'L3MON4D3/LuaSnip', -- snippet engine
