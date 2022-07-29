@@ -4,6 +4,9 @@ Statusline = {}
 local fn = vim.fn
 local api = vim.api
 
+-- Dont show mode in command line
+vim.o.showmode = false
+
 Statusline.trunc_width = setmetatable({
   mode = 80,
   git_status = 90,
