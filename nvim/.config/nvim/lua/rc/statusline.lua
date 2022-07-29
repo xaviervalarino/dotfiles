@@ -30,6 +30,10 @@ end
 
 local palette = require('catppuccin.palettes').get_palette()
 api.nvim_set_hl(0, 'DarkFg', { fg = palette.crust, bg = palette.base })
+api.nvim_set_hl(0, 'StatusERROR', { fg = palette.crust, bg = palette.red })
+api.nvim_set_hl(0, 'StatusWARN', { fg = palette.crust, bg = palette.yellow })
+api.nvim_set_hl(0, 'StatusINFO', { fg = palette.crust, bg = palette.sky })
+api.nvim_set_hl(0, 'StatusHINT', { fg = palette.crust, bg = palette.teal })
 api.nvim_set_hl(0, 'StatusLine', { fg = palette.text, bg = palette.crust })
 
 Statusline.separator = { start = color('DarkFg', ''), close = color('DarkFg', '') }
@@ -111,36 +115,27 @@ Statusline.line_col = function(self)
   return ' Ln %l, Col %c '
 end
 
--- TODO: keep severity sort order in result
 -- TODO: pull icons from a central module to use across config files
 Statusline.diagnostics = function(self)
-  local result = ''
+  local result = {}
+  local severity = { 'ERROR', 'WARN', 'INFO', 'HINT' }
   local icon = {
     error = ' ',
-    warning = ' ',
+    warn = ' ',
     info = ' ',
     hint = ' ',
   }
-  local severity = {
-    error = 'ERROR',
-    warning = 'WARN',
-    info = 'INFO',
-    hint = 'HINT',
-  }
-  for k, level in pairs(severity) do
+  for _, level in ipairs(severity) do
     local count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity[level] })
     if count > 0 then
-      if result:len() == 0 then
-        result = '|'
-      end
-      result = string.format('%s %s%s |', result, icon[k], count)
+      table.insert(result, color('Status' .. level, string.format(' %s%s ', icon[level:lower()], count)))
     end
   end
 
   if self:is_truncated(self.trunc_width.diagnostic) then
     return ''
   else
-    return result
+    return table.concat(result)
   end
 end
 
