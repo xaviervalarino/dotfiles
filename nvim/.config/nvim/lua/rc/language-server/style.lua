@@ -1,8 +1,8 @@
 local signs = {
-  { name = 'Error', icon = '' },
+  { name = 'Error', icon = ' ' },
   { name = 'Warn', icon = ' ' },
-  { name = 'Info', icon = '' },
-  { name = 'Hint', icon = ' ' },
+  { name = 'Info', icon = ' ' },
+  { name = 'Hint', icon = ' ' },
 }
 
 for _, sign in ipairs(signs) do
