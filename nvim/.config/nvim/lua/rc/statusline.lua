@@ -1,117 +1,161 @@
-local status_ok, el = pcall(require, 'el')
-if not status_ok then
-  return
-end
+-- Pulled heavily from: https://elianiva.my.id/post/neovim-lua-statusline
 
-local builtin = require 'el.builtin'
-local extensions = require 'el.extensions'
-local sections = require 'el.sections'
-local subscribe = require 'el.subscribe'
-local lsp_statusline = require 'el.plugins.lsp_status'
-local helper = require 'el.helper'
-local diagnostic = require 'el.diagnostic'
+Statusline = {}
+local fn = vim.fn
+local api = vim.api
 
-local has_lsp_extensions, ws_diagnostics = pcall(require, 'lsp_extensions.workspace.diagnostic')
-
-local git_icon = subscribe.buf_autocmd('el_file_icon', 'BufRead', function(_, bufnr)
-  local icon = extensions.file_icon(_, bufnr)
-  if icon then
-    return icon .. ' '
-  end
-
-  return ''
-end)
-
-local git_branch = subscribe.buf_autocmd('el_git_branch', 'BufEnter', function(window, buffer)
-  local branch = extensions.git_branch(window, buffer)
-  if branch then
-    return ' ' .. extensions.git_icon() .. ' ' .. branch
-  end
-end)
-
-local git_changes = subscribe.buf_autocmd('el_git_changes', 'BufWritePost', function(window, buffer)
-  return extensions.git_changes(window, buffer)
-end)
-
-local ws_diagnostic_counts = function(_, buffer)
-  if not has_lsp_extensions then
-    return ''
-  end
-
-  local messages = {}
-
-  local error_count = ws_diagnostics.get_count(buffer.bufnr, 'Error')
-
-  local x = '⬤'
-  if error_count == 0 then
-    -- pass
-  elseif error_count < 5 then
-    table.insert(messages, string.format('%s#%s#%s%%*', '%', 'StatuslineError' .. error_count, x))
-  else
-    table.insert(messages, string.format('%s#%s#%s%%*', '%', 'StatuslineError5', x))
-  end
-
-  return table.concat(messages, '')
-end
-
-local show_current_func = function(window, buffer)
-  if buffer.filetype == 'lua' then
-    return ''
-  end
-
-  return lsp_statusline.current_function(window, buffer)
-end
-
-local diagnostic_display = diagnostic.make_buffer()
-
-require('el').setup {
-  generator = function(window, buffer)
-    local mode = extensions.gen_mode { format_string = ' %s ' }
-
-    local items = {
-      -- { mode  },
-      { git_branch },
-      { ' ' },
-      { sections.split },
-      { git_icon },
-      { sections.maximum_width(builtin.make_responsive_file(140, 90), 0.40) },
-      { sections.collapse_builtin { { ' ' }, { builtin.modified_flag } } },
-      { sections.split },
-      { diagnostic_display },
-      { show_current_func },
-      { lsp_statusline.server_progress },
-      { ws_diagnostic_counts },
-      { git_changes },
-      { '[' },
-      { builtin.line_with_width(3) },
-      { ':' },
-      { builtin.column_with_width(2) },
-      { ']' },
-      {
-        sections.collapse_builtin {
-          '[',
-          builtin.help_list,
-          builtin.readonly_list,
-          ']',
-        },
-      },
-      -- { builtin.filetype },
-    }
-
-    local result = {}
-    for _, item in ipairs(items) do
-      table.insert(result, item)
-    end
-
-    return result
+Statusline.trunc_width = setmetatable({
+  mode = 80,
+  git_status = 90,
+  filename = 140,
+  line_col = 60,
+}, {
+  __index = function()
+    -- handle edge cases
+    return 80
   end,
-}
+})
 
-require('fidget').setup {
-  text = {
-    spinner = 'moon',
-  },
-  align = {
-    bottom = true,
-  },
-}
+Statusline.is_truncated = function(_, width)
+  local current_width = api.nvim_win_get_width(0)
+  return current_width < width
+end
+
+local function color(hlgroup, str)
+  return string.format('%%#%s#%s%%#%s#', hlgroup, str, 'StatusLine')
+end
+
+local palette = require('catppuccin.palettes').get_palette()
+api.nvim_set_hl(0, 'DarkFg', { fg = palette.crust, bg = palette.base })
+api.nvim_set_hl(0, 'StatusLine', { fg = palette.text, bg = palette.crust })
+
+Statusline.separator = { start = color('DarkFg', ''), close = color('DarkFg', '') }
+
+Statusline.modes = setmetatable({
+  ['n'] = { 'Normal', 'N' },
+  ['no'] = { 'N·Pending', 'N·P' },
+  ['v'] = { 'Visual', 'V' },
+  ['V'] = { 'V·Line', 'V·L' },
+  [''] = { 'V·Block', 'V·B' },
+  ['s'] = { 'Select', 'S' },
+  ['S'] = { 'S·Line', 'S·L' },
+  [''] = { 'S·Block', 'S·B' },
+  ['i'] = { 'Insert', 'I' },
+  ['ic'] = { 'Insert', 'I' },
+  ['R'] = { 'Replace', 'R' },
+  ['Rv'] = { 'V·Replace', 'V·R' },
+  ['c'] = { 'Command', 'C' },
+  ['cv'] = { 'Vim·Ex ', 'V·E' },
+  ['ce'] = { 'Ex ', 'E' },
+  ['r'] = { 'Prompt ', 'P' },
+  ['rm'] = { 'More ', 'M' },
+  ['r?'] = { 'Confirm ', 'C' },
+  ['!'] = { 'Shell ', 'S' },
+  ['t'] = { 'Terminal ', 'T' },
+}, {
+  __index = function()
+    return { 'Unkown', 'U' }
+  end,
+})
+
+Statusline.mode = function(self)
+  local current_mode = api.nvim_get_mode().mode
+
+  if self:is_truncated(self.trunc_width.mode) then
+    return string.format(' %s ', self.modes[current_mode][2]:upper())
+  end
+
+  return string.format(' %s ', self.modes[current_mode][1]):upper()
+end
+
+Statusline.git_status = function(self)
+  -- fallback
+  local signs = vim.b.gitsigns_status_dict or { head = '', added = 0, changed = 0, removed = 0 }
+  local is_head_empty = signs.head ~= ''
+
+  if self:is_truncated(self.trunc_width.git_status) then
+    return is_head_empty and string.format('  %s ', signs.head or '') or ''
+  end
+
+  return is_head_empty
+      and string.format('  %s | +%s ~%s -%s ', signs.head, signs.added, signs.changed, signs.removed)
+    or ''
+end
+
+Statusline.filename = function(self)
+  if self:is_truncated(self.trunc_width.filename) then
+    --   return ' %<%f '
+    return fn.pathshorten(fn.expand '%:f')
+  end
+  return ' %<%f '
+end
+
+Statusline.filetype = function(self)
+  local file_name, file_ext = fn.expand '%:t', fn.expand '%:e'
+  local icon = require('nvim-web-devicons').get_icon(file_name, file_ext, { default = true })
+  local filetype = vim.bo.filetype
+
+  if filetype == '' then
+    return ''
+  end
+  return string.format(' %s %s ', icon, filetype):lower()
+end
+
+Statusline.line_col = function(self)
+  if self:is_truncated(self.trunc_width.line_col) then
+    return ' %l:%c '
+  end
+  return ' Ln %l, Col %c '
+end
+
+-- TODO: keep severity sort order in result
+-- TODO: pull icons from a central module to use across config files
+Statusline.diagnostics = function(self)
+  local result = ''
+  local icon = {
+    error = ' ',
+    warning = ' ',
+    info = ' ',
+    hint = ' ',
+  }
+  local severity = {
+    error = 'ERROR',
+    warning = 'WARN',
+    info = 'INFO',
+    hint = 'HINT',
+  }
+  for k, level in pairs(severity) do
+    local count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity[level] })
+    if count > 0 then
+      if result:len() == 0 then
+        result = '|'
+      end
+      result = string.format('%s %s%s |', result, icon[k], count)
+    end
+  end
+
+  if self:is_truncated(self.trunc_width.diagnostic) then
+    return ''
+  else
+    return result
+  end
+end
+
+setmetatable(Statusline, {
+  __call = function(s)
+    return table.concat {
+      s.separator.start,
+      s:mode(),
+      s:diagnostics(),
+      s:git_status(),
+      '%=',
+      s:filename(),
+      '%=',
+      s:filetype(),
+      s:line_col(),
+      s.separator.close,
+    }
+  end,
+})
+
+vim.wo.statusline = '%!luaeval("Statusline()")'

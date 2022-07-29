@@ -68,7 +68,6 @@ local packages = {
   'kyazdani42/nvim-web-devicons',
   { 'catppuccin/nvim', as = 'catppuccin' },
   'projekt0n/github-nvim-theme',
-  'tjdevries/express_line.nvim',
 
   'j-hui/fidget.nvim',
 
