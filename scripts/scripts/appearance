@@ -1,0 +1,20 @@
+#!/usr/bin/osascript -l JavaScript
+
+/*
+ * Change MacOS appearance from darkMode to lightMode programmatically
+ * $ appearance dark|light
+ */
+function run(argv){
+  const appearance = Application('System Events').appearancePreferences
+  if (argv[0] === 'dark') {
+    appearance.darkMode = true
+    return
+  }
+  if (argv[0] === 'light') {
+    appearance.darkMode = false
+    return
+  }
+  console.log('Appearance accepts either `dark` or `light` mode as arguments')
+}
+
+// vim:ft=javascript
