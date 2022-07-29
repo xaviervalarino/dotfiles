@@ -67,3 +67,5 @@ nmap('<leader>gj', ':diffget //2<CR>', { desc = 'Select right diff' })
 
 -- Set CWD to buffer (manual :set autochdir)
 nmap('<leader>cd', ':cd %:h<CR>', { desc = 'Set working directory to buffer' })
+
+nmap('<leader>z', ':ZenMode<CR>', { desc = 'Toggle Distraction-free Zen Mode' })

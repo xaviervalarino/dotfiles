@@ -71,7 +71,24 @@ local packages = {
   'tjdevries/express_line.nvim',
 
   'j-hui/fidget.nvim',
-  { 'folke/zen-mode.nvim', config = simple_setup 'zen-mode' },
+
+  -- TODO: move this into it's own file?
+  {
+    'folke/zen-mode.nvim',
+    config = require('zen-mode').setup {
+      window = {
+        backdrop = 1,
+        width = 80,
+      },
+      -- TODO: I don't think this works
+      plugins = {
+        kitty = {
+          enabled = true,
+          font = '+4',
+        },
+      },
+    },
+  },
   'ThePrimeagen/harpoon',
   { 'folke/which-key.nvim', config = simple_setup 'which-key' },
   { 'numToStr/Comment.nvim', config = simple_setup 'Comment' },
