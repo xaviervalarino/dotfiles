@@ -105,7 +105,7 @@ Statusline.filetype = function(self)
   if filetype == '' then
     return ''
   end
-  return string.format(' %s %s ', icon, filetype):lower()
+  return string.format(' %s %s ', filetype, icon)
 end
 
 Statusline.line_col = function(self)
