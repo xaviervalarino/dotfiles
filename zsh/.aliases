@@ -29,6 +29,9 @@ theme() {
   esac
 
   KITTY_CONFIG_DIRECTORY=$XDG_CONFIG_HOME/kitty/colorscheme/ kitty +kitten themes --reload-in all "$colorscheme"
+
+  # Used to set colorscheme in nvim
+  export TERM_COLORSCHEME=$colorscheme
 }
 # Autocompletion
 _theme() {

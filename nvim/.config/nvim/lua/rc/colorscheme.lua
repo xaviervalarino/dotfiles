@@ -1,9 +1,10 @@
 local catppuccin = require 'catppuccin'
 
-local _, palette
-if type(vim.env.ITERM_PROFILE) == 'string' then
-  _, _, palette = vim.env.ITERM_PROFILE:find '-(%a+)'
+local palette
+if type(vim.env.TERM_COLORSCHEME) == 'string' then
+  palette = vim.env.TERM_COLORSCHEME:match('-(%a+)'):lower()
 else
+  -- default to dark
   palette = 'mocha'
 end
 
