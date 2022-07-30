@@ -66,9 +66,9 @@ function M:create(key, name)
     self.active_mode = mode
   end)
 
-  --Key binding wrapper that works with this mode
-  --@param ... any arguments used on hs.hotkey bind, except `msg`
-  --@return table hs.hotkey
+  ---Key binding wrapper that works with this mode
+  ---@param ... any arguments used on hs.hotkey bind, except `msg`
+  ---@return table hs.hotkey
   function mode:chord(...)
     local args = { ... }
     -- if no modifier keys

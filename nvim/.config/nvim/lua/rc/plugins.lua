@@ -3,7 +3,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.execute('!git clone --depth 1 https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
---- setup package with default config
+---Setup package with default config
 ---@param pkg_name string plugin name supplied to `require`
 local function simple_setup(pkg_name)
   if type(pkg_name) == 'string' then
