@@ -114,11 +114,6 @@ _G.packer_plugins = {
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
-  ["express_line.nvim"] = {
-    loaded = true,
-    path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/express_line.nvim",
-    url = "https://github.com/tjdevries/express_line.nvim"
-  },
   ["fidget.nvim"] = {
     loaded = true,
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/fidget.nvim",
