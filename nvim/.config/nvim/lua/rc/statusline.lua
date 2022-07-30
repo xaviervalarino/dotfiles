@@ -77,16 +77,24 @@ end
 
 Statusline.git_status = function(self)
   -- fallback
-  local signs = vim.b.gitsigns_status_dict or { head = '', added = 0, changed = 0, removed = 0 }
-  local is_head_empty = signs.head ~= ''
+  local signs = vim.b.gitsigns_status_dict
 
-  if self:is_truncated(self.trunc_width.git_status) then
-    return is_head_empty and string.format('  %s ', signs.head or '') or ''
+  -- not a repo
+  if not signs then
+    return ''
   end
 
-  return is_head_empty
-      and string.format('  %s | +%s ~%s -%s ', signs.head, signs.added, signs.changed, signs.removed)
-    or ''
+  if self:is_truncated(self.trunc_width.git_status) then
+    return string.format('  %s ', signs.head or '')
+  end
+
+  return string.format(
+    '  %s | +%s ~%s -%s ',
+    signs.head or '',
+    signs.added or 0,
+    signs.changed or 0,
+    signs.removed or 0
+  )
 end
 
 Statusline.filename = function(self)
