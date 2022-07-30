@@ -1,4 +1,7 @@
-local M, keymap, mt = {}, {}, {}
+local M = {}
+
+-- Keymap convenience function -------------------------------------------------
+local keymap, mt = {}, {}
 
 local function split(str)
   if #str > 0 then
@@ -49,5 +52,15 @@ function M.buf_create_keymaps(...)
     return unpack(buf_maps)
   end
 end
+
+-- Diagnostic icons ------------------------------------------------------------
+M.diagnostic_signs = {
+  { name = 'Error', icon = ' ' },
+  { name = 'Warn', icon = ' ' },
+  { name = 'Info', icon = ' ' },
+  { name = 'Hint', icon = ' ' },
+}
+
+--------------------------------------------------------------------------------
 
 return M

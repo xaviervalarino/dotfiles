@@ -1,11 +1,6 @@
-local signs = {
-  { name = 'Error', icon = ' ' },
-  { name = 'Warn', icon = ' ' },
-  { name = 'Info', icon = ' ' },
-  { name = 'Hint', icon = ' ' },
-}
+local diagnostic_signs = require('rc.util').diagnostic_signs
 
-for _, sign in ipairs(signs) do
+for _, sign in ipairs(diagnostic_signs) do
   local hl = 'DiagnosticSign' .. sign.name
   vim.fn.sign_define(hl, {
     texthl = hl,
@@ -17,7 +12,7 @@ end
 vim.diagnostic.config {
   virtual_text = false,
   -- virtual_text = { severity = 'ERROR'},
-  signs = { active = signs },
+  signs = { active = diagnostic_signs },
   update_in_insert = true,
   severity_sort = true,
   underline = true,

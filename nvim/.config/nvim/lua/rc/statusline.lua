@@ -24,16 +24,17 @@ Statusline.is_truncated = function(_, width)
   return current_width < width
 end
 
+-- add color to the string segment and then reset back to the StatusLine hlGroup
 local function color(hlgroup, str)
   return string.format('%%#%s#%s%%#%s#', hlgroup, str, 'StatusLine')
 end
 
 local palette = require('catppuccin.palettes').get_palette()
 api.nvim_set_hl(0, 'DarkFg', { fg = palette.crust, bg = palette.base })
-api.nvim_set_hl(0, 'StatusERROR', { fg = palette.crust, bg = palette.red })
-api.nvim_set_hl(0, 'StatusWARN', { fg = palette.crust, bg = palette.yellow })
-api.nvim_set_hl(0, 'StatusINFO', { fg = palette.crust, bg = palette.sky })
-api.nvim_set_hl(0, 'StatusHINT', { fg = palette.crust, bg = palette.teal })
+api.nvim_set_hl(0, 'StatusError', { fg = palette.crust, bg = palette.red })
+api.nvim_set_hl(0, 'StatusWarn', { fg = palette.crust, bg = palette.yellow })
+api.nvim_set_hl(0, 'StatusInfo', { fg = palette.crust, bg = palette.sky })
+api.nvim_set_hl(0, 'StatusHint', { fg = palette.crust, bg = palette.teal })
 api.nvim_set_hl(0, 'StatusLine', { fg = palette.text, bg = palette.crust })
 
 Statusline.separator = { start = color('DarkFg', ''), close = color('DarkFg', '') }
@@ -124,19 +125,13 @@ Statusline.line_col = function(self)
 end
 
 -- TODO: pull icons from a central module to use across config files
+local diagnostic_signs = require('rc.util').diagnostic_signs
 Statusline.diagnostics = function(self)
   local result = {}
-  local severity = { 'ERROR', 'WARN', 'INFO', 'HINT' }
-  local icon = {
-    error = ' ',
-    warn = ' ',
-    info = ' ',
-    hint = ' ',
-  }
-  for _, level in ipairs(severity) do
-    local count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity[level] })
+  for _, sign in ipairs(diagnostic_signs) do
+    local count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity[sign.name:upper()] })
     if count > 0 then
-      table.insert(result, color('Status' .. level, string.format(' %s%s ', icon[level:lower()], count)))
+      table.insert(result, color('Status' .. sign.name, string.format(' %s%s ', sign.icon, count)))
     end
   end
 
