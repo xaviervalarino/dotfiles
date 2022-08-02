@@ -70,23 +70,7 @@ local packages = {
 
   'j-hui/fidget.nvim',
 
-  -- TODO: move this into it's own file?
-  {
-    'folke/zen-mode.nvim',
-    config = require('zen-mode').setup {
-      window = {
-        backdrop = 1,
-        width = 80,
-      },
-      -- TODO: I don't think this works
-      plugins = {
-        kitty = {
-          enabled = true,
-          font = '+4',
-        },
-      },
-    },
-  },
+  'folke/zen-mode.nvim',
   'ThePrimeagen/harpoon',
   { 'folke/which-key.nvim', config = simple_setup 'which-key' },
   { 'numToStr/Comment.nvim', config = simple_setup 'Comment' },
