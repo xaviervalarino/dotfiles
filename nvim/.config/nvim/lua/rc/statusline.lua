@@ -101,9 +101,9 @@ end
 Statusline.filename = function(self)
   if self:is_truncated(self.trunc_width.filename) then
     --   return ' %<%f '
-    return fn.pathshorten(fn.expand '%:f')
+    return fn.pathshorten(fn.expand '%:f %:m')
   end
-  return ' %<%f '
+  return ' %<%f %m '
 end
 
 Statusline.filetype = function(self)
