@@ -1,3 +1,10 @@
+local ok, harpoon = pcall(require, 'harpoon')
+if not ok then
+  return
+end
+
+harpoon.setup{}
+
 local nmap = require('rc.util').create_keymaps 'n'
 local harpoon_add_file = require('harpoon.mark').add_file
 local harpoon_ui = require 'harpoon.ui'
