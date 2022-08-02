@@ -8,9 +8,11 @@ local function nav_to_file(id)
   end
 end
 
-nmap('h ', harpoon_add_file)
-nmap('hl', harpoon_ui.toggle_quick_menu)
-nmap('ha', nav_to_file(1))
-nmap('hs', nav_to_file(2))
-nmap('hd', nav_to_file(3))
-nmap('hf', nav_to_file(4))
+require('harpoon').setup{}
+
+nmap('<leader>pa', harpoon_add_file, { desc = 'Harpoon: add file to list'})
+nmap('<leader>l', harpoon_ui.toggle_quick_menu, { desc='Harpoon: list all files'})
+nmap('<leader>1', nav_to_file(1), { desc = 'Harpoon: Go to 1st file'})
+nmap('<leader>2', nav_to_file(2), { desc = 'Harpoon: Go to 2nd file'})
+nmap('<leader>3', nav_to_file(3), { desc = 'Harpoon: Go to 3rd file'})
+nmap('<leader>4', nav_to_file(4), { desc = 'Harpoon: Go to 4th file'})
