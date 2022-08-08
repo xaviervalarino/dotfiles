@@ -10,17 +10,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- Turn off relative line numbers for inactive windows
 local local_numbers = vim.api.nvim_create_augroup('LocalNumbers', { clear = true })
-local function set_local_numbers(event, set)
-  vim.api.nvim_create_autocmd(event, {
-    group = local_numbers,
-    pattern = '*',
-    callback = function()
-      vim.opt_local.relativenumber = set
-    end,
-  })
-end
-set_local_numbers('WinEnter', true)
-set_local_numbers('WinLeave', false)
+vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
+  group = local_numbers,
+  pattern = '*',
+  callback = function(arg)
+    vim.opt_local.relativenumber = arg.event == 'WinEnter' and true or false
+  end,
+})
 
 -- not sure if I need this 
 -- local preview_nonumbers = vim.api.nvim_create_augroup('PreviewNoNumbers', { clear = true })
