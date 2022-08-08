@@ -69,6 +69,12 @@ cmp.setup.filetype({ 'markdown', 'gitcommit' }, {
     entries = { name = 'wildmenu', separator = ' | ' },
   },
 })
+-- Fix WildMenu controlled by CMP
+-- Match color to StatusLine
+local palette = require('catppuccin.palettes').get_palette()
+if palette then
+  vim.api.nvim_set_hl(0, 'Pmenu', { bg = palette.crust })
+end
 
 --TODO
 --cmp.setup.cmdline('/', { sources = { name = 'buffer' } })
