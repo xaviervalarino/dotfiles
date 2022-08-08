@@ -30,12 +30,14 @@ local function color(hlgroup, str)
 end
 
 local palette = require('catppuccin.palettes').get_palette()
-api.nvim_set_hl(0, 'DarkFg', { fg = palette.crust, bg = palette.base })
-api.nvim_set_hl(0, 'StatusError', { fg = palette.crust, bg = palette.red })
-api.nvim_set_hl(0, 'StatusWarn', { fg = palette.crust, bg = palette.yellow })
-api.nvim_set_hl(0, 'StatusInfo', { fg = palette.crust, bg = palette.sky })
-api.nvim_set_hl(0, 'StatusHint', { fg = palette.crust, bg = palette.teal })
-api.nvim_set_hl(0, 'StatusLine', { fg = palette.text, bg = palette.crust })
+if palette then
+  api.nvim_set_hl(0, 'DarkFg', { fg = palette.crust, bg = palette.base })
+  api.nvim_set_hl(0, 'StatusError', { fg = palette.crust, bg = palette.red })
+  api.nvim_set_hl(0, 'StatusWarn', { fg = palette.crust, bg = palette.yellow })
+  api.nvim_set_hl(0, 'StatusInfo', { fg = palette.crust, bg = palette.sky })
+  api.nvim_set_hl(0, 'StatusHint', { fg = palette.crust, bg = palette.teal })
+  api.nvim_set_hl(0, 'StatusLine', { fg = palette.text, bg = palette.crust })
+end
 
 Statusline.separator = { start = color('DarkFg', ''), close = color('DarkFg', '') }
 
