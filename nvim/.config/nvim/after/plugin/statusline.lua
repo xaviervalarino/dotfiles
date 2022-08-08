@@ -1,4 +1,4 @@
--- Pulled heavily from: https://elianiva.my.id/post/neovim-lua-statusline
+-- originally inspired by https://elianiva.my.id/post/neovim-lua-statusline
 
 Statusline = {}
 local fn = vim.fn
@@ -108,7 +108,7 @@ Statusline.filename = function(self)
   return ' %<%f %m '
 end
 
-Statusline.filetype = function(self)
+Statusline.filetype = function()
   local file_name, file_ext = fn.expand '%:t', fn.expand '%:e'
   local icon = require('nvim-web-devicons').get_icon(file_name, file_ext, { default = true })
   local filetype = vim.bo.filetype

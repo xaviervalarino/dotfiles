@@ -3,7 +3,7 @@ if not ok then
   return
 end
 
-harpoon.setup{}
+harpoon.setup {}
 
 local nmap = require('rc.util').create_keymaps 'n'
 local harpoon_add_file = require('harpoon.mark').add_file
