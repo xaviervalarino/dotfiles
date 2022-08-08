@@ -57,8 +57,10 @@ theme() {
 
   KITTY_CONFIG_DIRECTORY=$XDG_CONFIG_HOME/kitty/colorscheme/ kitty +kitten themes --reload-in all "$colorscheme"
 
-  # Used to set colorscheme in nvim
+  # Used to set colorscheme in other tools like Neovim
+  # vars need are be reexported since `kitty` does not export switching themes
   export TERM_COLORSCHEME=$colorscheme
+  export BAT_THEME=$TERM_COLORSCHEME
   export FZF_DEFAULT_OPT
 }
 # Autocompletion

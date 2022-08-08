@@ -18,16 +18,19 @@
 [core]
   editor = nvim
   excludesfile = /Users/xavier/.config/git/excludes
-  pager = delta
+  pager = delta --features="$TERM_COLORSCHEME"
 [push]
   default = simple
 [pull]
   rebase = true
 [interactive]
-  diffFilter = delta --color-only
+  diffFilter = delta --features="$TERM_COLORSCHEME" --color-only
 [delta]
   navigate = true  # use n and N to move between diff sections
   line-numbers = true
+; dark by default: Catppuccin-Frappe, Catpuccin-Macchiato, Catppuccin-Mocha 
+[delta "Catppuccin-Latte"]
+  light = true
 [merge]
   conflictstyle = diff3
 [diff]
