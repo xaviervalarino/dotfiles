@@ -74,8 +74,6 @@ local packages = {
   'ThePrimeagen/harpoon',
   { 'folke/which-key.nvim', config = simple_setup 'which-key' },
   { 'numToStr/Comment.nvim', config = simple_setup 'Comment' },
-
-  { 'Pocco81/AutoSave.nvim', config = simple_setup 'autosave' },
 }
 
 return require('packer').startup {

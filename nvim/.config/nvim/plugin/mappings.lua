@@ -9,6 +9,10 @@ vim.g.maplocalleader = ' '
 -- Make Y yank to the end of the line (behave like other capital letters)
 nmap('Y', 'y$')
 
+-- Save when exiting insert mode
+-- TODO: consider autocommand for TextChanged,FocusLost
+imap('<esc>', '<esc>:update<CR>')
+
 -- Keep cursor centered
 nmap('n', 'nzzzv')
 nmap('N', 'nzzzv')
