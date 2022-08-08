@@ -116,7 +116,7 @@ Statusline.filetype = function(self)
   if filetype == '' then
     return ''
   end
-  return string.format(' %s %s ', filetype, icon)
+  return string.format(' %s ', icon)
 end
 
 Statusline.line_col = function(self)
@@ -152,9 +152,9 @@ setmetatable(Statusline, {
       s:diagnostics(),
       s:git_status(),
       '%=',
+      s:filetype(),
       s:filename(),
       '%=',
-      s:filetype(),
       s:line_col(),
       s.separator.close,
     }
