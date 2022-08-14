@@ -3,16 +3,16 @@ Bootstrapping
 * [ ] ~~N / NodeJs: user persmissions for /usr/local/?~~
 
 Hammerspoon
-* [ ] Moving windows
+* [x] Moving windows
 * [ ] Resizing windows
 * [ ] Moving spaces
-* [ ] Turn off wifi when ethernet or thunderbolt bridge is connected
+* [x] Turn off wifi when ethernet or thunderbolt bridge is connected
 
 Karabiner
-* [ ] Mouse buttons
+* [x] Mouse buttons
 
 Nvim
-* [ ] Telescope config
+* [x] Telescope config
 * [ ] Async for HS Lua LSP
-* [ ] Migrate to Lua autocmd
+* [x] Migrate to Lua autocmd
 * [x] Install language servers
