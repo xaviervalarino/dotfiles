@@ -26,6 +26,16 @@ set.number = true
 set.updatetime = 250
 window.signcolumn = 'yes'
 
+set.fillchars = {
+  horiz = '━',
+  horizup = '┻',
+  horizdown = '┳',
+  vert = '┃',
+  vertleft = '┫',
+  vertright = '┣',
+  verthoriz = '╋',
+}
+
 -- Search ------------------------------
 set.ignorecase = true
 set.smartcase = true
