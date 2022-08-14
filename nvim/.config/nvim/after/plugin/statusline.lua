@@ -39,7 +39,7 @@ if palette then
   api.nvim_set_hl(0, 'StatusLine', { fg = palette.text, bg = palette.crust })
 end
 
-Statusline.separator = { start = color('DarkFg', ''), close = color('DarkFg', '') }
+Statusline.separator = { start = color('DarkFg', '░▒▓'), close = color('DarkFg', '▓▒░') }
 
 Statusline.modes = setmetatable({
   ['n'] = { 'Normal', 'N' },
