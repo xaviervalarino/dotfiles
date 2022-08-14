@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+if [[ -z "$1" ]]; then
+  time=25m
+else 
+  time="$1"
+fi
+
+
+_play_pause () {
+  hs -c "hs.eventtap.event.newSystemKeyEvent('PLAY',true):post()" > /dev/null
+}
+audio () {
+  if [[ "$(pmset -g | grep ' sleep')" == *"coreaudiod"* ]]; then
+    is_playing=true
+  else
+    is_playing=false
+  fi
+
+  if [[ "$1" == "play" ]] && [ $is_playing = false ]; then _play_pause; fi
+  if [[ "$1" == "pause" ]] && [ $is_playing = true ]; then _play_pause; fi
+}
+
+
+audio 'play'
+utimer -c "$time" && audio 'pause' && sleep 0.5; say 'beep boop, times up' 

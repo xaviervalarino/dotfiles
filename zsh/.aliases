@@ -15,9 +15,9 @@ ps_time() {
   ps -p "$pid" -o etime=
 }
 
-pom() {
-  utimer -c "$1" && say 'beep boop, times up' 
-}
+# pom() {
+#   utimer -c "$1" && say 'beep boop, times up' 
+# }
 
 theme() {
   case "$1" in
