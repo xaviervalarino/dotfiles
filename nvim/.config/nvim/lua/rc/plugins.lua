@@ -74,6 +74,7 @@ local packages = {
   'ThePrimeagen/harpoon',
   { 'folke/which-key.nvim', config = simple_setup 'which-key' },
   { 'numToStr/Comment.nvim', config = simple_setup 'Comment' },
+   'norcalli/nvim-colorizer.lua',
   {
     'rcarriga/nvim-notify',
     config = function()
