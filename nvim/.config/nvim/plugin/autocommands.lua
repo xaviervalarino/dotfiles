@@ -1,7 +1,5 @@
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = highlight_group,
+  group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
   pattern = '*',
   callback = function()
     vim.highlight.on_yank()
@@ -9,12 +7,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Turn off relative line numbers for inactive windows
-local local_numbers = vim.api.nvim_create_augroup('LocalNumbers', { clear = true })
 vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
-  group = local_numbers,
-  pattern = '*',
-  callback = function(arg)
-    vim.opt_local.relativenumber = arg.event == 'WinEnter' and true or false
+  group = vim.api.nvim_create_augroup('LocalNumbers', { clear = true }),
+  callback = function(ctx)
+    vim.opt_local.relativenumber = ctx.event == 'WinEnter'
   end,
 })
 
@@ -31,14 +27,6 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave', 'FileType' }, {
 if not vim.o.cursorline then
   vim.api.nvim_del_augroup_by_name 'cursorlinefocus'
 end
-
--- not sure if I need this 
--- local preview_nonumbers = vim.api.nvim_create_augroup('PreviewNoNumbers', { clear = true })
--- vim.api.nvim_create_autocmd('WinEnter', {
---   group = preview_nonumbers,
---   pattern = '*',
---   command = 'if &previewwindow | setlocal nonumber | endif',
--- })
 
 -- Toggle padding in terminal when entering/leaving vim
 vim.api.nvim_create_autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' }, {
