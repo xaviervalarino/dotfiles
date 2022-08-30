@@ -28,6 +28,15 @@ if not vim.o.cursorline then
   vim.api.nvim_del_augroup_by_name 'cursorlinefocus'
 end
 
+-- Create directory if it doesn't exist when saving file
+-- https://github.com/jdhao/nvim-config/blob/78baf8d015695c2b795ac6f955550f5e96104845/lua/custom-autocmd.lua#L53-L67
+vim.api.nvim_create_autocmd('BufWritePre', {
+  group = vim.api.nvim_create_augroup('auto_create_dir', { clear = true }),
+  callback = function(ctx)
+    vim.fn.mkdir(vim.fn.fnamemodify(ctx.file, ':p:h'), 'p')
+  end,
+})
+
 -- Toggle padding in terminal when entering/leaving vim
 vim.api.nvim_create_autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' }, {
   group = vim.api.nvim_create_augroup('TermMargin', { clear = true }),
