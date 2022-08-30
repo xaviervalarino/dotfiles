@@ -8,6 +8,15 @@ M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
 function M.on_attach(client, bufnr)
   local nmap = buf_keymaps(bufnr)
 
+  local function rename()
+    vim.o.laststatus = 0
+    vim.o.cmdheight = 1
+    vim.schedule(function ()
+       vim.fn.feedkeys('IncRename ' .. vim.fn.expand '<cword>')
+    end)
+    return ':'
+  end
+
   -- stylua: ignore start
   nmap('<leader>ca',  'vim.lsp.buf.code_action',   { desc = 'Code action' })
   nmap('gd',          vim.lsp.buf.definition,      { desc = 'Go to definition' })
@@ -17,8 +26,8 @@ function M.on_attach(client, bufnr)
   nmap('K',           vim.lsp.buf.hover,           { desc = 'Hover symbol info' })
   nmap('gi',          vim.lsp.buf.implementation,  { desc = 'Implementation' })
   nmap('<leader>D',   vim.lsp.buf.type_definition, { desc = 'Type definition' })
-  nmap('<leader>rn',  ':IncRename ',               { desc = 'Rename reference' })
-  nmap('<leader>rr',  ':LspRestart<CR>',           { desc = 'Restart LSP' })
+  nmap('<leader>rn',  rename,                      { expr = true, desc = 'Rename reference' })
+  nmap('<leader>rr',  '<cmd>LspRestart<CR>',       { desc = 'Restart LSP' })
   nmap('<leader>d',   vim.diagnostic.open_float,   { desc = 'Current diagnostic' })
   nmap('[d',          vim.diagnostic.goto_prev,    { desc = 'Previous diagnostic' })
   nmap(']d',          vim.diagnostic.goto_next,    { desc = 'Next diagnostic' })
