@@ -37,6 +37,21 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   end,
 })
 
+-- Update file if modified outside Vim
+-- https://github.com/jdhao/nvim-config/blob/78baf8d015695c2b795ac6f955550f5e96104845/lua/custom-autocmd.lua#L69-L92
+vim.api.nvim_create_autocmd({ 'FileChangedShellPost', 'FocusGained', 'CursorHold' }, {
+  group = vim.api.nvim_create_augroup('AutoRead', { clear = true }),
+  pattern = '*',
+  callback = function(ctx)
+    if ctx.event == 'FileChangedShellPost' then
+      vim.notify('File changed on disk. Buffer reloaded!', vim.log.levels.WARN, { title = 'nvim-config' })
+    end
+    if vim.fn.getcmdwintype() == '' then
+      vim.cmd 'checktime'
+    end
+  end,
+})
+
 -- Toggle padding in terminal when entering/leaving vim
 vim.api.nvim_create_autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' }, {
   group = vim.api.nvim_create_augroup('TermMargin', { clear = true }),
