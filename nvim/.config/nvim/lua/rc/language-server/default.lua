@@ -11,8 +11,8 @@ function M.on_attach(client, bufnr)
   local function rename()
     vim.o.laststatus = 0
     vim.o.cmdheight = 1
-    vim.schedule(function ()
-       vim.fn.feedkeys('IncRename ' .. vim.fn.expand '<cword>')
+    vim.schedule(function()
+      vim.fn.feedkeys('IncRename ' .. vim.fn.expand '<cword>')
     end)
     return ':'
   end
