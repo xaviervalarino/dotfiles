@@ -8,46 +8,36 @@ if not cmp_ok then
   return
 end
 
-local ismap = require('rc.util').create_keymaps 'is'
+local ismap, nmap = require('rc.util').create_keymaps('is', 'n')
 
 require('luasnip.loaders.from_vscode').lazy_load()
+require('luasnip.loaders.from_lua').lazy_load()
 
-local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
+luasnip.config.set_config {
+  history = true,
+  updateevents = 'TextChanged,TextChangedI',
+  -- delete_check_events = 'TextChanged, InsertEnter',
+  enable_autosnippets = true,
+  ext_opts = {
+    [require('luasnip.util.types').choiceNode] = {
+      -- passive = { virt_text = { { '●', 'Comment' } } },
+      active = { virt_text = { { '●', 'DiagnosticHint' } } },
+    },
+  },
+}
 
-local check_back_space = function()
-  local col = vim.fn.col '.' - 1
-  if col == 0 or vim.fn.getline('.'):sub(col, col):match '%s' then
-    return true
-  else
-    return false
+ismap('<C-k>', function()
+  if luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
   end
-end
-
-_G.tab_complete = function()
-  if cmp and cmp.visible() then
-    cmp.select_next_item()
-  elseif luasnip and luasnip.expand_or_jumpable() then
-    return t '<Plug>luasnip-expand-or-jump'
-  elseif check_back_space() then
-    return t '<Tab>'
-  else
-    cmp.complete()
+end)
+ismap('<C-j>', function()
+  if luasnip.jumpable(-1) then
+    luasnip.jump(-1)
   end
-  return ''
-end
-_G.s_tab_complete = function()
-  if cmp and cmp.visible() then
-    cmp.select_prev_item()
-  elseif luasnip and luasnip.jumpable(-1) then
-    return t '<Plug>luasnip-jump-prev'
-  else
-    return t '<S-Tab>'
+end)
+ismap('<C-l>', function()
+  if luasnip.choice_active() then
+    luasnip.change_choice(1)
   end
-  return ''
-end
-
-ismap('<Tab>', 'v:lua.tab_complete()', { expr = true })
-ismap('<S-Tab>', 'v:lua.s_tab_complete()', { expr = true })
-ismap('<C-E>', '<Plug>luasnip-next-choice')
+end)
