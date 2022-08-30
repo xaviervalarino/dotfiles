@@ -1,8 +1,6 @@
 local M = {}
 local buf_keymaps = require('rc.util').buf_create_keymaps 'n'
 
-require 'rc.language-server.style'
-
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
