@@ -18,6 +18,20 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
   end,
 })
 
+vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave', 'FileType' }, {
+  group = vim.api.nvim_create_augroup('CursorLineFocus', { clear = true }),
+  callback = function(ctx)
+    local value = ctx.event == 'WinEnter'
+    if ctx.match == 'TelescopePrompt' then
+      value = false
+    end
+    vim.opt_local.cursorline = value
+  end,
+})
+if not vim.o.cursorline then
+  vim.api.nvim_del_augroup_by_name 'cursorlinefocus'
+end
+
 -- not sure if I need this 
 -- local preview_nonumbers = vim.api.nvim_create_augroup('PreviewNoNumbers', { clear = true })
 -- vim.api.nvim_create_autocmd('WinEnter', {

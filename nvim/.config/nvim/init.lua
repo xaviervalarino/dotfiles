@@ -24,6 +24,7 @@ set.breakindent = true
 set.relativenumber = true
 set.number = true
 set.updatetime = 250
+set.cursorline = true
 window.signcolumn = 'yes'
 
 set.fillchars = {
