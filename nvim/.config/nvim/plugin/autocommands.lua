@@ -25,3 +25,15 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
 --   pattern = '*',
 --   command = 'if &previewwindow | setlocal nonumber | endif',
 -- })
+
+-- Toggle padding in terminal when entering/leaving vim
+vim.api.nvim_create_autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' }, {
+  group = vim.api.nvim_create_augroup('TermMargin', { clear = true }),
+  callback = function(ctx)
+    if not vim.env.KITTY_LISTEN_ON then
+      return
+    end
+    local padding = (ctx.event == 'VimLeave' or ctx.event == 'VimSuspend') and 20 or 0
+    os.execute('kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=' .. padding)
+  end,
+})
