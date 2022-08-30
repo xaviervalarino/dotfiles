@@ -74,6 +74,12 @@ local packages = {
   'ThePrimeagen/harpoon',
   { 'folke/which-key.nvim', config = simple_setup 'which-key' },
   { 'numToStr/Comment.nvim', config = simple_setup 'Comment' },
+  {
+    'rcarriga/nvim-notify',
+    config = function()
+      vim.notify = require 'notify'
+    end,
+  },
 }
 
 return require('packer').startup {
