@@ -14,6 +14,12 @@ for _, v in ipairs { 'latte', 'frappe', 'macchiato', 'mocha' } do
   end
 end
 
+catppuccin.setup {
+  integrations = {
+    navic = true,
+  },
+}
+
 vim.cmd [[colorscheme catppuccin]]
 
 local color = require('catppuccin.palettes').get_palette()
@@ -49,6 +55,34 @@ if color then
       fg = color.text,
       bg = color.mantle,
     },
+  NavicIconsFile = { bg = color.base },
+  NavicIconsModule = { bg = color.base },
+  NavicIconsNamespace = { bg = color.base },
+  NavicIconsPackage = { bg = color.base },
+  NavicIconsClass = { bg = color.base },
+  NavicIconsMethod = { bg = color.base },
+  NavicIconsProperty = { bg = color.base },
+  NavicIconsField = { bg = color.base },
+  NavicIconsConstructor = { bg = color.base },
+  NavicIconsEnum = { bg = color.base },
+  NavicIconsInterface = { bg = color.base },
+  NavicIconsFunction = { bg = color.base },
+  NavicIconsVariable = { bg = color.base },
+  NavicIconsConstant = { bg = color.base },
+  NavicIconsString = { bg = color.base },
+  NavicIconsNumber = { bg = color.base },
+  NavicIconsBoolean = { bg = color.base },
+  NavicIconsArray = { bg = color.base },
+  NavicIconsObject = { bg = color.base },
+  NavicIconsKey = { bg = color.base },
+  NavicIconsNull = { bg = color.base },
+  NavicIconsEnumMember = { bg = color.base },
+  NavicIconsStruct = { bg = color.base },
+  NavicIconsEvent = { bg = color.base },
+  NavicIconsOperator = { bg = color.base },
+  NavicIconsTypeParameter = { bg = color.base },
+  NavicText = { bg = color.base },
+  NavicSeparator = { bg = color.base },
   }
   for name, override in pairs(hl_overrides) do
     local colors = vim.api.nvim_get_hl_by_name(name, true)
