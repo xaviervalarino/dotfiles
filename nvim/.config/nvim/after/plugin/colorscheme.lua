@@ -53,5 +53,9 @@ if color then
   for name, override in pairs(hl_overrides) do
     local colors = vim.api.nvim_get_hl_by_name(name, true)
     vim.api.nvim_set_hl(0, name, vim.tbl_extend('force', colors, override))
+    -- swap the hightlight groups for DiagnosticVirtualText* and DiagnosticSign* 
+    if name:find('DiagnosticVirtualText') then
+      vim.api.nvim_set_hl(0, 'DiagnosticSign' .. name:match '.+(%u%l+)', colors)
+    end
   end
 end
