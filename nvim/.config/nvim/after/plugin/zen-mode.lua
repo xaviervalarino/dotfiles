@@ -3,11 +3,11 @@ require('zen-mode').setup {
     backdrop = 1,
     width = 80,
   },
-  -- TODO: I don't think this works
   plugins = {
+    -- requires `allow_remote_control` and 'listen_on' to be set
     kitty = {
       enabled = true,
-      font = '+4',
+      font = '+1',
     },
   },
 }
