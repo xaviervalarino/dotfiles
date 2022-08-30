@@ -79,4 +79,12 @@ heic_to_jpg() {
   fi
 }
 
+h264() {
+  ffmpeg -i $1 -vcodec h264 -acodec aac ${1%.*}.mp4
+}
+
+video_halfspeed () {
+  ffmpeg -i $1 -filter:v "setpts=0.5*PTS" ${1%.*}.min.${1##*.}
+}
+
 # vi:filetype=sh
