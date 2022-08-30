@@ -29,12 +29,12 @@ window.signcolumn = 'yes'
 
 set.fillchars = {
   horiz = '━',
-  horizup = '┻',
-  horizdown = '┳',
-  vert = '┃',
-  vertleft = '┫',
-  vertright = '┣',
-  verthoriz = '╋',
+  horizup = '━',
+  horizdown = '━',
+  vert = ' ',
+  vertleft = '━',
+  vertright = '━',
+  verthoriz = '━',
 }
 
 -- Search ------------------------------
