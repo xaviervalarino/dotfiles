@@ -1,6 +1,5 @@
 Bootstrapping
 * [ ] Script for cargo and gem packages?
-* [ ] ~~N / NodeJs: user persmissions for /usr/local/?~~
 
 Hammerspoon
 * [x] Moving windows
@@ -9,10 +8,12 @@ Hammerspoon
 * [x] Turn off wifi when ethernet or thunderbolt bridge is connected
 
 Karabiner
-* [x] Mouse buttons
+* [ ] Remap ESC from L_CTRL to F14?
 
 Nvim
-* [x] Telescope config
+* [ ] Statusline
+  * [ ] Add debug flag
+  * [ ] add condition for resolver when in Netrw
+  * [ ] make sure resolver works when in different CWD
+* [ ] Telescope config
 * [ ] Async for HS Lua LSP
-* [x] Migrate to Lua autocmd
-* [x] Install language servers
