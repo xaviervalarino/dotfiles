@@ -45,19 +45,10 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-y>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<C-e>'] = cmp.mapping {
-      i = cmp.mapping.abort(),
-      c = cmp.mapping.close(),
-    },
-    ['<CR>'] = cmp.mapping.confirm { select = true },
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<C-space>'] = cmp.mapping.complete(),
     ['<Tab>'] = cmp.mapping.confirm { select = true },
-    ['<S-Tab>'] = cmp.mapping.confirm { select = true },
-    cmp.setup.cmdline('/', { sources = { name = 'buffer' } }),
+    ['<Enter>'] = cmp.mapping.abort(),
   },
   experimental = {
     ghost_text = true,
