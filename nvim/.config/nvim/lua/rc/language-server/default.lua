@@ -82,9 +82,15 @@ function M.on_attach(client, bufnr)
       callback = vim.lsp.buf.clear_references,
     })
   end
-  if client.name ~= 'null-ls' then
-    require('nvim-navic').attach(client, bufnr)
+
+  vim.pretty_print(client.name, client.server_capabilities)
+  if client.server_capabilities.documentSymbolProvider then
+    -- hard stop servers that use deprecated `SymbolInformation`
+    if client.name  ~= 'cssls' then
+      require('nvim-navic').attach(client, bufnr)
+    end
   end
+
   -- if client.server_capabilities.documentFormattingProvider then
   --   local lsp_formatting = vim.api.nvim_create_augroup('lsp_formatting', { clear = true })
   --   vim.api.nvim_create_autocmd('BufWritePre', {
