@@ -1,8 +1,11 @@
 local buf_keymaps = require('rc.util').buf_create_keymaps('n', 'nv', 'ox')
 
 require('gitsigns').setup {
-  signs = {},
-  numhl = true,
+  signs = {
+    add = { text = '▎' },
+    change = { text = '▎' },
+  },
+  numhl = false,
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
     local nmap, nvmap, oxmap = buf_keymaps(bufnr)
