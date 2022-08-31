@@ -8,8 +8,9 @@ local cmd_status = vim.api.nvim_create_augroup('CmdlineStatus', { clear = true }
 -- to counteract the cmdline shift
 for _, char in pairs { ':', '/', '?', '!' } do
   vim.keymap.set('', char, function()
+    local keys = vim.api.nvim_replace_termcodes(char, true, false, true)
     vim.api.nvim_exec_autocmds('User', { pattern = 'CmdlineEnterPre', group = 'CmdlineStatus' })
-    vim.fn.feedkeys(char, 'n') -- 'n': do not remap keys, any other option locks up Vim
+    vim.api.nvim_feedkeys(keys, 'n', false) -- 'n': do not remap keys, any other option locks up Vim
   end)
 end
 
