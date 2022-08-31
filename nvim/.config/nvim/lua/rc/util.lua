@@ -37,6 +37,13 @@ M.diagnostic_signs = {
   { name = 'Hint', icon = ' ' },
 }
 
------------------------------------------------------------------------------------
+-- Cmdheight=0 expression fix --------------------------------------------------
+M.run_cmd = function(keys)
+  vim.o.laststatus = 0
+  vim.o.cmdheight = 1
+  local keys = vim.api.nvim_replace_termcodes(':'.. keys, true, false, true)
+  vim.api.nvim_feedkeys(keys, mode or 'n', false)
+end
+--------------------------------------------------------------------------------
 
 return M
