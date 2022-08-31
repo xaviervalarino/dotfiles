@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-local nmap = require('rc.util').create_keymaps 'n'
+local map = require('rc.util').keymap()
 local builtin = require 'telescope.builtin'
 
 telescope.load_extension 'fzf'
@@ -18,16 +18,16 @@ telescope.setup {
   },
 }
 
-nmap('<leader><space>', function()
+map.n('<leader><space>', function()
   builtin.buffers { previewer = false }
 end)
-nmap('<leader>sf', builtin.find_files)
-nmap('<leader>sb', builtin.current_buffer_fuzzy_find)
-nmap('<leader>sh', builtin.help_tags)
-nmap('<leader>st', builtin.tags)
-nmap('<leader>sd', builtin.grep_string)
-nmap('<leader>sp', builtin.live_grep)
-nmap('<leader>so', function()
+map.n('<leader>sf', builtin.find_files)
+map.n('<leader>sb', builtin.current_buffer_fuzzy_find)
+map.n('<leader>sh', builtin.help_tags)
+map.n('<leader>st', builtin.tags)
+map.n('<leader>sd', builtin.grep_string)
+map.n('<leader>sp', builtin.live_grep)
+map.n('<leader>so', function()
   builtin.tags { only_current_buffer = true }
 end)
-nmap('<leader>?', builtin.oldfiles)
+map.n('<leader>?', builtin.oldfiles)

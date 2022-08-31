@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-local buf_keymaps = require('rc.util').buf_create_keymaps 'n'
+local bufmap = require('rc.util').keymap
 
 return {
   init_options = require('nvim-lsp-ts-utils').init_options,
@@ -13,17 +13,17 @@ return {
     client.server_capabilities.documentRangeFormattingProvider = false
   end,
   on_attach = function(_, bufnr)
-    local nmap = buf_keymaps(bufnr)
+    local map = bufmap(bufnr)
     ts_utils.setup {
       auto_inlay_hints = false,
     }
 
     -- stylua: ignore start
-    nmap('<leader>o',   ':TSLspOrganize<CR>',          { desc = 'Organize imports' })
-    nmap('<leader>rf',  ':TSLspRenameFile<CR>',        { desc = 'Rename file' })
-    nmap('<leader>I',   ':TSLspImportAll<CR>',         { desc = 'Import all packages' })
-    nmap('<leader>ic',  ':TSLspImportCurrent<CR>',     { desc = 'Import current package' })
-    nmap('<leader>th',  ':TSLspToggleInlayHints<CR>',  { desc = 'Toggle inlayed hints (Typescript)' })
+    map.n('<leader>o',   ':TSLspOrganize<CR>',          { desc = 'Organize imports' })
+    map.n('<leader>rf',  ':TSLspRenameFile<CR>',        { desc = 'Rename file' })
+    map.n('<leader>I',   ':TSLspImportAll<CR>',         { desc = 'Import all packages' })
+    map.n('<leader>ic',  ':TSLspImportCurrent<CR>',     { desc = 'Import current package' })
+    map.n('<leader>th',  ':TSLspToggleInlayHints<CR>',  { desc = 'Toggle inlayed hints (Typescript)' })
     -- stylua: ignore end
   end,
 }

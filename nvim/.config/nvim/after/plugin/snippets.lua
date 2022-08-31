@@ -8,7 +8,7 @@ if not cmp_ok then
   return
 end
 
-local ismap, nmap = require('rc.util').create_keymaps('is', 'n')
+local map = require('rc.util').keymap()
 
 require('luasnip.loaders.from_vscode').lazy_load()
 require('luasnip.loaders.from_lua').lazy_load()
@@ -26,17 +26,17 @@ luasnip.config.set_config {
   },
 }
 
-ismap('<C-k>', function()
+map.is('<C-k>', function()
   if luasnip.expand_or_jumpable() then
     luasnip.expand_or_jump()
   end
 end)
-ismap('<C-j>', function()
+map.is('<C-j>', function()
   if luasnip.jumpable(-1) then
     luasnip.jump(-1)
   end
 end)
-ismap('<C-l>', function()
+map.is('<C-l>', function()
   if luasnip.choice_active() then
     luasnip.change_choice(1)
   end

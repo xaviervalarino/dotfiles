@@ -1,12 +1,12 @@
 local M = {}
-local buf_keymaps = require('rc.util').buf_create_keymaps 'n'
+local bufmap = require('rc.util').keymap
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
 
 function M.on_attach(client, bufnr)
-  local nmap = buf_keymaps(bufnr)
+  local map = bufmap(bufnr)
 
   local function rename()
     vim.o.laststatus = 0
@@ -18,31 +18,31 @@ function M.on_attach(client, bufnr)
   end
 
   -- stylua: ignore start
-  nmap('<leader>ca',  'vim.lsp.buf.code_action',   { desc = 'Code action' })
-  nmap('gd',          vim.lsp.buf.definition,      { desc = 'Go to definition' })
+  map.n('<leader>ca',  'vim.lsp.buf.code_action',   { desc = 'Code action' })
+  map.n('gd',          vim.lsp.buf.definition,      { desc = 'Go to definition' })
   -- note: many servers do not implement this method
-  nmap('gD',          vim.lsp.buf.declaration,     { desc = 'Go to declaration' })
+  map.n('gD',          vim.lsp.buf.declaration,     { desc = 'Go to declaration' })
   -- TODO: no `number` on document hover
-  nmap('K',           vim.lsp.buf.hover,           { desc = 'Hover symbol info' })
-  nmap('gi',          vim.lsp.buf.implementation,  { desc = 'Implementation' })
-  nmap('<leader>D',   vim.lsp.buf.type_definition, { desc = 'Type definition' })
-  nmap('<leader>rn',  rename,                      { expr = true, desc = 'Rename reference' })
-  nmap('<leader>rr',  '<cmd>LspRestart<CR>',       { desc = 'Restart LSP' })
-  nmap('<leader>d',   vim.diagnostic.open_float,   { desc = 'Current diagnostic' })
-  nmap('[d',          vim.diagnostic.goto_prev,    { desc = 'Previous diagnostic' })
-  nmap(']d',          vim.diagnostic.goto_next,    { desc = 'Next diagnostic' })
-  nmap('<leader>q',   vim.diagnostic.setloclist,   { desc = 'Diagnostic location list' })
+  map.n('K',           vim.lsp.buf.hover,           { desc = 'Hover symbol info' })
+  map.n('gi',          vim.lsp.buf.implementation,  { desc = 'Implementation' })
+  map.n('<leader>D',   vim.lsp.buf.type_definition, { desc = 'Type definition' })
+  map.n('<leader>rn',  rename,                      { expr = true, desc = 'Rename reference' })
+  map.n('<leader>rr',  '<cmd>LspRestart<CR>',       { desc = 'Restart LSP' })
+  map.n('<leader>d',   vim.diagnostic.open_float,   { desc = 'Current diagnostic' })
+  map.n('[d',          vim.diagnostic.goto_prev,    { desc = 'Previous diagnostic' })
+  map.n(']d',          vim.diagnostic.goto_next,    { desc = 'Next diagnostic' })
+  map.n('<leader>q',   vim.diagnostic.setloclist,   { desc = 'Diagnostic location list' })
 
-  nmap(
+  map.n(
     '<leader>so',
     require('telescope.builtin').lsp_document_symbols,
     { desc = 'Search document symbols'}
   )
 
-  nmap('<leader>ca',  vim.lsp.buf.code_action,     { desc = 'Code action' })
-  nmap('gr',          vim.lsp.buf.references,      { desc = 'List references' })
-  nmap('<leader>f',   vim.lsp.buf.format,          { desc = 'Format buffer' })
-  nmap('<C-s>',       vim.lsp.buf.signature_help,  { desc = 'Signature help' })
+  map.n('<leader>ca',  vim.lsp.buf.code_action,     { desc = 'Code action' })
+  map.n('gr',          vim.lsp.buf.references,      { desc = 'List references' })
+  map.n('<leader>f',   vim.lsp.buf.format,          { desc = 'Format buffer' })
+  map.n('<C-s>',       vim.lsp.buf.signature_help,  { desc = 'Signature help' })
   --stylua: ignore end
 
   local diagnostic_hover = vim.api.nvim_create_augroup('lsp_diagnostic_hover', { clear = true })
