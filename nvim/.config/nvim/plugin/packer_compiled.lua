@@ -190,6 +190,11 @@ _G.packer_plugins = {
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/nvim-notify",
     url = "https://github.com/rcarriga/nvim-notify"
   },
+  ["nvim-surround"] = {
+    loaded = true,
+    path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/nvim-surround",
+    url = "https://github.com/kylechui/nvim-surround"
+  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
@@ -259,11 +264,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/vim-repeat",
     url = "https://github.com/tpope/vim-repeat"
-  },
-  ["vim-surround"] = {
-    loaded = true,
-    path = "/Users/xavier/.local/share/nvim/site/pack/packer/start/vim-surround",
-    url = "https://github.com/tpope/vim-surround"
   },
   ["which-key.nvim"] = {
     loaded = true,

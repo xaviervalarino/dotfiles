@@ -26,7 +26,7 @@ local packages = {
 
   { 'windwp/nvim-autopairs', config = simple_setup 'nvim-autopairs' },
   { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } },
-  'tpope/vim-surround',
+  {'kylechui/nvim-surround', config = simple_setup 'nvim-surround' },
   'tpope/vim-repeat',
   'tpope/vim-fugitive',
   'godlygeek/tabular',
