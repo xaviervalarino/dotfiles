@@ -29,7 +29,7 @@ M.keymap = function(bufnr)
   })
 end
 
--- Diagnostic icons ----------------------------------------------------------------
+-- Diagnostic icons ------------------------------------------------------------
 M.diagnostic_signs = {
   { name = 'Error', icon = ' ' },
   { name = 'Warn', icon = ' ' },
