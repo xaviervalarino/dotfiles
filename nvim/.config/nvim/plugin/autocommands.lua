@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave', 'FileType' }, {
   end,
 })
 if not vim.o.cursorline then
-  vim.api.nvim_del_augroup_by_name 'cursorlinefocus'
+  vim.api.nvim_del_augroup_by_name 'CursorLineFocus'
 end
 
 -- Create directory if it doesn't exist when saving file
