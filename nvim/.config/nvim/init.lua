@@ -63,13 +63,3 @@ set.completeopt = { 'menu,menuone,noselect' }
 
 -- Package Config --------------------
 require 'rc.plugins'
--- require 'rc.colorscheme'
--- require 'rc.completion'
--- require 'rc.snippets'
--- require 'rc.git-signs'
--- require 'rc.indent-blankline'
-require 'rc.language-server'
--- require 'rc.telescope'
--- require 'rc.autocommands'
--- require 'rc.treesitter'
--- require 'rc.statusline'
