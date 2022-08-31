@@ -70,6 +70,3 @@ map.n('<leader>gj', '<cmd>diffget //2<CR>', { desc = 'Select right diff' })
 map.n('<leader>cd', '<cmd>cd %:h<CR>', { desc = 'Set working directory to buffer' })
 
 map.n('<leader>z', '<cmd>ZenMode<CR>', { desc = 'Toggle Distraction-free Zen Mode' })
-
--- fix: cmdline=0 breaks WhichKey plugin
-map.n('gg', 'gg')
