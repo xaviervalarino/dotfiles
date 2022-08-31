@@ -26,8 +26,6 @@ vim.diagnostic.config {
       end
     end,
   },
-  -- virtual_text = { severity = 'ERROR'},
-  -- signs = { active = diagnostic_signs },
   signs = true,
   severity_sort = true,
   underline = true,

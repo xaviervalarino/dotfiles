@@ -83,7 +83,6 @@ function M.on_attach(client, bufnr)
     })
   end
 
-  vim.pretty_print(client.name, client.server_capabilities)
   if client.server_capabilities.documentSymbolProvider then
     -- hard stop servers that use deprecated `SymbolInformation`
     if client.name  ~= 'cssls' then
