@@ -39,9 +39,8 @@ M.diagnostic_signs = {
 
 -- Cmdheight=0 expression fix --------------------------------------------------
 M.run_cmd = function(keys)
-  vim.o.laststatus = 0
-  vim.o.cmdheight = 1
   local keys = vim.api.nvim_replace_termcodes(':'.. keys, true, false, true)
+  vim.api.nvim_exec_autocmds('User', { pattern = 'CmdlineEnterPre', group = 'CmdlineStatus' })
   vim.api.nvim_feedkeys(keys, mode or 'n', false)
 end
 --------------------------------------------------------------------------------
