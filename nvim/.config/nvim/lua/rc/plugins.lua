@@ -72,7 +72,7 @@ local packages = {
 
   'folke/zen-mode.nvim',
   'ThePrimeagen/harpoon',
-  { 'folke/which-key.nvim', config = simple_setup 'which-key' },
+  'folke/which-key.nvim',
   { 'numToStr/Comment.nvim', config = simple_setup 'Comment' },
   'norcalli/nvim-colorizer.lua',
   {

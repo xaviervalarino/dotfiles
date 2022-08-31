@@ -1,3 +1,18 @@
+local status_ok, wk = pcall(require, 'which-key')
+if not status_ok then
+  return
+end
+
+wk.setup {
+  plugins = {
+    spelling = {
+      enabled = true,
+    },
+  },
+  window = {
+    border = require('rc.float').border,
+  },
+}
 ---PATCH from https://github.com/folke/which-key.nvim/pull/305
 local wk_view = require 'which-key.view'
 wk_view.hide = function()
