@@ -4,11 +4,14 @@ alias g="git"
 alias ls="ls -Gh"
 alias mkdir="mkdir -p"
 alias pomodoro="utimer -t 25s && say 'beep boop, times up'"
-alias ql="qlmanage -p"
 alias reload="source ~/.zshrc"
 alias stow="stow --verbose"
 alias vim="nvim"
 alias brew_bundle="brew bundle --file=$HOME/dotfiles/Brewfile"
+
+ql() {
+  qlmanage -p "$1" &>/dev/null
+}
 
 ps_time() {
   pid=$(pgrep -i "$1")
