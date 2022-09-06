@@ -40,12 +40,16 @@ M.bufkeymap = function(bufnr)
   }, keymap_mt)
 end
 
--- Diagnostic icons ------------------------------------------------------------
+-- UI elements and styling -----------------------------------------------------
 M.diagnostic_signs = {
   { name = 'Error', icon = ' ' },
   { name = 'Warn', icon = ' ' },
   { name = 'Info', icon = ' ' },
   { name = 'Hint', icon = ' ' },
+}
+
+M.border = {
+  border = 'rounded',
 }
 
 -- Cmdheight=0 expression fix --------------------------------------------------

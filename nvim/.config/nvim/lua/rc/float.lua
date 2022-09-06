@@ -1,1 +1,0 @@
-return { border = 'rounded' }

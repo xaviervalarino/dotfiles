@@ -10,6 +10,6 @@ wk.setup {
     },
   },
   window = {
-    border = require('rc.float').border,
+    border = require('rc.util').border,
   },
 }

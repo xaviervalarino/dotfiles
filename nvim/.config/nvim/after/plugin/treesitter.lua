@@ -25,7 +25,7 @@ require('nvim-treesitter.configs').setup {
   textobjects = {
     lsp_interop = {
       enable = true,
-      border = require('rc.float').border,
+      border = require('rc.util').border,
       peek_definition_code = {
         ['<leader>df'] = '@function.outer',
       },

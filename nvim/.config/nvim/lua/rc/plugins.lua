@@ -89,7 +89,7 @@ return require('packer').startup {
   config = {
     display = {
       open_fn = function()
-        return require('packer.util').float(require 'rc.float')
+        return require('packer.util').float(require 'rc.util').border
       end,
     },
     luarocks = {
