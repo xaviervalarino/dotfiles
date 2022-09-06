@@ -1,3 +1,5 @@
+local bufmap = require('rc.util').bufkeymap
+
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
   pattern = '*',
@@ -61,5 +63,15 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' 
     end
     local padding = (ctx.event == 'VimLeave' or ctx.event == 'VimSuspend') and 20 or 0
     os.execute('kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=' .. padding)
+  end,
+})
+
+-- Save when exiting insert mode
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('AutoSave', { clear = true }),
+  callback = function(ctx)
+    if not ctx.match:find 'Telescope' then
+      bufmap(ctx.buf).i('<esc>', '<esc><cmd>update<CR>')
+    end
   end,
 })

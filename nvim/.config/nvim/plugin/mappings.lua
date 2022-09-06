@@ -8,10 +8,6 @@ map('<Space>', '<Nop>')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Save when exiting insert mode
--- TODO: consider autocommand for TextChanged,FocusLost
-map.i('<esc>', '<esc><cmd>update<CR>')
-
 -- Keep cursor centered
 map.n('n', 'nzzzv')
 map.n('N', 'nzzzv')
