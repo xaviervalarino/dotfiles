@@ -1,13 +1,6 @@
 local utf8 = require 'lua-utf8'
-local mapdrop = require('rc.util').mapdrop
 
-local count = 0
-
-local M = {} -- need to know length of chars
--- and how much white space
-local tbl = function()
-  return setmetatable({}, { __index = table })
-end
+local M = {}
 
 local function get_padding(left, center, right)
   local col = vim.o.columns
@@ -20,8 +13,8 @@ end
 local function section()
   local _data = {}
   return {
-    ---@param input string|function, a string with the component info or a function that returns these parameters
-    ---@param hlgrp? string highlight group name
+    ---@param input string|function, Text to insert into this statusline section or a function that returns these parameters
+    ---@param hlgrp? string highlight group to use on this text 
     add = function(input, hlgrp)
       local component = type(input) == 'function' and input or { input, hlgrp }
       table.insert(_data, component)
@@ -60,16 +53,11 @@ M.left = M.sections[1]
 M.center = M.sections[2]
 M.right = M.sections[3]
 
--- if true then
---   return M.left.add{'Test', 'Yes'}
--- end
--- M.left.add{'Test', 'Yes'}
-
 M.create = function(self)
   local lengths = {}
   local result = {}
-  for _, section in ipairs(self.sections) do
-    local t = section.create()
+  for _, this_section in ipairs(self.sections) do
+    local t = this_section.create()
     table.insert(lengths, t.length)
     table.insert(result, t.str)
   end
