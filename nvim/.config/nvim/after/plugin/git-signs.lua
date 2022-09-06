@@ -1,4 +1,4 @@
-local bufmap = require('rc.util').keymap
+local bufmap = require('rc.util').bufkeymap
 
 require('gitsigns').setup {
   signs = {

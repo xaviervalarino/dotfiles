@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-local bufmap = require('rc.util').keymap
+local bufmap = require('rc.util').bufkeymap
 
 return {
   init_options = require('nvim-lsp-ts-utils').init_options,

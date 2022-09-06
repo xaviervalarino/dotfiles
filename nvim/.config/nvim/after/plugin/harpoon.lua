@@ -5,7 +5,7 @@ end
 
 harpoon.setup {}
 
-local map = require('rc.util').keymap()
+local map = require('rc.util').keymap
 local harpoon_add_file = require('harpoon.mark').add_file
 local harpoon_ui = require 'harpoon.ui'
 

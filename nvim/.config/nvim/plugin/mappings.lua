@@ -1,6 +1,6 @@
 -- Mode mapping are created through a metatable
 local util = require('rc.util')
-local map = util.keymap()
+local map = util.keymap
 local run_cmd = util.run_cmd
 
 -- Remap leader

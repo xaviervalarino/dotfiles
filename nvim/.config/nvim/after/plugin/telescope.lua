@@ -3,7 +3,7 @@ if not status_ok then
   return
 end
 
-local map = require('rc.util').keymap()
+local map = require('rc.util').keymap
 local builtin = require 'telescope.builtin'
 
 telescope.load_extension 'fzf'
