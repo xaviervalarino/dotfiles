@@ -22,7 +22,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 return require('packer').startup {
-  function(use)
+  function(use, use_rocks)
     use 'wbthomason/packer.nvim'
 
     use { 'windwp/nvim-autopairs', config = simple_setup 'nvim-autopairs' }
@@ -84,12 +84,16 @@ return require('packer').startup {
         vim.notify = require 'notify'
       end,
     }
+    use_rocks 'luautf8'
   end,
   config = {
     display = {
       open_fn = function()
         return require('packer.util').float(require 'rc.float')
       end,
+    },
+    luarocks = {
+      python_cmd = 'python3',
     },
   },
 }
