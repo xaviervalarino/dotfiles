@@ -53,8 +53,13 @@ M.border = {
 }
 
 -- Cmdheight=0 expression fix --------------------------------------------------
-M.run_cmd = function(keys)
-  local keys = vim.api.nvim_replace_termcodes(':'.. keys, true, false, true)
+
+--- Run a <command> expression through feedkeys
+---Fix for cmdheight=0
+---@param keys string keys to be typed as a command
+---@param mode? string  Feedkeys mode to use, defaults to 'n' -> Do not remap keys
+M.run_cmd = function(keys, mode)
+  local keys = vim.api.nvim_replace_termcodes(':' .. keys, true, false, true)
   vim.api.nvim_exec_autocmds('User', { pattern = 'CmdlineEnterPre', group = 'CmdlineStatus' })
   vim.api.nvim_feedkeys(keys, mode or 'n', false)
 end
