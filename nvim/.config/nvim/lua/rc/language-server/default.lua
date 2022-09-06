@@ -1,5 +1,5 @@
 local M = {}
-local util = require('rc.util')
+local util = require 'rc.util'
 local bufmap = util.bufkeymap
 local run_cmd = util.run_cmd
 
