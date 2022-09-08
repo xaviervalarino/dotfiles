@@ -1,6 +1,8 @@
 local map = require('rc.util').keymap
+
 -- Initial setting
 vim.opt.cmdheight = 0
+vim.opt.ruler = false
 
 local cmd_status = vim.api.nvim_create_augroup('CmdlineStatus', { clear = true })
 
