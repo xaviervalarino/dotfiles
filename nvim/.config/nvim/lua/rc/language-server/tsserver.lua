@@ -19,11 +19,11 @@ return {
     }
 
     -- stylua: ignore start
-    map.n('<leader>o',   ':TSLspOrganize<CR>',          { desc = 'Organize imports' })
-    map.n('<leader>rf',  ':TSLspRenameFile<CR>',        { desc = 'Rename file' })
-    map.n('<leader>I',   ':TSLspImportAll<CR>',         { desc = 'Import all packages' })
-    map.n('<leader>ic',  ':TSLspImportCurrent<CR>',     { desc = 'Import current package' })
-    map.n('<leader>th',  ':TSLspToggleInlayHints<CR>',  { desc = 'Toggle inlayed hints (Typescript)' })
+    map.n('<leader>o',   '<cmd>TSLspOrganize<CR>',          { desc = 'Organize imports' })
+    map.n('<leader>rf',  '<cmd>TSLspRenameFile<CR>',        { desc = 'Rename file' })
+    map.n('<leader>I',   '<cmd>TSLspImportAll<CR>',         { desc = 'Import all packages' })
+    map.n('<leader>ic',  '<cmd>TSLspImportCurrent<CR>',     { desc = 'Import current package' })
+    map.n('<leader>th',  '<cmd>TSLspToggleInlayHints<CR>',  { desc = 'Toggle inlayed hints (Typescript)' })
     -- stylua: ignore end
   end,
 }
