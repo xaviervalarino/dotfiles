@@ -38,6 +38,8 @@ return require('packer').startup {
     use 'nvim-treesitter/playground'
     use 'windwp/nvim-ts-autotag'
     use { 'lewis6991/spellsitter.nvim', config = simple_setup 'spellsitter' }
+    use 'JoosepAlviste/nvim-ts-context-commentstring'
+
     use 'SmiteshP/nvim-navic'
 
     -- lsp
@@ -75,7 +77,14 @@ return require('packer').startup {
 
     use 'folke/which-key.nvim'
 
-    use { 'numToStr/Comment.nvim', config = simple_setup 'Comment' }
+    use {
+      'numToStr/Comment.nvim',
+      config = function()
+        require('Comment').setup {
+          pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+        }
+      end,
+    }
     use 'norcalli/nvim-colorizer.lua'
     use {
       'rcarriga/nvim-notify',
