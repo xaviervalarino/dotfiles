@@ -73,7 +73,8 @@ local function git_status(add)
 end
 
 local function filepath(add)
-  add(fn.expand('%'))
+  local modified = vim.bo.modified and ' [+]' or ''
+  add(fn.expand('%') .. modified)
 end
 
 s.left.add('▎', 'Bold')
