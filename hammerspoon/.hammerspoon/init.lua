@@ -31,15 +31,6 @@ local work = hs.execute('uname -n'):find 'trax'
 
 hs.hotkey.bind('shift-cmd', ',', app_select 'System Preferences')
 
-app:chord('space', app_select 'kitty')
-app:chord('a', app_select 'Activity Monitor')
-app:chord('c', app_select 'Google Chrome')
-app:chord('x', app_select 'Firefox Developer Edition')
-app:chord('f', app_select 'Figma')
-app:chord('s', app_select 'Slack')
-app:chord('i', app_select 'Miro')
-app:chord('shift', 'f', app_select 'Finder')
-
 app:chord('m', work and goto_chrome_tab 'mail.google.com' or app_select 'Mail')
 app:chord('c', work and goto_chrome_tab 'calendar.google.com' or app_select 'Calendar')
 app:chord('shift', 'm', goto_chrome_tab 'meet.google.com')
@@ -54,9 +45,6 @@ wm:chord('d', detach_chrome_tab)
 
 wm:chord('c', function()
   hs.window.focusedWindow():centerOnScreen()
-end)
-wm:chord('m', function()
-  hs.window.focusedWindow():maximize()
 end)
 
 wm:chord('n', function()
@@ -73,8 +61,10 @@ wm:chord('ctrl', 'd', function()
   hs.spaces.toggleShowDesktop()
 end)
 
+WindowManager = {}
+
 -- https://github.com/jasonrudolph/keyboard/blob/main/hammerspoon/windows.lua
-wm:chord('h', function()
+function WindowManager.left()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -85,9 +75,9 @@ wm:chord('h', function()
   f.w = max.w / 2
   f.h = max.h
   win:setFrame(f)
-end)
+end
 
-wm:chord('j', function()
+function WindowManager.down()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -98,9 +88,9 @@ wm:chord('j', function()
   f.y = max.y + (max.h / 2)
   f.h = max.h / 2
   win:setFrame(f)
-end)
+end
 
-wm:chord('k', function()
+function WindowManager.up()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -111,9 +101,9 @@ wm:chord('k', function()
   f.y = max.y
   f.h = max.h / 2
   win:setFrame(f)
-end)
+end
 
-wm:chord('l', function()
+function WindowManager.right()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -124,9 +114,8 @@ wm:chord('l', function()
   f.w = max.w / 2
   f.h = max.h
   win:setFrame(f)
-end)
-
-wm:chord('c', function()
+end
+function WindowManager.center()
   local win = hs.window.focusedWindow()
   local f = win:frame()
   local screen = win:screen()
@@ -137,7 +126,11 @@ wm:chord('c', function()
   f.y = max.y
   f.h = max.h
   win:setFrame(f)
-end)
+end
+
+function WindowManager.fill()
+  hs.window.focusedWindow():maximize()
+end
 
 -- Handlers ---------------------------------------------------------
 Thunderbolt = hs.usb.watcher.new(function(t)

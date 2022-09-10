@@ -1,0 +1,127 @@
+;; !  | means mandatory
+;; #  | means optional
+; C  | left_command
+; T  | left_control
+; O  | left_option
+; S  | left_shift
+; F  | fn
+; Q  | right_command
+; W  | right_control
+; E  | right_option
+; R  | right_shift
+; !! | mandatory command + control + optional + shift (hyper)
+; ## | optional any
+
+{:alone 100 
+ :delay 210
+ :held 210
+ :sim 30
+ :templates {
+             :wm "/opt/homebrew/bin/hs -c \"WindowManager.%s(%s)\""
+             :indicator "opt/homebrew/bin/hs -c \"Indicator.%s()\""
+             :open "open -a \"%s\""
+             :say "say \"%s %s\""
+             }
+ :layers {
+          :caps_layer {:key :caps_lock :alone {:key :escape}}
+          :tab_layer {:key :tab}
+          }
+ :simlayers {
+             :w_layer {:key :w :modi {:optional :left_shift}}
+             }
+ :devices {
+           :razer_mouse [
+                         {:vendor_id 5426 :product_id 146} ; bluetooth
+                         {:vendor_id 5426 :product_id 143} ; wired
+                         ]
+           }
+ :applications {
+                :chrome ["^com\\.google\\.Chrome$"]
+                :figma ["^com\\.figma\\.Desktop$"] 
+                :slack ["^com\\.tinyspeck.slackmacgap$"]
+                }
+ :main [
+        {:des "Unset Caps Lock" :rules [ [:##caps_lock :vk_none] ] }
+
+        {:des "Caps + Homerow arrow keys H/J/K/L"
+         :rules [:caps_layer
+                 [:##h :left_arrow] 
+                 [:##j :down_arrow] 
+                 [:##k :up_arrow] 
+                 [:##l :right_arrow] 
+                 ]}
+
+        {:des "Tab + Homerow navigation keys H/J/K/L"
+         :rules [:tab_layer
+                 [:##h :home] 
+                 [:##j :page_down] 
+                 [:##k :page_up] 
+                 [:##l :end] 
+                 ]}
+
+        {:des "Function Keys: F1...F12"
+         :rules [:caps_layer
+                 ; TODO: only for Mistel keyboard
+                 [:1 :f1]
+                 [:2 :f2]
+                 [:3 :f3]
+                 [:4 :f4]
+                 [:5 :f5]
+                 [:6 :f6]
+                 [:7 :f7]
+                 [:8 :f8]
+                 [:9 :f9]
+                 [:0 :f10]
+                 [:hyphen :f11]
+                 [:equal_sign :f12]
+                 ]
+         }
+
+        {:des "Figma enhancements"
+         :rules [:figma
+                 [:!Td :delete_forward]                ; Fix forward delete
+                 ; TODO: only for logitech mouse
+                 ; TODO: why key_code button* is unknown?
+                 [:button4 :!Sreturn_or_enter]         ; Mouse button4 → Go up one layer
+                 [:button5 :return_or_enter]           ; Mouse button5 → Go down one layer
+                 [:!Sbutton4 :!Cclose_bracket]         ; ⇧ + Mouse button4 →  Move layer down 
+                 [:!Sbutton5 :!Copen_bracket]          ; ⇧ + Mouse button5 →  Move layer up
+                 ; for razer mouse
+                 [:2 :!Sreturn_or_enter :razer_mouse]  ; Mouse button 2 → Go up one layer
+                 [:3 :return_or_enter :razer_mouse]    ; Mouse button 3 → Go down one layer
+                 [:!S2 :!Copen_bracket :razer_mouse]   ; ⇧ + Mouse button 2 →  Move layer down 
+                 [:!S3 :!Cclose_bracket :razer_mouse]  ; ⇧ + Mouse button 3 →  Move layer up
+                 ]
+         }
+
+        {:des "Slack enhancement"
+         :rules [:slack
+                 [:!Ck :!CSu] ; Create links <Ctrl+K>
+                 ]}
+
+        {:des "Move focused windows"
+         :rules [
+                 :w_layer
+                 [:h  [:wm "left" ]]
+                 [:j  [:wm "down"]]
+                 [:k  [:wm "up"]]
+                 [:l  [:wm "right"]]
+                 [:spacebar [:wm "center"]]
+                 [:semicolon [:wm "fill"]]
+                 ]}
+
+        {:des "Application launcher"
+         :rules [
+                 :caps_layer
+                 [:spacebar ["launch_mode" 1] :!launch_mode]
+                 :launch_mode
+                 [:a  [["launch_mode" 0] [:open "Activity Monitor" ]]]
+                 [:c  [["launch_mode" 0] [:open "Google Chrome" ]]]
+                 [:f  [["launch_mode" 0] [:open "Firefox Developer Edition" ]]]
+                 [:!Sf  [["launch_mode" 0] [:open "Figma" ]]]
+                 [:m  [["launch_mode" 0] [:open "Mail" ]]]
+                 [:spacebar  [["launch_mode" 0] [:open "Kitty" ]]]
+                 [:return_or_enter  [["launch_mode" 0] [:open "Finder" ]]]
+                 ]}
+        ]
+ }

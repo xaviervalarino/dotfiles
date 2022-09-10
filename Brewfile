@@ -40,6 +40,7 @@ brew "tree"
 brew "utimer"
 brew "volta"
 brew "yq"
+brew "yqrashawn/goku/goku"
 brew "zsh-completions"
 
 cask "kitty"
