@@ -10,7 +10,7 @@ hs.console.clearConsole()
 
 -- TODO: would be nice to look up $HOMEBREW_PREFIX location
 -- os.getenv'HOMEBREW_PREFIX' and hs.execute'echo $HOMEBREW_PREFIX' are note working
-hs.ipc.cliInstall('/opt/homebrew/')
+hs.ipc.cliInstall '/opt/homebrew/'
 
 local Modes = require 'keymodes'
 local switcher = require 'switcher'
