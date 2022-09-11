@@ -39,6 +39,9 @@
       }, {
         "description" : "Caps Lock -> Escape + caps_layer",
         "manipulators" : [ {
+          "to_if_alone" : [ {
+            "key_code" : "escape"
+          } ],
           "to_after_key_up" : [ {
             "set_variable" : {
               "name" : "caps_layer",
@@ -57,6 +60,9 @@
           }, {
             "shell_command" : "opt/homebrew/bin/hs -c \"Indicator.off()\""
           } ],
+          "parameters" : {
+            "basic.to_delayed_action_delay_milliseconds" : 200
+          },
           "from" : {
             "key_code" : "caps_lock",
             "modifiers" : {
@@ -64,8 +70,6 @@
             }
           },
           "to" : [ {
-            "key_code" : "escape"
-          }, {
             "set_variable" : {
               "name" : "caps_layer",
               "value" : 1

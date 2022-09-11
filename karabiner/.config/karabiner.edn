@@ -36,8 +36,10 @@
 
  :main [
         {:des "Caps Lock -> Escape + caps_layer"
-        :rules [[:##caps_lock [:##escape ["caps_layer" 1]] nil
-                 {:afterup [{:set ["caps_layer" 0]}
+         :rules [[:##caps_lock ["caps_layer" 1] nil
+                 {:alone {:key :escape}
+                  :params {:delay 200}
+                  :afterup [{:set ["caps_layer" 0]}
                             {:set ["r_layer" 0]}
                             {:set ["launch_mode" 0]}
                             [:indicator "off"]]}]]}
