@@ -81,11 +81,10 @@
          :rules [:figma
                  [:!Td :delete_forward]                ; Fix forward delete
                  ; TODO: only for logitech mouse
-                 ; TODO: why key_code button* is unknown?
-                 [:button4 :!Sreturn_or_enter]         ; Mouse button4 → Go up one layer
-                 [:button5 :return_or_enter]           ; Mouse button5 → Go down one layer
-                 [:!Sbutton4 :!Cclose_bracket]         ; ⇧ + Mouse button4 →  Move layer down 
-                 [:!Sbutton5 :!Copen_bracket]          ; ⇧ + Mouse button5 →  Move layer up
+                 [{:pkey :button4} :!Sreturn_or_enter]                 ; Mouse button4 → Go up one layer
+                 [{:pkey :button5} :return_or_enter]                   ; Mouse button5 → Go down one layer
+                 [{:pkey :button4 :modi :left_shift} :!Cclose_bracket] ; ⇧ + Mouse button4 →  Move layer down 
+                 [{:pkey :button5 :modi :left_shift} :!Copen_bracket]  ; ⇧ + Mouse button5 →  Move layer up
                  ; for razer mouse
                  [:2 :!Sreturn_or_enter :razer_mouse]  ; Mouse button 2 → Go up one layer
                  [:3 :return_or_enter :razer_mouse]    ; Mouse button 3 → Go down one layer
