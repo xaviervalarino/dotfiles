@@ -17,7 +17,7 @@
  :held 210
  :sim 30
  :templates {
-             :wm "/opt/homebrew/bin/hs -c \"WindowManager.%s(%s)\""
+             :wm "/opt/homebrew/bin/hs -c \"WM.%s(%s)\""
              :indicator "opt/homebrew/bin/hs -c \"Indicator.%s()\""
              :open "open -a \"%s\""
              :say "say \"%s %s\""
@@ -101,10 +101,13 @@
         {:des "Move focused windows"
          :rules [
                  :w_layer
-                 [:h  [:wm "left" ]]
-                 [:j  [:wm "down"]]
-                 [:k  [:wm "up"]]
-                 [:l  [:wm "right"]]
+                 [:h [:wm "left" ]]
+                 [:j [:wm "down"]]
+                 [:k [:wm "up"]]
+                 [:l [:wm "right"]]
+                 [:m [:wm "toggle_mission_control"]]
+                 [:d [:wm "toggle_show_desktop"]]
+                 [:n [:wm "move_to_next_display"]]
                  [:spacebar [:wm "center"]]
                  [:semicolon [:wm "fill"]]
                  ]}

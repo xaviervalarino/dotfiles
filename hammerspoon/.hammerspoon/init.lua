@@ -47,89 +47,83 @@ wm:chord('c', function()
   hs.window.focusedWindow():centerOnScreen()
 end)
 
-wm:chord('n', function()
+-- Window manager
+WM = {}
+
+-- Inspired by: https://github.com/jasonrudolph/keyboard/blob/main/hammerspoon/windows.lua
+local function manipulate_curr_window(callback)
+  local win = hs.window.focusedWindow()
+  local frame = win:frame()
+  local max = win:screen():frame()
+  win:setFrame(callback(frame, max))
+end
+
+function WM.left()
+  manipulate_curr_window(function(frame, max)
+    frame.x = max.x
+    frame.y = max.y
+    frame.w = max.w / 2
+    frame.h = max.h
+    return frame
+  end)
+end
+
+function WM.down()
+  manipulate_curr_window(function(frame, max)
+    frame.x = max.x
+    frame.w = max.w
+    frame.y = max.y + (max.h / 2)
+    frame.h = max.h / 2
+    return frame
+  end)
+end
+
+function WM.up()
+  manipulate_curr_window(function(frame, max)
+    frame.x = max.x
+    frame.w = max.w
+    frame.y = max.y
+    frame.h = max.h / 2
+    return frame
+  end)
+end
+
+function WM.right()
+  manipulate_curr_window(function(frame, max)
+    frame.x = max.x + (max.w / 2)
+    frame.y = max.y
+    frame.w = max.w / 2
+    frame.h = max.h
+    return frame
+  end)
+end
+
+function WM.center()
+  manipulate_curr_window(function(frame, max)
+    frame.x = max.x + (max.w / 5)
+    frame.w = max.w * 3 / 5
+    frame.y = max.y
+    frame.h = max.h
+    return frame
+  end)
+end
+
+function WM.fill()
+  hs.window.focusedWindow():maximize()
+end
+
+function WM.toggle_mission_control()
+  hs.spaces.toggleMissionControl()
+end
+
+function WM.toggle_show_desktop()
+  hs.spaces.toggleShowDesktop()
+end
+
+function WM.move_to_next_display()
   local w = hs.window.focusedWindow()
   local screen = w:screen()
   w:move(w:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
-end)
-
-wm:chord('w', function()
-  hs.spaces.toggleMissionControl()
-end)
-
-wm:chord('ctrl', 'd', function()
-  hs.spaces.toggleShowDesktop()
-end)
-
-WindowManager = {}
-
--- https://github.com/jasonrudolph/keyboard/blob/main/hammerspoon/windows.lua
-function WindowManager.left()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
-  win:setFrame(f)
-end
-
-function WindowManager.down()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x
-  f.w = max.w
-  f.y = max.y + (max.h / 2)
-  f.h = max.h / 2
-  win:setFrame(f)
-end
-
-function WindowManager.up()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x
-  f.w = max.w
-  f.y = max.y
-  f.h = max.h / 2
-  win:setFrame(f)
-end
-
-function WindowManager.right()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:frame()
-
-  f.x = max.x + (max.w / 2)
-  f.y = max.y
-  f.w = max.w / 2
-  f.h = max.h
-  win:setFrame(f)
-end
-function WindowManager.center()
-  local win = hs.window.focusedWindow()
-  local f = win:frame()
-  local screen = win:screen()
-  local max = screen:fullFrame()
-
-  f.x = max.x + (max.w / 5)
-  f.w = max.w * 3 / 5
-  f.y = max.y
-  f.h = max.h
-  win:setFrame(f)
-end
-
-function WindowManager.fill()
-  hs.window.focusedWindow():maximize()
 end
 
 -- Handlers ---------------------------------------------------------
