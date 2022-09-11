@@ -43,77 +43,31 @@ local wm = modes:create('w', 'window manager')
 
 wm:chord('d', detach_chrome_tab)
 
-wm:chord('c', function()
-  hs.window.focusedWindow():centerOnScreen()
-end)
-
 -- Window manager
 WM = {}
 
--- Inspired by: https://github.com/jasonrudolph/keyboard/blob/main/hammerspoon/windows.lua
-local function manipulate_curr_window(callback)
-  local win = hs.window.focusedWindow()
-  local frame = win:frame()
-  local max = win:screen():frame()
-  win:setFrame(callback(frame, max))
-end
-
 function WM.left()
-  manipulate_curr_window(function(frame, max)
-    frame.x = max.x
-    frame.y = max.y
-    frame.w = max.w / 2
-    frame.h = max.h
-    return frame
-  end)
+  hs.window.focusedWindow():moveToUnit { 0, 0, 0.5, 1 }
 end
 
 function WM.down()
-  manipulate_curr_window(function(frame, max)
-    frame.x = max.x
-    frame.w = max.w
-    frame.y = max.y + (max.h / 2)
-    frame.h = max.h / 2
-    return frame
-  end)
+  hs.window.focusedWindow():moveToUnit { 0, 0.5, 1, 0.5 }
 end
 
 function WM.up()
-  manipulate_curr_window(function(frame, max)
-    frame.x = max.x
-    frame.w = max.w
-    frame.y = max.y
-    frame.h = max.h / 2
-    return frame
-  end)
+  hs.window.focusedWindow():moveToUnit { 0, 0, 1, 0.5 }
 end
 
 function WM.right()
-  manipulate_curr_window(function(frame, max)
-    frame.x = max.x + (max.w / 2)
-    frame.y = max.y
-    frame.w = max.w / 2
-    frame.h = max.h
-    return frame
-  end)
+  hs.window.focusedWindow():moveToUnit { 0.5, 0, 0.5, 1 }
 end
 
 function WM.center()
-  manipulate_curr_window(function(frame, max)
-    frame.x = max.x + (max.w / 5)
-    frame.w = max.w * 3 / 5
-    frame.y = max.y
-    frame.h = max.h
-    return frame
-  end)
+  hs.window.focusedWindow():moveToUnit { 0.1, 0.1, 0.8, 0.8 }
 end
 
 function WM.fill()
   hs.window.focusedWindow():maximize()
-end
-
-function WM.toggle_mission_control()
-  hs.spaces.toggleMissionControl()
 end
 
 function WM.toggle_show_desktop()
@@ -124,6 +78,88 @@ function WM.move_to_next_display()
   local w = hs.window.focusedWindow()
   local screen = w:screen()
   w:move(w:frame():toUnitRect(screen:frame()), screen:next(), true, 0)
+end
+
+local function mod_curr_win(callback)
+  local win = hs.window.focusedWindow()
+  local frame = win:frame()
+  local max = win:screen():frame()
+  win:setFrame(callback(frame, max), 0)
+end
+
+local function increment_mod_cur_win(callback)
+  local timer
+  return function(start)
+    if start then
+      timer = hs.timer.doEvery(0.05, function()
+        mod_curr_win(callback)
+      end)
+    else
+      timer:stop()
+    end
+  end
+end
+
+WM.grow_right = increment_mod_cur_win(function(frame, max)
+  if frame.x + frame.w == max.w then
+    frame.w = frame.w - 20
+    frame.x = frame.x + 20
+  else
+    frame.w = frame.w + 20
+  end
+  return frame
+end)
+
+WM.grow_down = increment_mod_cur_win(function(frame, max)
+  if frame.h >= max.h then
+    frame.h = frame.h - 20
+    frame.y = frame.y + 20
+  else
+    frame.h = frame.h + 20
+  end
+  return frame
+end)
+
+WM.grow_up = increment_mod_cur_win(function(frame, max)
+  if frame.y <= max.y then
+    frame.h = frame.h - 20
+  else
+    frame.y = frame.y - 20
+  end
+  return frame
+end)
+
+WM.grow_left = increment_mod_cur_win(function(frame, max)
+  if frame.x == max.x then
+    frame.w = frame.w - 20
+  else
+    frame.x = frame.x - 20
+    frame.w = frame.w + 20
+  end
+  return frame
+end)
+
+Indicator = {}
+Indicator.canvas = (function()
+  local max = hs.screen.mainScreen():fullFrame()
+  local canvas = hs.canvas.new { x = max.x, y = max.y, h = max.h, w = max.w }
+  canvas:appendElements {
+    type = 'rectangle',
+    action = 'fill',
+    fillColor = { red = 0, green = 0, blue = 0, alpha = 0.6 },
+    frame = { x = max.x, y = max.y, h = max.h, w = max.w },
+  }
+  canvas:level 'normal'
+  return canvas
+end)()
+
+Indicator.on = function()
+  hs.window.focusedWindow():raise()
+  Indicator.canvas:show(0.4)
+end
+
+Indicator.off = function()
+  Indicator.canvas:hide(0.4)
 end
 
 -- Handlers ---------------------------------------------------------
