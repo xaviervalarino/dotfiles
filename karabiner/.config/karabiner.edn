@@ -38,13 +38,13 @@
  :main [
         {:des "Caps Lock -> Escape + caps_layer"
          :rules [[:##caps_lock ["caps_layer" 1] nil
-                 {:alone {:key :escape}
-                  :params {:delay 200}
-                  :afterup [{:set ["caps_layer" 0]}
-                            {:set ["r_layer" 0]}
-                            {:set ["launch_mode" 0]}
-                            {:set ["hs_layer" 0]}
-                            [:indicator "off"]]}]]}
+                  {:alone [{:key :escape}
+                           {:set ["r_layer" 0]}
+                           {:set ["launch_layer" 0]}
+                           {:set ["hs_layer" 0]}
+                           [:indicator "off"]]
+                   :params {:delay 200}
+                   :afterup {:set ["caps_layer" 0]}}]]}
 
         {:des "Caps + Homerow arrow keys H/J/K/L"
          :rules [:caps_layer
