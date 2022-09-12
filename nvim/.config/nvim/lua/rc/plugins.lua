@@ -37,7 +37,6 @@ return require('packer').startup {
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'nvim-treesitter/playground'
     use 'windwp/nvim-ts-autotag'
-    use { 'lewis6991/spellsitter.nvim', config = simple_setup 'spellsitter' }
     use 'JoosepAlviste/nvim-ts-context-commentstring'
 
     use 'SmiteshP/nvim-navic'
