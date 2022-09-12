@@ -17,6 +17,7 @@
  :held 210
  :sim 50
  :templates {:wm "/opt/homebrew/bin/hs -c \"WM.%s(%s)\""
+             :hs "/opt/homebrew/bin/hs -c \"hs.%s()\""
              :indicator "opt/homebrew/bin/hs -c \"Indicator.%s()\""
              :open "open -a \"%s\""
              :say "say \"%s %s\""}
@@ -42,6 +43,7 @@
                   :afterup [{:set ["caps_layer" 0]}
                             {:set ["r_layer" 0]}
                             {:set ["launch_mode" 0]}
+                            {:set ["hs_layer" 0]}
                             [:indicator "off"]]}]]}
 
         {:des "Caps + Homerow arrow keys H/J/K/L"
@@ -122,4 +124,14 @@
                  [:!Sf  [["launch_layer" 0] [:open "Figma"]]]
                  [:m  [["launch_layer" 0] [:open "Mail"]]]
                  [:spacebar  [["launch_layer" 0] [:open "Kitty"]]]
-                 [:return_or_enter  [["launch_layer" 0] [:open "Finder"]]]]}]}
+                 [:return_or_enter  [["launch_layer" 0] [:open "Finder"]]]]}
+
+        {:des "Hammerspoon management"
+         :rules [:caps_layer
+                 [:s ["hs_layer" 1] :!hs_layer]
+                 :hs_layer
+                 [:c [[:hs "toggleConsole"]["hs_layer" 0]]]
+                 [:r [[:hs "reload"]["hs_layer" 0]]]
+                 [{:any :key_code} [["hs_layer" 0]]]]}
+        ]}
+

@@ -58,6 +58,11 @@
               "value" : 0
             }
           }, {
+            "set_variable" : {
+              "name" : "hs_layer",
+              "value" : 0
+            }
+          }, {
             "shell_command" : "opt/homebrew/bin/hs -c \"Indicator.off()\""
           } ],
           "parameters" : {
@@ -1309,6 +1314,81 @@
           } ],
           "conditions" : [ {
             "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "Hammerspoon management",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "s"
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "hs_layer",
+              "value" : 1
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "caps_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          }, {
+            "name" : "hs_layer",
+            "value" : 1,
+            "type" : "variable_unless"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "c"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"hs.toggleConsole()\""
+          }, {
+            "set_variable" : {
+              "name" : "hs_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "hs_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "r"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"hs.reload()\""
+          }, {
+            "set_variable" : {
+              "name" : "hs_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "hs_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "any" : "key_code"
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "hs_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "hs_layer",
             "value" : 1,
             "type" : "variable_if"
           } ],

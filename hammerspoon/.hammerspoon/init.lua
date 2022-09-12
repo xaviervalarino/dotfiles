@@ -20,11 +20,6 @@ local goto_chrome_tab = switcher.goto_chrome_tab
 local detach_chrome_tab = switcher.detach_chrome_tab
 local modes = Modes:new('ctrl', 'space')
 
--- Manage hammerspoon -----------------------------------------------
-local mgmt = modes:create('h', 'hammerspoon')
-mgmt:chord('c', hs.toggleConsole)
-mgmt:chord('r', hs.reload)
-
 -- App launcher -----------------------------------------------------
 local app = modes:create('a', 'app launcher')
 local work = hs.execute('uname -n'):find 'trax'
