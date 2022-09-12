@@ -43,7 +43,6 @@
                            {:set ["launch_layer" 0]}
                            {:set ["hs_layer" 0]}
                            [:indicator "off"]]
-                   :params {:delay 200}
                    :afterup {:set ["caps_layer" 0]}}]]}
 
         {:des "Caps + Homerow arrow keys H/J/K/L"
