@@ -22,7 +22,8 @@
              :open "open -a \"%s\""
              :say "say \"%s %s\""}
 
- :layers {:tab_layer {:key :tab}}
+ :layers {:tab_layer {:key :tab}
+          :return_layer {:key :return_or_enter}}
 
  :simlayers {:w_layer {:key :w :modi {:optional :left_shift}}}
 
@@ -126,12 +127,11 @@
                  [:spacebar  [["launch_layer" 0] [:open "Kitty"]]]
                  [:return_or_enter  [["launch_layer" 0] [:open "Finder"]]]]}
 
-        {:des "Hammerspoon management"
-         :rules [:caps_layer
-                 [:s ["hs_layer" 1] :!hs_layer]
-                 :hs_layer
-                 [:c [[:hs "toggleConsole"]["hs_layer" 0]]]
-                 [:r [[:hs "reload"]["hs_layer" 0]]]
-                 [{:any :key_code} [["hs_layer" 0]]]]}
+        {:des "Extension/Automation management"
+         :rules [:return_layer
+                 [:c [[:hs "toggleConsole"]]]
+                 [:r [[:hs "reload"]]]
+                 [:k [[:open "Karabiner-Elements"]]]
+                 [:e [[:open "Karabiner-EventViewer"]]]]}
         ]}
 

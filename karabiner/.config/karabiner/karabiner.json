@@ -35,6 +35,26 @@
           "to_if_alone" : [ {
             "key_code" : "tab"
           } ]
+        }, {
+          "type" : "basic",
+          "to" : [ {
+            "set_variable" : {
+              "name" : "return_layer",
+              "value" : 1
+            }
+          } ],
+          "from" : {
+            "key_code" : "return_or_enter"
+          },
+          "to_after_key_up" : [ {
+            "set_variable" : {
+              "name" : "return_layer",
+              "value" : 0
+            }
+          } ],
+          "to_if_alone" : [ {
+            "key_code" : "return_or_enter"
+          } ]
         } ]
       }, {
         "description" : "Caps Lock -> Escape + caps_layer",
@@ -1255,6 +1275,17 @@
         "description" : "Application launcher",
         "manipulators" : [ {
           "from" : {
+            "key_code" : "comma",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "open -a \"System Preferences\""
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
             "key_code" : "spacebar"
           },
           "to" : [ {
@@ -1404,41 +1435,16 @@
           "type" : "basic"
         } ]
       }, {
-        "description" : "Hammerspoon management",
+        "description" : "Extension/Automation management",
         "manipulators" : [ {
-          "from" : {
-            "key_code" : "s"
-          },
-          "to" : [ {
-            "set_variable" : {
-              "name" : "hs_layer",
-              "value" : 1
-            }
-          } ],
-          "conditions" : [ {
-            "name" : "caps_layer",
-            "value" : 1,
-            "type" : "variable_if"
-          }, {
-            "name" : "hs_layer",
-            "value" : 1,
-            "type" : "variable_unless"
-          } ],
-          "type" : "basic"
-        }, {
           "from" : {
             "key_code" : "c"
           },
           "to" : [ {
             "shell_command" : "/opt/homebrew/bin/hs -c \"hs.toggleConsole()\""
-          }, {
-            "set_variable" : {
-              "name" : "hs_layer",
-              "value" : 0
-            }
           } ],
           "conditions" : [ {
-            "name" : "hs_layer",
+            "name" : "return_layer",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -1449,30 +1455,35 @@
           },
           "to" : [ {
             "shell_command" : "/opt/homebrew/bin/hs -c \"hs.reload()\""
-          }, {
-            "set_variable" : {
-              "name" : "hs_layer",
-              "value" : 0
-            }
           } ],
           "conditions" : [ {
-            "name" : "hs_layer",
+            "name" : "return_layer",
             "value" : 1,
             "type" : "variable_if"
           } ],
           "type" : "basic"
         }, {
           "from" : {
-            "any" : "key_code"
+            "key_code" : "k"
           },
           "to" : [ {
-            "set_variable" : {
-              "name" : "hs_layer",
-              "value" : 0
-            }
+            "shell_command" : "open -a \"Karabiner-Elements\""
           } ],
           "conditions" : [ {
-            "name" : "hs_layer",
+            "name" : "return_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "e"
+          },
+          "to" : [ {
+            "shell_command" : "open -a \"Karabiner-EventViewer\""
+          } ],
+          "conditions" : [ {
+            "name" : "return_layer",
             "value" : 1,
             "type" : "variable_if"
           } ],
