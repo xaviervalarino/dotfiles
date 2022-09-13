@@ -662,7 +662,7 @@
           } ],
           "conditions" : [ {
             "type" : "frontmost_application_if",
-            "bundle_identifiers" : [ "^com\\.tinyspeck.slackmacgap$" ]
+            "bundle_identifiers" : [ "^com\\.tinyspeck\\.slackmacgap$" ]
           } ],
           "type" : "basic"
         } ]

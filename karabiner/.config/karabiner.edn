@@ -27,14 +27,13 @@
 
  :simlayers {:w_layer {:key :w :modi {:optional :left_shift}}}
 
- :devices {
-           :razer_mouse [{:vendor_id 5426 :product_id 146}  ; bluetooth
-                         {:vendor_id 5426 :product_id 143}] ; wired
-           :mistel [{:vendor_id 1241 :product_id 323}]}
+ :devices {:mistel      [{:vendor_id 1241 :product_id 323}]
+           :razer_mouse [{:vendor_id 5426 :product_id 146}   ; bluetooth
+                         {:vendor_id 5426 :product_id 143}]} ; wired
 
  :applications {:chrome ["^com\\.google\\.Chrome$"]
-                :figma ["^com\\.figma\\.Desktop$"]
-                :slack ["^com\\.tinyspeck.slackmacgap$"]}
+                :figma  ["^com\\.figma\\.Desktop$"]
+                :slack  ["^com\\.tinyspeck\\.slackmacgap$"]}
 
  :main [
         {:des "Caps Lock -> Escape + caps_layer"
