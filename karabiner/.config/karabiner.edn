@@ -124,14 +124,14 @@
                  [:spacebar ["launch_layer" 1] :!launch_layer]
                  :launch_layer
                  [:a   [[:open "Activity Monitor"] ["launch_layer" 0]]]
-                 [:c   [[:open "Google Chrome"] ["launch_layer" 0]]]
-                 [:!Sc [[:launch "calendar"] ["launch_layer" 0]]]
+                 [:c   [[:launch "calendar"] ["launch_layer" 0]]]
+                 [:!Sc [[:open "Google Chrome"] ["launch_layer" 0]]]
                  [:f   [[:open "Firefox Developer Edition"]["launch_layer" 0]]]
                  [:!Sf [[:open "Figma"] ["launch_layer" 0]]]
                  [:m   [[:launch "mail"] ["launch_layer" 0]]]
                  [:n   [[:launch "nts"] ["launch_layer" 0]]]
                  [:e   [[:launch "meet"] ["launch_layer" 0]]]
-                 [:spacebar  [[:open "Kitty"] ["launch_layer" 0]]]
+                 [:t   [[:open "Kitty"] ["launch_layer" 0]]]
                  [:return_or_enter  [[:open "Finder"] ["launch_layer" 0]]]]}
 
         {:des "Extension/Automation management"
