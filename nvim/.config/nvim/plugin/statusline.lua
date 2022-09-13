@@ -74,7 +74,7 @@ end
 
 local function filepath(add)
   local modified = vim.bo.modified and ' [+]' or ''
-  add(fn.expand('%') .. modified)
+  add(fn.expand('%'):gsub(string.format('^%s', vim.env.HOME), '~') .. modified)
 end
 
 s.left.add('▎', 'Bold')
