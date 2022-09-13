@@ -99,6 +99,11 @@ return require('packer').startup {
         vim.notify = notify
       end,
     }
+    use {
+      'goolord/alpha-nvim',
+      requires = { 'kyazdani42/nvim-web-devicons' },
+      config = function()
+        require('alpha').setup(require('alpha.themes.startify').config)
       end,
     }
     use 'lewis6991/impatient.nvim'
