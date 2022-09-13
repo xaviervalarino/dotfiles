@@ -24,8 +24,6 @@ local modes = Modes:new('ctrl', 'space')
 local app = modes:create('a', 'app launcher')
 local work = hs.execute('uname -n'):find 'trax'
 
-hs.hotkey.bind('shift-cmd', ',', app_select 'System Preferences')
-
 app:chord('m', work and goto_chrome_tab 'mail.google.com' or app_select 'Mail')
 app:chord('c', work and goto_chrome_tab 'calendar.google.com' or app_select 'Calendar')
 app:chord('shift', 'm', goto_chrome_tab 'meet.google.com')

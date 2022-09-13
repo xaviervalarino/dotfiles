@@ -114,7 +114,8 @@
                  [{:any :key_code} [["r_layer" 0] [:indicator "off"]]]]}
 
         {:des "Application launcher"
-         :rules [:caps_layer
+         :rules [[:!SCcomma [:open "System Preferences"]]
+                 :caps_layer
                  [:spacebar ["launch_layer" 1] :!launch_layer]
                  :launch_layer
                  [:a  [["launch_layer" 0] [:open "Activity Monitor"]]]
