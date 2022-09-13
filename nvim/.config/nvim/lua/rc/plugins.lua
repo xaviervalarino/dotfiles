@@ -75,7 +75,7 @@ return require('packer').startup {
     use 'kyazdani42/nvim-web-devicons'
     use { 'catppuccin/nvim', as = 'catppuccin' }
 
-    use 'j-hui/fidget.nvim'
+    use { 'j-hui/fidget.nvim', config = simple_setup 'fidget' }
 
     use 'folke/zen-mode.nvim'
     use 'ThePrimeagen/harpoon'
