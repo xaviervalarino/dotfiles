@@ -30,6 +30,7 @@ set.relativenumber = true
 set.number = true
 set.updatetime = 250
 set.cursorline = true
+set.wrap = false
 window.signcolumn = 'yes'
 
 set.fillchars = {
