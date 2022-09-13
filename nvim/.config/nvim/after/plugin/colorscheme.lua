@@ -59,3 +59,5 @@ for _, name in pairs {
   vim.api.nvim_set_hl(0, 'DiagnosticStatusLine' .. name:match '.+(%u%l+)', statusline_colors)
   vim.api.nvim_set_hl(0, 'DiagnosticSign' .. name:match '.+(%u%l+)', colors)
 end
+
+vim.api.nvim_set_hl(0, 'StatuslineMode', { bg = color.subtext0, fg = 'bg', bold = true })

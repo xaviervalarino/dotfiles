@@ -1,10 +1,12 @@
 local s = require 'rc.statusline'
+local utf8 = require('lua-utf8')
 
 -- require('plenary.reload').reload_module('rc.statusline-new', true)
 -- local c = require 'rc.statusline.components'
 
 local api = vim.api
 local fn = vim.fn
+
 local function mode(add)
   local modes = setmetatable({
     ['n'] = { 'Normal', 'N' },
@@ -33,7 +35,9 @@ local function mode(add)
     end,
   })
   local current = api.nvim_get_mode().mode
-  add(modes[current][2]:upper() .. ' ')
+  local mode = modes[current][2]:upper()
+  local pad = 4 - utf8.len(mode)
+  add(string.rep(' ', pad) .. mode .. ' ')
 end
 
 local diagnostic_signs = require('rc.util').diagnostic_signs
@@ -77,14 +81,13 @@ local function filepath(add)
   add(fn.expand('%'):gsub(string.format('^%s', vim.env.HOME), '~') .. modified)
 end
 
-s.left.add('▎', 'Bold')
+s.left.add('', 'StatuslineMode')
 s.left.add(mode)
 s.left.add(diagnostics)
 s.left.add('', 'Statusline')
 s.left.add(git_status)
 s.center.add('  ', 'Statusline')
 s.center.add(filepath)
--- s.center.add({' %m'})
 
 -- Dont show mode in command line
 vim.o.showmode = false
