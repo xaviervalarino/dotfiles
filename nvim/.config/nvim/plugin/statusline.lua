@@ -80,6 +80,7 @@ end
 s.left.add('▎', 'Bold')
 s.left.add(mode)
 s.left.add(diagnostics)
+s.left.add('', 'Statusline')
 s.left.add(git_status)
 s.center.add('  ', 'Statusline')
 s.center.add(filepath)
