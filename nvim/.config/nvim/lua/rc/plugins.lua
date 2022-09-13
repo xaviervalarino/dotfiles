@@ -97,6 +97,7 @@ return require('packer').startup {
         vim.notify = require 'notify'
       end,
     }
+    use 'lewis6991/impatient.nvim'
     use_rocks 'luautf8'
   end,
   config = {

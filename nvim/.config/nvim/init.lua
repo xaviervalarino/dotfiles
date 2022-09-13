@@ -1,3 +1,8 @@
+-- Package Config --------------------
+require 'rc.plugins'
+require'impatient'
+
+-- Set options -----------------------
 local set = vim.opt
 local window = vim.wo
 
@@ -60,6 +65,3 @@ set.splitright = true
 
 -- Completion --------------------------
 set.completeopt = { 'menu,menuone,noselect' }
-
--- Package Config --------------------
-require 'rc.plugins'
