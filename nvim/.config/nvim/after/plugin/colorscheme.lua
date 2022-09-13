@@ -16,12 +16,6 @@ vim.g.catppuccin_flavour = palette
 local color = require('catppuccin.palettes').get_palette()
 
 catppuccin.setup {
-  integrations = {
-    navic = {
-      enabled = true,
-      custom_bg = 'NONE',
-    },
-  },
   highlight_overrides = {
     all = {
       FloatBorder = {

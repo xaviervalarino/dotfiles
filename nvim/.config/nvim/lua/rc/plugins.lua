@@ -38,8 +38,14 @@ return require('packer').startup {
     use 'nvim-treesitter/playground'
     use 'windwp/nvim-ts-autotag'
     use 'JoosepAlviste/nvim-ts-context-commentstring'
-
-    use 'SmiteshP/nvim-navic'
+    use {
+      'nvim-treesitter/nvim-treesitter-context',
+      config = function()
+        require('treesitter-context').setup {
+          separator = '─',
+        }
+      end,
+    }
 
     -- lsp
     use 'neovim/nvim-lspconfig'
