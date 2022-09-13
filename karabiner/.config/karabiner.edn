@@ -89,7 +89,10 @@
                  [:3 :return_or_enter :razer_mouse]    ; Mouse button 3 → Go down one layer
                  [:!S2 :!Copen_bracket :razer_mouse]   ; ⇧ + Mouse button 2 →  Move layer down 
                  [:!S3 :!Cclose_bracket :razer_mouse]  ; ⇧ + Mouse button 3 →  Move layer up
-                 ]}
+                 ; left hand convenience
+                 [:d :!O8 ["caps_layer" 1]]   ; [d]esign panel
+                 [:t :!O9 ["caps_layer" 1]]]} ; Pro[t]otype panel
+
         {:des "Slack enhancement"
          :rules [:slack
                  ; Create links <Ctrl+K>
