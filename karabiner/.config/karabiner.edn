@@ -33,7 +33,8 @@
 
  :applications {:chrome ["^com\\.google\\.Chrome$"]
                 :figma  ["^com\\.figma\\.Desktop$"]
-                :slack  ["^com\\.tinyspeck\\.slackmacgap$"]}
+                :slack  ["^com\\.tinyspeck\\.slackmacgap$"]
+                :term   ["^net\\.kovidgoyal\\.kitty$"]}
 
  :main [
         {:des "Caps Lock -> Escape + caps_layer"
@@ -132,5 +133,11 @@
                  [:r [[:hs "reload"]]]
                  [:k [[:open "Karabiner-Elements"]]]
                  [:e [[:open "Karabiner-EventViewer"]]]]}
+
+        {:des "Deleting backwards"
+         :rules [:!term
+                 [:!Tw [:!SOleft_arrow :delete_or_backspace]]   ; Delete word
+                 [:!Tu [:!CSleft_arrow :delete_or_backspace]]]} ; Delte line
+
         ]}
 
