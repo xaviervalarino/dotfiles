@@ -16,21 +16,14 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
   end,
 })
 
--- Turn off cursorline for inactive and special windows
+-- Turn off cursorline for inactive windows
 vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
   group = vim.api.nvim_create_augroup('CursorLineFocus', { clear = true }),
   callback = function(ctx)
     vim.opt_local.cursorline = ctx.event == 'WinEnter'
   end,
 })
-vim.api.nvim_create_autocmd('FileType', {
-  group = 'CursorLineFocus',
-  callback = function(ctx)
-    if ctx.match == 'TelescopePrompt' then
-      vim.opt_local.cursorline = false
-    end
-  end,
-})
+
 if not vim.o.cursorline then
   vim.api.nvim_del_augroup_by_name 'CursorLineFocus'
 end
