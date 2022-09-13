@@ -1063,7 +1063,7 @@
           }
         }, {
           "from" : {
-            "key_code" : "spacebar",
+            "key_code" : "semicolon",
             "modifiers" : {
               "optional" : [ "left_shift" ]
             }
@@ -1097,7 +1097,7 @@
             "simultaneous" : [ {
               "key_code" : "w"
             }, {
-              "key_code" : "spacebar"
+              "key_code" : "semicolon"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
@@ -1114,7 +1114,7 @@
           }
         }, {
           "from" : {
-            "key_code" : "semicolon",
+            "key_code" : "return_or_enter",
             "modifiers" : {
               "optional" : [ "left_shift" ]
             }
@@ -1148,7 +1148,7 @@
             "simultaneous" : [ {
               "key_code" : "w"
             }, {
-              "key_code" : "semicolon"
+              "key_code" : "return_or_enter"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
