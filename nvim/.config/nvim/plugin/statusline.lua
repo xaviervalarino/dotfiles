@@ -42,7 +42,7 @@ local function diagnostics(add)
   for _, sign in ipairs(diagnostic_signs) do
     local count = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity[sign.name:upper()] })
     if count > 0 then
-      local hlgrp = 'DiagnosticSign' .. sign.name
+      local hlgrp = 'DiagnosticStatusLine' .. sign.name
       local diagnostic = string.format(' %s%s ', sign.icon, count)
       add(diagnostic, hlgrp)
     end

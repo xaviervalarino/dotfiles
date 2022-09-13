@@ -53,6 +53,9 @@ for _, name in pairs {
   'DiagnosticVirtualTextHint',
 } do
   local colors = vim.api.nvim_get_hl_by_name(name, true)
-  vim.api.nvim_set_hl(0, name, vim.tbl_extend('force', colors, { bg = 'bg' }))
+  local virtualtxt_colors = vim.tbl_extend('force', colors, { bg = 'bg', italic = false })
+  local statusline_colors = vim.tbl_extend('force', colors, { italic = false })
+  vim.api.nvim_set_hl(0, name, virtualtxt_colors)
+  vim.api.nvim_set_hl(0, 'DiagnosticStatusLine' .. name:match '.+(%u%l+)', statusline_colors)
   vim.api.nvim_set_hl(0, 'DiagnosticSign' .. name:match '.+(%u%l+)', colors)
 end
