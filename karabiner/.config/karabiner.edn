@@ -18,6 +18,7 @@
  :sim 50
  :templates {:wm "/opt/homebrew/bin/hs -c \"WM.%s(%s)\""
              :hs "/opt/homebrew/bin/hs -c \"hs.%s()\""
+             :launch "opt/homebrew/bin/hs -c \"Launch.%s()\""
              :indicator "opt/homebrew/bin/hs -c \"Indicator.%s()\""
              :open "open -a \"%s\""
              :say "say \"%s %s\""}
@@ -122,13 +123,16 @@
                  :caps_layer
                  [:spacebar ["launch_layer" 1] :!launch_layer]
                  :launch_layer
-                 [:a  [["launch_layer" 0] [:open "Activity Monitor"]]]
-                 [:c  [["launch_layer" 0] [:open "Google Chrome"]]]
-                 [:f  [["launch_layer" 0] [:open "Firefox Developer Edition"]]]
-                 [:!Sf  [["launch_layer" 0] [:open "Figma"]]]
-                 [:m  [["launch_layer" 0] [:open "Mail"]]]
-                 [:spacebar  [["launch_layer" 0] [:open "Kitty"]]]
-                 [:return_or_enter  [["launch_layer" 0] [:open "Finder"]]]]}
+                 [:a   [[:open "Activity Monitor"] ["launch_layer" 0]]]
+                 [:c   [[:open "Google Chrome"] ["launch_layer" 0]]]
+                 [:!Sc [[:launch "calendar"] ["launch_layer" 0]]]
+                 [:f   [[:open "Firefox Developer Edition"]["launch_layer" 0]]]
+                 [:!Sf [[:open "Figma"] ["launch_layer" 0]]]
+                 [:m   [[:launch "mail"] ["launch_layer" 0]]]
+                 [:n   [[:launch "nts"] ["launch_layer" 0]]]
+                 [:e   [[:launch "meet"] ["launch_layer" 0]]]
+                 [:spacebar  [[:open "Kitty"] ["launch_layer" 0]]]
+                 [:return_or_enter  [[:open "Finder"] ["launch_layer" 0]]]]}
 
         {:des "Extension/Automation management"
          :rules [:return_layer

@@ -12,31 +12,25 @@ hs.console.clearConsole()
 -- os.getenv'HOMEBREW_PREFIX' and hs.execute'echo $HOMEBREW_PREFIX' are note working
 hs.ipc.cliInstall '/opt/homebrew/'
 
-local Modes = require 'keymodes'
 local switcher = require 'switcher'
 
 local app_select = switcher.app_select
 local goto_chrome_tab = switcher.goto_chrome_tab
 local detach_chrome_tab = switcher.detach_chrome_tab
-local modes = Modes:new('ctrl', 'space')
 
 -- App launcher -----------------------------------------------------
-local app = modes:create('a', 'app launcher')
-local work = hs.execute('uname -n'):find 'trax'
+Launch = {}
+local work = nil -- hs.execute('uname -n'):find '<NAME>'
 
-app:chord('m', work and goto_chrome_tab 'mail.google.com' or app_select 'Mail')
-app:chord('c', work and goto_chrome_tab 'calendar.google.com' or app_select 'Calendar')
-app:chord('shift', 'm', goto_chrome_tab 'meet.google.com')
-app:chord('o', goto_chrome_tab 'app.shortcut.com')
-app:chord('d', goto_chrome_tab 'withabound.slite.com')
-app:chord('n', goto_chrome_tab 'nts.live')
+Launch.mail = work and goto_chrome_tab 'mail.google.com' or app_select 'Mail'
+Launch.calendar =  work and goto_chrome_tab 'calendar.google.com' or app_select 'Calendar'
+Launch.meet = goto_chrome_tab 'meet.google.com'
+Launch.nts = goto_chrome_tab 'nts.live'
 
 -- Manage windows ---------------------------------------------------
-local wm = modes:create('w', 'window manager')
-
-wm:chord('d', detach_chrome_tab)
-
 WM = require 'window-manager'
+WM.detach_chrome_tab = detach_chrome_tab
+
 Indicator = require 'focused-window-indicator'
 
 -- Handlers ---------------------------------------------------------
