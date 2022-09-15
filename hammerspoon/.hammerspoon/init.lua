@@ -19,8 +19,7 @@ end
 hs.loadSpoon 'SpoonInstall'
 
 -- Load Hammerspoon annotations for Sumneko LSP
--- TODO: this doesn't need to be run on every startup
--- hs.loadSpoon 'EmmyLua'
+require('emmy-lua-annotations')
 
 -- allow Hammerspoon to be used through CLI
 -- `hs` to start REPL
