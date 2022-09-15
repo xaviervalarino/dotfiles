@@ -54,6 +54,11 @@
           } ],
           "to_if_alone" : [ {
             "key_code" : "return_or_enter"
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 0,
+            "type" : "variable_if"
           } ]
         } ]
       }, {
@@ -1549,6 +1554,22 @@
           "to" : [ {
             "shell_command" : "open -a \"Finder\""
           }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "any" : "key_code"
+          },
+          "to" : [ {
             "set_variable" : {
               "name" : "launch_layer",
               "value" : 0

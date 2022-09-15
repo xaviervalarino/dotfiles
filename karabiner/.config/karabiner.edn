@@ -24,7 +24,7 @@
              :say "say \"%s %s\""}
 
  :layers {:tab_layer {:key :tab}
-          :return_layer {:key :return_or_enter}}
+          :return_layer {:key :return_or_enter :condi ["launch_layer" 0]}}
 
  :simlayers {:w_layer {:key :w :modi {:optional :left_shift}}}
 
