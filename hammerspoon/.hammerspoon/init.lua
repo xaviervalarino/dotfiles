@@ -41,7 +41,7 @@ Launch = {}
 local work = nil -- hs.execute('uname -n'):find '<NAME>'
 
 Launch.mail = work and goto_chrome_tab 'mail.google.com' or app_select 'Mail'
-Launch.calendar =  work and goto_chrome_tab 'calendar.google.com' or app_select 'Calendar'
+Launch.calendar = work and goto_chrome_tab 'calendar.google.com' or app_select 'Calendar'
 Launch.meet = goto_chrome_tab 'meet.google.com'
 Launch.nts = goto_chrome_tab 'nts.live'
 
