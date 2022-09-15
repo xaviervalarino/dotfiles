@@ -1,5 +1,23 @@
 hs.console.clearConsole()
 
+-- Install SpoonInstall if it's not already instaled
+if not pcall(hs.fs.dir, './Spoons') then
+  hs.fs.mkdir './Spoons/'
+end
+
+if not hs.spoons.isInstalled 'SpoonInstall' then
+  local url = 'https://raw.githubusercontent.com/Hammerspoon/Spoons/master/Source/SpoonInstall.spoon/'
+  local path = './Spoons/SpoonInstall.spoon/'
+  local function download_file(filename)
+    os.execute(string.format('curl %s%s > %s%s', url, filename, path, filename))
+  end
+  hs.fs.mkdir(path)
+  download_file 'init.lua'
+  download_file 'docs.json'
+end
+
+hs.loadSpoon 'SpoonInstall'
+
 -- Load Hammerspoon annotations for Sumneko LSP
 -- TODO: this doesn't need to be run on every startup
 -- hs.loadSpoon 'EmmyLua'
