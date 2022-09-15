@@ -20,6 +20,7 @@ hs.loadSpoon 'SpoonInstall'
 
 -- Load Hammerspoon annotations for Sumneko LSP
 require('emmy-lua-annotations')
+URLDispather = require './url-dispatcher'
 
 -- allow Hammerspoon to be used through CLI
 -- `hs` to start REPL
