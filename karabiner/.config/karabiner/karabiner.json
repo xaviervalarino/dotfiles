@@ -1360,6 +1360,23 @@
           } ],
           "type" : "basic"
         }, {
+          "to_delayed_action" : {
+            "to_if_invoked" : [ {
+              "set_variable" : {
+                "name" : "launch_layer",
+                "value" : 0
+              }
+            } ],
+            "to_if_canceled" : [ {
+              "set_variable" : {
+                "name" : "lauch_layer",
+                "value" : 0
+              }
+            } ]
+          },
+          "parameters" : {
+            "basic.to_delayed_action_delay_milliseconds" : 800
+          },
           "from" : {
             "key_code" : "spacebar"
           },
@@ -1554,22 +1571,6 @@
           "to" : [ {
             "shell_command" : "open -a \"Finder\""
           }, {
-            "set_variable" : {
-              "name" : "launch_layer",
-              "value" : 0
-            }
-          } ],
-          "conditions" : [ {
-            "name" : "launch_layer",
-            "value" : 1,
-            "type" : "variable_if"
-          } ],
-          "type" : "basic"
-        }, {
-          "from" : {
-            "any" : "key_code"
-          },
-          "to" : [ {
             "set_variable" : {
               "name" : "launch_layer",
               "value" : 0

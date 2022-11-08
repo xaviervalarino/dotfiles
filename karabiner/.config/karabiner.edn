@@ -120,8 +120,11 @@
 
         {:des "Application launcher"
          :rules [[:!SCcomma [:open "System Preferences"]]
-                 :caps_layer
-                 [:spacebar ["launch_layer" 1] :!launch_layer]
+                 ; enter launch_layer with spacebar
+                 [:spacebar ["launch_layer" 1] [:caps_layer :!launch_layer]
+                  {:delayed {:invoked ["launch_layer" 0]
+                             :canceled ["lauch_layer" 0]}
+                   :params  {:delay 800}}]
                  :launch_layer
                  [:a   [[:open "Activity Monitor"] ["launch_layer" 0]]]
                  [:c   [[:launch "calendar"] ["launch_layer" 0]]]
@@ -132,8 +135,7 @@
                  [:n   [[:launch "nts"] ["launch_layer" 0]]]
                  [:e   [[:launch "meet"] ["launch_layer" 0]]]
                  [:t   [[:open "Kitty"] ["launch_layer" 0]]]
-                 [:return_or_enter [[:open "Finder"] ["launch_layer" 0]]]
-                 [{:any :key_code} ["launch_layer" 0]]]}
+                 [:return_or_enter [[:open "Finder"] ["launch_layer" 0]]]]}
 
         {:des "Extension/Automation management"
          :rules [:return_layer
