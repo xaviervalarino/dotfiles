@@ -5,7 +5,7 @@ local run_cmd = util.run_cmd
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = require('cmp_nvim_lsp').update_capabilities(M.capabilities)
+M.capabilities = require('cmp_nvim_lsp').default_capabilities(M.capabilities)
 
 function M.on_attach(client, bufnr)
   local map = bufmap(bufnr)
