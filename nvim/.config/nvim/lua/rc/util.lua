@@ -7,7 +7,6 @@ local function split(str)
   end
 end
 
----@class Keymap_helper
 local keymap_mt = {
   __call = function(t, lhs, rhs, opts)
     opts = vim.tbl_extend('force', t.defaults, opts or {})
@@ -24,13 +23,10 @@ local keymap_mt = {
   end,
 }
 
----@type Keymap_helper
 M.keymap = setmetatable({
   defaults = { silent = true },
 }, keymap_mt)
 
----@param bufnr integer buffer number
----@return Keymap_helper  -- keymap utility function scoped to `bufnr`
 M.bufkeymap = function(bufnr)
   return setmetatable({
     defaults = {
