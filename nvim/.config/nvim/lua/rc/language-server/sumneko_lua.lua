@@ -7,10 +7,7 @@ local M = {
 local buffer_path = vim.fn.expand '%:p'
 
 -- Neovim config files
-if buffer_path:match '.config/nvim' then
-  local lua_dev = require('lua-dev').setup()
-  M = vim.tbl_deep_extend('keep', M, lua_dev)
-end
+require('neodev').setup{}
 
 -- Hammerspoon config files
 -- make sure HS is running and IPC command is available
