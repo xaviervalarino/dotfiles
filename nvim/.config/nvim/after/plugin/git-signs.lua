@@ -26,8 +26,8 @@ require('gitsigns').setup {
     end, {expr=true, desc = 'Go to previous hunk'})
 
     -- Actions
-    map.nv('<leader>hs',  ':Gitsigns stage_hunk<CR>',                    { desc = 'Stage hunk' })
-    map.nv('<leader>hr',  ':Gitsigns reset_hunk<CR>',                    { desc = 'Reset hunk' })
+    map.nv('<leader>hs',  '<cmd>Gitsigns stage_hunk<CR>',                { desc = 'Stage hunk' })
+    map.nv('<leader>hr',  '<cmd>Gitsigns reset_hunk<CR>',                { desc = 'Reset hunk' })
     map.n('<leader>hS',   gs.stage_buffer,                               { desc = 'Stage buffer' })
     map.n('<leader>hu',   gs.undo_stage_hunk,                            { desc = 'Undo stage hunk' })
     map.n('<leader>hR',   gs.reset_buffer,                               { desc = 'Reset all hunks in buffer' })
