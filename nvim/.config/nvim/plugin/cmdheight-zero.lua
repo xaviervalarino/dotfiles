@@ -23,16 +23,3 @@ vim.api.nvim_create_autocmd({ 'CmdlineLeave' }, {
     vim.api.nvim_exec_autocmds('User', { pattern = 'CmdlineLeavePost', group = 'CmdlineStatus' })
   end,
 })
-
--- See "StatusLineToggle" autogroup in StatusLine
-vim.api.nvim_create_autocmd('User', {
-  group = 'CmdlineStatus',
-  pattern = { 'CmdlineEnterPre', 'CmdlineLeavePost' },
-  callback = function(ctx)
-    if ctx.match == 'CmdlineEnterPre' then
-      vim.opt.cmdheight = 1
-    else
-      vim.opt.cmdheight = 0
-    end
-  end,
-})

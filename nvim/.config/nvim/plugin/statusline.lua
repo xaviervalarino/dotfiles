@@ -105,20 +105,3 @@ vim.o.showmode = false
 -- initial
 local sl = [[%{%luaeval("require'rc.statusline':create()")%}]]
 vim.opt.statusline = sl
-
--- User event for "CmdlineEnterPre|CmdlineLeavePost" defined in cmdheight-zero.lua
-vim.api.nvim_create_autocmd('User', {
-  group = 'CmdlineStatus',
-  pattern = { 'CmdlineEnterPre', 'CmdlineLeavePost' },
-  callback = function(ctx)
-    if ctx.match == 'CmdlineEnterPre' then
-      local separator = string.rep(vim.opt.fillchars:get().horiz or '─', vim.o.columns)
-      local win_split = string.format('%%#WinSeparator#%s', separator)
-      vim.opt.laststatus = 0
-      vim.opt.statusline = win_split
-    else
-      vim.opt.laststatus = 3
-      vim.opt.statusline = sl
-    end
-  end,
-})
