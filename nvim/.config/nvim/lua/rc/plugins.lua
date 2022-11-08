@@ -107,6 +107,10 @@ return require('packer').startup {
       end,
     }
     use {
+      'AckslD/messages.nvim',
+      config = simple_setup('messages'),
+    }
+    use {
       'goolord/alpha-nvim',
       requires = { 'kyazdani42/nvim-web-devicons' },
       config = function()
