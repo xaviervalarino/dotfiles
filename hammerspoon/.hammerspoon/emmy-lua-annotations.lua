@@ -10,7 +10,7 @@ if not pcall(hs.fs.dir, path) or not io.open(version_file) then
   print 'Emmy Lua Annotations do not exist, installing spoon and generating'
   return spoon.SpoonInstall:andUse('EmmyLua', {
     fn = function()
-      -- After EmmyLua writes annotations, log version number
+      -- log version number after EmmyLua writes annotations
       writeDocGenInfo()
     end,
   })
