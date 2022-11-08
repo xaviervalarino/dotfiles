@@ -40,6 +40,15 @@ local function mode(add)
   add(string.rep(' ', pad) .. mode .. ' ')
 end
 
+local function macro_recording(add)
+  local record_reg = vim.fn.reg_recording()
+  local ret = ''
+  if record_reg ~= '' then
+    ret = "@" .. record_reg
+  end
+  add(ret)
+end
+
 local diagnostic_signs = require('rc.util').diagnostic_signs
 
 local function diagnostics(add)
@@ -83,6 +92,7 @@ end
 
 s.left.add('', 'StatuslineMode')
 s.left.add(mode)
+s.left.add(macro_recording)
 s.left.add(diagnostics)
 s.left.add('', 'Statusline')
 s.left.add(git_status)
