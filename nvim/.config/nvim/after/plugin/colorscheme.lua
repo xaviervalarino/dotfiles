@@ -13,7 +13,7 @@ end
 
 vim.g.catppuccin_flavour = palette
 
-local color = require('catppuccin.palettes').get_palette()
+local color = require('catppuccin.palettes').get_palette(palette)
 
 catppuccin.setup {
   highlight_overrides = {
