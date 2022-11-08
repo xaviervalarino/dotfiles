@@ -82,6 +82,8 @@ return require('packer').startup {
       end,
     }
 
+    use { 'gen740/SmoothCursor.nvim', config = simple_setup 'smoothcursor' }
+
     use 'folke/zen-mode.nvim'
     use 'ThePrimeagen/harpoon'
 
