@@ -75,7 +75,12 @@ return require('packer').startup {
     use 'kyazdani42/nvim-web-devicons'
     use { 'catppuccin/nvim', as = 'catppuccin' }
 
-    use { 'j-hui/fidget.nvim', config = simple_setup 'fidget' }
+    use {
+      'j-hui/fidget.nvim',
+      config = function()
+        require('fidget').setup { text = { spinner = 'dots' } }
+      end,
+    }
 
     use 'folke/zen-mode.nvim'
     use 'ThePrimeagen/harpoon'
