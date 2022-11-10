@@ -2,7 +2,8 @@
 
 # Install @latest
 if ! which volta > /dev/null; then echo 'Volta is missing' exit 1; fi
-if ! which node > /dev/null; then volta install node@latest; fi
+
+volta install node@latest
 
 # Install global packages
 volta install \
