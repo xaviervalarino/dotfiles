@@ -87,7 +87,7 @@ h264() {
 }
 
 video_halfspeed () {
-  ffmpeg -i $1 -filter:v "setpts=0.5*PTS" ${1%.*}.min.${1##*.}
+  ffmpeg -i $1 -filter:v "setpts=0.5*PTS" ${1%.*}.half.${1##*.}
 }
 
 # vi:filetype=sh
