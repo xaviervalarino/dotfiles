@@ -11,11 +11,10 @@ else
   palette = 'mocha'
 end
 
-vim.g.catppuccin_flavour = palette
-
 local color = require('catppuccin.palettes').get_palette(palette)
 
 catppuccin.setup {
+  flavour = palette,
   highlight_overrides = {
     all = {
       FloatBorder = {
@@ -43,7 +42,7 @@ catppuccin.setup {
   },
 }
 
-vim.cmd [[colorscheme catppuccin]]
+vim.cmd.colorscheme "catppuccin"
 
 -- Use the diagnostic background color from DiagnosticVirtualText* for DiagnosticSign*
 for _, name in pairs {
