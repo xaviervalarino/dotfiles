@@ -242,7 +242,10 @@
         "description" : "Mappings for Mistel keyboard",
         "manipulators" : [ {
           "from" : {
-            "key_code" : "escape"
+            "key_code" : "escape",
+            "modifiers" : {
+              "optional" : [ "any" ]
+            }
           },
           "to" : [ {
             "key_code" : "grave_accent_and_tilde"
