@@ -135,6 +135,8 @@
                  [:n   [[:launch "nts"] ["launch_layer" 0]]]
                  [:e   [[:launch "meet"] ["launch_layer" 0]]]
                  [:t   [[:open "Kitty"] ["launch_layer" 0]]]
+                 [:z   [[:open "Zoom.us"] ["launch_layer" 0]]]
+                 [:s   [[:open "Slack"]["launch_layer" 0]]]
                  [:return_or_enter [[:open "Finder"] ["launch_layer" 0]]]]}
 
         {:des "Extension/Automation management"
