@@ -109,7 +109,7 @@
                  [:d [:wm "toggle_show_desktop"]]
                  [:n [:wm "move_to_next_display"]]
                  [:semicolon [:wm "center"]]
-                 [:return_or_enter [:wm "fill"]]
+                 [:quote [:wm "fill"]]
                  [:r [["r_layer" 1] [:indicator "on"]] !r_layer]
                  :r_layer
                  [:h nil nil {:held [:wm "grow_left" "true"]  :afterup [:wm "grow_left" "false"]}]

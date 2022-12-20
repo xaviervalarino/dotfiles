@@ -1156,7 +1156,7 @@
           }
         }, {
           "from" : {
-            "key_code" : "return_or_enter",
+            "key_code" : "quote",
             "modifiers" : {
               "optional" : [ "left_shift" ]
             }
@@ -1190,7 +1190,7 @@
             "simultaneous" : [ {
               "key_code" : "w"
             }, {
-              "key_code" : "return_or_enter"
+              "key_code" : "quote"
             } ],
             "simultaneous_options" : {
               "detect_key_down_uninterruptedly" : true,
