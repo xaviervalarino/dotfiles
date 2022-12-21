@@ -72,5 +72,38 @@ Thunderbolt = hs.usb.watcher.new(function(t)
 end)
 Thunderbolt:start()
 
+-- Spaces -----------------------------------------------------------
+
+---Get ordered list of space IDs
+local function getSpaces()
+  local t = {}
+  for _, screen in ipairs(hs.screen.allScreens()) do
+    for _, space in ipairs(hs.spaces.spacesForScreen(screen)) do
+      table.insert(t, space)
+    end
+  end
+  return t
+end
+
+local spaceIDs = getSpaces()
+local lastActiveWindows = hs.window.filter.new():setCurrentSpace(true):getWindows()
+
+---Go to space by it's Mission Control number
+---Focuses the last focused (usually the topmost one) window for that space 
+---@param number number The number as seen in Mission Control, i.e. 1-8
+Spaces = function(number)
+  local spaceID = spaceIDs[number]
+  hs.spaces.gotoSpace(spaceID)
+
+  -- set focus to last active window in the Space being selected
+  if spaceID ~= hs.spaces.activeSpaceOnScreen() then
+    for _, lastActive in ipairs(lastActiveWindows) do
+      if hs.spaces.windowSpaces(lastActive)[1] == spaceID then
+        return lastActive:focus()
+      end
+    end
+  end
+end
+
 ---------------------------------------------------------------------
 require('util').alert '🔨 loaded'

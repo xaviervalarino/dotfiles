@@ -1621,6 +1621,162 @@
             "type" : "variable_if"
           } ],
           "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "1"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Spaces(1)\""
+          }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "2"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Spaces(2)\""
+          }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "3"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Spaces(4)\""
+          }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "4"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Spaces(4)\""
+          }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "1",
+            "modifiers" : {
+              "mandatory" : [ "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Spaces(5)\""
+          }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "2",
+            "modifiers" : {
+              "mandatory" : [ "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Spaces(6)\""
+          }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "3",
+            "modifiers" : {
+              "mandatory" : [ "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Spaces(7)\""
+          }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "4",
+            "modifiers" : {
+              "mandatory" : [ "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Spaces(8)\""
+          }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
         } ]
       }, {
         "description" : "Extension/Automation management",

@@ -20,6 +20,7 @@
              :hs "/opt/homebrew/bin/hs -c \"hs.%s()\""
              :launch "opt/homebrew/bin/hs -c \"Launch.%s()\""
              :indicator "opt/homebrew/bin/hs -c \"Indicator.%s()\""
+             :spaces "/opt/homebrew/bin/hs -c \"Spaces(%s)\""
              :open "open -a \"%s\""
              :say "say \"%s %s\""}
 
@@ -137,7 +138,17 @@
                  [:t   [[:open "Kitty"] ["launch_layer" 0]]]
                  [:z   [[:open "Zoom.us"] ["launch_layer" 0]]]
                  [:s   [[:open "Slack"]["launch_layer" 0]]]
-                 [:return_or_enter [[:open "Finder"] ["launch_layer" 0]]]]}
+                 [:return_or_enter [[:open "Finder"] ["launch_layer" 0]]]
+                 ; Move to Mission Control space
+                 [:1   [[:spaces 1]["launch_layer" 0 ]]]
+                 [:2   [[:spaces 2]["launch_layer" 0 ]]]
+                 [:3   [[:spaces 4]["launch_layer" 0 ]]]
+                 [:4   [[:spaces 4]["launch_layer" 0 ]]]
+                 [:!S1 [[:spaces 5]["launch_layer" 0 ]]]
+                 [:!S2 [[:spaces 6]["launch_layer" 0 ]]]
+                 [:!S3 [[:spaces 7]["launch_layer" 0 ]]]
+                 [:!S4 [[:spaces 8]["launch_layer" 0 ]]]
+                 ]}
 
         {:des "Extension/Automation management"
          :rules [:return_layer
