@@ -111,34 +111,34 @@
                  [:n [:wm "move_to_next_display"]]
                  [:semicolon [:wm "center"]]
                  [:quote [:wm "fill"]]
-                 [:r [["r_layer" 1] [:indicator "on"]] !r_layer]
+                 [:r [["r_layer" 1][:indicator "on"]] !r_layer]
                  :r_layer
                  [:h nil nil {:held [:wm "grow_left" "true"]  :afterup [:wm "grow_left" "false"]}]
                  [:j nil nil {:held [:wm "grow_down" "true"]  :afterup [:wm "grow_down" "false"]}]
                  [:k nil nil {:held [:wm "grow_up" "true"]    :afterup [:wm "grow_up" "false"]}]
                  [:l nil nil {:held [:wm "grow_right" "true"] :afterup [:wm "grow_right" "false"]}]
-                 [{:any :key_code} [["r_layer" 0] [:indicator "off"]]]]}
+                 [{:any :key_code} [["r_layer" 0][:indicator "off"]]]]}
 
         {:des "Application launcher"
          :rules [[:!SCcomma [:open "System Preferences"]]
                  ; enter launch_layer with spacebar
-                 [:spacebar ["launch_layer" 1] [:caps_layer :!launch_layer]
+                 [:spacebar ["launch_layer" 1][:caps_layer :!launch_layer]
                   {:delayed {:invoked ["launch_layer" 0]
                              :canceled ["lauch_layer" 0]}
                    :params  {:delay 800}}]
                  :launch_layer
-                 [:a   [[:open "Activity Monitor"] ["launch_layer" 0]]]
-                 [:c   [[:launch "calendar"] ["launch_layer" 0]]]
-                 [:!Sc [[:open "Google Chrome"] ["launch_layer" 0]]]
+                 [:a   [[:open "Activity Monitor"]["launch_layer" 0]]]
+                 [:c   [[:launch "calendar"]["launch_layer" 0]]]
+                 [:!Sc [[:open "Google Chrome"]["launch_layer" 0]]]
                  [:f   [[:open "Firefox Developer Edition"]["launch_layer" 0]]]
-                 [:!Sf [[:open "Figma"] ["launch_layer" 0]]]
-                 [:m   [[:launch "mail"] ["launch_layer" 0]]]
-                 [:n   [[:launch "nts"] ["launch_layer" 0]]]
-                 [:e   [[:launch "meet"] ["launch_layer" 0]]]
-                 [:t   [[:open "Kitty"] ["launch_layer" 0]]]
-                 [:z   [[:open "Zoom.us"] ["launch_layer" 0]]]
+                 [:!Sf [[:open "Figma"]["launch_layer" 0]]]
+                 [:m   [[:launch "mail"]["launch_layer" 0]]]
+                 [:n   [[:launch "nts"]["launch_layer" 0]]]
+                 [:e   [[:launch "meet"]["launch_layer" 0]]]
+                 [:t   [[:open "Kitty"]["launch_layer" 0]]]
+                 [:z   [[:open "Zoom.us"]["launch_layer" 0]]]
                  [:s   [[:open "Slack"]["launch_layer" 0]]]
-                 [:return_or_enter [[:open "Finder"] ["launch_layer" 0]]]
+                 [:return_or_enter [[:open "Finder"]["launch_layer" 0]]]
                  ; Move to Mission Control space
                  [:1   [[:spaces 1]["launch_layer" 0 ]]]
                  [:2   [[:spaces 2]["launch_layer" 0 ]]]
