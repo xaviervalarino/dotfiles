@@ -18,8 +18,8 @@
  :sim 50
  :templates {:wm "/opt/homebrew/bin/hs -c \"WM.%s(%s)\""
              :hs "/opt/homebrew/bin/hs -c \"hs.%s()\""
-             :launch "opt/homebrew/bin/hs -c \"Launch.%s()\""
-             :indicator "opt/homebrew/bin/hs -c \"Indicator.%s()\""
+             :launch "/opt/homebrew/bin/hs -c \"Launch.%s()\""
+             :indicator "/opt/homebrew/bin/hs -c \"Indicator.%s()\""
              :spaces "/opt/homebrew/bin/hs -c \"Spaces(%s)\""
              :open "open -a \"%s\""
              :say "say \"%s %s\""}

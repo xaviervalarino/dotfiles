@@ -82,7 +82,7 @@
               "value" : 0
             }
           }, {
-            "shell_command" : "opt/homebrew/bin/hs -c \"Indicator.off()\""
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Indicator.off()\""
           } ],
           "to_after_key_up" : [ {
             "set_variable" : {
@@ -1218,7 +1218,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "opt/homebrew/bin/hs -c \"Indicator.on()\""
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Indicator.on()\""
           } ],
           "conditions" : [ {
             "name" : "w_layer",
@@ -1242,7 +1242,7 @@
               "value" : 1
             }
           }, {
-            "shell_command" : "opt/homebrew/bin/hs -c \"Indicator.on()\""
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Indicator.on()\""
           } ],
           "from" : {
             "modifiers" : {
@@ -1340,7 +1340,7 @@
               "value" : 0
             }
           }, {
-            "shell_command" : "opt/homebrew/bin/hs -c \"Indicator.off()\""
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Indicator.off()\""
           } ],
           "conditions" : [ {
             "name" : "r_layer",
@@ -1422,7 +1422,7 @@
             "key_code" : "c"
           },
           "to" : [ {
-            "shell_command" : "opt/homebrew/bin/hs -c \"Launch.calendar()\""
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Launch.calendar()\""
           }, {
             "set_variable" : {
               "name" : "launch_layer",
@@ -1500,7 +1500,7 @@
             "key_code" : "m"
           },
           "to" : [ {
-            "shell_command" : "opt/homebrew/bin/hs -c \"Launch.mail()\""
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Launch.mail()\""
           }, {
             "set_variable" : {
               "name" : "launch_layer",
@@ -1518,7 +1518,7 @@
             "key_code" : "n"
           },
           "to" : [ {
-            "shell_command" : "opt/homebrew/bin/hs -c \"Launch.nts()\""
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Launch.nts()\""
           }, {
             "set_variable" : {
               "name" : "launch_layer",
@@ -1536,7 +1536,7 @@
             "key_code" : "e"
           },
           "to" : [ {
-            "shell_command" : "opt/homebrew/bin/hs -c \"Launch.meet()\""
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Launch.meet()\""
           }, {
             "set_variable" : {
               "name" : "launch_layer",
