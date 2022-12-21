@@ -89,7 +89,7 @@ local spaceIDs = getSpaces()
 local lastActiveWindows = hs.window.filter.new():setCurrentSpace(true):getWindows()
 
 ---Go to space by it's Mission Control number
----Focuses the last focused (usually the topmost one) window for that space 
+---Focuses the last focused (usually the topmost) window for that space 
 ---@param number number The number as seen in Mission Control, i.e. 1-8
 Spaces = function(number)
   local spaceID = spaceIDs[number]
@@ -99,7 +99,8 @@ Spaces = function(number)
   if spaceID ~= hs.spaces.activeSpaceOnScreen() then
     for _, lastActive in ipairs(lastActiveWindows) do
       if hs.spaces.windowSpaces(lastActive)[1] == spaceID then
-        return lastActive:focus()
+        lastActive:focus()
+        break
       end
     end
   end
