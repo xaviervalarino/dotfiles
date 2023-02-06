@@ -6,7 +6,7 @@ if ! which volta > /dev/null; then echo 'Volta is missing' exit 1; fi
 volta install node@latest
 
 # Install global packages
-volta install \
+npm -g install \
   bash-language-server \
   prettier \
   typescript \
