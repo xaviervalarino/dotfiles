@@ -134,9 +134,8 @@
         {:des "Application launcher"
          :rules [[:!SCcomma [:open "System Preferences"]]
                  ; enter launch_layer with spacebar
-                 [:spacebar ["launch_layer" 1][:caps_layer :!launch_layer]
-                  {:delayed {:invoked ["launch_layer" 0]
-                             :canceled ["lauch_layer" 0]}
+                 [:spacebar ["launch_layer" 1] [:caps_layer :!launch_layer]
+                  {:delayed {:invoked ["launch_layer" 0]}
                    :params  {:delay 800}}]
                  :launch_layer
                  [:a   [[:open "Activity Monitor"]["launch_layer" 0]]]
