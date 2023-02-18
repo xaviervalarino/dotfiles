@@ -21,6 +21,7 @@
              :launch "/opt/homebrew/bin/hs -c \"Launch.%s()\""
              :indicator "/opt/homebrew/bin/hs -c \"Indicator.%s()\""
              :spaces "/opt/homebrew/bin/hs -c \"Spaces(%s)\""
+             :menu_item "/opt/homebrew/bin/hs -c \"Menu_item('%s', '%s')\""
              :open "open -a \"%s\""
              :say "say \"%s %s\""}
 
@@ -105,8 +106,29 @@
                  [:!S3 :!Cclose_bracket :razer_mouse]  ; ⇧ + Mouse button 3 → Move layer up
                  [:6 :!SCh :razer_mouse]               ; Mouse button 6 → show/hide layer
                  ; left hand convenience
-                 [:d :!O8 ["caps_layer" 1]]   ; [d]esign panel
-                 [:t :!O9 ["caps_layer" 1]]]} ; Pro[t]otype panel
+                 [:d :!O8 ["caps_layer" 1]] ; [d]esign panel
+                 [:t :!O9 ["caps_layer" 1]] ; Pro[t]otype panel
+                 ; auto-layout
+                 [[:a :spacebar] ["figma_layout_layer" 1] [:!figma_layout_layer]
+                  {:delayed {:invoked ["figma_layout_layer" 0]}
+                   :params  {:delay 800}}]
+                 :figma_layout_layer
+                 [:f   [[:menu_item "Figma" "Horizontal"] ["figma_layout_layer" 0]]]
+                 [:!Sf [[:menu_item "Figma" "Vertical"] ["figma_layout_layer" 0]]]
+                 [:c   [[:menu_item "Figma" "Horizontal Stretch"] ["figma_layout_layer" 0]]]
+                 [:!Sc [[:menu_item "Figma" "Vertical Stretch"] ["figma_layout_layer" 0]]]
+                 [:b   [[:menu_item "Figma" "Space Between Horizontal"] ["figma_layout_layer" 0]]]
+                 [:!Sb [[:menu_item "Figma" "Space Between Vertical"] ["figma_layout_layer" 0]]]
+                 [:t   [[:menu_item "Figma" "Toggle Direction"] ["figma_layout_layer" 0]]]
+
+                 ; "Align Top Left"
+                 ; "Align Top Center"
+                 ; "Align Top Right"
+
+                 ; "Align Mid Left"
+                 ; "Align Mid Right"
+                 ; 
+                 ]} 
 
         {:des "Slack enhancement"
          :rules [:slack
