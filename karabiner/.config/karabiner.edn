@@ -145,6 +145,7 @@
                  [:!Sf [[:open "Figma"]["launch_layer" 0]]]
                  [:m   [[:launch "mail"]["launch_layer" 0]]]
                  [:n   [[:launch "nts"]["launch_layer" 0]]]
+                 [:!Sn   [[:open "Notion"]["launch_layer" 0]]]
                  [:e   [[:launch "meet"]["launch_layer" 0]]]
                  [:t   [[:open "Kitty"]["launch_layer" 0]]]
                  [:z   [[:open "Zoom.us"]["launch_layer" 0]]]
