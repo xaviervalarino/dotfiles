@@ -30,6 +30,7 @@
  :simlayers {:w_layer {:key :w :modi {:optional :left_shift}}}
 
  :devices {:mistel      [{:vendor_id 1241 :product_id 323}]
+           :mbp         [{:vendor_id 1452 :product_id 833}]
            :razer_mouse [{:vendor_id 5426 :product_id 146}   ; bluetooth
                          {:vendor_id 5426 :product_id 143}]} ; wired
 
@@ -61,6 +62,17 @@
                  [:##j :page_down]
                  [:##k :page_up]
                  [:##l :end]]}
+
+        {:des "Mappings for MBP keyboard"
+         :rules [:mbp
+                 ; Volume
+                 [:!Ea {:ckey :mute}]
+                 [:!Es {:ckey :volume_decrement}]
+                 [:!Ed {:ckey :volume_increment}]
+                 ; Brightness
+                 [:!Ew {:ckey :display_brightness_decrement}]
+                 [:!Ee {:ckey :display_brightness_increment}]
+                 ]}
 
         {:des "Mappings for Mistel keyboard"
          :rules [:mistel
