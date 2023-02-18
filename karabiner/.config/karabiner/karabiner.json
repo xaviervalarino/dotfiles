@@ -239,6 +239,99 @@
           "type" : "basic"
         } ]
       }, {
+        "description" : "Mappings for MBP keyboard",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "a",
+            "modifiers" : {
+              "mandatory" : [ "right_option" ]
+            }
+          },
+          "to" : [ {
+            "consumer_key_code" : "mute"
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "vendor_id" : 1452,
+              "product_id" : 833
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "s",
+            "modifiers" : {
+              "mandatory" : [ "right_option" ]
+            }
+          },
+          "to" : [ {
+            "consumer_key_code" : "volume_decrement"
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "vendor_id" : 1452,
+              "product_id" : 833
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "d",
+            "modifiers" : {
+              "mandatory" : [ "right_option" ]
+            }
+          },
+          "to" : [ {
+            "consumer_key_code" : "volume_increment"
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "vendor_id" : 1452,
+              "product_id" : 833
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "w",
+            "modifiers" : {
+              "mandatory" : [ "right_option" ]
+            }
+          },
+          "to" : [ {
+            "consumer_key_code" : "display_brightness_decrement"
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "vendor_id" : 1452,
+              "product_id" : 833
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "e",
+            "modifiers" : {
+              "mandatory" : [ "right_option" ]
+            }
+          },
+          "to" : [ {
+            "consumer_key_code" : "display_brightness_increment"
+          } ],
+          "conditions" : [ {
+            "identifiers" : [ {
+              "vendor_id" : 1452,
+              "product_id" : 833
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
         "description" : "Mappings for Mistel keyboard",
         "manipulators" : [ {
           "from" : {
@@ -602,8 +695,7 @@
             "key_code" : "2"
           },
           "to" : [ {
-            "key_code" : "return_or_enter",
-            "modifiers" : [ "left_shift" ]
+            "key_code" : "return_or_enter"
           } ],
           "conditions" : [ {
             "type" : "frontmost_application_if",
@@ -624,7 +716,8 @@
             "key_code" : "3"
           },
           "to" : [ {
-            "key_code" : "return_or_enter"
+            "key_code" : "return_or_enter",
+            "modifiers" : [ "left_shift" ]
           } ],
           "conditions" : [ {
             "type" : "frontmost_application_if",
@@ -692,6 +785,28 @@
           "type" : "basic"
         }, {
           "from" : {
+            "key_code" : "6"
+          },
+          "to" : [ {
+            "key_code" : "h",
+            "modifiers" : [ "left_command", "left_shift" ]
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          }, {
+            "identifiers" : [ {
+              "vendor_id" : 5426,
+              "product_id" : 146
+            }, {
+              "vendor_id" : 5426,
+              "product_id" : 143
+            } ],
+            "type" : "device_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
             "key_code" : "d"
           },
           "to" : [ {
@@ -720,6 +835,181 @@
             "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
           }, {
             "name" : "caps_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "to_delayed_action" : {
+            "to_if_invoked" : [ {
+              "set_variable" : {
+                "name" : "figma_layout_layer",
+                "value" : 0
+              }
+            } ]
+          },
+          "parameters" : {
+            "basic.to_delayed_action_delay_milliseconds" : 800
+          },
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "a"
+            }, {
+              "key_code" : "spacebar"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : false,
+              "key_down_order" : "insensitive",
+              "key_up_order" : "insensitive",
+              "key_up_when" : "any"
+            }
+          },
+          "to" : [ {
+            "set_variable" : {
+              "name" : "figma_layout_layer",
+              "value" : 1
+            }
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          }, {
+            "name" : "figma_layout_layer",
+            "value" : 1,
+            "type" : "variable_unless"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Horizontal')\""
+          }, {
+            "set_variable" : {
+              "name" : "figma_layout_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "figma_layout_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "f",
+            "modifiers" : {
+              "mandatory" : [ "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Vertical')\""
+          }, {
+            "set_variable" : {
+              "name" : "figma_layout_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "figma_layout_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "c"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Horizontal Stretch')\""
+          }, {
+            "set_variable" : {
+              "name" : "figma_layout_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "figma_layout_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "c",
+            "modifiers" : {
+              "mandatory" : [ "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Vertical Stretch')\""
+          }, {
+            "set_variable" : {
+              "name" : "figma_layout_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "figma_layout_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "b"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Space Between Horizontal')\""
+          }, {
+            "set_variable" : {
+              "name" : "figma_layout_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "figma_layout_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "b",
+            "modifiers" : {
+              "mandatory" : [ "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Space Between Vertical')\""
+          }, {
+            "set_variable" : {
+              "name" : "figma_layout_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "figma_layout_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "t"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Toggle Direction')\""
+          }, {
+            "set_variable" : {
+              "name" : "figma_layout_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "figma_layout_layer",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -1369,12 +1659,6 @@
                 "name" : "launch_layer",
                 "value" : 0
               }
-            } ],
-            "to_if_canceled" : [ {
-              "set_variable" : {
-                "name" : "lauch_layer",
-                "value" : 0
-              }
             } ]
           },
           "parameters" : {
@@ -1519,6 +1803,27 @@
           },
           "to" : [ {
             "shell_command" : "/opt/homebrew/bin/hs -c \"Launch.nts()\""
+          }, {
+            "set_variable" : {
+              "name" : "launch_layer",
+              "value" : 0
+            }
+          } ],
+          "conditions" : [ {
+            "name" : "launch_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "n",
+            "modifiers" : {
+              "mandatory" : [ "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "shell_command" : "open -a \"Notion\""
           }, {
             "set_variable" : {
               "name" : "launch_layer",
