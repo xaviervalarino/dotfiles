@@ -24,7 +24,7 @@ local servers = {
     single_file_support = false,
   },
   jsonls = require 'rc.language-server.jsonls',
-  sumneko_lua = require 'rc.language-server.sumneko_lua',
+  lua_ls = require 'rc.language-server.lua_ls',
   tsserver = require 'rc.language-server.tsserver',
 }
 

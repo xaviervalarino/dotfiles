@@ -1,13 +1,27 @@
 local M = {
-  on_init = function(client)
-    client.server_capabilities.documentFormattingProvider = false
-  end,
+  -- on_init = function(client)
+  --   client.server_capabilities.documentFormattingProvider = false
+  -- end,
+  settings = {
+    Lua = {
+      runtime = {
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        globals = { 'vim' },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file('', true),
+        checkThirdParty = false,
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
 }
 
 local buffer_path = vim.fn.expand '%:p'
-
--- Neovim config files
-require('neodev').setup{}
 
 -- Hammerspoon config files
 -- make sure HS is running and IPC command is available
