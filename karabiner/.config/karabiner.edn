@@ -141,6 +141,7 @@
                  [:j [:wm "down"]]
                  [:k [:wm "up"]]
                  [:l [:wm "right"]]
+                 ; TODO: left/bottom/top/right half
                  [:m [:mission_control]]
                  [:d [:wm "toggle_show_desktop"]]
                  [:n [:wm "move_to_next_display"]]
