@@ -99,10 +99,11 @@
                  [{:pkey :button4 :modi :left_shift} :!Cclose_bracket] ; ⇧ + Mouse button4 →  Move layer down 
                  [{:pkey :button5 :modi :left_shift} :!Copen_bracket]  ; ⇧ + Mouse button5 →  Move layer up
                  ; for razer mouse
-                 [:2 :!Sreturn_or_enter :razer_mouse]  ; Mouse button 2 → Go up one layer
-                 [:3 :return_or_enter :razer_mouse]    ; Mouse button 3 → Go down one layer
-                 [:!S2 :!Copen_bracket :razer_mouse]   ; ⇧ + Mouse button 2 →  Move layer down 
-                 [:!S3 :!Cclose_bracket :razer_mouse]  ; ⇧ + Mouse button 3 →  Move layer up
+                 [:2 :return_or_enter :razer_mouse]    ; Mouse button 2 → Go down/in layer
+                 [:3 :!Sreturn_or_enter :razer_mouse]  ; Mouse button 3 → Go up/out layer
+                 [:!S2 :!Copen_bracket :razer_mouse]   ; ⇧ + Mouse button 2 → Move layer down 
+                 [:!S3 :!Cclose_bracket :razer_mouse]  ; ⇧ + Mouse button 3 → Move layer up
+                 [:6 :!SCh :razer_mouse]               ; Mouse button 6 → show/hide layer
                  ; left hand convenience
                  [:d :!O8 ["caps_layer" 1]]   ; [d]esign panel
                  [:t :!O9 ["caps_layer" 1]]]} ; Pro[t]otype panel
