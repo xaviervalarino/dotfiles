@@ -9,9 +9,10 @@ volta install node@latest
 npm -g install \
   bash-language-server \
   prettier \
+  svelte-language-server \
   typescript \
   typescript-language-server \
-  vscode-langservers-extracted 
+  vscode-langservers-extracted  
 
 # Check what was installed
 volta list
