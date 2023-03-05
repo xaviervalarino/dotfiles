@@ -102,6 +102,9 @@ s.center.add(filepath)
 -- Dont show mode in command line
 vim.o.showmode = false
 
+vim.opt.cmdheight = 0
+-- vim.opt.ruler = false
+
 -- initial
 local sl = [[%{%luaeval("require'rc.statusline':create()")%}]]
 vim.opt.statusline = sl

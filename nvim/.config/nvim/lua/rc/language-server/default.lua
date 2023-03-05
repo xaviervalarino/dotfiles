@@ -1,7 +1,6 @@
 local M = {}
 local util = require 'rc.util'
 local bufmap = util.bufkeymap
-local run_cmd = util.run_cmd
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -11,7 +10,7 @@ function M.on_attach(client, bufnr)
   local map = bufmap(bufnr)
 
   local function rename()
-    run_cmd('IncRename ' .. vim.fn.expand '<cword>')
+    return ':IncRename ' .. vim.fn.expand('<cword>')
   end
 
   -- stylua: ignore start
@@ -23,7 +22,7 @@ function M.on_attach(client, bufnr)
   map.n('K',           vim.lsp.buf.hover,           { desc = 'Hover symbol info' })
   map.n('gi',          vim.lsp.buf.implementation,  { desc = 'Implementation' })
   map.n('<leader>D',   vim.lsp.buf.type_definition, { desc = 'Type definition' })
-  map.n('<leader>rn',  rename,                      { desc = 'Rename reference' })
+  map.n('<leader>rn',  rename,                      { desc = 'Rename reference', expr = true })
   map.n('<leader>rr',  '<cmd>LspRestart<CR>',       { desc = 'Restart LSP' })
   map.n('<leader>d',   vim.diagnostic.open_float,   { desc = 'Current diagnostic' })
   map.n('[d',          vim.diagnostic.goto_prev,    { desc = 'Previous diagnostic' })

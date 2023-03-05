@@ -1,7 +1,5 @@
 -- Mode mapping are created through a metatable
-local util = require('rc.util')
-local map = util.keymap
-local run_cmd = util.run_cmd
+local map = require('rc.util').keymap
 
 -- Remap leader
 map('<Space>', '<Nop>')
@@ -52,9 +50,7 @@ map.n('cN', '*``cgN')
 -- Convenience for find/replace inside a visual area
 -- prepopulates cmd mode with wrapping `\%V` guards
 -- use <C-e> to move to replacement pattern
-map.v('<leader>s', function()
-  run_cmd 's/\\%V\\%V/<Left><Left><Left><Left>'
-end)
+map.v('<leader>s', ':s/\\%V\\%V/<Left><Left><Left><Left>')
 
 -- Tabularize on markers : = ,
 map.nv('<leader>a:', '<cmd>Tab /:\zs<CR>')
