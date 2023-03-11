@@ -1,5 +1,3 @@
-local bufmap = require('rc.util').bufkeymap
-
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
   pattern = '*',
@@ -65,11 +63,11 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' 
 })
 
 -- Save when exiting insert mode
-vim.api.nvim_create_autocmd('FileType', {
+vim.api.nvim_create_autocmd('InsertLeave', {
   group = vim.api.nvim_create_augroup('AutoSave', { clear = true }),
   callback = function(ctx)
-    if not ctx.match:find 'Telescope' then
-      bufmap(ctx.buf).i('<esc>', '<esc><cmd>update<CR>')
+    if ctx.file:len() > 0 and not ctx.file:find 'Command Line' then
+      vim.cmd ':update'
     end
   end,
 })
