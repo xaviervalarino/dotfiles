@@ -24,6 +24,8 @@ set.listchars:append {
   precedes = '⟨',
 }
 
+set.autowriteall = true
+
 -- Visual -------------------------
 set.breakindent = true
 set.relativenumber = true
