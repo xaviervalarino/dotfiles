@@ -18,8 +18,9 @@ require('nvim-treesitter.configs').setup {
     'javascript',
     'json',
     'lua',
-    'typescript',
+    'svelte',
     'tsx',
+    'typescript',
     'yaml',
   },
   keymaps = {
