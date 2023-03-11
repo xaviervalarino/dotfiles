@@ -1,7 +1,7 @@
 local M = {
-  -- on_init = function(client)
-  --   client.server_capabilities.documentFormattingProvider = false
-  -- end,
+  on_init = function(client)
+    client.server_capabilities.documentFormattingProvider = false
+  end,
   settings = {
     Lua = {
       runtime = {
