@@ -32,7 +32,7 @@ function M.on_attach(client, bufnr)
   map.n(
     '<leader>so',
     require('telescope.builtin').lsp_document_symbols,
-    { desc = 'Search document symbols'}
+    { desc = 'Search document symbols' }
   )
 
   map.n('<leader>ca',  vim.lsp.buf.code_action,     { desc = 'Code action' })
