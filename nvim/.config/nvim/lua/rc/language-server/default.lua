@@ -10,7 +10,7 @@ function M.on_attach(client, bufnr)
   local map = bufmap(bufnr)
 
   local function rename()
-    return ':IncRename ' .. vim.fn.expand('<cword>')
+    return ':IncRename ' .. vim.fn.expand '<cword>'
   end
 
   -- stylua: ignore start
