@@ -41,27 +41,18 @@ function M.on_attach(client, bufnr)
   map.n('<C-s>',       vim.lsp.buf.signature_help,  { desc = 'Signature help' })
   --stylua: ignore end
 
-  local diagnostic_hover = vim.api.nvim_create_augroup('lsp_diagnostic_hover', { clear = true })
-  vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-    group = diagnostic_hover,
-    buffer = 0,
-    callback = function(arg)
-      -- note: diagnostics uses zero index for line numbers, see :h api-indexing
-      local current_lnum = vim.fn.line '.' - 1
-      local diagnostic_count = #vim.diagnostic.get(0, { lnum = current_lnum })
-      local timeout = (arg.event == 'CursorHold' and 0 or 1000)
-
-      if arg.event == 'CursorHold' and current_lnum == vim.b.last_diagnostic_lnum then
-        return
-      else
-        vim.b.last_diagnostic_lnum = nil
-      end
-      if diagnostic_count > 0 then
-        vim.b.last_diagnostic_lnum = current_lnum
-        vim.fn.timer_start(timeout, function()
-          vim.diagnostic.open_float()
-        end)
-      end
+  vim.api.nvim_create_autocmd('CursorHold', {
+    buffer = bufnr,
+    callback = function()
+      local opts = {
+        focusable = false,
+        close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
+        border = 'rounded',
+        source = 'always',
+        prefix = ' ',
+        scope = 'cursor',
+      }
+      vim.diagnostic.open_float(nil, opts)
     end,
   })
 
