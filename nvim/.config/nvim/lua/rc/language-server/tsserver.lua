@@ -8,6 +8,8 @@ local bufmap = require('rc.util').bufkeymap
 return {
   init_options = require('nvim-lsp-ts-utils').init_options,
   root_dir = require('lspconfig').util.root_pattern 'package.json',
+  -- TODO: have single file if not deno project?
+  single_file_support = false,
   on_init = function(client)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
