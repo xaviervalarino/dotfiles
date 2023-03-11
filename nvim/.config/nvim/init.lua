@@ -1,6 +1,6 @@
 -- Package Config --------------------
 require 'rc.plugins'
-require'impatient'
+require 'impatient'
 
 -- Set options -----------------------
 local set = vim.opt
