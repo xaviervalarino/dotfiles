@@ -97,14 +97,6 @@ return require('packer').startup {
     use 'norcalli/nvim-colorizer.lua'
     use 'gpanders/editorconfig.nvim'
     use {
-      'rcarriga/nvim-notify',
-      config = function()
-        local notify = require 'notify'
-        notify.setup { top_down = false }
-        vim.notify = notify
-      end,
-    }
-    use {
       'AckslD/messages.nvim',
       config = simple_setup('messages'),
     }
