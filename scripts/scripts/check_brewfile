@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+# write a bundle of the current state to temp
+cd /tmp || exit 1
+brew bundle dump --force
+
+brewfile="$HOME/dotfiles/Brewfile"
+first=true
+
+# check the current state against what is actually managed in dotfiles
+brew bundle list | while read -r installed; do
+  exists=$(rg "$installed" "$brewfile")
+  if test ! "$exists"; then
+    $first && printf "\nInstalled but not in Brewfile:\n\n" && first=false
+    echo "$installed"
+  fi
+done
