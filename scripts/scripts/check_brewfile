@@ -9,8 +9,8 @@ first=true
 
 # check the current state against what is actually managed in dotfiles
 brew bundle list | while read -r installed; do
-  exists=$(echo "$brewfile" | rg "$installed")
-  if test ! "$exists"; then
+  substring=$(echo "$installed" | sed 's/\//\\\//g')
+  if ! test "$(echo "$brewfile" | sed -n "/$substring/p")"; then
     $first && printf "\nInstalled but not in Brewfile:\n\n" && first=false
     echo "$installed"
   fi
