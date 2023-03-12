@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
 
+brewfile=$(cat "$HOME/dotfiles/Brewfile")
+first=true
+
 # write a bundle of the current state to temp
 cd /tmp || exit 1
 brew bundle dump --force
-
-brewfile=$(cat "$HOME/dotfiles/Brewfile")
-first=true
 
 # check the current state against what is actually managed in dotfiles
 brew bundle list | while read -r installed; do
