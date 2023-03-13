@@ -19,6 +19,7 @@ local servers = {
   cssls = config.default,
   html = config.disable_formatting,
   svelte = config.default,
+  sqlls = config.default,
   denols = {
     root_dir = nvim_lsp.util.root_pattern('deno.json', 'deno.jsonc'),
     init_options = { lint = true },

@@ -21,6 +21,7 @@ require('nvim-treesitter.configs').setup {
     'svelte',
     'tsx',
     'typescript',
+    'sql',
     'yaml',
   },
   keymaps = {
