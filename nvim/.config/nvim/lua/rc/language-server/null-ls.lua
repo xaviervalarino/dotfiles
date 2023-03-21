@@ -15,7 +15,9 @@ function M.setup(opts)
     sources = {
       diagnostics.shellcheck,
       formatting.stylua,
-      formatting.prettier,
+      formatting.prettier.with {
+        extra_args = { '--print-width', '100' },
+      },
     },
   }
 end
