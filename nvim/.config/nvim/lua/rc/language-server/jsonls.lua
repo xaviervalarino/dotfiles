@@ -6,6 +6,11 @@ return {
     json = {
       schemas = {
         {
+          description = 'TypeScript compiler configuration file',
+          fileMatch = { 'tsconfig.json', 'tsconfig.*.json' },
+          url = 'https://json.schemastore.org/tsconfig.json',
+        },
+        {
           fileMatch = { 'package.json' },
           url = 'https://json.schemastore.org/package.json',
         },
