@@ -94,6 +94,7 @@
         {:des "Figma enhancements"
          :rules [:figma
                  [:!Td :delete_forward] ; Fix forward delete
+                 [:!Cd :delete_or_backspace] ; add delete to left hand
                  ; TODO: only for logitech mouse
                  [{:pkey :button4} :!Sreturn_or_enter]                 ; Mouse button4 → Go up one layer
                  [{:pkey :button5} :return_or_enter]                   ; Mouse button5 → Go down one layer

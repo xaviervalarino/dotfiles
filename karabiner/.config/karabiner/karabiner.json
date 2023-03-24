@@ -635,6 +635,36 @@
           "type" : "basic"
         }, {
           "from" : {
+            "key_code" : "d",
+            "modifiers" : {
+              "mandatory" : [ "left_control" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "delete_forward"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "d",
+            "modifiers" : {
+              "mandatory" : [ "left_command" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "delete_or_backspace"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
             "pointing_button" : "button4"
           },
           "to" : [ {
