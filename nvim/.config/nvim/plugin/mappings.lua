@@ -66,3 +66,9 @@ map.n('<leader>gj', '<cmd>diffget //2<CR>', { desc = 'Select right diff' })
 map.n('<leader>cd', '<cmd>cd %:h<CR>', { desc = 'Set working directory to buffer' })
 
 map.n('<leader>z', '<cmd>ZenMode<CR>', { desc = 'Toggle Distraction-free Zen Mode' })
+
+-- paste over word without changing what's in the paste register
+-- (sends the pasted-over text to the void register)
+map.x('<leader>p', '"_dP')
+-- delete motion without adding text to the paste register
+map.nv('<leader>d', '"_d')
