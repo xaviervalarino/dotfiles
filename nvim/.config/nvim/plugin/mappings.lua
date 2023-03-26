@@ -72,3 +72,9 @@ map.n('<leader>z', '<cmd>ZenMode<CR>', { desc = 'Toggle Distraction-free Zen Mod
 map.x('<leader>p', '"_dP')
 -- delete motion without adding text to the paste register
 map.nv('<leader>d', '"_d')
+
+-- copy/paste to system clipboard
+map.nv('<leader>y', '"+y')
+map.nv('<leader>Y', '"+Y')
+map.nv('<leader>p', '"+p')
+map.nv('<leader>P', '"+P')
