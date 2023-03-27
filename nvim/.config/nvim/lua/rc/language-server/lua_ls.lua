@@ -1,23 +1,16 @@
+-- make sure neodev is set up before lua language server
+local noedev_ok, neodev = pcall(require, 'neodev')
+if noedev_ok then
+  neodev.setup {}
+end
+
 local M = {
   on_init = function(client)
     client.server_capabilities.documentFormattingProvider = false
   end,
-  settings = {
-    Lua = {
-      runtime = {
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        globals = { 'vim' },
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
-        checkThirdParty = false,
-      },
-      telemetry = {
-        enable = false,
-      },
-    },
+  -- stop the "Do you need to configure your workspace as `luv`" prompt
+  workspace = {
+    checkThirdParty = false,
   },
 }
 

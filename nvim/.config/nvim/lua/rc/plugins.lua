@@ -51,6 +51,7 @@ return require('packer').startup {
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind-nvim'
     use 'jose-elias-alvarez/null-ls.nvim'
+    use 'folke/neodev.nvim'
     use 'jose-elias-alvarez/nvim-lsp-ts-utils'
     use { 'smjonas/inc-rename.nvim', config = simple_setup 'inc_rename' }
 
