@@ -58,6 +58,7 @@ return require('packer').startup {
     -- completion plugins
     use 'hrsh7th/nvim-cmp' -- completion plugin
     use 'hrsh7th/cmp-buffer' -- buffer completion
+    use 'hrsh7th/cmp-nvim-lsp-signature-help'
     use 'hrsh7th/cmp-path' -- path completion
     use 'hrsh7th/cmp-cmdline' -- cmdline completion
     use 'hrsh7th/cmp-nvim-lsp'
