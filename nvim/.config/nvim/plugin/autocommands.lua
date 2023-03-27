@@ -10,7 +10,10 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
   group = vim.api.nvim_create_augroup('LocalNumbers', { clear = true }),
   callback = function(ctx)
-    vim.opt_local.relativenumber = ctx.event == 'WinEnter'
+    -- Don't target float windows (which don't have `file` named) or Help docs
+    if #ctx.file > 0 and vim.api.nvim_buf_get_option(ctx.buf, 'filetype') ~= 'help' then
+      vim.opt_local.relativenumber = ctx.event == 'WinEnter'
+    end
   end,
 })
 
