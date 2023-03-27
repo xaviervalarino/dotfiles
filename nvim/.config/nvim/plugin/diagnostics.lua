@@ -1,4 +1,6 @@
-local diagnostic_signs = require('rc.util').diagnostic_signs
+local util = require('rc.util')
+local diagnostic_signs = util.diagnostic_signs
+local float_win_style = util.float_win_style
 
 for _, sign in ipairs(diagnostic_signs) do
   local hl = 'DiagnosticSign' .. sign.name
@@ -32,7 +34,7 @@ vim.diagnostic.config {
   float = {
     focusable = false,
     style = 'minimal',
-    border = 'rounded',
+    border = float_win_style.border,
     source = 'always',
     header = '',
     prefix = '',

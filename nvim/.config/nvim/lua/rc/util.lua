@@ -44,7 +44,7 @@ M.diagnostic_signs = {
   { name = 'Hint', icon = ' ' },
 }
 
-M.border = {
+M.float_win_style = {
   border = 'rounded',
 }
 

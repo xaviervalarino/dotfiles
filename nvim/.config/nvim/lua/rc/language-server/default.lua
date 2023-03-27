@@ -47,7 +47,7 @@ function M.on_attach(client, bufnr)
       local opts = {
         focusable = false,
         close_events = { 'BufLeave', 'CursorMoved', 'InsertEnter', 'FocusLost' },
-        border = 'rounded',
+        border = float_win_style.border,
         source = 'always',
         prefix = ' ',
         scope = 'cursor',
