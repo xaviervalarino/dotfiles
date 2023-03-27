@@ -21,13 +21,14 @@ cmp.setup {
     completion = menu_style,
     documentation = menu_style,
   },
-  sources = cmp.config.sources {
+  sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
-    { name = 'path' },
     { name = 'luasnip' },
+  }, {
+    { name = 'path' },
     { name = 'buffer', keyword_length = 4 },
-  },
+  }),
   formatting = {
     format = lspkind.cmp_format {
       mode = 'symbol_text',
