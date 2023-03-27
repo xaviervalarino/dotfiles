@@ -11,5 +11,6 @@ wk.setup {
   },
   window = {
     border = require('rc.util').float_win_style.border,
+    margin = { 1, 5, 2, 7 },
   },
 }
