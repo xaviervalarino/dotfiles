@@ -51,7 +51,3 @@ end
 if null_ls then
   null_ls.setup(config.default)
 end
-
-local float_win_style = require('rc.util').float_win_style
-vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, float_win_style)
-vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, float_win_style)

@@ -1,6 +1,34 @@
 local M = {}
 local util = require 'rc.util'
 local bufmap = util.bufkeymap
+local float_win_style = util.float_win_style
+
+local diagnostic_hover = true
+local dh_augroup = vim.api.nvim_create_augroup('diagnostic_hover', {})
+
+local function dh_disable_before(callback)
+  return function(...)
+    diagnostic_hover = false
+    callback(...)
+  end
+end
+
+local function dh_enable_after(lsp_handler)
+  return function(...)
+    local bufnr = vim.lsp.handlers[lsp_handler](...)
+    vim.api.nvim_create_autocmd('BufWinLeave', {
+      group = dh_augroup,
+      buffer = bufnr,
+      callback = function()
+        diagnostic_hover = true
+      end,
+    })
+    return bufnr
+  end
+end
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(dh_enable_after 'hover', float_win_style)
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(dh_enable_after 'signature_help', float_win_style)
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -19,7 +47,8 @@ function M.on_attach(client, bufnr)
   -- note: many servers do not implement this method
   map.n('gD',          vim.lsp.buf.declaration,     { desc = 'Go to declaration' })
   -- TODO: no `number` on document hover
-  map.n('K',           vim.lsp.buf.hover,           { desc = 'Hover symbol info' })
+  map.n('K',           dh_disable_before(vim.lsp.buf.hover),          { desc = 'Hover symbol info' })
+  map.n('<C-k',        dh_disable_before(vim.lsp.buf.signature_help), { desc = 'Signature help'})
   map.n('gi',          vim.lsp.buf.implementation,  { desc = 'Implementation' })
   map.n('<leader>D',   vim.lsp.buf.type_definition, { desc = 'Type definition' })
   map.n('<leader>rn',  rename,                      { desc = 'Rename reference', expr = true })
@@ -42,6 +71,7 @@ function M.on_attach(client, bufnr)
   --stylua: ignore end
 
   vim.api.nvim_create_autocmd('CursorHold', {
+    group = dh_augroup,
     buffer = bufnr,
     callback = function()
       local opts = {
@@ -52,7 +82,9 @@ function M.on_attach(client, bufnr)
         prefix = ' ',
         scope = 'cursor',
       }
-      vim.diagnostic.open_float(nil, opts)
+      if diagnostic_hover then
+        vim.diagnostic.open_float(nil, opts)
+      end
     end,
   })
 
