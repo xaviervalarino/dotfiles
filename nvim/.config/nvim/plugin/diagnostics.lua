@@ -1,4 +1,4 @@
-local util = require('rc.util')
+local util = require 'rc.util'
 local diagnostic_signs = util.diagnostic_signs
 local float_win_style = util.float_win_style
 
@@ -11,10 +11,10 @@ for _, sign in ipairs(diagnostic_signs) do
   })
 end
 
-vim.fn.sign_define('DiagnosticSignError',{ text = '' })
-vim.fn.sign_define('DiagnosticSignWarn', {text = '' })
-vim.fn.sign_define('DiagnosticSignInfo', {text = '' })
-vim.fn.sign_define('DiagnosticSignHint', {text = '' })
+vim.fn.sign_define('DiagnosticSignError', { text = '' })
+vim.fn.sign_define('DiagnosticSignWarn', { text = '' })
+vim.fn.sign_define('DiagnosticSignInfo', { text = '' })
+vim.fn.sign_define('DiagnosticSignHint', { text = '' })
 
 vim.diagnostic.config {
   virtual_text = {

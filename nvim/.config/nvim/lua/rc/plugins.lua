@@ -101,7 +101,8 @@ return require('packer').startup {
     use 'gpanders/editorconfig.nvim'
     use {
       'AckslD/messages.nvim',
-      config = simple_setup('messages'),
+      config = simple_setup 'messages',
+    }
     use {
       'tiagovla/scope.nvim',
       config = simple_setup 'scope',

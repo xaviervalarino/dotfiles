@@ -42,21 +42,21 @@ function M.on_attach(client, bufnr)
   end
 
   -- stylua: ignore start
-  map.n('<leader>ca',  'vim.lsp.buf.code_action',   { desc = 'Code action' })
-  map.n('gd',          vim.lsp.buf.definition,      { desc = 'Go to definition' })
+  map.n('<leader>ca',  'vim.lsp.buf.code_action',                     { desc = 'Code action' })
+  map.n('gd',          vim.lsp.buf.definition,                        { desc = 'Go to definition' })
   -- note: many servers do not implement this method
-  map.n('gD',          vim.lsp.buf.declaration,     { desc = 'Go to declaration' })
+  map.n('gD',          vim.lsp.buf.declaration,                       { desc = 'Go to declaration' })
   -- TODO: no `number` on document hover
   map.n('K',           dh_disable_before(vim.lsp.buf.hover),          { desc = 'Hover symbol info' })
   map.n('<C-k',        dh_disable_before(vim.lsp.buf.signature_help), { desc = 'Signature help'})
-  map.n('gi',          vim.lsp.buf.implementation,  { desc = 'Implementation' })
-  map.n('<leader>D',   vim.lsp.buf.type_definition, { desc = 'Type definition' })
-  map.n('<leader>rn',  rename,                      { desc = 'Rename reference', expr = true })
-  map.n('<leader>rr',  '<cmd>LspRestart<CR>',       { desc = 'Restart LSP' })
-  map.n('<leader>e',   vim.diagnostic.open_float,   { desc = 'Current diagnostic' })
-  map.n('[d',          vim.diagnostic.goto_prev,    { desc = 'Previous diagnostic' })
-  map.n(']d',          vim.diagnostic.goto_next,    { desc = 'Next diagnostic' })
-  map.n('<leader>q',   vim.diagnostic.setloclist,   { desc = 'Diagnostic location list' })
+  map.n('gi',          vim.lsp.buf.implementation,                    { desc = 'Implementation' })
+  map.n('<leader>D',   vim.lsp.buf.type_definition,                   { desc = 'Type definition' })
+  map.n('<leader>rn',  rename,                                        { desc = 'Rename reference', expr = true })
+  map.n('<leader>rr',  '<cmd>LspRestart<CR>',                         { desc = 'Restart LSP' })
+  map.n('<leader>e',   vim.diagnostic.open_float,                     { desc = 'Current diagnostic' })
+  map.n('[d',          vim.diagnostic.goto_prev,                      { desc = 'Previous diagnostic' })
+  map.n(']d',          vim.diagnostic.goto_next,                      { desc = 'Next diagnostic' })
+  map.n('<leader>q',   vim.diagnostic.setloclist,                     { desc = 'Diagnostic location list' })
 
   map.n(
     '<leader>so',
