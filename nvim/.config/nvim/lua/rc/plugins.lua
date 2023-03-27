@@ -102,6 +102,9 @@ return require('packer').startup {
     use {
       'AckslD/messages.nvim',
       config = simple_setup('messages'),
+    use {
+      'tiagovla/scope.nvim',
+      config = simple_setup 'scope',
     }
     use {
       'goolord/alpha-nvim',
