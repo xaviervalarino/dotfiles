@@ -1,5 +1,5 @@
+local utf8_len = require('rc.util').utf8_len
 local s = require 'rc.statusline'
-local utf8 = require('lua-utf8')
 
 -- require('plenary.reload').reload_module('rc.statusline-new', true)
 -- local c = require 'rc.statusline.components'
@@ -36,7 +36,7 @@ local function mode(add)
   })
   local current = api.nvim_get_mode().mode
   local mode = modes[current][2]:upper()
-  local pad = 4 - utf8.len(mode)
+  local pad = 4 - utf8_len(mode)
   add(string.rep(' ', pad) .. mode .. ' ')
 end
 
@@ -44,7 +44,7 @@ local function macro_recording(add)
   local record_reg = vim.fn.reg_recording()
   local ret = ''
   if record_reg ~= '' then
-    ret = "@" .. record_reg
+    ret = '@' .. record_reg
   end
   add(ret)
 end

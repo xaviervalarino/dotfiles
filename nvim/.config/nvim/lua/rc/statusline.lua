@@ -1,5 +1,4 @@
-local utf8 = require 'lua-utf8'
-
+local utf8_len = require('rc.util').utf8_len
 local M = {}
 
 local function get_padding(left, center, right)
@@ -14,7 +13,7 @@ local function section()
   local _data = {}
   return {
     ---@param input string|function, Text to insert into this statusline section or a function that returns these parameters
-    ---@param hlgrp? string highlight group to use on this text 
+    ---@param hlgrp? string highlight group to use on this text
     add = function(input, hlgrp)
       local component = type(input) == 'function' and input or { input, hlgrp }
       table.insert(_data, component)
@@ -37,7 +36,7 @@ local function section()
         return acc .. highlight .. value
       end, '')
       this_section.length = vim.fn.reduce(components, function(acc, v)
-        return acc + utf8.len(v[1])
+        return acc + utf8_len(v[1])
       end, 0)
       return this_section
     end,

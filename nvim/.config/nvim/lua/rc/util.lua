@@ -48,4 +48,28 @@ M.float_win_style = {
   border = 'rounded',
 }
 
+-- Get the string length of special utf8 characters ----------------------------
+function M.utf8_len(str)
+  local len = 0
+  local currentIndex = 1
+
+  while currentIndex <= #str do
+    local byte = string.byte(str, currentIndex)
+    local byteCount = 1
+
+    if byte >= 0xC0 and byte <= 0xDF then
+      byteCount = 2
+    elseif byte >= 0xE0 and byte <= 0xEF then
+      byteCount = 3
+    elseif byte >= 0xF0 and byte <= 0xF4 then
+      byteCount = 4
+    end
+
+    currentIndex = currentIndex + byteCount
+    len = len + 1
+  end
+
+  return len
+end
+
 return M
