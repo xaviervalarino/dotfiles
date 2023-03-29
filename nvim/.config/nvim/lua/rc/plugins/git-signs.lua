@@ -1,14 +1,18 @@
-local bufmap = require('rc.util').bufkeymap
+return {
+  'lewis6991/gitsigns.nvim',
+  event = { 'BufReadPre', 'BufNewFile' },
+  config = function()
+    local bufmap = require('rc.util').bufkeymap
 
-require('gitsigns').setup {
-  signs = {
-    add = { text = '▎' },
-    change = { text = '▎' },
-  },
-  numhl = false,
-  on_attach = function(bufnr)
-    local gs = package.loaded.gitsigns
-    local map = bufmap(bufnr)
+    require('gitsigns').setup {
+      signs = {
+        -- add = { text = '▎' },
+        -- change = { text = '▎' },
+      },
+      numhl = false,
+      on_attach = function(bufnr)
+        local gs = package.loaded.gitsigns
+        local map = bufmap(bufnr)
 
     -- stylua: ignore start
 
@@ -41,6 +45,8 @@ require('gitsigns').setup {
     -- Text object
     map.ox('ih', ':<C-U>Gitsigns select_hunk<CR>')
 
-    -- stylua ignore end
+        -- stylua ignore end
+      end,
+    }
   end,
 }

@@ -9,7 +9,6 @@ return {
       return t
     end)(),
   },
-  { 'lewis6991/gitsigns.nvim', event = { 'BufReadPre', 'BufNewFile' } },
   { 'kylechui/nvim-surround', event = { 'BufReadPost', 'BufNewFile' } },
   { 'tpope/vim-repeat', lazy = true },
   { 'tpope/vim-fugitive', cmd = { 'G', 'Git' } },
