@@ -37,35 +37,6 @@ return {
     },
   },
 
-  -- lsp
-  {
-    'neovim/nvim-lspconfig',
-    event = { 'BufReadPre', 'BufNewFile' },
-    dependencies = {
-      'onsails/lspkind-nvim',
-      'jose-elias-alvarez/null-ls.nvim',
-      'folke/neodev.nvim',
-      'jose-elias-alvarez/nvim-lsp-ts-utils',
-      'smjonas/inc-rename.nvim',
-    },
-  },
-
-  -- completion plugins
-  {
-    'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
-    release = false,
-    dependencies = {
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-buffer', -- buffer completion
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-path', -- path completion
-      'hrsh7th/cmp-cmdline', -- cmdline completion
-      'saadparwaiz1/cmp_luasnip', -- snippet completion
-      'fladson/vim-kitty',
-    },
-  },
-
   -- snippets
   {
     'L3MON4D3/LuaSnip', -- snippet engine
