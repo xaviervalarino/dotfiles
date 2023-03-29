@@ -1,11 +1,6 @@
 -- Mode mapping are created through a metatable
 local map = require('rc.util').keymap
 
--- Remap leader
-map('<Space>', '<Nop>')
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 -- Keep cursor centered
 map.n('n', 'nzzzv')
 map.n('N', 'nzzzv')

@@ -1,130 +1,142 @@
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  vim.fn.execute('!git clone --depth 1 https://github.com/wbthomason/packer.nvim ' .. install_path)
-end
+return {
+  {
+    'windwp/nvim-autopairs',
+    keys = (function()
+      local t = {}
+      for _, key in ipairs { '{', '}', '[', ']', "'", '"', '`' } do
+        table.insert(t, { key, mode = 'i' })
+      end
+      return t
+    end)(),
+  },
+  { 'lewis6991/gitsigns.nvim', event = { 'BufReadPre', 'BufNewFile' } },
+  { 'kylechui/nvim-surround', event = { 'BufReadPost', 'BufNewFile' } },
+  { 'tpope/vim-repeat', lazy = true },
+  { 'tpope/vim-fugitive', cmd = { 'G', 'Git' } },
+  { 'godlygeek/tabular', cmd = 'Tabularize' },
+  { 'lukas-reineke/indent-blankline.nvim', event = { 'BufReadPost', 'BufNewFile' } },
 
----Setup package with default config
----@param pkg_name string plugin name supplied to `require`
-local function simple_setup(pkg_name)
-  if type(pkg_name) == 'string' then
-    local pkg_status_ok, pkg = pcall(require, pkg_name)
-    if pkg_status_ok then
-      pkg.setup {}
-    end
-  end
-end
-
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = vim.api.nvim_create_augroup('packer_user_config', { clear = true }),
-  pattern = 'plugins.lua',
-  command = 'source <afile> | PackerInstall',
-})
-
-return require('packer').startup {
-  function(use, use_rocks)
-    use 'wbthomason/packer.nvim'
-
-    use { 'windwp/nvim-autopairs', config = simple_setup 'nvim-autopairs' }
-    use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-    use { 'kylechui/nvim-surround', config = simple_setup 'nvim-surround' }
-    use 'tpope/vim-repeat'
-    use 'tpope/vim-fugitive'
-    use 'godlygeek/tabular'
-    use 'lukas-reineke/indent-blankline.nvim'
-
-    -- Treesitter
-    use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-    use 'nvim-treesitter/nvim-treesitter-textobjects'
-    use 'nvim-treesitter/playground'
-    use 'windwp/nvim-ts-autotag'
-    use 'JoosepAlviste/nvim-ts-context-commentstring'
-    use {
-      'nvim-treesitter/nvim-treesitter-context',
-      config = function()
-        require('treesitter-context').setup {
+  -- Treesitter
+  {
+    'nvim-treesitter/nvim-treesitter',
+    event = { 'BufReadPost', 'BufNewFile' },
+    build = function()
+      pcall(require('nvim-treesitter.install').update { with_sync = true })
+    end,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/playground',
+      'windwp/nvim-ts-autotag',
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      {
+        'nvim-treesitter/nvim-treesitter-context',
+        opts = {
           separator = '─',
-        }
-      end,
-    }
-
-    -- lsp
-    use 'neovim/nvim-lspconfig'
-    use 'onsails/lspkind-nvim'
-    use 'jose-elias-alvarez/null-ls.nvim'
-    use 'folke/neodev.nvim'
-    use 'jose-elias-alvarez/nvim-lsp-ts-utils'
-    use { 'smjonas/inc-rename.nvim', config = simple_setup 'inc_rename' }
-
-    -- completion plugins
-    use 'hrsh7th/nvim-cmp' -- completion plugin
-    use 'hrsh7th/cmp-buffer' -- buffer completion
-    use 'hrsh7th/cmp-nvim-lsp-signature-help'
-    use 'hrsh7th/cmp-path' -- path completion
-    use 'hrsh7th/cmp-cmdline' -- cmdline completion
-    use 'hrsh7th/cmp-nvim-lsp'
-    use 'saadparwaiz1/cmp_luasnip' -- snippet completion
-    use 'fladson/vim-kitty'
-
-    -- snippets
-    use 'L3MON4D3/LuaSnip' -- snippet engine
-    use 'rafamadriz/friendly-snippets' -- collection of snippets
-
-    use { 'nvim-telescope/telescope.nvim', requires = 'nvim-lua/plenary.nvim' }
-    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-    use 'nvim-telescope/telescope-file-browser.nvim'
-
-    -- theme
-    use 'kyazdani42/nvim-web-devicons'
-    use { 'catppuccin/nvim', as = 'catppuccin' }
-
-    use {
-      'j-hui/fidget.nvim',
-      config = function()
-        require('fidget').setup { text = { spinner = 'dots' } }
-      end,
-    }
-
-    use 'folke/zen-mode.nvim'
-    use 'ThePrimeagen/harpoon'
-
-    use 'folke/which-key.nvim'
-
-    use {
-      'numToStr/Comment.nvim',
-      config = function()
-        require('Comment').setup {
-          pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
-        }
-      end,
-    }
-    use 'norcalli/nvim-colorizer.lua'
-    use 'gpanders/editorconfig.nvim'
-    use {
-      'AckslD/messages.nvim',
-      config = simple_setup 'messages',
-    }
-    use {
-      'tiagovla/scope.nvim',
-      config = simple_setup 'scope',
-    }
-    use {
-      'goolord/alpha-nvim',
-      requires = { 'kyazdani42/nvim-web-devicons' },
-      config = function()
-        require('alpha').setup(require('alpha.themes.startify').config)
-      end,
-    }
-    use 'lewis6991/impatient.nvim'
-    use_rocks 'luautf8'
-  end,
-  config = {
-    display = {
-      open_fn = function()
-        return require('packer.util').float(require('rc.util').float_win_style)
-      end,
+        },
+      },
     },
-    luarocks = {
-      python_cmd = 'python3',
+  },
+
+  -- lsp
+  {
+    'neovim/nvim-lspconfig',
+    event = { 'BufReadPre', 'BufNewFile' },
+    dependencies = {
+      'onsails/lspkind-nvim',
+      'jose-elias-alvarez/null-ls.nvim',
+      'folke/neodev.nvim',
+      'jose-elias-alvarez/nvim-lsp-ts-utils',
+      'smjonas/inc-rename.nvim',
     },
+  },
+
+  -- completion plugins
+  {
+    'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
+    release = false,
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer', -- buffer completion
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-path', -- path completion
+      'hrsh7th/cmp-cmdline', -- cmdline completion
+      'saadparwaiz1/cmp_luasnip', -- snippet completion
+      'fladson/vim-kitty',
+    },
+  },
+
+  -- snippets
+  {
+    'L3MON4D3/LuaSnip', -- snippet engine
+    event = 'VeryLazy',
+    dependencies = 'rafamadriz/friendly-snippets', -- collection of snippets
+  },
+
+  {
+    'nvim-telescope/telescope.nvim',
+    cmd = 'Telescope',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+      {
+        'nvim-telescope/telescope-file-browser.nvim',
+        cmd = 'Telescope file_browser',
+      },
+    },
+  },
+
+  -- theme
+  { 'kyazdani42/nvim-web-devicons', lazy = true },
+  { 'catppuccin/nvim', lazy = false, name = 'catppuccin' },
+
+  {
+    'j-hui/fidget.nvim',
+    config = function()
+      require('fidget').setup { text = { spinner = 'dots' } }
+    end,
+  },
+
+  {
+    'folke/zen-mode.nvim',
+    cmd = 'ZenMode',
+    opts = {
+      window = {
+        backdrop = 1,
+        width = 80,
+      },
+      plugins = {
+        -- requires `allow_remote_control` and 'listen_on' to be set
+        kitty = {
+          enabled = true,
+          font = '+1',
+        },
+      },
+    },
+  },
+  { 'ThePrimeagen/harpoon', lazy = true },
+  { 'folke/which-key.nvim', lazy = true },
+
+  {
+    'numToStr/Comment.nvim',
+    event = 'VeryLazy',
+    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    config = function()
+      require('Comment').setup {
+        pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+      }
+    end,
+  },
+  { 'norcalli/nvim-colorizer.lua', event = { 'BufReadPost', 'BufNewFile' } },
+  { 'gpanders/editorconfig.nvim', event = { 'BufReadPost', 'BufNewFile' } },
+  'AckslD/messages.nvim',
+  { 'tiagovla/scope.nvim', event = { 'TabEnter', 'TabLeave' } },
+  {
+    'goolord/alpha-nvim',
+    event = 'VimEnter',
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    config = function()
+      require('alpha').setup(require('alpha.themes.startify').config)
+    end,
   },
 }

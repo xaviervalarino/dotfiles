@@ -1,7 +1,3 @@
--- Package Config --------------------
-require 'rc.plugins'
-require 'impatient'
-
 -- Set options -----------------------
 local set = vim.opt
 local window = vim.wo
@@ -68,3 +64,25 @@ set.splitright = true
 
 -- Completion --------------------------
 set.completeopt = { 'menu,menuone,noselect' }
+
+-- Bootstrap Lazy plugin manager -------
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- Remap leader ------------------------
+require('rc.util').keymap('<Space>', '<Nop>')
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+-- Load plugins ------------------------
+require('lazy').setup('rc.plugins', { ui = { border = require('rc.util').float_win_style.border } })
