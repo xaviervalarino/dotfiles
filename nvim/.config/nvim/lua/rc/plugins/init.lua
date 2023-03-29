@@ -17,7 +17,6 @@ return {
 
   -- theme
   { 'kyazdani42/nvim-web-devicons', lazy = true },
-  { 'catppuccin/nvim', lazy = false, name = 'catppuccin' },
 
   {
     'j-hui/fidget.nvim',
