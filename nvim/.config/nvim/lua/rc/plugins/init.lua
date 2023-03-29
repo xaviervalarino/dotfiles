@@ -16,27 +16,6 @@ return {
   { 'godlygeek/tabular', cmd = 'Tabularize' },
   { 'lukas-reineke/indent-blankline.nvim', event = { 'BufReadPost', 'BufNewFile' } },
 
-  -- Treesitter
-  {
-    'nvim-treesitter/nvim-treesitter',
-    event = { 'BufReadPost', 'BufNewFile' },
-    build = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
-    end,
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/playground',
-      'windwp/nvim-ts-autotag',
-      'JoosepAlviste/nvim-ts-context-commentstring',
-      {
-        'nvim-treesitter/nvim-treesitter-context',
-        opts = {
-          separator = '─',
-        },
-      },
-    },
-  },
-
   -- snippets
   {
     'L3MON4D3/LuaSnip', -- snippet engine
