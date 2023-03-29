@@ -22,19 +22,6 @@ return {
     dependencies = 'rafamadriz/friendly-snippets', -- collection of snippets
   },
 
-  {
-    'nvim-telescope/telescope.nvim',
-    cmd = 'Telescope',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-      {
-        'nvim-telescope/telescope-file-browser.nvim',
-        cmd = 'Telescope file_browser',
-      },
-    },
-  },
-
   -- theme
   { 'kyazdani42/nvim-web-devicons', lazy = true },
   { 'catppuccin/nvim', lazy = false, name = 'catppuccin' },
