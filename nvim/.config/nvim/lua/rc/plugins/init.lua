@@ -15,13 +15,6 @@ return {
   { 'godlygeek/tabular', cmd = 'Tabularize' },
   { 'lukas-reineke/indent-blankline.nvim', event = { 'BufReadPost', 'BufNewFile' } },
 
-  -- snippets
-  {
-    'L3MON4D3/LuaSnip', -- snippet engine
-    event = 'VeryLazy',
-    dependencies = 'rafamadriz/friendly-snippets', -- collection of snippets
-  },
-
   -- theme
   { 'kyazdani42/nvim-web-devicons', lazy = true },
   { 'catppuccin/nvim', lazy = false, name = 'catppuccin' },
