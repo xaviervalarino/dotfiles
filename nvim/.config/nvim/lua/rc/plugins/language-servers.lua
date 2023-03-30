@@ -11,10 +11,8 @@ return {
     { 'j-hui/fidget.nvim', opts = { text = { spinner = 'dots' } } },
   },
   config = function()
-    local nvim_lsp_ok, nvim_lsp = pcall(require, 'lspconfig')
-    if not nvim_lsp_ok then
-      return
-    end
+    local nvim_lsp = require 'lspconfig'
+    require 'rc.language-server.diagnostics'
 
     local null_ls = require 'rc.language-server.null-ls'
 
