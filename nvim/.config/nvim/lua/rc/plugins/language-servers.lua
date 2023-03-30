@@ -66,5 +66,7 @@ return {
     if null_ls then
       null_ls.setup(config.default)
     end
+
+    require('lspconfig.ui.windows').default_options.border = require('rc.util').float_win_style.border
   end,
 }
