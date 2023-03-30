@@ -56,7 +56,14 @@ return {
       }
     end,
   },
-  { 'norcalli/nvim-colorizer.lua', event = { 'BufReadPost', 'BufNewFile' } },
+  {
+    'norcalli/nvim-colorizer.lua',
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts = {
+      '*',
+      css = { css = true },
+    },
+  },
   { 'gpanders/editorconfig.nvim', event = { 'BufReadPost', 'BufNewFile' } },
   'AckslD/messages.nvim',
   { 'tiagovla/scope.nvim', event = { 'TabEnter', 'TabLeave' } },
