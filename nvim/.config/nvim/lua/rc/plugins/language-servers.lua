@@ -7,7 +7,6 @@ return {
     'jose-elias-alvarez/null-ls.nvim',
     'folke/neodev.nvim',
     'jose-elias-alvarez/nvim-lsp-ts-utils',
-    'smjonas/inc-rename.nvim',
     { 'j-hui/fidget.nvim', opts = { text = { spinner = 'dots' } } },
   },
   config = function()
