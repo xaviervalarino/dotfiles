@@ -20,7 +20,7 @@ return {
   { 'kylechui/nvim-surround', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
   { 'tpope/vim-repeat', lazy = true },
   { 'tpope/vim-fugitive', cmd = { 'G', 'Git' } },
-  { 'godlygeek/tabular', cmd = 'Tabularize' },
+  { 'godlygeek/tabular', cmd = { 'Tab', 'Tabularize' } },
   {
     'lukas-reineke/indent-blankline.nvim',
     event = { 'BufReadPost', 'BufNewFile' },
