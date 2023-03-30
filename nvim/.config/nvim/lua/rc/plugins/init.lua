@@ -1,3 +1,10 @@
+local function cb(modname, method, ...)
+  local args = { ... }
+  return function()
+    require(modname)[method](unpack(args))
+  end
+end
+
 return {
   {
     'windwp/nvim-autopairs',
@@ -43,7 +50,18 @@ return {
       },
     },
   },
-  { 'ThePrimeagen/harpoon', lazy = true },
+  {
+    'ThePrimeagen/harpoon',
+    opts = {},
+    keys = {
+      { '<leader>pa', cb('harpoon.mark', 'add_file'), desc = 'Harpoon: add file to list' },
+      { '<leader>l', cb('harpoon.ui', 'toggle_quick_menu'), desc = 'Harpoon: list all files' },
+      { '<leader>1', cb('harpoon.ui', 'nav_file', 1), desc = 'Harpoon: Go to 1st file' },
+      { '<leader>2', cb('harpoon.ui', 'nav_file', 2), desc = 'Harpoon: Go to 2nd file' },
+      { '<leader>3', cb('harpoon.ui', 'nav_file', 3), desc = 'Harpoon: Go to 3rd file' },
+      { '<leader>4', cb('harpoon.ui', 'nav_file', 4), desc = 'Harpoon: Go to 4th file' },
+    },
+  },
   { 'folke/which-key.nvim', lazy = true },
 
   {
