@@ -17,7 +17,7 @@ return {
       return t
     end)(),
   },
-  { 'kylechui/nvim-surround', event = { 'BufReadPost', 'BufNewFile' }, config = true },
+  { 'kylechui/nvim-surround', event = 'VeryLazy', config = true },
   { 'tpope/vim-repeat', lazy = true },
   { 'tpope/vim-fugitive', cmd = { 'G', 'Git' } },
   { 'godlygeek/tabular', cmd = { 'Tab', 'Tabularize' } },
@@ -83,7 +83,7 @@ return {
   },
   {
     'folke/which-key.nvim',
-    lazy = true,
+    event = 'VeryLazy',
     opts = {
       plugins = {
         spelling = {
@@ -99,7 +99,7 @@ return {
 
   {
     'numToStr/Comment.nvim',
-    event = 'VeryLazy',
+    event = { 'BufReadPost', 'BufNewFile' },
     dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
     config = function()
       require('Comment').setup {
@@ -116,7 +116,7 @@ return {
     },
   },
   { 'gpanders/editorconfig.nvim', event = { 'BufReadPost', 'BufNewFile' } },
-  'AckslD/messages.nvim',
+  { 'AckslD/messages.nvim', event = 'VeryLazy', config = true },
   { 'tiagovla/scope.nvim', event = { 'TabEnter', 'TabLeave' } },
   {
     'goolord/alpha-nvim',
