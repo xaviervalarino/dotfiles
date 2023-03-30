@@ -31,6 +31,9 @@ set.cursorline = true
 set.wrap = false
 window.signcolumn = 'yes'
 
+vim.g.netrw_banner = 0
+-- let g:netrw_browse_split = 4
+
 set.fillchars = {
   horiz = '━',
   horizup = '━',
