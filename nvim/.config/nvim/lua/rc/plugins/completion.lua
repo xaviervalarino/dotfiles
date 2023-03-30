@@ -2,13 +2,16 @@
 return {
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
-  release = false,
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer', -- buffer completion
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-path', -- path completion
     'hrsh7th/cmp-cmdline', -- cmdline completion
+    {
+      'L3MON4D3/LuaSnip', -- snippet engine
+      dependencies = 'rafamadriz/friendly-snippets', -- collection of snippets
+    },
     'saadparwaiz1/cmp_luasnip', -- snippet completion
     'fladson/vim-kitty',
   },
@@ -94,5 +97,41 @@ return {
 
     local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
     cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = '' } })
+
+    -- snippets
+    local luasnip = require 'luasnip'
+    local map = require('rc.util').keymap
+
+    require('luasnip.loaders.from_vscode').lazy_load()
+    require('luasnip.loaders.from_lua').lazy_load()
+
+    luasnip.config.set_config {
+      history = true,
+      updateevents = 'TextChanged,TextChangedI',
+      -- delete_check_events = 'TextChanged, InsertEnter',
+      enable_autosnippets = true,
+      ext_opts = {
+        [require('luasnip.util.types').choiceNode] = {
+          -- passive = { virt_text = { { '●', 'Comment' } } },
+          active = { virt_text = { { '●', 'DiagnosticHint' } } },
+        },
+      },
+    }
+
+    map.is('<C-k>', function()
+      if luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      end
+    end)
+    map.is('<C-j>', function()
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      end
+    end)
+    map.is('<C-l>', function()
+      if luasnip.choice_active() then
+        luasnip.change_choice(1)
+      end
+    end)
   end,
 }
