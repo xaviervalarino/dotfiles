@@ -1,6 +1,7 @@
 return {
   {
     'windwp/nvim-autopairs',
+    opts = {},
     keys = (function()
       local t = {}
       for _, key in ipairs { '{', '}', '[', ']', "'", '"', '`' } do
