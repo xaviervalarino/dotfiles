@@ -8,6 +8,7 @@ return {
     'folke/neodev.nvim',
     'jose-elias-alvarez/nvim-lsp-ts-utils',
     'smjonas/inc-rename.nvim',
+    { 'j-hui/fidget.nvim', opts = { text = { spinner = 'dots' } } },
   },
   config = function()
     local nvim_lsp_ok, nvim_lsp = pcall(require, 'lspconfig')

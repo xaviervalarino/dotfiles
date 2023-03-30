@@ -53,13 +53,6 @@ return {
   { 'kyazdani42/nvim-web-devicons', lazy = true },
 
   {
-    'j-hui/fidget.nvim',
-    config = function()
-      require('fidget').setup { text = { spinner = 'dots' } }
-    end,
-  },
-
-  {
     'folke/zen-mode.nvim',
     cmd = 'ZenMode',
     opts = {
