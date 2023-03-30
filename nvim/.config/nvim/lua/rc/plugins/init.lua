@@ -17,7 +17,7 @@ return {
       return t
     end)(),
   },
-  { 'kylechui/nvim-surround', event = { 'BufReadPost', 'BufNewFile' } },
+  { 'kylechui/nvim-surround', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
   { 'tpope/vim-repeat', lazy = true },
   { 'tpope/vim-fugitive', cmd = { 'G', 'Git' } },
   { 'godlygeek/tabular', cmd = 'Tabularize' },
