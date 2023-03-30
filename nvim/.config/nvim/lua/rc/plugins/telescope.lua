@@ -10,37 +10,34 @@ return {
     },
   },
   config = function()
-    local status_ok, telescope = pcall(require, 'telescope')
-    if not status_ok then
-      return
-    end
+    local telescope = require('telescope')
 
-local map = require('rc.util').keymap
-local builtin = require 'telescope.builtin'
+    local map = require('rc.util').keymap
+    local builtin = require 'telescope.builtin'
 
-telescope.setup {
-  defaults = {
-    selection_caret = '❯ ',
-    prompt_prefix = '   ',
-    mappings = {
-      i = {
-        ['<C-u>'] = false,
-        ['<C-d>'] = false,
+    telescope.setup {
+      defaults = {
+        selection_caret = '❯ ',
+        prompt_prefix = '   ',
+        mappings = {
+          i = {
+            ['<C-u>'] = false,
+            ['<C-d>'] = false,
+          },
+        },
       },
-    },
-  },
-  pickers = {
-    find_files = {
-      -- theme = 'dropdown',
-    },
-  },
-  extensions = {
-    file_browser = {
-      theme = 'dropdown',
-      hijack_netrw = true,
-    },
-  },
-}
+      pickers = {
+        find_files = {
+          -- theme = 'dropdown',
+        },
+      },
+      extensions = {
+        file_browser = {
+          theme = 'dropdown',
+          hijack_netrw = true,
+        },
+      },
+    }
 
     telescope.load_extension 'fzf'
     telescope.load_extension 'file_browser'

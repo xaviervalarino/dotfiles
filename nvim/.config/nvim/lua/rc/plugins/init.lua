@@ -65,7 +65,7 @@ return {
         kitty = {
           enabled = true,
           font = '+1',
-       },
+        },
       },
     },
   },
