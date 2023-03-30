@@ -8,7 +8,7 @@ end
 return {
   {
     'windwp/nvim-autopairs',
-    opts = {},
+    config = true,
     keys = (function()
       local t = {}
       for _, key in ipairs { '{', '}', '[', ']', "'", '"', '`' } do
@@ -17,7 +17,7 @@ return {
       return t
     end)(),
   },
-  { 'kylechui/nvim-surround', event = { 'BufReadPost', 'BufNewFile' }, opts = {} },
+  { 'kylechui/nvim-surround', event = { 'BufReadPost', 'BufNewFile' }, config = true },
   { 'tpope/vim-repeat', lazy = true },
   { 'tpope/vim-fugitive', cmd = { 'G', 'Git' } },
   { 'godlygeek/tabular', cmd = { 'Tab', 'Tabularize' } },
@@ -71,7 +71,7 @@ return {
   },
   {
     'ThePrimeagen/harpoon',
-    opts = {},
+    config = true,
     keys = {
       { '<leader>pa', cb('harpoon.mark', 'add_file'), desc = 'Harpoon: add file to list' },
       { '<leader>l', cb('harpoon.ui', 'toggle_quick_menu'), desc = 'Harpoon: list all files' },
