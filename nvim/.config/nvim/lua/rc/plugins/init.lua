@@ -46,7 +46,7 @@ return {
         kitty = {
           enabled = true,
           font = '+1',
-        },
+       },
       },
     },
   },
@@ -62,7 +62,21 @@ return {
       { '<leader>4', cb('harpoon.ui', 'nav_file', 4), desc = 'Harpoon: Go to 4th file' },
     },
   },
-  { 'folke/which-key.nvim', lazy = true },
+  {
+    'folke/which-key.nvim',
+    lazy = true,
+    opts = {
+      plugins = {
+        spelling = {
+          enabled = true,
+        },
+      },
+      window = {
+        border = require('rc.util').float_win_style.border,
+        margin = { 1, 5, 2, 7 },
+      },
+    },
+  },
 
   {
     'numToStr/Comment.nvim',
