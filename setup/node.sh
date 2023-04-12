@@ -17,3 +17,4 @@ npm -g install \
 
 # Check what was installed
 volta list
+npm ls -g
