@@ -105,6 +105,23 @@
           "type" : "basic"
         } ]
       }, {
+        "description" : "OS convenience",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "4"
+          },
+          "to" : [ {
+            "key_code" : "4",
+            "modifiers" : [ "left_command", "left_control", "left_shift" ]
+          } ],
+          "conditions" : [ {
+            "name" : "caps_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
         "description" : "Caps + Homerow arrow keys H/J/K/L",
         "manipulators" : [ {
           "from" : {
@@ -619,21 +636,6 @@
       }, {
         "description" : "Figma enhancements",
         "manipulators" : [ {
-          "from" : {
-            "key_code" : "d",
-            "modifiers" : {
-              "mandatory" : [ "left_control" ]
-            }
-          },
-          "to" : [ {
-            "key_code" : "delete_forward"
-          } ],
-          "conditions" : [ {
-            "type" : "frontmost_application_if",
-            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
-          } ],
-          "type" : "basic"
-        }, {
           "from" : {
             "key_code" : "d",
             "modifiers" : {

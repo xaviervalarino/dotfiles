@@ -50,6 +50,10 @@
                            [:indicator "off"]]
                    :afterup {:set ["caps_layer" 0]}}]]}
 
+        {:des "OS convenience"
+         :rules [:caps_layer
+                 [:4 :!STC4]]}
+
         {:des "Caps + Homerow arrow keys H/J/K/L"
          :rules [:caps_layer
                  [:##h :left_arrow]
