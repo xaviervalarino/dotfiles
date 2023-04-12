@@ -51,6 +51,12 @@ WM.detach_chrome_tab = detach_chrome_tab
 
 Indicator = require 'focused-window-indicator'
 
+-- Menu Item Selection ----------------------------------------------
+Menu_item = function(app_name, menu_item)
+  local app = hs.application.find(app_name)
+  app:selectMenuItem(menu_item)
+end
+
 -- Handlers ---------------------------------------------------------
 
 local camera_config = hs.json.encode {
