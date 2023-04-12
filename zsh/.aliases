@@ -82,12 +82,18 @@ heic_to_jpg() {
   fi
 }
 
-h264() {
-  ffmpeg -i $1 -vcodec h264 -acodec aac ${1%.*}.mp4
-}
-
-video_halfspeed () {
-  ffmpeg -i $1 -filter:v "setpts=0.5*PTS" ${1%.*}.half.${1##*.}
+mov2mp4() {
+    local filters=''
+    local args=(-i "$1" -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 192k -map_metadata -1 -movflags +faststart)
+    if [[ "$2" == "-f" ]]; then
+        local speedup_factor=$3
+        local scale=$(bc <<< "scale=2; 1/$speedup_factor")
+        filters='[0:v]setpts='"$scale"'*PTS[v];[0:a]atempo='"$speedup_factor"'[a]'
+    fi
+    if [[ -n "$filters" ]]; then
+        args+=(-filter_complex "$filters" -map "[v]" -map "[a]")
+    fi
+    ffmpeg "${args[@]}" "${1:r}.mp4"
 }
 
 # vi:filetype=sh
