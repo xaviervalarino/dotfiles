@@ -12,7 +12,8 @@ npm -g install \
   svelte-language-server \
   typescript \
   typescript-language-server \
-  vscode-langservers-extracted  
+  vscode-langservers-extracted  \
+  uvcc # camera controller
 
 # Check what was installed
 volta list

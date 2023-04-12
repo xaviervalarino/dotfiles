@@ -52,14 +52,55 @@ WM.detach_chrome_tab = detach_chrome_tab
 Indicator = require 'focused-window-indicator'
 
 -- Handlers ---------------------------------------------------------
-Thunderbolt = hs.usb.watcher.new(function(t)
-  print('WATCHER ' .. t.eventType)
-  if t.productName == 'USB 10/100/1000 LAN' then
-    print('USB LAN ' .. t.eventType)
-    hs.wifi.setPower(t.eventType == 'removed')
+
+local camera_config = hs.json.encode {
+  absolute_exposure_time = 83,
+  absolute_focus = 45,
+  absolute_pan_tilt = {
+    0,
+    -10800,
+  },
+  absolute_zoom = 119,
+  auto_exposure_mode = 8,
+  auto_exposure_priority = 0,
+  auto_focus = 1,
+  auto_white_balance_temperature = 1,
+  backlight_compensation = 0,
+  brightness = 174,
+  contrast = 115,
+  gain = 111,
+  power_line_frequency = 2,
+  saturation = 115,
+  sharpness = 104,
+  white_balance_temperature = 3155,
+}
+
+local function setWebcam()
+  local echo_settings = string.format("printf '%s'", string.gsub(camera_config, '"', '\\"'))
+  local set_camera_cmd = string.format('%s | %s', echo_settings, 'uvcc import')
+  hs.execute(set_camera_cmd, true)
+end
+
+-- init -- set webcam on HS restart or when computer starts up already plugged in
+local webcam = hs.fnutils.filter(hs.usb.attachedDevices() or {}, function(device)
+  return device.productName == 'HD Pro Webcam C920'
+end)
+if webcam then
+  setWebcam()
+end
+
+Thunderbolt = hs.usb.watcher.new(function(event)
+  print('USB', event.eventType, event.productName)
+  -- set webcam if it's plugged in
+  if event.productName == 'HD Pro Webcam C920' and event.eventType == 'added' then
+    setWebcam()
+  end
+  if event.productName == 'USB 10/100/1000 LAN' then
+    print('USB LAN ' .. event.eventType)
+    hs.wifi.setPower(event.eventType == 'removed')
 
     -- pull all windows onto laptop monitor
-    if t.eventType == 'removed' then
+    if event.eventType == 'removed' then
       (function()
         local ws = hs.window.allWindows()
         for _, w in ipairs(ws) do
