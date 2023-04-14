@@ -1048,6 +1048,39 @@
           "type" : "basic"
         } ]
       }, {
+        "description" : "Affinity designer enhancements",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "left_control",
+            "modifiers" : {
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "left_option"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.seriflabs.affinitydesigner2" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "left_option",
+            "modifiers" : {
+              "optional" : [ "any" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "left_control"
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "com.seriflabs.affinitydesigner2" ]
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
         "description" : "Slack enhancement",
         "manipulators" : [ {
           "from" : {

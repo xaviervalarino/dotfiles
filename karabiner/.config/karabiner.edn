@@ -41,8 +41,7 @@
                 :term              ["^net\\.kovidgoyal\\.kitty$"]
                 :affinity_designer ["com.seriflabs.affinitydesigner2"]}
 
- :main [
-        {:des "Caps Lock -> Escape + caps_layer"
+ :main [{:des "Caps Lock -> Escape + caps_layer"
          :rules [[:##caps_lock ["caps_layer" 1] nil
                   {:alone [{:key :escape}
                            {:set ["r_layer" 0]}
@@ -77,8 +76,7 @@
                  [:!Ed {:ckey :volume_increment}]
                  ; Brightness
                  [:!Ew {:ckey :display_brightness_decrement}]
-                 [:!Ee {:ckey :display_brightness_increment}]
-                 ]}
+                 [:!Ee {:ckey :display_brightness_increment}]]}
 
         {:des "Mappings for Mistel keyboard"
          :rules [:mistel
@@ -159,13 +157,13 @@
                  [:n [:wm "move_to_next_display"]]
                  [:semicolon [:wm "center"]]
                  [:quote [:wm "fill"]]
-                 [:r [["r_layer" 1][:indicator "on"]] !r_layer]
+                 [:r [["r_layer" 1] [:indicator "on"]] !r_layer]
                  :r_layer
                  [:h nil nil {:held [:wm "grow_left" "true"]  :afterup [:wm "grow_left" "false"]}]
                  [:j nil nil {:held [:wm "grow_down" "true"]  :afterup [:wm "grow_down" "false"]}]
                  [:k nil nil {:held [:wm "grow_up" "true"]    :afterup [:wm "grow_up" "false"]}]
                  [:l nil nil {:held [:wm "grow_right" "true"] :afterup [:wm "grow_right" "false"]}]
-                 [{:any :key_code} [["r_layer" 0][:indicator "off"]]]]}
+                 [{:any :key_code} [["r_layer" 0] [:indicator "off"]]]]}
 
         {:des "Application launcher"
          :rules [[:!SCcomma [:open "System Preferences"]]
@@ -174,29 +172,28 @@
                   {:delayed {:invoked ["launch_layer" 0]}
                    :params  {:delay 800}}]
                  :launch_layer
-                 [:a   [[:open "Activity Monitor"]["launch_layer" 0]]]
-                 [:c   [[:launch "calendar"]["launch_layer" 0]]]
-                 [:!Sc [[:open "Google Chrome"]["launch_layer" 0]]]
-                 [:f   [[:open "Firefox Developer Edition"]["launch_layer" 0]]]
-                 [:!Sf [[:open "Figma"]["launch_layer" 0]]]
-                 [:m   [[:launch "mail"]["launch_layer" 0]]]
-                 [:n   [[:launch "nts"]["launch_layer" 0]]]
-                 [:!Sn   [[:open "Notion"]["launch_layer" 0]]]
-                 [:e   [[:launch "meet"]["launch_layer" 0]]]
-                 [:t   [[:open "Kitty"]["launch_layer" 0]]]
-                 [:z   [[:open "Zoom.us"]["launch_layer" 0]]]
-                 [:s   [[:open "Slack"]["launch_layer" 0]]]
-                 [:return_or_enter [[:open "Finder"]["launch_layer" 0]]]
+                 [:a   [[:open "Activity Monitor"] ["launch_layer" 0]]]
+                 [:c   [[:launch "calendar"] ["launch_layer" 0]]]
+                 [:!Sc [[:open "Google Chrome"] ["launch_layer" 0]]]
+                 [:f   [[:open "Firefox Developer Edition"] ["launch_layer" 0]]]
+                 [:!Sf [[:open "Figma"] ["launch_layer" 0]]]
+                 [:m   [[:launch "mail"] ["launch_layer" 0]]]
+                 [:n   [[:launch "nts"] ["launch_layer" 0]]]
+                 [:!Sn   [[:open "Notion"] ["launch_layer" 0]]]
+                 [:e   [[:launch "meet"] ["launch_layer" 0]]]
+                 [:t   [[:open "Kitty"] ["launch_layer" 0]]]
+                 [:z   [[:open "Zoom.us"] ["launch_layer" 0]]]
+                 [:s   [[:open "Slack"] ["launch_layer" 0]]]
+                 [:return_or_enter [[:open "Finder"] ["launch_layer" 0]]]
                  ; Move to Mission Control space
-                 [:1   [[:spaces 1]["launch_layer" 0 ]]]
-                 [:2   [[:spaces 2]["launch_layer" 0 ]]]
-                 [:3   [[:spaces 4]["launch_layer" 0 ]]]
-                 [:4   [[:spaces 4]["launch_layer" 0 ]]]
-                 [:!S1 [[:spaces 5]["launch_layer" 0 ]]]
-                 [:!S2 [[:spaces 6]["launch_layer" 0 ]]]
-                 [:!S3 [[:spaces 7]["launch_layer" 0 ]]]
-                 [:!S4 [[:spaces 8]["launch_layer" 0 ]]]
-                 ]}
+                 [:1   [[:spaces 1] ["launch_layer" 0]]]
+                 [:2   [[:spaces 2] ["launch_layer" 0]]]
+                 [:3   [[:spaces 4] ["launch_layer" 0]]]
+                 [:4   [[:spaces 4] ["launch_layer" 0]]]
+                 [:!S1 [[:spaces 5] ["launch_layer" 0]]]
+                 [:!S2 [[:spaces 6] ["launch_layer" 0]]]
+                 [:!S3 [[:spaces 7] ["launch_layer" 0]]]
+                 [:!S4 [[:spaces 8] ["launch_layer" 0]]]]}
 
         {:des "Extension/Automation management"
          :rules [:return_layer
