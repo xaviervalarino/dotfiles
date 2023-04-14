@@ -35,10 +35,11 @@
            :razer_mouse [{:vendor_id 5426 :product_id 146}   ; bluetooth
                          {:vendor_id 5426 :product_id 143}]} ; wired
 
- :applications {:chrome ["^com\\.google\\.Chrome$"]
-                :figma  ["^com\\.figma\\.Desktop$"]
-                :slack  ["^com\\.tinyspeck\\.slackmacgap$"]
-                :term   ["^net\\.kovidgoyal\\.kitty$"]}
+ :applications {:chrome            ["^com\\.google\\.Chrome$"]
+                :figma             ["^com\\.figma\\.Desktop$"]
+                :slack             ["^com\\.tinyspeck\\.slackmacgap$"]
+                :term              ["^net\\.kovidgoyal\\.kitty$"]
+                :affinity_designer ["com.seriflabs.affinitydesigner2"]}
 
  :main [
         {:des "Caps Lock -> Escape + caps_layer"
@@ -133,7 +134,13 @@
                  ; "Align Mid Left"
                  ; "Align Mid Right"
                  ; 
-                 ]} 
+                 ]}
+
+        {:des "Affinity designer enhancements"
+         :rules [:affinity_designer
+                 ; Make zoom work like in other design tools
+                 [:##left_control :left_option]
+                 [:##left_option :left_control]]}
 
         {:des "Slack enhancement"
          :rules [:slack
