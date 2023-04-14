@@ -201,7 +201,6 @@
         {:des "Deleting backwards"
          :rules [:!term
                  [:!Tw [:!SOleft_arrow :delete_or_backspace]]   ; Delete word
-                 [:!Tu [:!CSleft_arrow :delete_or_backspace]]]} ; Delte line
-
+                 [:!Tu [:!CSleft_arrow :delete_or_backspace]]]} ; Delete line
         ]}
 
