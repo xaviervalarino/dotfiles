@@ -109,11 +109,15 @@
                  [{:pkey :button4 :modi :left_shift} :!Cclose_bracket] ; ⇧ + Mouse button4 →  Move layer down 
                  [{:pkey :button5 :modi :left_shift} :!Copen_bracket]  ; ⇧ + Mouse button5 →  Move layer up
                  ; for razer mouse
-                 [:2 :return_or_enter :razer_mouse]    ; Mouse button 2 → Go down/in layer
-                 [:3 :!Sreturn_or_enter :razer_mouse]  ; Mouse button 3 → Go up/out layer
-                 [:!S2 :!Copen_bracket :razer_mouse]   ; ⇧ + Mouse button 2 → Move layer down 
-                 [:!S3 :!Cclose_bracket :razer_mouse]  ; ⇧ + Mouse button 3 → Move layer up
-                 [:6 :!SCh :razer_mouse]               ; Mouse button 6 → show/hide layer
+                 ; top row is 1-3 top to bottom
+                 [:1 :return_or_enter :razer_mouse]    ; Mouse button 1 → Go down/in layer
+                 [:2 :!Sreturn_or_enter :razer_mouse]  ; Mouse button 2 → Go up/out layer
+                 [:!S1 :!Copen_bracket :razer_mouse]   ; ⇧ + Mouse button 1 → Move layer down 
+                 [:!S2 :!Cclose_bracket :razer_mouse]  ; ⇧ + Mouse button 1 → Move layer up
+                 [:3 :!SCh :razer_mouse]               ; Mouse button 3 → show/hide layer
+                 ; bottom row is 6-4 top to bottom
+                 [:6 [[:menu_item "Figma" "Cycle Width Sizing"]] :razer_mouse] ; Mouse button 6 → cycle Auto-layout width sizing
+                 [:5 [[:menu_item "Figma" "Cycle Height Sizing"]] :razer_mouse] ; Mouse button 7 → cycle Auto-layout height sizing
                  ; left hand convenience
                  [:d :!O8 ["caps_layer" 1]] ; [d]esign panel
                  [:t :!O9 ["caps_layer" 1]] ; Pro[t]otype panel
