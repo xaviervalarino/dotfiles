@@ -98,6 +98,11 @@
          :rules [:figma
                  [:!Td :delete_forward] ; Fix forward delete
                  [:!Cd :delete_or_backspace] ; add delete to left hand
+
+                 ; Add Auto-layout frames with 0 padding work-around
+                 ; Frames selection first <ctrl+option+g> before turning it into an auto-layout frame <shift+a>
+                 [:a [:!OCg :!Sa] :caps_layer]
+
                  ; TODO: only for logitech mouse
                  [{:pkey :button4} :!Sreturn_or_enter]                 ; Mouse button4 → Go up one layer
                  [{:pkey :button5} :return_or_enter]                   ; Mouse button5 → Go down one layer
