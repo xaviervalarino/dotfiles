@@ -216,4 +216,3 @@
                  [:!Tw [:!SOleft_arrow :delete_or_backspace]]   ; Delete word
                  [:!Tu [:!CSleft_arrow :delete_or_backspace]]]} ; Delete line
         ]}
-
