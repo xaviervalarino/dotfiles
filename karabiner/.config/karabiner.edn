@@ -116,11 +116,10 @@
                  [:2 :!Sreturn_or_enter :razer_mouse]  ; Mouse button 2 → Go up/out layer
                  [:!S1 :!Copen_bracket :razer_mouse]   ; ⇧ + Mouse button 1 → Move layer down 
                  [:!S2 :!Cclose_bracket :razer_mouse]  ; ⇧ + Mouse button 1 → Move layer up
-                 [:3 :!SCh :razer_mouse]               ; Mouse button 3 → show/hide layer
                  ; bottom row is 6-4 top to bottom
                  [:6 [[:menu_item "Figma" "Cycle Width Sizing"]] :razer_mouse] ; Mouse button 6 → cycle Auto-layout width sizing
                  [:5 [[:menu_item "Figma" "Cycle Height Sizing"]] :razer_mouse] ; Mouse button 7 → cycle Auto-layout height sizing
-
+                 [:3 [:menu_item "Figma" "Cycle Layout Direction"] :razer_mouse] ; Mouse button 3 → show/hide layer
                  [:4 ["cycle_alignment" 1] :razer_mouse
                   {:afterup {:set ["cycle_alignment" 0]}}] ; hold Mouse button 4 to enable cycle_alignment mode
                  [:a [[:menu_item "Figma" "Cycle Left Column"]] :cycle_alignment] ; Mouse button 4 + a → cycle frame alignment in the left column
