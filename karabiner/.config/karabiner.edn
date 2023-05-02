@@ -118,29 +118,16 @@
                  ; bottom row is 6-4 top to bottom
                  [:6 [[:menu_item "Figma" "Cycle Width Sizing"]] :razer_mouse] ; Mouse button 6 → cycle Auto-layout width sizing
                  [:5 [[:menu_item "Figma" "Cycle Height Sizing"]] :razer_mouse] ; Mouse button 7 → cycle Auto-layout height sizing
-                 ; left hand convenience
+
+                 [:4 ["cycle_alignment" 1] :razer_mouse
+                  {:afterup {:set ["cycle_alignment" 0]}}] ; hold Mouse button 4 to enable cycle_alignment mode
+                 [:a [[:menu_item "Figma" "Cycle Left Column"]] :cycle_alignment] ; Mouse button 4 + a → cycle frame alignment in the left column
+                 [:s [[:menu_item "Figma" "Cycle Center Column"]] :cycle_alignment] ; Mouse button 4 + s → cycle frame alignment in the center column
+                 [:d [[:menu_item "Figma" "Cycle Right Column"]] :cycle_alignment] ; Mouse button 4 + d → cycle frame alignment in the right column
+
+               ; left hand convenience
                  [:d :!O8 ["caps_layer" 1]] ; [d]esign panel
                  [:t :!O9 ["caps_layer" 1]] ; Pro[t]otype panel
-                 ; auto-layout
-                 [[:a :spacebar] ["figma_layout_layer" 1] [:!figma_layout_layer]
-                  {:delayed {:invoked ["figma_layout_layer" 0]}
-                   :params  {:delay 800}}]
-                 :figma_layout_layer
-                 [:f   [[:menu_item "Figma" "Horizontal"] ["figma_layout_layer" 0]]]
-                 [:!Sf [[:menu_item "Figma" "Vertical"] ["figma_layout_layer" 0]]]
-                 [:c   [[:menu_item "Figma" "Horizontal Stretch"] ["figma_layout_layer" 0]]]
-                 [:!Sc [[:menu_item "Figma" "Vertical Stretch"] ["figma_layout_layer" 0]]]
-                 [:b   [[:menu_item "Figma" "Space Between Horizontal"] ["figma_layout_layer" 0]]]
-                 [:!Sb [[:menu_item "Figma" "Space Between Vertical"] ["figma_layout_layer" 0]]]
-                 [:t   [[:menu_item "Figma" "Toggle Direction"] ["figma_layout_layer" 0]]]
-
-                 ; "Align Top Left"
-                 ; "Align Top Center"
-                 ; "Align Top Right"
-
-                 ; "Align Mid Left"
-                 ; "Align Mid Right"
-                 ; 
                  ]}
 
         {:des "Affinity designer enhancements"
