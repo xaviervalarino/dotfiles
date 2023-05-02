@@ -22,6 +22,7 @@
              :indicator "/opt/homebrew/bin/hs -c \"Indicator.%s()\""
              :spaces "/opt/homebrew/bin/hs -c \"Spaces(%s)\""
              :menu_item "/opt/homebrew/bin/hs -c \"Menu_item('%s', '%s')\""
+             :play_pause "/opt/homebrew/bin/hs -c \"hs.eventtap.event.newSystemKeyEvent ('PLAY',true) :post ()\""
              :open "open -a \"%s\""
              :say "say \"%s %s\""}
 
@@ -52,7 +53,8 @@
 
         {:des "OS convenience"
          :rules [:caps_layer
-                 [:4 :!STC4]]}
+                 [:4 :!STC4]
+                 [:p [:play_pause]]]}
 
         {:des "Caps + Homerow arrow keys H/J/K/L"
          :rules [:caps_layer

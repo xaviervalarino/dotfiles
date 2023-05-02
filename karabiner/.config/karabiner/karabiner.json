@@ -121,6 +121,19 @@
             "type" : "variable_if"
           } ],
           "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "p"
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"hs.eventtap.event.newSystemKeyEvent ('PLAY',true) :post ()\""
+          } ],
+          "conditions" : [ {
+            "name" : "caps_layer",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
         } ]
       }, {
         "description" : "Caps + Homerow arrow keys H/J/K/L",
