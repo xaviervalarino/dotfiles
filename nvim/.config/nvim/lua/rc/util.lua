@@ -38,10 +38,10 @@ end
 
 -- UI elements and styling -----------------------------------------------------
 M.diagnostic_signs = {
-  { name = 'Error', icon = ' ' },
-  { name = 'Warn', icon = ' ' },
-  { name = 'Info', icon = ' ' },
-  { name = 'Hint', icon = ' ' },
+  { name = 'Error', icon = ' ' },
+  { name = 'Warn', icon = ' ' },
+  { name = 'Info', icon = ' ' },
+  { name = 'Hint', icon = '󰌵 ' },
 }
 
 M.float_win_style = {
