@@ -44,6 +44,12 @@ set.fillchars = {
   verthoriz = '━',
 }
 
+set.cmdheight = 0
+set.shortmess:append 'c' -- don't give `ins-completion-menu` messages
+set.shortmess:append 's' -- don't give "search hit BOTTOM, continuing at TOP"
+set.shortmess:append 'C' -- don't give messages while scanning for ins-completion
+set.shortmess:append 'S' -- do not show search count message when searching
+
 -- Search ------------------------------
 set.ignorecase = true
 set.smartcase = true
