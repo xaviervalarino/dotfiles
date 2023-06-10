@@ -127,4 +127,33 @@ return {
       require('alpha').setup(require('alpha.themes.startify').config)
     end,
   },
+  {
+    'luukvbaal/statuscol.nvim',
+    event = 'VimEnter',
+    opts = function()
+      local builtin = require 'statuscol.builtin'
+      return {
+        relculright = true,
+        segments = {
+          { text = { ' ', builtin.lnumfunc, ' ' }, click = 'v:lua.ScLa' },
+          {
+            sign = {
+              name = { 'GitSigns' },
+              maxwidth = 1,
+              colwidth = 1,
+              fillchar = '▏',
+            },
+            click = 'v:lua.ScSa',
+          },
+        },
+        ft_ignore = {
+          'help',
+          'vim',
+          'alpha',
+          'lazy',
+          'toggleterm',
+        },
+      }
+    end,
+  },
 }

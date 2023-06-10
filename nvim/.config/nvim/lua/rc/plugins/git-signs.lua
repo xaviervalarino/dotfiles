@@ -6,8 +6,11 @@ return {
 
     require('gitsigns').setup {
       signs = {
-        -- add = { text = '▎' },
-        -- change = { text = '▎' },
+        add = { text = '▏' },
+        delete = { text = '▏' },
+        topdelete = { text = '▏' },
+        changedelete = { text = '▏' },
+        change = { text = '▏' },
       },
       numhl = false,
       on_attach = function(bufnr)
