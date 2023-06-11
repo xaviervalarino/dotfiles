@@ -82,6 +82,8 @@ return {
       use_treesitter = true,
       -- show_trailing_blankline_indent = false,
       -- show_end_of_line = true,
+      char = '',
+      context_char = '│',
       buftype_exclude = { 'terminal', 'help', 'nofile' },
       show_current_context = true,
       -- show_current_context_start = true,
