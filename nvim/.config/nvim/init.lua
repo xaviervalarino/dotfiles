@@ -36,12 +36,12 @@ vim.g.netrw_banner = 0
 
 set.fillchars = {
   horiz = '━',
-  horizup = '━',
-  horizdown = '━',
-  vert = ' ',
-  vertleft = '━',
-  vertright = '━',
-  verthoriz = '━',
+  horizup = '┻',
+  horizdown = '┳',
+  vert = '┃',
+  vertleft = '┫',
+  vertright = '┣',
+  verthoriz = '╋',
 }
 
 set.cmdheight = 0
