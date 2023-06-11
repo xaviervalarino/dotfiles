@@ -3,8 +3,11 @@ local util = require 'rc.util'
 local bufmap = util.bufkeymap
 local float_win_style = util.float_win_style
 
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+
 local diagnostic_hover = true
-local dh_augroup = vim.api.nvim_create_augroup('diagnostic_hover', {})
+local dh_augroup = augroup('diagnostic_hover', {})
 
 local function dh_disable_before(callback)
   return function(...)
@@ -16,7 +19,7 @@ end
 local function dh_enable_after(lsp_handler)
   return function(...)
     local bufnr = vim.lsp.handlers[lsp_handler](...)
-    vim.api.nvim_create_autocmd('BufWinLeave', {
+    autocmd('BufWinLeave', {
       group = dh_augroup,
       buffer = bufnr,
       callback = function()
@@ -30,9 +33,9 @@ end
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(dh_enable_after 'hover', float_win_style)
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(dh_enable_after 'signature_help', float_win_style)
 
-M.capabilities = vim.lsp.protocol.make_client_capabilities()
-M.capabilities.textDocument.completion.completionItem.snippetSupport = true
-M.capabilities = require('cmp_nvim_lsp').default_capabilities(M.capabilities)
+-- M.capabilities = vim.lsp.protocol.make_client_capabilities()
+M.capabilities = require('cmp_nvim_lsp').default_capabilities()
+-- M.capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 function M.on_attach(client, bufnr)
   local map = bufmap(bufnr)
@@ -70,7 +73,7 @@ function M.on_attach(client, bufnr)
   map.n('<C-s>',       vim.lsp.buf.signature_help,  { desc = 'Signature help' })
   --stylua: ignore end
 
-  vim.api.nvim_create_autocmd('CursorHold', {
+  autocmd('CursorHold', {
     group = dh_augroup,
     buffer = bufnr,
     callback = function()
@@ -89,13 +92,13 @@ function M.on_attach(client, bufnr)
   })
 
   if client.server_capabilities.documentHighlightProvider then
-    local highlight_group = vim.api.nvim_create_augroup('lsp_document_highlight', { clear = true })
-    vim.api.nvim_create_autocmd('CursorHold', {
+    local highlight_group = augroup('lsp_document_highlight', { clear = true })
+    autocmd('CursorHold', {
       group = highlight_group,
       buffer = 0,
       callback = vim.lsp.buf.document_highlight,
     })
-    vim.api.nvim_create_autocmd('CursorMoved', {
+    autocmd('CursorMoved', {
       group = highlight_group,
       buffer = 0,
       callback = vim.lsp.buf.clear_references,
@@ -103,8 +106,8 @@ function M.on_attach(client, bufnr)
   end
 
   if client.server_capabilities.documentFormattingProvider then
-    local lsp_formatting = vim.api.nvim_create_augroup('lsp_formatting', { clear = true })
-    vim.api.nvim_create_autocmd('BufWritePre', {
+    local lsp_formatting = augroup('lsp_formatting', { clear = true })
+    autocmd('BufWritePre', {
       group = lsp_formatting,
       buffer = 0,
       callback = function()

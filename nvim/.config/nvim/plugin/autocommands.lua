@@ -1,5 +1,8 @@
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
+
+autocmd('TextYankPost', {
+  group = augroup('YankHighlight', { clear = true }),
   pattern = '*',
   callback = function()
     vim.highlight.on_yank()
@@ -7,8 +10,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- Turn off relative line numbers for inactive windows
-vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
-  group = vim.api.nvim_create_augroup('LocalNumbers', { clear = true }),
+autocmd({ 'WinEnter', 'WinLeave' }, {
+  group = augroup('LocalNumbers', { clear = true }),
   callback = function(ctx)
     -- Don't target float windows (which don't have `file` named) or Help docs
     if #ctx.file > 0 and vim.api.nvim_buf_get_option(ctx.buf, 'filetype') ~= 'help' then
@@ -18,8 +21,8 @@ vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
 })
 
 -- Turn off cursorline for inactive windows
-vim.api.nvim_create_autocmd({ 'WinEnter', 'WinLeave' }, {
-  group = vim.api.nvim_create_augroup('CursorLineFocus', { clear = true }),
+autocmd({ 'WinEnter', 'WinLeave' }, {
+  group = augroup('CursorLineFocus', { clear = true }),
   callback = function(ctx)
     vim.opt_local.cursorline = ctx.event == 'WinEnter'
   end,
@@ -31,8 +34,8 @@ end
 
 -- Create directory if it doesn't exist when saving file
 -- https://github.com/jdhao/nvim-config/blob/78baf8d015695c2b795ac6f955550f5e96104845/lua/custom-autocmd.lua#L53-L67
-vim.api.nvim_create_autocmd('BufWritePre', {
-  group = vim.api.nvim_create_augroup('auto_create_dir', { clear = true }),
+autocmd('BufWritePre', {
+  group = augroup('auto_create_dir', { clear = true }),
   callback = function(ctx)
     vim.fn.mkdir(vim.fn.fnamemodify(ctx.file, ':p:h'), 'p')
   end,
@@ -40,8 +43,8 @@ vim.api.nvim_create_autocmd('BufWritePre', {
 
 -- Update file if modified outside Vim
 -- https://github.com/jdhao/nvim-config/blob/78baf8d015695c2b795ac6f955550f5e96104845/lua/custom-autocmd.lua#L69-L92
-vim.api.nvim_create_autocmd({ 'FileChangedShellPost', 'FocusGained', 'CursorHold' }, {
-  group = vim.api.nvim_create_augroup('AutoRead', { clear = true }),
+autocmd({ 'FileChangedShellPost', 'FocusGained', 'CursorHold' }, {
+  group = augroup('AutoRead', { clear = true }),
   pattern = '*',
   callback = function(ctx)
     if ctx.event == 'FileChangedShellPost' then
@@ -54,8 +57,8 @@ vim.api.nvim_create_autocmd({ 'FileChangedShellPost', 'FocusGained', 'CursorHold
 })
 
 -- Toggle padding in terminal when entering/leaving vim
-vim.api.nvim_create_autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' }, {
-  group = vim.api.nvim_create_augroup('TermMargin', { clear = true }),
+autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' }, {
+  group = augroup('TermMargin', { clear = true }),
   callback = function(ctx)
     if not vim.env.KITTY_LISTEN_ON then
       return
@@ -66,8 +69,8 @@ vim.api.nvim_create_autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' 
 })
 
 -- Save when exiting insert mode
-vim.api.nvim_create_autocmd('InsertLeave', {
-  group = vim.api.nvim_create_augroup('AutoSave', { clear = true }),
+autocmd('InsertLeave', {
+  group = augroup('AutoSave', { clear = true }),
   callback = function(ctx)
     if ctx.file:len() > 0 and not ctx.file:find 'Command Line' then
       vim.cmd ':update'

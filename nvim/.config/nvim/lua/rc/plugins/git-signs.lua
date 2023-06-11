@@ -1,9 +1,9 @@
+local bufmap = require('rc.util').bufkeymap
+
 return {
   'lewis6991/gitsigns.nvim',
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
-    local bufmap = require('rc.util').bufkeymap
-
     require('gitsigns').setup {
       signs = {
         add = { text = '▏' },

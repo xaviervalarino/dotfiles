@@ -89,9 +89,10 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Remap leader ------------------------
-require('rc.util').keymap('<Space>', '<Nop>')
+local util = require 'rc.util'
+util.keymap('<Space>', '<Nop>')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
 -- Load plugins ------------------------
-require('lazy').setup('rc.plugins', { ui = { border = require('rc.util').float_win_style.border } })
+require('lazy').setup('rc.plugins', { ui = { border = util.float_win_style.border } })

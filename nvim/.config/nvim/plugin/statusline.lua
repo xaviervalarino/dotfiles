@@ -1,9 +1,6 @@
 local utf8_len = require('rc.util').utf8_len
 local s = require 'rc.statusline'
 
--- require('plenary.reload').reload_module('rc.statusline-new', true)
--- local c = require 'rc.statusline.components'
-
 local api = vim.api
 local fn = vim.fn
 

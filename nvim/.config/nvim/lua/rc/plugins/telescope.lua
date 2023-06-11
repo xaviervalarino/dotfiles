@@ -10,7 +10,7 @@ return {
     },
   },
   config = function()
-    local telescope = require('telescope')
+    local telescope = require 'telescope'
 
     local map = require('rc.util').keymap
     local builtin = require 'telescope.builtin'
