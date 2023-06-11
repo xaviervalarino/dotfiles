@@ -7,7 +7,7 @@ return {
     'jose-elias-alvarez/null-ls.nvim',
     'folke/neodev.nvim',
     'jose-elias-alvarez/nvim-lsp-ts-utils',
-    { 'j-hui/fidget.nvim', opts = { text = { spinner = 'dots' } } },
+    { 'j-hui/fidget.nvim', tag = 'legacy', opts = { text = { spinner = 'dots' } } },
   },
   config = function()
     local nvim_lsp = require 'lspconfig'
