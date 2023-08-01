@@ -39,7 +39,8 @@
  :applications {:chrome            ["^com\\.google\\.Chrome$"]
                 :figma             ["^com\\.figma\\.Desktop$"]
                 :slack             ["^com\\.tinyspeck\\.slackmacgap$"]
-                :term              ["^net\\.kovidgoyal\\.kitty$"]
+                :term              ["^net\\.kovidgoyal\\.kitty$"
+                                    "^com\\.github\\.wez\\.wezterm$"]
                 :affinity ["^com\\.seriflabs\\.affinity"]}
 
  :main [{:des "Caps Lock -> Escape + caps_layer"

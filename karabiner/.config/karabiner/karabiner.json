@@ -2198,7 +2198,7 @@
           } ],
           "conditions" : [ {
             "type" : "frontmost_application_unless",
-            "bundle_identifiers" : [ "^net\\.kovidgoyal\\.kitty$" ]
+            "bundle_identifiers" : [ "^net\\.kovidgoyal\\.kitty$", "^com\\.github\\.wez\\.wezterm$" ]
           } ],
           "type" : "basic"
         }, {
@@ -2216,7 +2216,7 @@
           } ],
           "conditions" : [ {
             "type" : "frontmost_application_unless",
-            "bundle_identifiers" : [ "^net\\.kovidgoyal\\.kitty$" ]
+            "bundle_identifiers" : [ "^net\\.kovidgoyal\\.kitty$", "^com\\.github\\.wez\\.wezterm$" ]
           } ],
           "type" : "basic"
         } ]
