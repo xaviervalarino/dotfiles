@@ -40,7 +40,7 @@
                 :figma             ["^com\\.figma\\.Desktop$"]
                 :slack             ["^com\\.tinyspeck\\.slackmacgap$"]
                 :term              ["^net\\.kovidgoyal\\.kitty$"]
-                :affinity_designer ["com.seriflabs.affinitydesigner2"]}
+                :affinity ["^com\\.seriflabs\\.affinity"]}
 
  :main [{:des "Caps Lock -> Escape + caps_layer"
          :rules [[:##caps_lock ["caps_layer" 1] nil
@@ -131,8 +131,8 @@
                  [:t :!O9 ["caps_layer" 1]] ; Pro[t]otype panel
                  ]}
 
-        {:des "Affinity designer enhancements"
-         :rules [:affinity_designer
+        {:des "Affinity designer/publisher/photo enhancements"
+         :rules [:affinity
                  ; Make zoom work like in other design tools
                  [:##left_control :left_option]
                  [:##left_option :left_control]]}

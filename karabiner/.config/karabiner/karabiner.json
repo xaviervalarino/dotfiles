@@ -1026,7 +1026,7 @@
           "type" : "basic"
         } ]
       }, {
-        "description" : "Affinity designer enhancements",
+        "description" : "Affinity designer/publisher/photo enhancements",
         "manipulators" : [ {
           "from" : {
             "key_code" : "left_control",
@@ -1039,7 +1039,7 @@
           } ],
           "conditions" : [ {
             "type" : "frontmost_application_if",
-            "bundle_identifiers" : [ "com.seriflabs.affinitydesigner2" ]
+            "bundle_identifiers" : [ "^com\\.seriflabs\\.affinity" ]
           } ],
           "type" : "basic"
         }, {
@@ -1054,7 +1054,7 @@
           } ],
           "conditions" : [ {
             "type" : "frontmost_application_if",
-            "bundle_identifiers" : [ "com.seriflabs.affinitydesigner2" ]
+            "bundle_identifiers" : [ "^com\\.seriflabs\\.affinity" ]
           } ],
           "type" : "basic"
         } ]
