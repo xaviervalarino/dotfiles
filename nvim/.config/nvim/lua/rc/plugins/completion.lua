@@ -81,8 +81,9 @@ return {
     })
     -- Fix WildMenu controlled by CMP
     -- Match color to StatusLine
-    local palette = require('catppuccin.palettes').get_palette()
-    if palette then
+    local cat_palette_ok, cat_palette = pcall(require, 'catppuccin.palettes')
+    if cat_palette_ok then
+      local palette = cat_palette.get_palette()
       vim.api.nvim_set_hl(0, 'Pmenu', { bg = palette.crust })
     end
 
