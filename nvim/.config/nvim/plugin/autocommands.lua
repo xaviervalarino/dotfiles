@@ -1,3 +1,5 @@
+local base64_enc = require('rc.util').base64_enc
+
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
@@ -60,6 +62,18 @@ autocmd({ 'FileChangedShellPost', 'FocusGained', 'CursorHold' }, {
 autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' }, {
   group = augroup('TermMargin', { clear = true }),
   callback = function(ctx)
+    local wezterm_pane = vim.env.WEZTERM_PANE
+    local kitty_socket = vim.env.KITTY_LISTEN_ON
+    local is_out_event = (ctx.event == 'VimLeave' or ctx.event == 'VimSuspend')
+
+    if wezterm_pane then
+      local wezterm_str = string.format('wezterm cli set-tab-title --pane-id %s %%s', wezterm_pane)
+      local event = base64_enc(is_out_event and 'OUT' or 'IN')
+
+      if event then
+        io.write('\x1b]1337;SetUserVar=NVIM_EVENT=' .. event)
+      end
+    end
 
     if kitty_socket then
       local padding = is_out_event and 20 or 0
