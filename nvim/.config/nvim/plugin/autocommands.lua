@@ -60,11 +60,12 @@ autocmd({ 'FileChangedShellPost', 'FocusGained', 'CursorHold' }, {
 autocmd({ 'VimEnter', 'VimLeave', 'VimResume', 'VimSuspend' }, {
   group = augroup('TermMargin', { clear = true }),
   callback = function(ctx)
-    if not vim.env.KITTY_LISTEN_ON then
-      return
+
+    if kitty_socket then
+      local padding = is_out_event and 20 or 0
+      local cmd = string.format('kitty @ --to=%s set-spacing padding=%s', kitty_socket, padding)
+      os.execute(cmd)
     end
-    local padding = (ctx.event == 'VimLeave' or ctx.event == 'VimSuspend') and 20 or 0
-    os.execute('kitty @ --to=$KITTY_LISTEN_ON set-spacing padding=' .. padding)
   end,
 })
 
