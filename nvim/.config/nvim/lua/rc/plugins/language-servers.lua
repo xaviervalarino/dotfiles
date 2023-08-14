@@ -6,7 +6,6 @@ return {
     'onsails/lspkind-nvim',
     'jose-elias-alvarez/null-ls.nvim',
     'folke/neodev.nvim',
-    'jose-elias-alvarez/nvim-lsp-ts-utils',
   },
   config = function()
     local nvim_lsp = require 'lspconfig'
@@ -36,7 +35,6 @@ return {
       },
       jsonls = require 'rc.language-server.jsonls',
       lua_ls = require 'rc.language-server.lua_ls',
-      tsserver = require 'rc.language-server.tsserver',
       pyright = config.default,
       clojure_lsp = config.default,
     }
