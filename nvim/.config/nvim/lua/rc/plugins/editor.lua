@@ -45,6 +45,5 @@ return {
       }
     end,
   },
-  { 'gpanders/editorconfig.nvim', event = { 'BufReadPost', 'BufNewFile' } },
   { 'tiagovla/scope.nvim', event = { 'TabEnter', 'TabLeave' } },
 }
