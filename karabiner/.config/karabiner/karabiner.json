@@ -758,6 +758,146 @@
           "type" : "basic"
         }, {
           "from" : {
+            "simultaneous" : [ {
+              "key_code" : "spacebar"
+            }, {
+              "key_code" : "w"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : false,
+              "key_down_order" : "insensitive",
+              "key_up_order" : "insensitive",
+              "key_up_when" : "any"
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Width Sizing')\""
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "spacebar"
+            }, {
+              "key_code" : "v"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : false,
+              "key_down_order" : "insensitive",
+              "key_up_order" : "insensitive",
+              "key_up_when" : "any"
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Height Sizing')\""
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "spacebar"
+            }, {
+              "key_code" : "r"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : false,
+              "key_down_order" : "insensitive",
+              "key_up_order" : "insensitive",
+              "key_up_when" : "any"
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Layout Direction')\""
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "spacebar"
+            }, {
+              "key_code" : "a"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : false,
+              "key_down_order" : "insensitive",
+              "key_up_order" : "insensitive",
+              "key_up_when" : "any"
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Left Column')\""
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "spacebar"
+            }, {
+              "key_code" : "s"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : false,
+              "key_down_order" : "insensitive",
+              "key_up_order" : "insensitive",
+              "key_up_when" : "any"
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Center Column')\""
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          }, {
+            "name" : "cycle_alignment",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "simultaneous" : [ {
+              "key_code" : "spacebar"
+            }, {
+              "key_code" : "d"
+            } ],
+            "simultaneous_options" : {
+              "detect_key_down_uninterruptedly" : false,
+              "key_down_order" : "insensitive",
+              "key_up_order" : "insensitive",
+              "key_up_when" : "any"
+            }
+          },
+          "to" : [ {
+            "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Right Column')\""
+          } ],
+          "conditions" : [ {
+            "type" : "frontmost_application_if",
+            "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          }, {
+            "name" : "cycle_alignment",
+            "value" : 1,
+            "type" : "variable_if"
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
             "key_code" : "1"
           },
           "to" : [ {
@@ -1098,7 +1238,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {
@@ -1149,7 +1289,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {
@@ -1200,7 +1340,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {
@@ -1251,7 +1391,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {
@@ -1302,7 +1442,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {
@@ -1353,7 +1493,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {
@@ -1404,7 +1544,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {
@@ -1455,7 +1595,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {
@@ -1506,7 +1646,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {
@@ -1562,7 +1702,7 @@
         }, {
           "type" : "basic",
           "parameters" : {
-            "basic.simultaneous_threshold_milliseconds" : 250
+            "basic.simultaneous_threshold_milliseconds" : 1000
           },
           "to" : [ {
             "set_variable" : {

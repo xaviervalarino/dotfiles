@@ -16,6 +16,7 @@
  :delay 210
  :held 210
  :sim 50
+ :simlayer-threshold 1000
  :templates {:wm "/opt/homebrew/bin/hs -c \"WM.%s(%s)\""
              :hs "/opt/homebrew/bin/hs -c \"hs.%s()\""
              :launch "/opt/homebrew/bin/hs -c \"Launch.%s()\""
@@ -106,11 +107,19 @@
                  ; Frames selection first <ctrl+option+g> before turning it into an auto-layout frame <shift+a>
                  [:a [:!OCg :!Sa] :caps_layer]
 
-                 ; TODO: only for logitech mouse
+                 ; Standard mouse
                  [{:pkey :button4} :!Sreturn_or_enter]                 ; Mouse button4 → Go up one layer
                  [{:pkey :button5} :return_or_enter]                   ; Mouse button5 → Go down one layer
                  [{:pkey :button4 :modi :left_shift} :!Cclose_bracket] ; ⇧ + Mouse button4 →  Move layer down 
                  [{:pkey :button5 :modi :left_shift} :!Copen_bracket]  ; ⇧ + Mouse button5 →  Move layer up
+
+                 [[:spacebar :w] [:menu_item "Figma" "Cycle Width Sizing"]]                   ; spacebar + w -> Change [w]idth sizing
+                 [[:spacebar :v] [:menu_item "Figma" "Cycle Height Sizing"]]                  ; spacebar + v -> Change [v]ertical sizing 
+                 [[:spacebar :r] [:menu_item "Figma" "Cycle Layout Direction"]]               ; spacebar + r -> [r]rotate layout direction
+                 [[:spacebar :a] [:menu_item "Figma" "Cycle Left Column"]]                    ; spacebar + a -> cycle frame alignment in the left column
+                 [[:spacebar :s] [:menu_item "Figma" "Cycle Center Column"] :cycle_alignment] ; spacebar + s -> cycle frame alignment in the center column
+                 [[:spacebar :d] [:menu_item "Figma" "Cycle Right Column"] :cycle_alignment]  ; spacebar + d -> cycle frame alignment in the right column
+
                  ; for razer mouse
                  ; top row is 1-3 top to bottom
                  [:1 :return_or_enter :razer_mouse]    ; Mouse button 1 → Go down/in layer
