@@ -57,7 +57,8 @@ return {
           },
           {
             sign = {
-              name = { 'GitSigns' },
+              name = { '.*' },
+              namespace = { 'gitsigns' },
               maxwidth = 1,
               colwidth = 1,
               fillchar = '▏',
