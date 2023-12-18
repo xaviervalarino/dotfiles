@@ -1,4 +1,8 @@
 -- Treesitter
+
+-- speed up loading of ts_context_commentstring
+vim.g.skip_ts_context_commentstring_module = true
+
 return {
   { 'nvim-treesitter/playground', cmd = 'TSPlaygroundToggle' },
   {
@@ -21,9 +25,6 @@ return {
     },
     config = function()
       require('nvim-treesitter.configs').setup {
-        context_commentstring = {
-          enable = true,
-        },
         highlight = {
           enable = true,
         },
