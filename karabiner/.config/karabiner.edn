@@ -137,7 +137,7 @@
                  [:d [[:menu_item "Figma" "Cycle Right Column"]] :cycle_alignment] ; Mouse button 4 + d → cycle frame alignment in the right column
 
                ; left hand convenience
-                 [:d :!O8 ["caps_layer" 1]] ; [d]esign panel
+                 [:g :!O8 ["caps_layer" 1]] ; desi[g]n panel
                  [:t :!O9 ["caps_layer" 1]] ; Pro[t]otype panel
                  ]}
 
