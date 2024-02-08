@@ -113,12 +113,12 @@
                  [{:pkey :button4 :modi :left_shift} :!Cclose_bracket] ; ⇧ + Mouse button4 →  Move layer down 
                  [{:pkey :button5 :modi :left_shift} :!Copen_bracket]  ; ⇧ + Mouse button5 →  Move layer up
 
-                 [[:spacebar :w] [:menu_item "Figma" "Cycle Width Sizing"]]                   ; spacebar + w -> Change [w]idth sizing
-                 [[:spacebar :v] [:menu_item "Figma" "Cycle Height Sizing"]]                  ; spacebar + v -> Change [v]ertical sizing 
-                 [[:spacebar :r] [:menu_item "Figma" "Cycle Layout Direction"]]               ; spacebar + r -> [r]rotate layout direction
-                 [[:spacebar :a] [:menu_item "Figma" "Cycle Left Column"]]                    ; spacebar + a -> cycle frame alignment in the left column
-                 [[:spacebar :s] [:menu_item "Figma" "Cycle Center Column"] :cycle_alignment] ; spacebar + s -> cycle frame alignment in the center column
-                 [[:spacebar :d] [:menu_item "Figma" "Cycle Right Column"] :cycle_alignment]  ; spacebar + d -> cycle frame alignment in the right column
+                 [:w [:menu_item "Figma" "Cycle Width Sizing"] :caps_layer]     ; caps + w -> Change [w]idth sizing
+                 [:v [:menu_item "Figma" "Cycle Height Sizing"] :caps_layer]    ; caps + v -> Change [v]ertical sizing
+                 [:r [:menu_item "Figma" "Cycle Layout Direction"] :caps_layer] ; caps + r -> [r]rotate layout direction
+                 [:a [:menu_item "Figma" "Cycle Left Column"] :caps_layer]      ; caps + a -> cycle frame alignment in the left column
+                 [:s [:menu_item "Figma" "Cycle Center Column"] :caps_layer]    ; caps + s -> cycle frame alignment in the center column
+                 [:d [:menu_item "Figma" "Cycle Right Column"] :caps_layer]     ; caps + d -> cycle frame alignment in the right column
 
                  ; for razer mouse
                  ; top row is 1-3 top to bottom
