@@ -67,6 +67,8 @@ set.softtabstop = 2
 set.smartindent = true
 set.expandtab = true
 
+-- vim.g.editorconfig = true
+
 -- Window splits -----------------------
 set.splitbelow = true
 set.splitright = true
