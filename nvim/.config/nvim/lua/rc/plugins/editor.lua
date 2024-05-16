@@ -46,4 +46,61 @@ return {
     end,
   },
   { 'tiagovla/scope.nvim', event = { 'TabEnter', 'TabLeave' } },
+  {
+    'stevearc/conform.nvim',
+    event = 'LspAttach',
+    opts = {
+      formatters_by_ft = {
+        lua = { 'stylua' },
+        typescript = { 'prettier' },
+        typescriptreact = { 'prettier' },
+        javascript = { 'prettier' },
+        javascriptreact = { 'prettier' },
+        json = { 'prettier' },
+        css = { 'prettier' },
+        scss = { 'prettier' },
+        markdown = { 'prettier' },
+        yaml = { 'prettier' },
+      },
+      format_on_save = function(bufnr)
+        local bufname = vim.api.nvim_buf_get_name(bufnr)
+        if bufname:match '/node_modules/' then
+          return
+        end
+        return {
+          timeout_ms = 500,
+          lsp_fallback = true,
+          async = true,
+        }
+      end,
+      config = function(_, opts)
+        local conform = require 'conform'
+        conform.setup(opts)
+
+        require('conform.formatters.prettier').args = function(ctx)
+          local prettier_roots = { '.prettierrc', '.prettierrc.json', 'prettier.config.js' }
+          local args = { '--stdin-filepath', '$FILENAME' }
+
+          local local_prettier_config = vim.fs.find(prettier_roots, {
+            upward = true,
+            path = ctx.dirname,
+            type = 'file',
+          })[1]
+          local global_prettier_config = vim.fs.find(prettier_roots, {
+            path = vim.fn.stdpath 'config',
+            type = 'file',
+          })[1]
+          local disable_global_prettier_config = os.getenv 'DISABLE_GLOBAL_PRETTIER_CONFIG'
+
+          print(vim.inspect(local_prettier_config))
+
+          if local_prettier_config then
+            vim.list_extend(args, { '--config', local_prettier_config })
+          elseif disable_global_prettier_config and not disable_global_prettier_config then
+            vim.list_extend(args, { '--config', global_prettier_config })
+          end
+        end
+      end,
+    },
+  },
 }

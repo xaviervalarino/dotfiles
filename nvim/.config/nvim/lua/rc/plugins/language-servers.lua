@@ -4,14 +4,11 @@ return {
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
     'onsails/lspkind-nvim',
-    'jose-elias-alvarez/null-ls.nvim',
     'folke/neodev.nvim',
   },
   config = function()
     local nvim_lsp = require 'lspconfig'
     require 'rc.language-server.diagnostics'
-
-    local null_ls = require 'rc.language-server.null-ls'
 
     local config = {
       default = require 'rc.language-server.default',
@@ -55,10 +52,6 @@ return {
         opts = config:create(opts)
       end
       nvim_lsp[server].setup(opts)
-    end
-
-    if null_ls then
-      null_ls.setup(config.default)
     end
 
     require('lspconfig.ui.windows').default_options.border = require('rc.util').float_win_style.border
