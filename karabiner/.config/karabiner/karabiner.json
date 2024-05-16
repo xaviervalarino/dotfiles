@@ -758,17 +758,7 @@
           "type" : "basic"
         }, {
           "from" : {
-            "simultaneous" : [ {
-              "key_code" : "spacebar"
-            }, {
-              "key_code" : "w"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : false,
-              "key_down_order" : "insensitive",
-              "key_up_order" : "insensitive",
-              "key_up_when" : "any"
-            }
+            "key_code" : "w"
           },
           "to" : [ {
             "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Width Sizing')\""
@@ -776,21 +766,15 @@
           "conditions" : [ {
             "type" : "frontmost_application_if",
             "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          }, {
+            "name" : "caps_layer",
+            "value" : 1,
+            "type" : "variable_if"
           } ],
           "type" : "basic"
         }, {
           "from" : {
-            "simultaneous" : [ {
-              "key_code" : "spacebar"
-            }, {
-              "key_code" : "v"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : false,
-              "key_down_order" : "insensitive",
-              "key_up_order" : "insensitive",
-              "key_up_when" : "any"
-            }
+            "key_code" : "v"
           },
           "to" : [ {
             "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Height Sizing')\""
@@ -798,21 +782,15 @@
           "conditions" : [ {
             "type" : "frontmost_application_if",
             "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          }, {
+            "name" : "caps_layer",
+            "value" : 1,
+            "type" : "variable_if"
           } ],
           "type" : "basic"
         }, {
           "from" : {
-            "simultaneous" : [ {
-              "key_code" : "spacebar"
-            }, {
-              "key_code" : "r"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : false,
-              "key_down_order" : "insensitive",
-              "key_up_order" : "insensitive",
-              "key_up_when" : "any"
-            }
+            "key_code" : "r"
           },
           "to" : [ {
             "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Layout Direction')\""
@@ -820,21 +798,15 @@
           "conditions" : [ {
             "type" : "frontmost_application_if",
             "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          }, {
+            "name" : "caps_layer",
+            "value" : 1,
+            "type" : "variable_if"
           } ],
           "type" : "basic"
         }, {
           "from" : {
-            "simultaneous" : [ {
-              "key_code" : "spacebar"
-            }, {
-              "key_code" : "a"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : false,
-              "key_down_order" : "insensitive",
-              "key_up_order" : "insensitive",
-              "key_up_when" : "any"
-            }
+            "key_code" : "a"
           },
           "to" : [ {
             "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Left Column')\""
@@ -842,21 +814,15 @@
           "conditions" : [ {
             "type" : "frontmost_application_if",
             "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
+          }, {
+            "name" : "caps_layer",
+            "value" : 1,
+            "type" : "variable_if"
           } ],
           "type" : "basic"
         }, {
           "from" : {
-            "simultaneous" : [ {
-              "key_code" : "spacebar"
-            }, {
-              "key_code" : "s"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : false,
-              "key_down_order" : "insensitive",
-              "key_up_order" : "insensitive",
-              "key_up_when" : "any"
-            }
+            "key_code" : "s"
           },
           "to" : [ {
             "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Center Column')\""
@@ -865,24 +831,14 @@
             "type" : "frontmost_application_if",
             "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
           }, {
-            "name" : "cycle_alignment",
+            "name" : "caps_layer",
             "value" : 1,
             "type" : "variable_if"
           } ],
           "type" : "basic"
         }, {
           "from" : {
-            "simultaneous" : [ {
-              "key_code" : "spacebar"
-            }, {
-              "key_code" : "d"
-            } ],
-            "simultaneous_options" : {
-              "detect_key_down_uninterruptedly" : false,
-              "key_down_order" : "insensitive",
-              "key_up_order" : "insensitive",
-              "key_up_when" : "any"
-            }
+            "key_code" : "d"
           },
           "to" : [ {
             "shell_command" : "/opt/homebrew/bin/hs -c \"Menu_item('Figma', 'Cycle Right Column')\""
@@ -891,7 +847,7 @@
             "type" : "frontmost_application_if",
             "bundle_identifiers" : [ "^com\\.figma\\.Desktop$" ]
           }, {
-            "name" : "cycle_alignment",
+            "name" : "caps_layer",
             "value" : 1,
             "type" : "variable_if"
           } ],
@@ -1132,7 +1088,7 @@
           "type" : "basic"
         }, {
           "from" : {
-            "key_code" : "d"
+            "key_code" : "g"
           },
           "to" : [ {
             "key_code" : "8",
@@ -2511,6 +2467,32 @@
       },
       "ignore" : false,
       "manipulate_caps_lock_led" : true,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false
+    }, {
+      "disable_built_in_keyboard_if_exists" : false,
+      "fn_function_keys" : [ ],
+      "identifiers" : {
+        "is_keyboard" : true,
+        "is_pointing_device" : false,
+        "product_id" : 50475,
+        "vendor_id" : 1133
+      },
+      "ignore" : false,
+      "manipulate_caps_lock_led" : true,
+      "simple_modifications" : [ ],
+      "treat_as_built_in_keyboard" : false
+    }, {
+      "disable_built_in_keyboard_if_exists" : false,
+      "fn_function_keys" : [ ],
+      "identifiers" : {
+        "is_keyboard" : false,
+        "is_pointing_device" : true,
+        "product_id" : 50475,
+        "vendor_id" : 1133
+      },
+      "ignore" : false,
+      "manipulate_caps_lock_led" : false,
       "simple_modifications" : [ ],
       "treat_as_built_in_keyboard" : false
     } ],
