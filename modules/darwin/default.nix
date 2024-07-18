@@ -11,7 +11,7 @@
     systemPackages = [ coreutils ];
   };
   # system.stateVersion
-  system.default = {
+  system.defaults = {
     dock.autohide = true;
     finder._FXShowPosixPathInTitle = true;
     # finder.AppleShowAllExtensions = true;
