@@ -10,14 +10,11 @@
     loginShell = zsh;
     systemPackages = [ coreutils ];
   };
-  system = {
-    # stateVersion
-    defaults = {
-      # finder.AppleShowAllExtensions = true;
-      dock.autohide = true;
-      finder._FXShowPosixPathInTitle = true;
-      # finder.AppleShowAllExtensions = true;
-      NSGlobalDomain.AppleShowAllExtensions = true;
-    };
+  # system.stateVersion
+  system.default = {
+    dock.autohide = true;
+    finder._FXShowPosixPathInTitle = true;
+    # finder.AppleShowAllExtensions = true;
+    NSGlobalDomain.AppleShowAllExtensions = true;
   };
 }
