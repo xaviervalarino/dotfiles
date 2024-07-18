@@ -5,10 +5,10 @@
   services.nix-daemon.enable = true;
   users.users.xavier.home = "/Users/xavier";
   programs.zsh.enable = true;
-  environment = {
-    shells = [ pkgs.bash pkgs.zsh ];
-    loginShell = pkgs.zsh;
-    systemPackages = [ pkgs.coreutils ];
+  environment = with pkgs; {
+    shells = [ bash zsh ];
+    loginShell = zsh;
+    systemPackages = [ coreutils ];
   };
   system = {
     # stateVersion
