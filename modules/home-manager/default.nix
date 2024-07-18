@@ -13,6 +13,10 @@
     file.".zshenv".source = ../../zsh/zshenv;
     file.".zshrc".source = ../../zsh/zshrc;
   };
+  xdg.configFile = {
+    wezterm.source = ../../wezterm;
+  };
+
   programs = {
     home-manager.enable = true;
     bat.enable = true;
@@ -30,7 +34,7 @@
     # zsh.autosuggestion.enable = true;
     # zsh.syntaxHighlighting.enable = true;
     # zsh.shellAliases = true;
-    wezterm.enable = true;
-    wezterm.enableZshIntegration = true;
+    # wezterm.enable = true;
+    # wezterm.enableZshIntegration = true;
   };
 }
