@@ -17,6 +17,10 @@
     fzf.enable = true;
     fzf.enableZshIntegration = true;
     git.enable = true;
+    git.includes = [
+      { path  = "~/dotfiles/git/config"; }
+      { path  = "~/dotfiles/git/exclude"; }
+    ];
     zsh.enable = true;
     zsh.enableCompletion = true;
     zsh.autosuggestion.enable = true;
