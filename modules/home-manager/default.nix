@@ -9,6 +9,9 @@
     sessionVariables = {
       EDITOR = "nvim";
     };
+    file.".zprofile".source = ../../zsh/zprofile;
+    file.".zshenv".source = ../../zsh/zshenv;
+    file.".zshrc".source = ../../zsh/zshrc;
   };
   programs = {
     home-manager.enable = true;
@@ -21,10 +24,11 @@
       { path  = "~/dotfiles/git/config"; }
       { path  = "~/dotfiles/git/exclude"; }
     ];
-    zsh.enable = true;
-    zsh.enableCompletion = true;
-    zsh.autosuggestion.enable = true;
-    zsh.syntaxHighlighting.enable = true;
+    # zsh.enable = true;
+    # zsh.enableCompletion = true;
+    # zsh.initExtra = /Users/xavier/dotfiles/zsh/zshrc;
+    # zsh.autosuggestion.enable = true;
+    # zsh.syntaxHighlighting.enable = true;
     # zsh.shellAliases = true;
     wezterm.enable = true;
     wezterm.enableZshIntegration = true;
