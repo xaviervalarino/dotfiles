@@ -25,7 +25,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- Fuzzy find all the symbols in the current workspace.
     map('<leader>ws', builtin.lsp_dynamic_workspace_symbols, '[w]orkspace [s]ymbols')
 
-    -- When you move your cursor, the highlights will be cleared (the second autocommand).
     local client = vim.lsp.get_client_by_id(event.data.client_id)
     if client and client.server_capabilities.documentHighlightProvider then
       local highlight_augroup = vim.api.nvim_create_augroup('lsp-highlight', { clear = false })
@@ -50,10 +49,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       })
     end
 
-    -- The following autocommand is used to enable inlay hints in your
-    -- code, if the language server you are using supports them
-
-    -- This may be unwanted, since they displace some of your code
     if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
       map('<leader>th', function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
