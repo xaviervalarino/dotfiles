@@ -10,7 +10,7 @@ alias vim="nvim"
 alias brew_bundle="brew bundle --file=$HOME/dotfiles/Brewfile"
 
 alias nixswitch="darwin-rebuild switch --flake ~/dotfiles/.#"
-alias nixup="pushd ~/dotfiles; nix flake update; nixswitch"
+alias nixup="pushd ~/dotfiles; nix flake update; nixswitch; popd"
 
 ql() {
   qlmanage -p "$1" &>/dev/null
