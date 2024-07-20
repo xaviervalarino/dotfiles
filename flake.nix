@@ -10,7 +10,7 @@
     darwin.url = "github:lnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
   };
-  outputs = inputs@{ nixpkgs, darwin, home-manager, ...}: {
+  outputs = inputs@{ nixpkgs, darwin, home-manager, ... }: {
     darwinConfigurations.Xaviers-MacBook-Pro-2 = 
       darwin.lib.darwinSystem {
         system = "aarch64-darwin";
