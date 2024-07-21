@@ -1,10 +1,10 @@
 { config, pkgs, ... }: {
   home = {
     stateVersion = "24.05";
-    packages = [
-      pkgs.ripgrep
-      pkgs.fd
-      pkgs.du-dust
+    packages = with pkgs; [
+      ripgrep
+      fd
+      du-dust
     ];
     sessionVariables = {
       EDITOR = "nvim";
