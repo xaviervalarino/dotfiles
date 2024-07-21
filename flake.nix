@@ -9,8 +9,10 @@
 
     darwin.url = "github:lnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    mac-app-util.url = "github:hraban/mac-app-util";
   };
-  outputs = inputs@{ nixpkgs, darwin, home-manager, ... }: {
+  outputs = inputs@{ nixpkgs, darwin, home-manager, mac-app-util, ... }: {
     darwinConfigurations.Xaviers-MacBook-Pro-2 = 
       darwin.lib.darwinSystem {
         system = "aarch64-darwin";
@@ -18,13 +20,15 @@
           system = "aarch64-darwin";
         };
         modules = [
-         ./modules/darwin 
+          ./modules/darwin
+          mac-app-util.darwinModules.default
           home-manager.darwinModules.home-manager {
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
               users.xavier.imports = [
                 ./modules/home-manager
+                mac-app-util.homeManagerModules.default
               ];
             };
           }
