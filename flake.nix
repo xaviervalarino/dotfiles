@@ -26,6 +26,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              verbose = true;
               users.xavier.imports = [
                 ./modules/home-manager
                 mac-app-util.homeManagerModules.default
