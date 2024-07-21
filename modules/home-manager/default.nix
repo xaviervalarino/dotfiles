@@ -1,10 +1,11 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, lib, home-manager, ... }: {
   home = {
     stateVersion = "24.05";
     packages = with pkgs; [
       ripgrep
       fd
       du-dust
+      goku
     ];
     sessionVariables = {
       EDITOR = "nvim";
@@ -14,6 +15,11 @@
     file.".zshrc".source = ../../zsh/zshrc;
   };
   xdg.configFile = {
+    # TODO: add default `karabiner.json` during build
+    "karabiner.edn" = {
+      source = ../../karabiner/karabiner.edn;
+      onChange = "${pkgs.goku}/bin/goku";
+    };
     nvim = {
         source =
         config.lib.file.mkOutOfStoreSymlink

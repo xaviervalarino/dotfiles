@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   nix.settings.experimental-features = "nix-command flakes";
   services.nix-daemon.enable = true;
+  services.karabiner-elements.enable = true;
   users.users.xavier.home = "/Users/xavier";
   programs.zsh.enable = true;
   environment = with pkgs; {
