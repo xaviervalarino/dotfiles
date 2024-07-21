@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ config, pkgs, ... }: {
   home = {
     stateVersion = "24.05";
     packages = [
@@ -14,6 +14,12 @@
     file.".zshrc".source = ../../zsh/zshrc;
   };
   xdg.configFile = {
+    nvim = {
+        source =
+        config.lib.file.mkOutOfStoreSymlink
+        "${config.home.homeDirectory}/dotfiles/nvim";
+      recursive = true;
+    };
     wezterm.source = ../../wezterm;
   };
 
