@@ -12,7 +12,7 @@
   system.defaults = {
     dock.autohide = true;
     finder._FXShowPosixPathInTitle = true;
-    # finder.AppleShowAllExtensions = true;
+    finder.AppleShowAllExtensions = true;
     NSGlobalDomain.AppleShowAllExtensions = true;
   };
 }
