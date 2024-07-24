@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 alias g="git"
-alias ls="ls -Gh"
+alias ls="ls -h --color"
 alias mkdir="mkdir -p"
 alias pomodoro="utimer -t 25s && say 'beep boop, times up'"
 alias reload="source ~/.zshrc"
