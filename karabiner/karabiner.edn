@@ -84,6 +84,8 @@
 
         {:des "Mappings for Mistel keyboard"
          :rules [:mistel
+                 [:left_command :left_option]
+                 [:left_option :left_command]
                  [:##escape :grave_accent_and_tilde]
                  [:##1 :f1 ["caps_layer" 1]]
                  [:##2 :f2 ["caps_layer" 1]]
