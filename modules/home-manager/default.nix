@@ -6,6 +6,9 @@
       fd
       du-dust
       goku
+      nodejs
+      yarn-berry
+      nodePackages_latest.graphql-language-service-cli
     ];
     sessionVariables = {
       EDITOR = "nvim";
