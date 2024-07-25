@@ -265,4 +265,12 @@ return {
       vim.keymap.set('n', '<c-n>', '<Plug>(YankyNextEntry)')
     end,
   },
+  {
+    'echasnovski/mini.completion',
+    enabled = not vim.g.vscode,
+    version = false,
+    config = function()
+      require('mini.completion').setup()
+    end,
+  },
 }
