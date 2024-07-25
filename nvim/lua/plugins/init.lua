@@ -238,10 +238,10 @@ return {
       vim.keymap.set('n', '<C-l>', function()
         harpoon:list():select(4)
       end, { desc = 'Harpoon: Go to to 4th item' })
-      vim.keymap.set('n', '<C-S-P>', function()
+      vim.keymap.set('n', '<leader>p', function()
         harpoon:list():prev()
       end, { desc = 'Harpoon: go to [p]rev file' })
-      vim.keymap.set('n', '<C-S-N>', function()
+      vim.keymap.set('n', '<leader>n', function()
         harpoon:list():next()
       end, { desc = 'Harpoon: go to [n]ext file' })
     end,
