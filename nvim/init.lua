@@ -27,6 +27,8 @@ window.signcolumn = 'yes'
 vim.g.netrw_banner = 0
 -- let g:netrw_browse_split = 4
 
+set.fillchars = { diff = '╱' }
+
 -- set.fillchars = {
 --   horiz = '━',
 --   horizup = '┻',
