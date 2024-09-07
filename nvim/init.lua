@@ -97,7 +97,7 @@ else
   set.mouse = 'a'
   set.spell = true
   set.linebreak = true
-  set.laststatus = 0
+  set.laststatus = 3
   vim.cmd 'colorscheme rose-pine-moon'
   -- vim.cmd 'colorscheme rose-pine-dawn'
 end
