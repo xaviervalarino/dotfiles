@@ -23,7 +23,7 @@ return {
       diff.setup {
         view = { style = 'sign' },
       }
-      vim.keymap.set('n', '<leader>gh', diff.toggle_overlay, { desc = 'Toggle [G]it [H]unks' })
+      vim.keymap.set('n', 'dh', diff.toggle_overlay, { desc = 'Toggle [d]iff [h]unks' })
     end,
   },
   {
