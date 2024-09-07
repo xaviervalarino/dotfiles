@@ -295,4 +295,14 @@ return {
       }
     end,
   },
+  'folke/twilight.nvim',
+  {
+    'folke/zen-mode.nvim',
+    cmd = 'ZenMode',
+    opts = {
+      window = { backdrop = 0.7 },
+      plugins = {},
+    },
+    keys = { { '<leader>z', '<cmd>ZenMode<cr>', desc = 'Zen Mode' } },
+  },
 }
