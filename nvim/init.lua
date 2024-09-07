@@ -91,9 +91,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup 'plugins'
 
-if vim.g.vscode then
-  print 'VSCODE!!!!!!'
-else
+if not vim.g.vscode then
   set.mouse = 'a'
   set.spell = true
   set.linebreak = true
