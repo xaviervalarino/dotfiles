@@ -9,8 +9,13 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 return {
   {
     'neovim/nvim-lspconfig',
+    dependencies = {
+      'yioneko/nvim-vtsls',
+      'marilari88/twoslash-queries.nvim',
+    },
     config = function()
       local lspconfig = require 'lspconfig'
+
       lspconfig.eslint.setup {
         settings = {
           format = false,
@@ -42,56 +47,52 @@ return {
           },
         },
       }
+
+      require('lspconfig.configs').vtsls = require('vtsls').lspconfig
+
+      lspconfig.vtsls.setup {
+        settings = {
+          typescript = {
+            autoUseWorkspaceTsdk = true,
+            inlayHints = {
+              parameterNames = { enabled = 'literals' },
+              parameterTypes = { enabled = true },
+              variableTypes = { enabled = true },
+              propertyDeclarationTypes = { enabled = true },
+              functionLikeReturnTypes = { enabled = true },
+              enumMemberValues = { enabled = true },
+            },
+          },
+        },
+        on_attach = function(client, bufnr)
+          require('twoslash-queries').attach(client, bufnr)
+
+          local cmd = require('vtsls').commands
+
+          local function on_reject(msg_or_err)
+            vim.notify(msg_or_err)
+          end
+
+          vim.keymap.set('n', '<leader>im', function()
+            cmd.remove_unused_imports(bufnr, function()
+              cmd.add_missing_imports(bufnr, function()
+                cmd.sort_imports(bufnr, nil, on_reject)
+              end, on_reject)
+            end, on_reject)
+          end, { desc = 'TS: update [im]ports' })
+
+          vim.keymap.set('n', '<leader>fa', function()
+            cmd.fix_all(bufnr)
+          end, { desc = 'TS: [f]ix [a]ll' })
+
+          vim.keymap.set('n', '<leader>rf', ':VtsRename % ', { desc = 'TS: [r]ename [f]ile' })
+        end,
+      }
     end,
   },
   {
     'folke/lazydev.nvim',
     ft = 'lua', -- only load on lua file
     opts = {},
-  },
-  {
-    'marilari88/twoslash-queries.nvim',
-    opts = { multi_line = true },
-  },
-  {
-    'pmizio/typescript-tools.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      'neovim/nvim-lspconfig',
-      'davidosomething/format-ts-errors.nvim',
-    },
-    config = function()
-      require('typescript-tools').setup {
-        handlers = {
-          ['textDocument/publishDiagnostics'] = function(_, result, ctx, config)
-            if result.diagnostics == nil then
-              return
-            end
-
-            -- ignore some tsserver diagnostics
-            local idx = 1
-            while idx <= #result.diagnostics do
-              local entry = result.diagnostics[idx]
-
-              local formatter = require('format-ts-errors')[entry.code]
-              entry.message = formatter and formatter(entry.message) or entry.message
-
-              -- codes: https://github.com/microsoft/TypeScript/blob/main/src/compiler/diagnosticMessages.json
-              if entry.code == 80001 then
-                -- { message = "File is a CommonJS module; it may be converted to an ES module.", }
-                table.remove(result.diagnostics, idx)
-              else
-                idx = idx + 1
-              end
-            end
-
-            vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
-          end,
-        },
-        on_attach = function(client, bufnr)
-          require('twoslash-queries').attach(client, bufnr)
-        end,
-      }
-    end,
   },
 }
