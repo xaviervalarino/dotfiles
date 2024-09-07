@@ -305,4 +305,12 @@ return {
     },
     keys = { { '<leader>z', '<cmd>ZenMode<cr>', desc = 'Zen Mode' } },
   },
+  {
+    'sindrets/diffview.nvim',
+    config = function()
+      require('diffview').setup {
+        enhanced_diff_hl = true,
+      }
+    end,
+  },
 }
