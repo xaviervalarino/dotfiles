@@ -266,14 +266,6 @@ return {
     end,
   },
   {
-    'echasnovski/mini.completion',
-    enabled = not vim.g.vscode,
-    version = false,
-    config = function()
-      require('mini.completion').setup()
-    end,
-  },
-  {
     'JoosepAlviste/nvim-ts-context-commentstring',
     enabled = not vim.g.vscode,
     config = function()
