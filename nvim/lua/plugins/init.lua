@@ -322,7 +322,7 @@ return {
           vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
         end,
       }
-      vim.keymap.set('n', '<leader>a', '<cmd>AerialToggle!<CR>', { desc = 'Open Code Outline' })
+      vim.keymap.set('n', '<leader>o', '<cmd>AerialToggle!<CR>', { desc = 'Open Code Outline' })
     end,
   },
 }
