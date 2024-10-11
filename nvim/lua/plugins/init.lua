@@ -325,4 +325,11 @@ return {
       vim.keymap.set('n', '<leader>o', '<cmd>AerialToggle!<CR>', { desc = 'Open Code Outline' })
     end,
   },
+  {
+    'windwp/nvim-ts-autotag',
+    ft = { 'html', 'javascriptreact', 'typescriptreact' },
+    config = function()
+      require('nvim-ts-autotag').setup {}
+    end,
+  },
 }
