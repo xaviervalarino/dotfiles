@@ -1,13 +1,5 @@
--- Set options -----------------------
 local set = vim.opt
 local window = vim.wo
-
-set.termguicolors = true
-set.linebreak = true
-set.laststatus = 3
-
-set.mouse = 'a'
-set.spell = true
 
 set.showbreak = '↪'
 set.listchars:append {
@@ -25,6 +17,7 @@ set.autowriteall = true
 -- Visual -------------------------
 set.breakindent = true
 set.relativenumber = true
+vim.opt.relativenumber = true
 set.number = true
 set.updatetime = 250
 set.cursorline = true
@@ -34,17 +27,19 @@ window.signcolumn = 'yes'
 vim.g.netrw_banner = 0
 -- let g:netrw_browse_split = 4
 
-set.fillchars = {
-  horiz = '━',
-  horizup = '┻',
-  horizdown = '┳',
-  vert = '┃',
-  vertleft = '┫',
-  vertright = '┣',
-  verthoriz = '╋',
-}
+set.fillchars = { diff = '╱' }
 
-set.cmdheight = 0
+-- set.fillchars = {
+--   horiz = '━',
+--   horizup = '┻',
+--   horizdown = '┳',
+--   vert = '┃',
+--   vertleft = '┫',
+--   vertright = '┣',
+--   verthoriz = '╋',
+-- }
+
+-- set.cmdheight = 0
 set.shortmess:append 'c' -- don't give `ins-completion-menu` messages
 set.shortmess:append 's' -- don't give "search hit BOTTOM, continuing at TOP"
 set.shortmess:append 'C' -- don't give messages while scanning for ins-completion
@@ -67,8 +62,6 @@ set.softtabstop = 2
 set.smartindent = true
 set.expandtab = true
 
--- vim.g.editorconfig = true
-
 -- Window splits -----------------------
 set.splitbelow = true
 set.splitright = true
@@ -76,25 +69,33 @@ set.splitright = true
 -- Completion --------------------------
 set.completeopt = { 'menu,menuone,noselect' }
 
--- Bootstrap Lazy plugin manager -------
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/folke/lazy.nvim.git',
-    '--branch=stable', -- latest stable release
-    lazypath,
-  }
-end
-vim.opt.rtp:prepend(lazypath)
-
--- Remap leader ------------------------
-local util = require 'rc.util'
-util.keymap('<Space>', '<Nop>')
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
--- Load plugins ------------------------
-require('lazy').setup('rc.plugins', { ui = { border = util.float_win_style.border } })
+-- lazy.nvim --------------------------
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = 'https://github.com/folke/lazy.nvim.git'
+  local out = vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
+      { out, 'WarningMsg' },
+      { '\nPress any key to exit...' },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup 'plugins'
+
+if not vim.g.vscode then
+  set.mouse = 'a'
+  set.spell = true
+  set.linebreak = true
+  set.laststatus = 3
+  vim.cmd 'colorscheme rose-pine-moon'
+  -- vim.cmd 'colorscheme rose-pine-dawn'
+end
