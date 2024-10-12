@@ -3,7 +3,7 @@
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd "$SCRIPT_DIR" && cd .. || exit 1
 
-stow -Rv zsh
+stow -Rv --dotfiles zsh
 # export ENV
 source "$HOME/.zprofile"
 # set up zsh history dir
@@ -13,29 +13,26 @@ mkdir -p "$XDG_DATA_HOME/zsh"
 # fuzzy finder
 yes | "$HOMEBREW_PREFIX/opt/fzf/install"
 
-stow -Rv kitty
+stow -Rv --dotfiles wezterm
 
-stow -Rv karabiner
+stow -Rv --dotfiles karabiner
 launchctl kickstart -k "gui/$(id -u)/org.pqrs.karabiner.karabiner_console_user_server"
 
-stow -Rv hammerspoon
-# Set up /usr/local/ for hammerspoon CLI
-echo "Creating /usr/local dirs"
+stow -Rv --dotfiles hammerspoon
+echo "Creating /usr/local dirs for hammerspoon CLI"
 sudo mkdir -v /usr/local/{bin,share}
 echo "Changing dirs owner to '$(whoami)'"
 sudo chown -v "$(whoami):" /usr/local/{bin,share}
 echo "Adding write privileges to dirs"
 sudo chmod -v u+w /usr/local/{bin,share}
 
-stow -Rv bat
+stow -Rv --dotfiles bat
 bat cache --build
 
-stow -Rv git
-stow -Rv js
-stow -Rv scripts
-stow -Rv stylua
-cargo install stylua
+stow -Rv --dotfiles git
+stow -Rv --dotfiles js
+stow -Rv --dotfiles scripts
+stow -Rv --dotfiles stylua
+# cargo install stylua
 
-stow -Rv nvim
-# TODO: set up nvim
-# nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+stow -Rv --dotfiles nvim
