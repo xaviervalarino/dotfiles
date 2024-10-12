@@ -7,7 +7,7 @@ stow -Rv --dotfiles zsh
 # export ENV
 source "$HOME/.zprofile"
 # set up zsh history dir
-mkdir -p "$XDG_DATA_HOME/zsh"
+mkdir -p "${XDG_DATA_HOME:$HOME/.config/}/zsh"
 [ -f "$HOME/.zsh_history" ] && rm -v "$HOME/.zsh_history"
 
 # fuzzy finder

@@ -121,6 +121,6 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
 # Move hammerspoon config to XDG_CONFIG_HOME
-defaults write org.hammerspoon.Hammerspoon MJConfigFile "${XDG_CONFIG_HOME:$HOME//hammerspoon/init.lua"
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "${XDG_CONFIG_HOME:$HOME/.config}/hammerspoon/init.lua"
 
 killall cfprefsd Dock Finder Photos SystemUIServer
