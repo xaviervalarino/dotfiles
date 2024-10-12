@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+cp "$HOME/.custom-icons/kitty.icns" /Applications/kitty.app/Contents/Resources/kitty.icns
+touch /Applications/kitty.app
+sudo killall Dock && sudo killall Finder

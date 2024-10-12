@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+padding=0
+if [[ $1 = 'loose' ]]; then
+  padding=20 
+fi
+kitty @ set-spacing padding=$padding
+# kitty @ --to=$KITTY_LISTEN_ON set-colors background=

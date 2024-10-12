@@ -1,0 +1,20 @@
+# vim:ft=zsh
+#compdef appearance
+
+autoload +X -Uz appearance
+
+local funcdef=$(type -f appearance)
+local -a words=( ${=funcdef[(r)case,(r)esac]})
+local -a required=(${(M)words:#'('*')'})
+
+# _arguments \
+#   {-a,--all}'[description for "all"]' \
+#   (-o --os){-t,--term}'[description for "term"]' \
+#   (-t --term){-o,--os}'[description for "os"]'  \
+#   "*:required argument:( ${required//[()]/})"
+
+_arguments -s \
+  {-a,--all}'[description for "all"]' \
+  {-t,--term}'[description for "term"]' \
+  {-o,--os}'[description for "os"]'  \
+  "*:required argument:( ${required//[()]/})"
