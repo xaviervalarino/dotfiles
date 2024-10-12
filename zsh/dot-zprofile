@@ -21,4 +21,6 @@ path+=$HOME/scripts
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 
+export GOKU_EDN_CONFIG_FILE=$XDG_CONFIG_HOME/karabiner/karabiner.edn
+
 export EDITOR=$(which nvim)
