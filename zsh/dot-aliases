@@ -7,6 +7,10 @@ alias pomodoro="utimer -t 25s && say 'beep boop, times up'"
 alias reload="source ~/.zshrc"
 alias stow="stow --verbose"
 alias vim="nvim"
+
+# Use a dedicated user `brewer` to manage homebrew
+# -H ensures we use brewer's $HOME directory
+alias brew="sudo -Hu brewer brew"
 alias brew_bundle="brew bundle --file=$HOME/dotfiles/Brewfile"
 
 ql() {
