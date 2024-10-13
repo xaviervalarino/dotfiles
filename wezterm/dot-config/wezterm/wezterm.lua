@@ -5,9 +5,9 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
-config.color_scheme = 'rose-pine-moon'
-config.font = wezterm.font 'Iosevka Term'
-config.font_size = 16
+config.color_scheme = 'rose-pine'
+-- config.font = wezterm.font 'Iosevka Term'
+config.font_size = 15
 -- config.use_ime = false
 
 config.window_decorations = 'RESIZE'
