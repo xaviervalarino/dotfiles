@@ -5,7 +5,6 @@ else
   brew=/usr/local/bin/brew
 fi
 eval "$($brew shellenv)"
-export HOMEBREW_NO_ENV_HINTS=true
 
 # Rust
 # path+=$HOME/.cargo/bin
@@ -16,11 +15,3 @@ path+=/usr/local/sbin
 
 # Personal scripts
 path+=$HOME/scripts
-
-# Exports
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_DATA_HOME=$HOME/.local/share
-
-export GOKU_EDN_CONFIG_FILE=$XDG_CONFIG_HOME/karabiner/karabiner.edn
-
-export EDITOR=$(which nvim)

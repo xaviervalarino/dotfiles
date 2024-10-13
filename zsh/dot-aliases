@@ -5,19 +5,13 @@ alias ls="ls -Gh"
 alias mkdir="mkdir -p"
 alias pomodoro="utimer -t 25s && say 'beep boop, times up'"
 alias reload="source ~/.zshrc"
-alias stow="stow --verbose"
+alias stow="stow --verbose --dotfiles"
 alias vim="nvim"
 
 # Set environment variables and run brew as the 'brewer' user with sudo.
 # -H ensures we use brewer's $HOME directory, while -E keeps the current
 # environment, so vars need to be passed in.
-brew() {
-    sudo -E -H -u brewer \
-    HOMEBREW_CACHE=/opt/homebrew/cache \
-    HOMEBREW_LOGS=/opt/homebrew/logs \
-    HOMEBREW_CASK_OPTS='--fontdir=/Library/Fonts' \
-    command brew "$@"
-}
+alias brew="sudo -E -H -u brewer brew"
 alias brew_bundle="brew bundle --file=$HOME/dotfiles/Brewfile"
 
 ql() {
@@ -68,8 +62,6 @@ theme() {
       return 1
     ;;
   esac
-
-  KITTY_CONFIG_DIRECTORY=$XDG_CONFIG_HOME/kitty/colorscheme/ kitty +kitten themes --reload-in all "$colorscheme"
 
   # Used to set colorscheme in other tools like Neovim
   # vars need are be reexported since `kitty` does not export switching themes
