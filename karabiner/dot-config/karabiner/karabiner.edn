@@ -42,6 +42,7 @@
                 :slack             ["^com\\.tinyspeck\\.slackmacgap$"]
                 :term              ["^net\\.kovidgoyal\\.kitty$"
                                     "^com\\.github\\.wez\\.wezterm$"]
+                :vscode            ["com.microsoft.VSCode"]
                 :affinity ["^com\\.seriflabs\\.affinity"]}
 
  :main [{:des "Caps Lock -> Escape + caps_layer"
@@ -210,7 +211,7 @@
                  [:e [[:open "Karabiner-EventViewer"]]]]}
 
         {:des "Deleting backwards"
-         :rules [:!term
+         :rules [[:condi :!term :!vscode] ; exclude terminal and vscode
                  [:!Tw [:!SOleft_arrow :delete_or_backspace]]   ; Delete word
                  [:!Tu [:!CSleft_arrow :delete_or_backspace]]]} ; Delete line
         ]}
