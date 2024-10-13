@@ -16,6 +16,18 @@ config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 -- config.window_decorations = 'INTEGRATED_BUTTONS'
 
+-- Add highlight color when selecting text
+-- TODO: set this up so that it switches with term theme
+config.colors = {
+    -- Set the Rose Pine theme selection colors
+  selection_fg = '#e0def4',  -- Use 'text' color for the selection foreground
+  selection_bg = '#26233a',  -- Use 'overlay' color for the selection background
+
+  -- Set the cursor colors to fit the theme
+  cursor_fg = '#191724',  -- Use 'base' color for cursor foreground
+  cursor_bg = '#e0def4',  -- Use 'text' color for cursor background
+}
+
 local default_window_padding = {
   left = '2cell',
   right = '2cell',
