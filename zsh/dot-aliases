@@ -8,9 +8,16 @@ alias reload="source ~/.zshrc"
 alias stow="stow --verbose"
 alias vim="nvim"
 
-# Use a dedicated user `brewer` to manage homebrew
-# -H ensures we use brewer's $HOME directory
-alias brew="sudo -Hu brewer brew"
+# Set environment variables and run brew as the 'brewer' user with sudo.
+# -H ensures we use brewer's $HOME directory, while -E keeps the current
+# environment, so vars need to be passed in.
+brew() {
+    sudo -E -H -u brewer \
+    HOMEBREW_CACHE=/opt/homebrew/cache \
+    HOMEBREW_LOGS=/opt/homebrew/logs \
+    HOMEBREW_CASK_OPTS='--fontdir=/Library/Fonts' \
+    command brew "$@"
+}
 alias brew_bundle="brew bundle --file=$HOME/dotfiles/Brewfile"
 
 ql() {
