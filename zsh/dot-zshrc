@@ -7,7 +7,7 @@ fi
 #------------------------------------------
 # Activate zsh completions
 autoload -Uz compinit
-compinit
+compinit -u
 
 #------------------------------------------
 # Aliases: some aliases require `compinit` to be loaded
