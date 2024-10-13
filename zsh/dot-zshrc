@@ -55,7 +55,9 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 #------------------------------------------
 # Init command-line fuzzy finder
 ## https://github.com/junegunn/fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if command -v fzf &> /dev/null; then
+ source <(fzf --zsh)
+fi
 
 # fnm
 FNM_PATH="/Users/xrv-greenline/.local/share/fnm"
