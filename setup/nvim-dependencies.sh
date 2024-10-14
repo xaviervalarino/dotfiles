@@ -1,6 +1,7 @@
 #!usr/bin/env sh
 
 brew install lua-language-server
+brew install stylua
 
 npm -g install \
   @fsouza/prettierd \
