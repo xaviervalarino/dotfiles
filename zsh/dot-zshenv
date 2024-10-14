@@ -4,12 +4,15 @@ export XDG_STATE_HOME="$HOME/.local/state"
 
 export EDITOR=nvim
 
+# set up Homebrew for multi-admin access through brewer user
 export HOMEBREW_CACHE="/opt/homebrew/cache"
 export HOMEBREW_LOGS="/opt/homebrew/logs"
 export HOMEBREW_CASK_OPTS="--fontdir=/Library/Fonts"
 # export HOMEBREW_NO_ENV_HINTS=true
 
-export FNM_DIR="$HOME/Library/Application Support/fnm"
+# set up FNM for multi-user access
+export FNM_DIR="/Library/Application Support/fnm"
+export FNM_MULTISHELL_PATH="/Library/Application Support/fnm/versions"
 
 export GOKU_EDN_CONFIG_FILE=$XDG_CONFIG_HOME/karabiner/karabiner.edn
 
