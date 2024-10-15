@@ -1,19 +1,18 @@
 function appId(app)
-
-  return hs.application.infoForBundlePath(app)['CFBundleIdentifier']
+    return hs.application.infoForBundlePath(app)["CFBundleIdentifier"]
 end
 
-Chrome = appId '/Applications/Google Chrome.app'
-Firefox = appId '/Applications/Firefox Developer Edition.app/'
+Chrome = appId("/Applications/Google Chrome.app")
+Firefox = appId("/Applications/Firefox Developer Edition.app/")
 
-spoon.SpoonInstall:andUse('URLDispatcher', {
-  config = {
-    url_patterns = {
-      { 'https?://meet%.google%.com', Chrome },
-      { 'https?://google%.meet', Chrome },
+spoon.SpoonInstall:andUse("URLDispatcher", {
+    config = {
+        url_patterns = {
+            { "https?://meet%.google%.com", Chrome },
+            { "https?://google%.meet", Chrome },
+        },
+        default_handler = Firefox,
     },
-    default_handler = Firefox,
-  },
-  start = true,
-  loglevel = 'debug'
+    start = true,
+    loglevel = "debug",
 })

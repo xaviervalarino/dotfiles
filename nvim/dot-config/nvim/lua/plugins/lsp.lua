@@ -1,21 +1,21 @@
 if vim.g.vscode then
-  return {}
+    return {}
 end
 
 return {
-  {
-    'neovim/nvim-lspconfig',
-    dependencies = {
-      'yioneko/nvim-vtsls',
-      'marilari88/twoslash-queries.nvim',
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            "yioneko/nvim-vtsls",
+            "marilari88/twoslash-queries.nvim",
+        },
+        config = function()
+            require("rc.lsp")
+        end,
     },
-    config = function()
-      require 'rc.lsp'
-    end,
-  },
-  {
-    'folke/lazydev.nvim',
-    ft = 'lua',
-    opts = {},
-  },
+    {
+        "folke/lazydev.nvim",
+        ft = "lua",
+        opts = {},
+    },
 }

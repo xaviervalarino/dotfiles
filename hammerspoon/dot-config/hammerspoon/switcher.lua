@@ -5,9 +5,9 @@ local M = {}
 ---@param name string the name of the app
 ---@return boolean did the application launch or focus
 function M.app_select(name)
-  return function()
-    hs.application.launchOrFocus(name)
-  end
+    return function()
+        hs.application.launchOrFocus(name)
+    end
 end
 
 ---Go to Chrome tab by uri
@@ -15,10 +15,10 @@ end
 ---@param uri string URI of the open tab
 ---@return function AppleScript the Applescript to be run
 function M.goto_chrome_tab(uri)
-  -- https://evantravers.com/articles/2019/10/31/focusing-browser-tab-using-jxa-and-hammerspoon/
-  -- https://github.com/JXA-Cookbook/JXA-Cookbook/
-  local fn = string.format(
-    [[
+    -- https://evantravers.com/articles/2019/10/31/focusing-browser-tab-using-jxa-and-hammerspoon/
+    -- https://github.com/JXA-Cookbook/JXA-Cookbook/
+    local fn = string.format(
+        [[
     const chrome = Application("Google Chrome");
     chrome.activate();
 
@@ -41,22 +41,22 @@ function M.goto_chrome_tab(uri)
     }
     goToTab("%s");
     ]],
-    uri
-  )
-  return function()
-    hs.osascript.javascript(fn)
-  end
+        uri
+    )
+    return function()
+        hs.osascript.javascript(fn)
+    end
 end
 
 function M.detach_chrome_tab()
-  hs.osascript [[
+    hs.osascript([[
     tell application "Google Chrome"
       set theURL to URL of active tab of window 1
       close active tab of window 1
       make new window
       set URL of active tab of window 1 to theURL
     end tell
-  ]]
+  ]])
 end
 
 return M
