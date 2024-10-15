@@ -60,12 +60,11 @@ if command -v fzf &> /dev/null; then
 fi
 
 # fnm
-if [ -d "$FNM_PATH" ]; then
+if command -v fnm &> /dev/null; then
   export PATH="$FNM_PATH:$PATH"
-  eval "`fnm env`"
+  eval "$(fnm env --use-on-cd --version-file-strategy=recursive --corepack-enabled --shell zsh)"
 fi
 
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive --corepack-enabled --shell zsh)"
 
 # direnv
 eval "$(direnv hook zsh)"
