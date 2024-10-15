@@ -12,7 +12,6 @@ export HOMEBREW_CASK_OPTS="--fontdir=/Library/Fonts"
 
 # set up FNM for multi-user access
 export FNM_DIR="/Library/Application Support/fnm"
-export FNM_MULTISHELL_PATH="/Library/Application Support/fnm/versions"
 
 export GOKU_EDN_CONFIG_FILE=$XDG_CONFIG_HOME/karabiner/karabiner.edn
 
