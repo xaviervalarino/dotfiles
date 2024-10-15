@@ -15,6 +15,37 @@ config.use_resize_increments = true
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 -- config.window_decorations = 'INTEGRATED_BUTTONS'
+local wezterm = require("wezterm")
+
+-- Apply the Rose Pine colors for the tabs
+local tab_colors = {
+    background = "#191724", -- Tab bar background color (matches Rose Pine background)
+
+    active_tab = {
+        bg_color = "#191724", -- Background for the active tab
+        fg_color = "#e0def4", -- Foreground (text) for the active tab
+    },
+
+    inactive_tab = {
+        bg_color = "#26233a", -- Background for inactive tabs
+        fg_color = "#908caa", -- Foreground for inactive tabs
+    },
+
+    inactive_tab_hover = {
+        bg_color = "#3e3859", -- Background when hovering over an inactive tab
+        fg_color = "#e0def4", -- Foreground when hovering
+    },
+
+    new_tab = {
+        bg_color = "#191724", -- Background for the 'new tab' button
+        fg_color = "#eb6f92", -- Accent color for the 'new tab' button
+    },
+
+    new_tab_hover = {
+        bg_color = "#3e3859", -- Background when hovering over the 'new tab' button
+        fg_color = "#eb6f92", -- Accent color for the hover state
+    },
+}
 
 -- Add highlight color when selecting text
 -- TODO: set this up so that it switches with term theme
@@ -26,6 +57,7 @@ config.colors = {
     -- Set the cursor colors to fit the theme
     cursor_fg = "#191724", -- Use 'base' color for cursor foreground
     cursor_bg = "#e0def4", -- Use 'text' color for cursor background
+    tab_bar = tab_colors,
 }
 
 local default_window_padding = {
