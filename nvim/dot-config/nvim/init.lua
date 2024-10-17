@@ -14,6 +14,8 @@ set.listchars:append({
 
 set.autowriteall = true
 
+set.clipboard = "unnamedplus"
+
 -- Visual -------------------------
 set.breakindent = true
 set.relativenumber = true
