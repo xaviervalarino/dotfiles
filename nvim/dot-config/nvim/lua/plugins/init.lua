@@ -27,6 +27,13 @@ return {
         end,
     },
     {
+        "f-person/git-blame.nvim",
+        event = "VeryLazy",
+        config = function()
+            require("rc.gitblame")
+        end,
+    },
+    {
         "echasnovski/mini.ai",
         version = false,
         config = function()
