@@ -15,6 +15,9 @@ return {
         end,
     },
     {
+        "tpope/vim-sleuth",
+    },
+    {
         "echasnovski/mini.diff",
         version = false,
         enabled = not vim.g.vscode,
