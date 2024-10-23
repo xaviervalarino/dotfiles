@@ -13,4 +13,7 @@ vim.api.nvim_set_hl(0, "CursorComment", { fg = comment_fg, bg = cursor_bg })
 
 require("gitblame").setup({
     highlight_group = "CursorComment",
+    opts = {
+        ignored_filetypes = { "gitcommit" },
+    },
 })
