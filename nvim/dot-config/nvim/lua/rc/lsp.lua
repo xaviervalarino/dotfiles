@@ -1,6 +1,6 @@
 -- Enable (broadcasting) snippet capability for completion
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local lspconfig = require("lspconfig")
 
