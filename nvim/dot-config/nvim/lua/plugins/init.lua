@@ -15,6 +15,20 @@ return {
         end,
     },
     {
+        "nvim-treesitter/nvim-treesitter-context",
+        enabled = not vim.g.vscode,
+        event = "VeryLazy",
+        config = function()
+            local ts_context = require("treesitter-context")
+
+            ts_context.setup({})
+
+            vim.keymap.set("n", "[c", function()
+                ts_context.go_to_context(vim.v.count1)
+            end, { silent = true })
+        end,
+    },
+    {
         "tpope/vim-sleuth",
         enabled = not vim.g.vscode,
     },
