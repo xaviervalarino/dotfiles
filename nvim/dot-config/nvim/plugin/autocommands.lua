@@ -29,6 +29,9 @@ end
 autocmd("BufWritePre", {
     group = augroup("auto_create_dir", { clear = true }),
     callback = function(ctx)
+        if vim.bo.filetype == "oil" then
+            return
+        end
         vim.fn.mkdir(vim.fn.fnamemodify(ctx.file, ":p:h"), "p")
     end,
 })
@@ -37,6 +40,10 @@ autocmd("BufWritePre", {
 autocmd("InsertLeave", {
     group = augroup("AutoSave", { clear = true }),
     callback = function(ctx)
+        if vim.bo.filetype == "oil" then
+            return
+        end
+
         if ctx.file:len() > 0 and not ctx.file:find("Command Line") then
             vim.cmd(":update")
         end
