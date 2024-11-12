@@ -16,6 +16,7 @@ return {
     },
     {
         "tpope/vim-sleuth",
+        enabled = not vim.g.vscode,
     },
     {
         "echasnovski/mini.diff",
@@ -31,6 +32,7 @@ return {
     },
     {
         "f-person/git-blame.nvim",
+        enabled = not vim.g.vscode,
         event = "VeryLazy",
         config = function()
             require("rc.gitblame")
