@@ -1,4 +1,7 @@
 require("blink.cmp").setup({
+    keymap = {
+        preset = "super-tab",
+    },
     accept = {
         auto_brackets = { enabled = true },
     },
