@@ -27,7 +27,7 @@ end
 -- Create directory if it doesn't exist when saving file
 -- https://github.com/jdhao/nvim-config/blob/78baf8d015695c2b795ac6f955550f5e96104845/lua/custom-autocmd.lua#L53-L67
 autocmd("BufWritePre", {
-    group = augroup("auto_create_dir", { clear = true }),
+    group = augroup("AutoCreateDir", { clear = true }),
     callback = function(ctx)
         if vim.bo.filetype == "oil" then
             return
@@ -47,5 +47,13 @@ autocmd("InsertLeave", {
         if ctx.file:len() > 0 and not ctx.file:find("Command Line") then
             vim.cmd(":update")
         end
+    end,
+})
+
+-- rebalance windows on window resize events
+autocmd("VimResized", {
+    group = augroup("WindowRebalance", { clear = true }),
+    callback = function()
+        vim.cmd("wincmd =")
     end,
 })
