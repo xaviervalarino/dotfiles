@@ -1,52 +1,111 @@
 -- Enable (broadcasting) snippet capability for completion
--- local capabilities = require("cmp_nvim_lsp").default_capabilities()
--- capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local lspconfig = require("lspconfig")
-
-lspconfig.eslint.setup({
-    settings = {
-        format = false,
-        workingDirectory = {
-            mode = "auto",
-        },
+vim.lsp.config("eslint", {
+    format = false,
+    workingDirectory = {
+        mode = "auto",
     },
-    root_dir = lspconfig.util.find_git_ancestor,
-})
+    on_attach = function(client, bufnr)
+        if not base_on_attach then
+            return
+        end
 
-lspconfig.graphql.setup({})
-
-lspconfig.html.setup({})
-
-lspconfig.jsonls.setup({
-    -- capabilities = capabilities,
-})
-lspconfig.cssls.setup({})
-
-lspconfig.cssmodules_ls.setup({
-    on_attach = function(client)
-        client.server_capabilities.definitionProvider = false
+        vim.lsp.config.eslint.on_attach(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            command = "LspEslintFixAll",
+        })
     end,
 })
 
--- lspconfig.css_variables.setup {}
+vim.lsp.enable("eslint")
 
-lspconfig.somesass_ls.setup({})
+vim.lsp.enable("graphql")
 
-lspconfig.lua_ls.setup({
-    settings = {
-        Lua = {
-            diagnostics = {
-                globals = { "vim" },
-                disable = { "missing-fields" },
+vim.lsp.config("html", {
+    capabilities = capabilities,
+})
+vim.lsp.enable("html")
+
+vim.lsp.config("jsonls", {
+    capabilities = capabilities,
+})
+vim.lsp.enable("jsonls")
+
+vim.lsp.config("cssls", {
+    capabilities = capabilities,
+})
+vim.lsp.enable("cssls")
+vim.lsp.enable("cssmodules_ls")
+-- TODO: test out this language server:
+-- npm i -g css-variables-language-server
+-- Need to fix permissions for installing global packages
+vim.lsp.enable("css_variables")
+
+vim.lsp.enable("somesass_ls")
+
+vim.lsp.config("lua_ls", {
+    --     settings = {
+    --         Lua = {
+    --             diagnostics = {
+    --                 globals = { "vim" },
+    --                 disable = { "missing-fields" },
+    --             },
+    --         },
+    --     },
+    on_init = function(client)
+        if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if
+                path ~= vim.fn.stdpath("config")
+                and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
+            then
+                return
+            end
+        end
+
+        client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most
+                -- likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
+                -- Tell the language server how to find Lua modules same way as Neovim
+                -- (see `:h lua-module-load`)
+                path = {
+                    "lua/?.lua",
+                    "lua/?/init.lua",
+                },
             },
-        },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                    -- Depending on the usage, you might want to add additional paths
+                    -- here.
+                    -- '${3rd}/luv/library'
+                    -- '${3rd}/busted/library'
+                },
+                -- Or pull in all of 'runtimepath'.
+                -- NOTE: this is a lot slower and will cause issues when working on
+                -- your own configuration.
+                -- See https://github.com/neovim/nvim-lspconfig/issues/3189
+                -- library = {
+                --   vim.api.nvim_get_runtime_file('', true),
+                -- }
+            },
+        })
+    end,
+    settings = {
+        Lua = {},
     },
 })
+vim.lsp.enable("lua_ls")
 
 require("lspconfig.configs").vtsls = require("vtsls").lspconfig
-
-lspconfig.vtsls.setup({
+require("lspconfig").vtsls.setup({
     settings = {
         typescript = {
             autoUseWorkspaceTsdk = true,
