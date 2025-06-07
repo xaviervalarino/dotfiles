@@ -62,12 +62,18 @@ return {
         end,
     },
     {
+        "refractalize/oil-git-status.nvim",
+        dependencies = {
+            "stevearc/oil.nvim",
+        },
+        config = true,
+    },
+    {
         "stevearc/oil.nvim",
         enabled = not vim.g.vscode,
         dependencies = { "echasnovski/mini.icons" },
         config = function()
-            require("oil").setup()
-            vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+            require("rc.oil")
         end,
     },
     {
