@@ -18,6 +18,15 @@ return {
         "tpope/vim-sleuth",
     },
     {
+        "saghen/blink.cmp",
+        enabled = not vim.g.vscode,
+        dependencies = { "rafamadriz/friendly-snippets" },
+        version = "1.*",
+        config = function()
+            require("rc.completion")
+        end,
+    },
+    {
         "echasnovski/mini.diff",
         version = false,
         enabled = not vim.g.vscode,
