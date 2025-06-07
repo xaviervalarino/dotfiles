@@ -127,11 +127,9 @@ return {
         end,
     },
     {
-        "rose-pine/neovim",
-        enabled = not vim.g.vscode,
-        config = function()
-            require("rose-pine").setup({})
-        end,
+        "webhooked/kanso.nvim",
+        lazy = false,
+        priority = 1000,
     },
     {
         "stevearc/conform.nvim",

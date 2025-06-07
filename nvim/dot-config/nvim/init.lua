@@ -98,6 +98,5 @@ if not vim.g.vscode then
     set.spell = true
     set.linebreak = true
     set.laststatus = 3
-    vim.cmd("colorscheme rose-pine")
-    -- vim.cmd 'colorscheme rose-pine-dawn'
+    vim.cmd("colorscheme kanso")
 end

@@ -5,60 +5,81 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
-config.color_scheme = "rose-pine"
--- config.font = wezterm.font 'Iosevka Term'
+config.font = wezterm.font("JetBrains Mono")
 config.font_size = 15
--- config.use_ime = false
 
 config.window_decorations = "RESIZE"
-config.use_resize_increments = true
+config.window_content_alignment = {
+    horizontal = "Center",
+    vertical = "Bottom",
+}
+
+config.force_reverse_video_cursor = true
+
+local kanso_ink_colors = {
+    foreground = "#C5C9C7",
+    background = "#14171d",
+
+    cursor_bg = "#C5C9C7",
+    cursor_fg = "#14171d",
+    cursor_border = "#C5C9C7",
+
+    selection_fg = "#C5C9C7",
+    selection_bg = "#393B44",
+
+    scrollbar_thumb = "#393B44",
+    split = "#393B44",
+
+    ansi = {
+        "#14171d",
+        "#C4746E",
+        "#8A9A7B",
+        "#C4B28A",
+        "#8BA4B0",
+        "#A292A3",
+        "#8EA4A2",
+        "#A4A7A4",
+    },
+    brights = {
+        "#A4A7A4",
+        "#E46876",
+        "#87A987",
+        "#E6C384",
+        "#7FB4CA",
+        "#938AA9",
+        "#7AA89F",
+        "#C5C9C7",
+    },
+    tab_bar = {
+        background = "#14171d",
+        active_tab = {
+            bg_color = "#14171d",
+            fg_color = "#7AA89F",
+            intensity = "Bold",
+        },
+
+        inactive_tab = {
+            bg_color = "#14171d",
+            fg_color = "#A4A7A4",
+            intensity = "Half",
+        },
+    },
+}
+
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
--- config.window_decorations = 'INTEGRATED_BUTTONS'
-local wezterm = require("wezterm")
+config.show_new_tab_button_in_tab_bar = false
 
--- Apply the Rose Pine colors for the tabs
-local tab_colors = {
-    background = "#191724", -- Tab bar background color (matches Rose Pine background)
-
-    active_tab = {
-        bg_color = "#191724", -- Background for the active tab
-        fg_color = "#e0def4", -- Foreground (text) for the active tab
-    },
-
-    inactive_tab = {
-        bg_color = "#26233a", -- Background for inactive tabs
-        fg_color = "#908caa", -- Foreground for inactive tabs
-    },
-
-    inactive_tab_hover = {
-        bg_color = "#3e3859", -- Background when hovering over an inactive tab
-        fg_color = "#e0def4", -- Foreground when hovering
-    },
-
-    new_tab = {
-        bg_color = "#191724", -- Background for the 'new tab' button
-        fg_color = "#eb6f92", -- Accent color for the 'new tab' button
-    },
-
-    new_tab_hover = {
-        bg_color = "#3e3859", -- Background when hovering over the 'new tab' button
-        fg_color = "#eb6f92", -- Accent color for the hover state
-    },
+local kanso_ink = {
+    background = "#14171d",
+    foreground = "#C5C9C7",
+    muted = "#6E7370",
+    highlight = "#393B44",
+    faded = "#1A1C22",
 }
 
--- Add highlight color when selecting text
 -- TODO: set this up so that it switches with term theme
-config.colors = {
-    -- Set the Rose Pine theme selection colors
-    selection_fg = "#e0def4", -- Use 'text' color for the selection foreground
-    selection_bg = "#26233a", -- Use 'overlay' color for the selection background
-
-    -- Set the cursor colors to fit the theme
-    cursor_fg = "#191724", -- Use 'base' color for cursor foreground
-    cursor_bg = "#e0def4", -- Use 'text' color for cursor background
-    tab_bar = tab_colors,
-}
+config.colors = kanso_ink_colors
 
 local default_window_padding = {
     left = "2cell",
