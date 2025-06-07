@@ -81,41 +81,31 @@ local kanso_ink = {
 -- TODO: set this up so that it switches with term theme
 config.colors = kanso_ink_colors
 
-local default_window_padding = {
-    left = "2cell",
-    right = "2cell",
-    top = "2cell",
-    bottom = "2cell",
+local default_padding = {
+    left = 36,
+    right = 36,
+    top = 32,
+    bottom = 32,
 }
 
-local nvim_window_padding = {
-    left = "0cell",
-    right = "0cell",
-    top = "0cell",
-    bottom = "0cell",
-}
+-- Remove padding when editing inside nvim
+wezterm.on("update-right-status", function(window, pane)
+    local process = pane:get_foreground_process_name()
 
-config.window_padding = default_window_padding
-
-local function set_padding(window, enter_event)
-    local overrides = window:get_config_overrides() or {}
-
-    if enter_event then
-        overrides.window_padding = nvim_window_padding
+    if process:find("nvim") then
+        window:set_config_overrides({
+            window_padding = {
+                left = 0,
+                right = 0,
+                top = 0,
+                bottom = 0,
+            },
+        })
     else
-        overrides.window_padding = nil
+        window:set_config_overrides({
+            window_padding = default_padding,
+        })
     end
-
-    window:set_config_overrides(overrides)
-end
-
-wezterm.on("user-var-changed", function(window, _, name, value)
-    if name == "NVIM_EVENT" then
-        local enter_event = value == "IN"
-        set_padding(window, enter_event)
-    end
-
-    return false
 end)
 
 return config
