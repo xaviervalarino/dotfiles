@@ -2,10 +2,17 @@ require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
 
 require("telescope").setup({
-    -- You can put your default mappings / updates / etc. in here
-    --  All the info you're looking for is in `:help telescope.setup()`
-    --
     defaults = {
+        border = {
+            prompt = { 1, 1, 1, 1 },
+            results = { 1, 1, 1, 1 },
+            preview = { 1, 1, 1, 1 },
+        },
+        borderchars = {
+            prompt = { " ", " ", "━", "┃", "┃", " ", "━", "┗" },
+            results = { "━", " ", " ", "┃", "┏", "━", " ", "┃" },
+            preview = { "━", "┃", "━", "┃", "┳", "┓", "┛", "┻" },
+        },
         path_display = { "smart" },
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
@@ -59,3 +66,19 @@ end, { desc = "[S]earch [/] in Open Files" })
 vim.keymap.set("n", "<leader>sn", function()
     builtin.find_files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]earch [N]eovim files" })
+
+-- HACK fix 0.11 winborder issue: https://github.com/nvim-telescope/telescope.nvim/issues/3436
+vim.api.nvim_create_autocmd("User", {
+    pattern = "TelescopeFindPre",
+    callback = function()
+        local default_winborder = vim.opt.winborder:get()
+
+        vim.opt_local.winborder = "none"
+        vim.api.nvim_create_autocmd("WinLeave", {
+            once = true,
+            callback = function()
+                vim.opt_local.winborder = default_winborder
+            end,
+        })
+    end,
+})

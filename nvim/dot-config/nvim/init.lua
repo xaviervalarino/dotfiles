@@ -99,4 +99,5 @@ if not vim.g.vscode then
     set.linebreak = true
     set.laststatus = 3
     vim.cmd("colorscheme kanso")
+    vim.o.winborder = "bold"
 end
