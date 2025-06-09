@@ -70,7 +70,7 @@ sudo curl -fsSL https://fnm.vercel.app/install \
 | bash -s -- --install-dir "$FNM_DIR" --skip-shell
 ```
 
-Allow other admins to read, write, execute, and other users to read and execture
+Allow other admins to read, write, execute, and other users to read and execute
 in the FNM directory:
 
 ```sh
