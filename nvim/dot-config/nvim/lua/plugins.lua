@@ -1,4 +1,4 @@
-local headless = {
+local headless_config = {
     {
         "nvim-treesitter/nvim-treesitter",
         branch = "master",
@@ -28,7 +28,7 @@ local headless = {
                     "jsdoc",
                     "json",
                     "json5",
-                    'jsonc',
+                    "jsonc",
                     "luadoc",
                     "luap",
                     "regex",
@@ -114,10 +114,10 @@ local headless = {
 }
 
 if vim.g.vscode then
-    return headless
+    return headless_config
 end
 
-return vim.tbl_extend("keep", headless, {
+return vim.tbl_extend("force", headless_config, {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -297,6 +297,14 @@ return vim.tbl_extend("keep", headless, {
         },
         config = function()
             require("rc.aerial")
+        end,
+    },
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        config = function()
+            require("rc.copilot")
         end,
     },
 })
