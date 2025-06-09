@@ -108,4 +108,6 @@ wezterm.on("update-right-status", function(window, pane)
     end
 end)
 
+config.window_close_confirmation = "NeverPrompt"
+
 return config
