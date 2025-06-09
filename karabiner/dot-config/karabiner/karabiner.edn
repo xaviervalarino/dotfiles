@@ -171,6 +171,11 @@
                  ; Create links <Ctrl+K>
                  [:!Ck :!CSu]]}
 
+        {:des "VS Code enhancements"
+         :rules [:vscode
+                 [:!Chyphen  {:mkey {:vwheel 32} :modi :left_command}]
+                 [:!Cequal_sign  {:mkey {:vwheel -32} :modi :left_command}]]}
+
         {:des "Move focused windows"
          :rules [:w_layer
                  [:h [:wm "left"]]
