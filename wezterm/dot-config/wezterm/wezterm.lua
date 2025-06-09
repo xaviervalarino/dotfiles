@@ -97,4 +97,6 @@ wezterm.on("user-var-changed", function(window, _, name, value)
     return false
 end)
 
+config.window_close_confirmation = "NeverPrompt"
+
 return config
