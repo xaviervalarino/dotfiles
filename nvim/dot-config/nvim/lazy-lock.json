@@ -1,10 +1,12 @@
 {
   "aerial.nvim": { "branch": "master", "commit": "5c0df1679bf7c814c924dc6646cc5291daca8363" },
+  "blink.cmp": { "branch": "main", "commit": "485c03400608cb6534bbf84da8c1c471fc4808c0" },
   "conform.nvim": { "branch": "master", "commit": "0e93e0d12d2f7ebdea9e3e444dfaff0050cefbe6" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "format-ts-errors.nvim": { "branch": "main", "commit": "4b7418d6689bc0fd3c1db0500c67133422522384" },
+  "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
   "grapple.nvim": { "branch": "main", "commit": "b41ddfc1c39f87f3d1799b99c2f0f1daa524c5f7" },
-  "kanso.nvim": { "branch": "main", "commit": "0a2dd5b372fba7c191ce84078ab6e7a4d858b413" },
+  "kanso.nvim": { "branch": "main", "commit": "eb7ff15d2836fc1c4e8393a7d8ce87e6e62736e2" },
   "lazy.nvim": { "branch": "main", "commit": "6c3bda4aca61a13a9c63f1c1d1b16b9d3be90d7a" },
   "mini.ai": { "branch": "main", "commit": "95e9d77e58bdf633c4d0c6b8c72892dd10eada51" },
   "mini.clue": { "branch": "main", "commit": "97198ef9d8425e69f74d2875e217440ba0ff1730" },
