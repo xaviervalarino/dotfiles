@@ -1,4 +1,4 @@
-local headless = {
+local headless_plugins = {
     {
         "nvim-treesitter/nvim-treesitter",
         branch = "master",
@@ -28,7 +28,7 @@ local headless = {
                     "jsdoc",
                     "json",
                     "json5",
-                    'jsonc',
+                    "jsonc",
                     "luadoc",
                     "luap",
                     "regex",
@@ -114,10 +114,10 @@ local headless = {
 }
 
 if vim.g.vscode then
-    return headless
+    return headless_plugins
 end
 
-return vim.tbl_extend("keep", headless, {
+local nvim_plugins = {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -299,4 +299,6 @@ return vim.tbl_extend("keep", headless, {
             require("rc.aerial")
         end,
     },
-})
+}
+
+return vim.iter({ headless_plugins, nvim_plugins }):flatten():totable()
