@@ -263,6 +263,12 @@ local nvim_plugins = {
             require("rc.rename")
         end,
     },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        config = function()
+            require("rc.treesitter-context")
+        end,
+    }
 }
 
 return vim.iter({ headless_plugins, nvim_plugins }):flatten():totable()
