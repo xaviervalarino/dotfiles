@@ -11,7 +11,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
         local builtin = require("telescope.builtin")
 
-        map("<leader>rn", vim.lsp.buf.rename, "[r]e[n]ame")
         map("<leader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction")
         map("K", vim.lsp.buf.hover, "hover documentation")
         map("gD", vim.lsp.buf.declaration, "[g]oto [d]eclaration")

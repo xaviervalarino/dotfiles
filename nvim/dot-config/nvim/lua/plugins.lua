@@ -299,6 +299,13 @@ local nvim_plugins = {
             require("rc.aerial")
         end,
     },
+    {
+
+        "saecki/live-rename.nvim",
+        config = function()
+            require("rc.rename")
+        end,
+    },
 }
 
 return vim.iter({ headless_plugins, nvim_plugins }):flatten():totable()
