@@ -5,8 +5,8 @@ local headless_plugins = {
         lazy = false,
         build = ":TSUpdate",
         config = function()
-            require('rc.treesitter')
-        end
+            require("rc.treesitter")
+        end,
     },
     {
         "tpope/vim-sleuth",
@@ -261,6 +261,12 @@ local nvim_plugins = {
         "saecki/live-rename.nvim",
         config = function()
             require("rc.rename")
+        end,
+    },
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        config = function()
+            require("rc.treesitter-context")
         end,
     },
 }
