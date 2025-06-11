@@ -5,8 +5,8 @@ require("aerial").setup({
     },
     attach_mode = "global",
     on_attach = function(bufnr)
-        vim.keymap.set("n", "ns", "<cmd>AerialPrev<CR>", { buffer = bufnr, desc = "Go to [n]ext [s]ymbol" })
-        vim.keymap.set("n", "ps", "<cmd>AerialNext<CR>", { buffer = bufnr, desc = "Go to [p]revious [s]ymbol" })
+        vim.keymap.set("n", "<leader>ns", "<cmd>AerialPrev<CR>", { buffer = bufnr, desc = "Go to [n]ext [s]ymbol" })
+        vim.keymap.set("n", "<leader>ps", "<cmd>AerialNext<CR>", { buffer = bufnr, desc = "Go to [p]revious [s]ymbol" })
     end,
 })
 
