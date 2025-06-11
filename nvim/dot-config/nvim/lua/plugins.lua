@@ -5,51 +5,8 @@ local headless_plugins = {
         lazy = false,
         build = ":TSUpdate",
         config = function()
-            require("nvim-treesitter.configs").setup({
-                ensure_installed = {
-                    "bash",
-                    "csv",
-                    "lua",
-                    "vim",
-                    "vimdoc",
-                    "query",
-                    "markdown",
-                    "markdown_inline",
-                    "css",
-                    "diff",
-                    "editorconfig",
-                    "git_config",
-                    "git_rebase",
-                    "go",
-                    "graphql",
-                    "html",
-                    "javascript",
-                    "jq",
-                    "jsdoc",
-                    "json",
-                    "json5",
-                    "jsonc",
-                    "luadoc",
-                    "luap",
-                    "regex",
-                    "ruby",
-                    "rust",
-                    "scss",
-                    "sql",
-                    "ssh_config",
-                    "svelte",
-                    "toml",
-                    "typescript",
-                    "xml",
-                    "yaml",
-                },
-                sync_install = false,
-                highlight = {
-                    enable = true,
-                },
-                indent = { enable = true },
-            })
-        end,
+            require('rc.treesitter')
+        end
     },
     {
         "tpope/vim-sleuth",
@@ -65,7 +22,7 @@ local headless_plugins = {
         "echasnovski/mini.pairs",
         version = false,
         config = function()
-            require("mini.pairs").setup({})
+            require("mini.pairs").setup()
         end,
     },
     {
