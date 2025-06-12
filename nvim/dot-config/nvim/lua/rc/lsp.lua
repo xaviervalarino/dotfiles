@@ -24,6 +24,8 @@ vim.lsp.enable("eslint")
 
 vim.lsp.enable("graphql")
 
+vim.lsp.enable("gopls")
+
 vim.lsp.config("html", {
     capabilities = capabilities,
 })
