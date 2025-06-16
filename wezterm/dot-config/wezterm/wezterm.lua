@@ -9,6 +9,7 @@ end
 
 config.font = wezterm.font("JetBrains Mono")
 config.font_size = 15
+config.line_height = 1.1
 
 config.window_decorations = "RESIZE"
 config.window_content_alignment = {
