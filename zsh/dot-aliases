@@ -14,6 +14,8 @@ alias vim="nvim"
 alias brew="sudo -E -H -u brewer brew"
 alias brew_bundle="brew bundle --file=$HOME/dotfiles/Brewfile"
 
+alias logout="osascript -e 'tell app \"System Events\" to log out'"
+
 ql() {
   qlmanage -p "$1" &>/dev/null
 }
