@@ -12,14 +12,14 @@ local headless_plugins = {
         "tpope/vim-sleuth",
     },
     {
-        "echasnovski/mini.ai",
+        "nvim-mini/mini.ai",
         version = false,
         config = function()
             require("mini.ai").setup()
         end,
     },
     {
-        "echasnovski/mini.pairs",
+        "nvim-mini/mini.pairs",
         version = false,
         config = function()
             require("mini.pairs").setup()
@@ -27,7 +27,7 @@ local headless_plugins = {
     },
     {
 
-        "echasnovski/mini.surround",
+        "nvim-mini/mini.surround",
         version = false,
         config = function()
             require("mini.surround").setup({
@@ -42,7 +42,7 @@ local headless_plugins = {
         end,
     },
     {
-        "echasnovski/mini.comment",
+        "nvim-mini/mini.comment",
         version = false,
         dependencies = {
             "JoosepAlviste/nvim-ts-context-commentstring",
@@ -104,7 +104,7 @@ local nvim_plugins = {
                 end,
             },
             { "nvim-telescope/telescope-ui-select.nvim" },
-            { "echasnovski/mini.icons" },
+            { "nvim-mini/mini.icons" },
         },
         config = function()
             require("rc.telescope")
@@ -119,7 +119,7 @@ local nvim_plugins = {
         end,
     },
     {
-        "echasnovski/mini.diff",
+        "nvim-mini/mini.diff",
         version = false,
         config = function()
             local diff = require("mini.diff")
@@ -137,7 +137,7 @@ local nvim_plugins = {
         end,
     },
     {
-        "echasnovski/mini-git",
+        "nvim-mini/mini-git",
         version = false,
         main = "mini.git",
         config = function()
@@ -145,7 +145,7 @@ local nvim_plugins = {
         end,
     },
     {
-        "echasnovski/mini.hipatterns",
+        "nvim-mini/mini.hipatterns",
         version = false,
         config = function()
             local hipatterns = require("mini.hipatterns")
@@ -163,14 +163,14 @@ local nvim_plugins = {
         end,
     },
     {
-        "echasnovski/mini.animate",
+        "nvim-mini/mini.animate",
         version = false,
         config = function()
             require("rc.animate")
         end,
     },
     {
-        "echasnovski/mini.indentscope",
+        "nvim-mini/mini.indentscope",
         version = false,
         config = function()
             require("mini.indentscope").setup({
@@ -193,13 +193,13 @@ local nvim_plugins = {
     },
     {
         "stevearc/oil.nvim",
-        dependencies = { "echasnovski/mini.icons" },
+        dependencies = { "nvim-mini/mini.icons" },
         config = function()
             require("rc.oil")
         end,
     },
     {
-        "echasnovski/mini.clue",
+        "nvim-mini/mini.clue",
         version = false,
         config = function()
             require("rc.clue")
