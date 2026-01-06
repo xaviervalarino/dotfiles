@@ -15,7 +15,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("K", vim.lsp.buf.hover, "hover documentation")
         map("gD", vim.lsp.buf.declaration, "[g]oto [d]eclaration")
 
-        map("gd", require("telescope.builtin").lsp_definitions, "[g]oto [d]efinition")
+        map("gd", builtin.lsp_definitions, "[g]oto [d]efinition")
         map("gr", builtin.lsp_references, "[g]oto [r]eferences")
         map("gI", builtin.lsp_implementations, "[g]oto [i]mplementation")
         map("<leader>D", builtin.lsp_type_definitions, "type [d]efinition")
@@ -23,8 +23,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
         map("<leader>ds", builtin.lsp_document_symbols, "[d]ocument [s]ymbols")
         -- Fuzzy find all the symbols in the current workspace.
         map("<leader>ws", builtin.lsp_dynamic_workspace_symbols, "[w]orkspace [s]ymbols")
-
         local client = vim.lsp.get_client_by_id(event.data.client_id)
+
         if client and client.server_capabilities.documentHighlightProvider then
             local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight", { clear = false })
             vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {

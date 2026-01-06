@@ -1,6 +1,10 @@
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
+if vim.g.vscode then
+    return
+end
+
 -- Turn off relative line numbers for inactive windows
 autocmd({ "WinEnter", "WinLeave" }, {
     group = augroup("LocalNumbers", { clear = true }),
