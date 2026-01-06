@@ -1,8 +1,5 @@
-local set = vim.opt
-local window = vim.wo
-
-set.showbreak = "↪"
-set.listchars:append({
+vim.o.showbreak = "↪"
+vim.opt.listchars:append({
     space = "·",
     tab = "→ ",
     eol = "¬",
@@ -12,24 +9,28 @@ set.listchars:append({
     precedes = "⟨",
 })
 
-set.autowriteall = true
+vim.o.autowriteall = true
 
-set.clipboard = "unnamedplus"
+vim.schedule_wrap(function()
+    vim.o.clipboard = "unnamedplus"
+end)
 
 -- Visual -------------------------
-set.breakindent = true
-set.relativenumber = true
-vim.opt.relativenumber = true
-set.number = true
-set.updatetime = 250
-set.cursorline = true
-set.wrap = false
-window.signcolumn = "yes"
+vim.o.breakindent = true
+vim.o.relativenumber = true
+vim.o.relativenumber = true
+vim.o.number = true
+vim.o.updatetime = 250
+vim.o.timeoutlen = 250
+vim.o.cursorline = true
+vim.o.wrap = false
+vim.o.scrolloff = 10
+vim.wo.signcolumn = "yes"
 
 vim.g.netrw_banner = 0
 -- let g:netrw_browse_split = 4
 
-set.fillchars = { diff = "╱" }
+vim.opt.fillchars = { diff = "╱" }
 
 -- set.fillchars = {
 --   horiz = '━',
@@ -42,35 +43,35 @@ set.fillchars = { diff = "╱" }
 -- }
 
 -- set.cmdheight = 0
-set.shortmess:append("c") -- don't give `ins-completion-menu` messages
-set.shortmess:append("s") -- don't give "search hit BOTTOM, continuing at TOP"
-set.shortmess:append("C") -- don't give messages while scanning for ins-completion
-set.shortmess:append("S") -- do not show search count message when searching
+vim.opt.shortmess:append("c") -- don't give `ins-completion-menu` messages
+vim.opt.shortmess:append("s") -- don't give "search hit BOTTOM, continuing at TOP"
+vim.opt.shortmess:append("C") -- don't give messages while scanning for ins-completion
+vim.opt.shortmess:append("S") -- do not show search count message when searching
 
 -- Search ------------------------------
-set.ignorecase = true
-set.smartcase = true
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 -- Save / Swap / Undo ------------------
 -- Leave buffers open in the background
-set.hidden = true
+vim.o.hidden = true
 -- Turn off swap and turn on undo history
-set.swapfile = false
-set.undofile = true
+vim.o.swapfile = false
+vim.o.undofile = true
 
 -- Tabs --------------------------------
-set.tabstop = 4
-set.shiftwidth = 4
-set.softtabstop = 4
-set.smartindent = true
-set.expandtab = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.smartindent = true
+vim.o.expandtab = true
 
 -- Window splits -----------------------
-set.splitbelow = true
-set.splitright = true
+vim.o.splitbelow = true
+vim.o.splitright = true
 
 -- Completion --------------------------
-set.completeopt = { "menu,menuone,noselect" }
+vim.opt.completeopt = { "menu,menuone,noselect" }
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
@@ -95,10 +96,10 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 if not vim.g.vscode then
-    set.mouse = "a"
-    set.spell = true
-    set.linebreak = true
-    set.laststatus = 3
+    vim.o.mouse = "a"
+    vim.o.spell = true
+    vim.o.linebreak = true
+    vim.o.laststatus = 3
     vim.cmd("colorscheme kanso")
     vim.o.winborder = "bold"
 end
