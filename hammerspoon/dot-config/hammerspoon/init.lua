@@ -154,4 +154,31 @@ Spaces = function(number)
 end
 
 ---------------------------------------------------------------------
+-- Watch for changes to the default output device (e.g., when headphones are plugged in)
+local lastDevice = hs.audiodevice.defaultOutputDevice():name()
+
+hs.audiodevice.watcher.setCallback(function(event)
+    local currentDevice = hs.audiodevice.defaultOutputDevice():name()
+
+    if event == "dOut" and currentDevice ~= lastDevice then
+        -- Optional: print device name to Hammerspoon console for debugging
+        hs.printf("Audio output changed to: %s", currentDevice)
+
+        -- Adjust this string check to match your device name if needed
+        if
+            string.find(string.lower(currentDevice), "external headphones")
+            or string.find(string.lower(currentDevice), "audio jack")
+            or string.find(string.lower(currentDevice), "usb audio")
+        then
+            -- TODO: this doesn't work for all devices
+            hs.audiodevice.defaultOutputDevice():setVolume(2)
+            hs.alert.show("Volume set to 2 for " .. currentDevice)
+        end
+
+        lastDevice = currentDevice
+    end
+end)
+
+hs.audiodevice.watcher.start()
+---------------------------------------------------------------------
 require("util").alert("🔨 loaded")
