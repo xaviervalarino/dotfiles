@@ -1,16 +1,16 @@
-local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
-
 if vim.g.vscode then
     return
 end
+
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
 -- Turn off relative line numbers for inactive windows
 autocmd({ "WinEnter", "WinLeave" }, {
     group = augroup("LocalNumbers", { clear = true }),
     callback = function(ctx)
         -- Don't target float windows (which don't have `file` named) or Help docs
-        if #ctx.file > 0 and vim.api.nvim_buf_get_option(ctx.buf, "filetype") ~= "help" then
+        if #ctx.file > 0 and vim.api.nvim_get_option_value("filetype", { buf = ctx.buf }) ~= "help" then
             vim.opt_local.relativenumber = ctx.event == "WinEnter"
         end
     end,
@@ -41,8 +41,18 @@ autocmd("BufWritePre", {
 autocmd("InsertLeave", {
     group = augroup("AutoSave", { clear = true }),
     callback = function(ctx)
-        if ctx.file:len() > 0 and not ctx.file:find("Command Line") then
-            vim.cmd(":update")
+        local buf = ctx.buf
+        local name = vim.api.nvim_buf_get_name(buf)
+
+        local unnamed_buffer = name == ""
+        local is_unmodified = not vim.bo[buf].modified
+        local non_normal_buffer = vim.bo[buf].buftype ~= ""
+        local is_oil_or_term = vim.startswith(name, "oil:") or vim.startswith(name, "term:")
+
+        if unnamed_buffer or is_unmodified or non_normal_buffer or is_oil_or_term then
+            return
         end
+
+        vim.cmd(":update")
     end,
 })
