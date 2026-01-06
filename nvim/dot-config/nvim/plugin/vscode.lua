@@ -4,9 +4,10 @@ end
 
 local vscode = require("vscode")
 
+---Run VS Code editor commands through keymaps
 ---https://code.visualstudio.com/api/references/commands
 ---@param mode string|string[]
----@param lhs string|function
+---@param lhs string
 ---@param rhs string
 ---@param opts vim.keymap.set.Opts?
 local function vs_map(mode, lhs, rhs, opts)

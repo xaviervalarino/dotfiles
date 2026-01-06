@@ -1,3 +1,7 @@
+if vim.g.vsocde then
+    return
+end
+
 -- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[r]e[n]ame' })
 -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[c]ode [a]ction' })
 -- vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'hover documentation' })
