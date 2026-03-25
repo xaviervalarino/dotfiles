@@ -1,0 +1,21 @@
+#!/usr/bin/env zsh
+
+git_restore_fzf() {
+  # 1) Gather all unstaged (changed) + untracked files, relative to CWD
+  local files
+  files=$(
+    { 
+      git diff --name-only --relative
+      git ls-files --others --exclude-standard
+    } \
+    | sort -u \
+    | fzf --multi
+  )
+
+  # 2) If the user selected something, run git restore on those paths
+  if [[ -n $files ]]; then
+    git restore -- $files
+  else
+    echo "No files selected."
+  fi
+}

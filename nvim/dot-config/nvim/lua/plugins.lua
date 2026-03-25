@@ -93,7 +93,6 @@ local nvim_plugins = {
     {
         "nvim-telescope/telescope.nvim",
         event = "VimEnter",
-        branch = "0.1.x",
         dependencies = {
             "nvim-lua/plenary.nvim",
             {
@@ -206,11 +205,6 @@ local nvim_plugins = {
         end,
     },
     {
-        "webhooked/kanso.nvim",
-        lazy = false,
-        priority = 1000,
-    },
-    {
         "stevearc/conform.nvim",
         event = { "BufWritePre " },
         cmd = { "ConformInfo" },
@@ -267,6 +261,12 @@ local nvim_plugins = {
         "nvim-treesitter/nvim-treesitter-context",
         config = function()
             require("rc.treesitter-context")
+        end,
+    },
+    {
+        "dmmulroy/tsc.nvim",
+        config = function()
+            require("tsc").setup()
         end,
     },
 }

@@ -1,11 +1,6 @@
-if vim.g.vsocde then
+if vim.g.vscode then
     return
 end
-
--- vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[r]e[n]ame' })
--- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[c]ode [a]ction' })
--- vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = 'hover documentation' })
--- vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = '[g]oto [d]eclaration' })
 
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("lsp-attach", { clear = true }),
@@ -15,11 +10,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end
         local builtin = require("telescope.builtin")
 
-        map("<leader>ca", vim.lsp.buf.code_action, "[c]ode [a]ction")
+        map("<D-.>", vim.lsp.buf.code_action, "[c]ode [a]ction")
         map("K", vim.lsp.buf.hover, "hover documentation")
         map("gD", vim.lsp.buf.declaration, "[g]oto [d]eclaration")
 
-        map("gd", builtin.lsp_definitions, "[g]oto [d]efinition")
+        map("gd", function()
+            builtin.lsp_definitions({ reuse_win = true })
+        end, "[g]oto [d]efinition")
         map("gr", builtin.lsp_references, "[g]oto [r]eferences")
         map("gI", builtin.lsp_implementations, "[g]oto [i]mplementation")
         map("<leader>D", builtin.lsp_type_definitions, "type [d]efinition")

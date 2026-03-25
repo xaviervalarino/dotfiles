@@ -1,19 +1,25 @@
+-- Move up/down visual line blocks when text is wrapped
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
+vim.keymap.set("v", "j", "gj")
+vim.keymap.set("v", "k", "gk")
+
 -- diagnostics
 vim.keymap.set("n", "[d", function()
-    if not vim.g.vscode then
-        vim.diagnostic.jump({ count = 1, float = true })
-    else
-        return "<F8>"
-    end
-end, { desc = "Go to previous [D]iagnostic message" })
-
-vim.keymap.set("n", "]d", function()
     if not vim.g.vscode then
         vim.diagnostic.jump({ count = -1, float = true })
     else
         return "S-<F8>"
     end
 end, { desc = "Go to previous [D]iagnostic message" })
+
+vim.keymap.set("n", "]d", function()
+    if not vim.g.vscode then
+        vim.diagnostic.jump({ count = 1, float = true })
+    else
+        return "<F8>"
+    end
+end, { desc = "Go to next [D]iagnostic message" })
 
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
 

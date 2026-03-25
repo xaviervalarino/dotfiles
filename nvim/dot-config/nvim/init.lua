@@ -11,27 +11,22 @@ vim.opt.listchars:append({
 
 vim.o.autowriteall = true
 
-vim.schedule_wrap(function()
+vim.schedule(function()
     vim.o.clipboard = "unnamedplus"
 end)
 
 -- Visual -------------------------
 vim.o.breakindent = true
 vim.o.relativenumber = true
-vim.o.relativenumber = true
 vim.o.number = true
-vim.o.updatetime = 250
-vim.o.timeoutlen = 250
 vim.o.cursorline = true
 vim.o.wrap = false
 vim.o.scrolloff = 10
 vim.wo.signcolumn = "yes"
 
 vim.g.netrw_banner = 0
--- let g:netrw_browse_split = 4
 
 vim.opt.fillchars = { diff = "╱" }
-
 -- set.fillchars = {
 --   horiz = '━',
 --   horizup = '┻',
@@ -41,8 +36,6 @@ vim.opt.fillchars = { diff = "╱" }
 --   vertright = '┣',
 --   verthoriz = '╋',
 -- }
-
--- set.cmdheight = 0
 vim.opt.shortmess:append("c") -- don't give `ins-completion-menu` messages
 vim.opt.shortmess:append("s") -- don't give "search hit BOTTOM, continuing at TOP"
 vim.opt.shortmess:append("C") -- don't give messages while scanning for ins-completion
@@ -100,6 +93,5 @@ if not vim.g.vscode then
     vim.o.spell = true
     vim.o.linebreak = true
     vim.o.laststatus = 3
-    vim.cmd("colorscheme kanso")
     vim.o.winborder = "bold"
 end

@@ -5,14 +5,32 @@ end
 local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
+-- Distinguish fields/properties from plain variables (default colorscheme only)
+local function apply_default_hl()
+    if vim.g.colors_name == nil then
+        vim.api.nvim_set_hl(0, "@variable.member", { link = "Constant" })
+        vim.api.nvim_set_hl(0, "@lsp.type.property", { link = "Constant" })
+    end
+end
+apply_default_hl()
+autocmd("ColorScheme", {
+    group = augroup("CustomHighlights", { clear = true }),
+    callback = apply_default_hl,
+})
+
 -- Turn off relative line numbers for inactive windows
 autocmd({ "WinEnter", "WinLeave" }, {
     group = augroup("LocalNumbers", { clear = true }),
     callback = function(ctx)
-        -- Don't target float windows (which don't have `file` named) or Help docs
-        if #ctx.file > 0 and vim.api.nvim_get_option_value("filetype", { buf = ctx.buf }) ~= "help" then
-            vim.opt_local.relativenumber = ctx.event == "WinEnter"
+        local is_floating_win = #ctx.file > 0
+        local is_help_file = vim.api.nvim_get_option_value("filetype", { buf = ctx.buf }) ~= "help"
+        local is_rename = vim.endswith(ctx.file, "lsp:rename")
+
+        if is_floating_win or is_help_file or is_rename then
+            return
         end
+
+        vim.opt_local.relativenumber = ctx.event == "WinEnter"
     end,
 })
 
@@ -36,6 +54,39 @@ autocmd("BufWritePre", {
         vim.fn.mkdir(vim.fn.fnamemodify(ctx.file, ":p:h"), "p")
     end,
 })
+
+-- Git status to quickfix from cwd
+vim.api.nvim_create_user_command("Gstatus", function()
+    local toplevel = vim.trim(vim.fn.system("git rev-parse --show-toplevel"))
+    local lines = vim.fn.systemlist("git status --porcelain -- .")
+    local qflist = {}
+    for _, line in ipairs(lines) do
+        local filename = toplevel .. "/" .. vim.trim(line:sub(4))
+        table.insert(qflist, { filename = filename, text = line:sub(1, 2) })
+    end
+    vim.fn.setqflist(qflist, "r")
+    vim.cmd.copen()
+end, { desc = "Git status to quickfix" })
+
+-- yarn tsc errors to quickfix from cwd
+vim.api.nvim_create_user_command("TsCheck", function()
+    local lines = vim.fn.systemlist("yarn tsc --noEmit --pretty false 2>&1")
+    local qflist = {}
+    for _, line in ipairs(lines) do
+        local file, lnum, col, severity, msg = line:match("^(.+)%((%d+),(%d+)%): (%a+) TS%d+: (.+)$")
+        if file then
+            table.insert(qflist, {
+                filename = file,
+                lnum = tonumber(lnum),
+                col = tonumber(col),
+                text = msg,
+                type = severity == "error" and "E" or "W",
+            })
+        end
+    end
+    vim.fn.setqflist(qflist, "r")
+    vim.cmd.copen()
+end, { desc = "yarn tsc to quickfix" })
 
 -- Save when exiting insert mode
 autocmd("InsertLeave", {
