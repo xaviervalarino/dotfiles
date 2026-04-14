@@ -153,3 +153,5 @@ require("lspconfig").vtsls.setup({
         vim.keymap.set("n", "<leader>rf", ":VtsRename % ", { desc = "TS: [r]ename [f]ile" })
     end,
 })
+
+vim.lsp.enable("tailwindcss")
