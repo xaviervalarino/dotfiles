@@ -55,15 +55,28 @@ heic_to_jpg() {
 }
 
 mov2mp4() {
+    local has_audio
+    has_audio=$(ffprobe -i "$1" -show_streams -select_streams a -loglevel quiet | head -1)
     local filters=''
-    local args=(-i "$1" -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 192k -map_metadata -1 -movflags +faststart -async 1)
+    local args=(-i "$1" -c:v libx264 -preset medium -crf 23 -map_metadata -1 -movflags +faststart)
+    if [[ -n "$has_audio" ]]; then
+        args+=(-c:a aac -b:a 192k -async 1)
+    else
+        args+=(-an)
+    fi
     if [[ "$2" == "-f" ]]; then
         local speedup_factor=$3
         local scale=$(bc <<< "scale=2; 1/$speedup_factor")
-        filters='[0:v]setpts='"$scale"'*PTS[v];[0:a]atempo='"$speedup_factor"'[a]'
+        if [[ -n "$has_audio" ]]; then
+            filters='[0:v]setpts='"$scale"'*PTS[v];[0:a]atempo='"$speedup_factor"'[a]'
+        else
+            filters='setpts='"$scale"'*PTS'
+        fi
     fi
-    if [[ -n "$filters" ]]; then
+    if [[ -n "$filters" && -n "$has_audio" ]]; then
         args+=(-filter_complex "$filters" -map "[v]" -map "[a]")
+    elif [[ -n "$filters" ]]; then
+        args+=(-filter:v "$filters")
     fi
     ffmpeg "${args[@]}" "${1:r}.mp4"
 }
