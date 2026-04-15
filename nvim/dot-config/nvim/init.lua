@@ -17,14 +17,13 @@ end)
 
 -- Visual -------------------------
 vim.o.breakindent = true
+vim.o.breakindentopt = "list:-1" -- Add padding to wrapped lists
 vim.o.relativenumber = true
 vim.o.number = true
 vim.o.cursorline = true
 vim.o.wrap = false
 vim.o.scrolloff = 10
 vim.wo.signcolumn = "yes"
-
-vim.g.netrw_banner = 0
 
 vim.opt.fillchars = { diff = "╱" }
 -- set.fillchars = {
@@ -93,5 +92,9 @@ if not vim.g.vscode then
     vim.o.spell = true
     vim.o.linebreak = true
     vim.o.laststatus = 3
-    vim.o.winborder = "bold"
+    vim.g.netrw_banner = 0
+    vim.o.winborder = "solid"
+
+    -- TODO: FT for UI elements does not work with treesitter
+    -- require("vim._core.ui2").enable({ enable = true })
 end

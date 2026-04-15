@@ -12,6 +12,7 @@ local headless_plugins = {
         "tpope/vim-sleuth",
     },
     {
+        -- TODO: add nvim-treesitter-textobjects?
         "nvim-mini/mini.ai",
         version = false,
         config = function()

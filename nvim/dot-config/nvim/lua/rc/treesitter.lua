@@ -44,7 +44,7 @@ end)
 
 vim.api.nvim_create_autocmd("FileType", {
     callback = function(ev)
-        if vim.startswith(ev.file, "blink-cmp") then
+        if vim.startswith(ev.file, "blink-cmp") or vim.startswith(ev.file, "oil:") then
             return
         end
 
@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd("FileType", {
         local _, err = pcall(vim.treesitter.start, ev.buf)
 
         if err then
-            return print(err)
+            return print("[ERROR] TREESITTER", ev.file, err)
         end
 
         -- Use treesitter indentation
