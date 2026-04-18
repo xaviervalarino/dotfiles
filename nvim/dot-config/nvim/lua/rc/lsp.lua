@@ -1,3 +1,17 @@
+-- Node version managers (fnm, nvm, volta) use ephemeral shell paths that
+-- Neovim may not inherit. Resolve the real bin directory from the `node`
+-- binary so npm-installed LSP servers are always found.
+local node = vim.fn.exepath("node")
+if node ~= "" then
+    local real = vim.uv.fs_realpath(node)
+    if real then
+        local bin_dir = vim.fs.dirname(real)
+        if not vim.env.PATH:find(bin_dir, 1, true) then
+            vim.env.PATH = bin_dir .. ":" .. vim.env.PATH
+        end
+    end
+end
+
 -- Enable (broadcasting) snippet capability for completion
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -7,20 +21,21 @@ vim.lsp.config("eslint", {
     workingDirectory = {
         mode = "auto",
     },
-    on_attach = function(client, bufnr)
-        if not base_on_attach then
-            return
-        end
-
-        vim.lsp.config.eslint.on_attach(client, bufnr)
-        vim.api.nvim_create_autocmd("BufWritePre", {
-            buffer = bufnr,
-            command = "LspEslintFixAll",
-        })
-    end,
 })
 
 vim.lsp.enable("eslint")
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.name == "eslint" then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = args.buf,
+                command = "LspEslintFixAll",
+            })
+        end
+    end,
+})
 
 vim.lsp.enable("graphql")
 
@@ -154,4 +169,11 @@ require("lspconfig").vtsls.setup({
     end,
 })
 
+vim.lsp.config("tailwindcss", {
+    root_dir = function(bufnr, on_dir)
+        local fname = vim.api.nvim_buf_get_name(bufnr)
+        -- Use the git root so the server can find hoisted node_modules in monorepos
+        on_dir(vim.fs.root(fname, ".git"))
+    end,
+})
 vim.lsp.enable("tailwindcss")
