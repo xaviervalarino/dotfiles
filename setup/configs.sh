@@ -52,6 +52,9 @@ VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
 if [ -d "$VSCODE_USER_DIR" ]; then
   ln -sf "$SCRIPT_DIR/../vscode/settings.json" "$VSCODE_USER_DIR/settings.json"
   ln -sf "$SCRIPT_DIR/../vscode/keybindings.json" "$VSCODE_USER_DIR/keybindings.json"
+  if command -v code &>/dev/null && [ -f "$SCRIPT_DIR/../vscode/extensions.txt" ]; then
+    xargs -n 1 code --install-extension < "$SCRIPT_DIR/../vscode/extensions.txt" 2>/dev/null || true
+  fi
 fi
 
 # Stow private agent configurations if submodule is present
