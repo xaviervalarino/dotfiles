@@ -44,3 +44,9 @@ stow -Rv --dotfiles tealdeer
 tldr --update 2>/dev/null || true
 
 stow -Rv --dotfiles nvim
+
+# Stow private agent configurations if submodule is present
+if [ -d "$SCRIPT_DIR/../agents" ]; then
+  stow -Rv --dotfiles -d "$SCRIPT_DIR/../agents" -t "$HOME" gemini 2>/dev/null || true
+  stow -Rv --dotfiles -d "$SCRIPT_DIR/../agents" -t "$HOME" claude 2>/dev/null || true
+fi

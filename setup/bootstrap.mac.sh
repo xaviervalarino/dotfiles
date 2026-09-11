@@ -39,12 +39,13 @@ fi
 
 msg "Cloning dotfiles"
 if [[ ! -d "$HOME/dotfiles" ]]; then
-  git clone https://github.com/xaviervalarino/dotfiles.git
+  git clone https://github.com/xaviervalarino/dotfiles.git "$HOME/dotfiles"
 else
   echo "Dotfiles directory already exists"
 fi
 
 cd "$HOME/dotfiles" || exit 1
+git submodule update --init --recursive 2>/dev/null || true
 brew bundle install --verbose
 ./setup/defaults.mac.sh
 ./setup/configs.sh
