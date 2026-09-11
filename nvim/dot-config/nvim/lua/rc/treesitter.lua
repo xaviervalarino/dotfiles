@@ -50,20 +50,22 @@ vim.schedule(function()
     end
 end)
 
+-- Register aliases for common filetypes that share parsers
+pcall(vim.treesitter.language.register, "bash", "env")
+pcall(vim.treesitter.language.register, "bash", "zsh")
+
 vim.api.nvim_create_autocmd("FileType", {
     callback = function(ev)
         if vim.startswith(ev.file, "blink-cmp") or vim.startswith(ev.file, "oil:") then
             return
         end
 
-        -- Start treesitter with highlighting
-        local _, err = pcall(vim.treesitter.start, ev.buf)
+        local lang = vim.treesitter.language.get_lang(ev.match) or ev.match
+        local has_parser = #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".so", false) > 0
 
-        if err then
-            return print("[ERROR] TREESITTER", ev.file, err)
+        if has_parser then
+            pcall(vim.treesitter.start, ev.buf, lang)
+            vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
-
-        -- Use treesitter indentation
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end,
 })

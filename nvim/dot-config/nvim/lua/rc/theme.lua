@@ -24,6 +24,15 @@ function M.apply_theme(mode)
     mode = mode or M.get_mode()
     vim.o.background = mode
 
+    local has_github, github_theme = pcall(require, "github-theme")
+    if has_github then
+        github_theme.setup({
+            options = {
+                transparent = true,
+            },
+        })
+    end
+
     local scheme = mode == "dark" and "github_dark" or "github_light"
     local has_github_theme = pcall(vim.cmd.colorscheme, scheme)
     if not has_github_theme then
