@@ -1,3 +1,6 @@
+# Deduplicate PATH entries automatically
+typeset -U path PATH
+
 # Homebrew
 if [ "$(uname -m)" = "arm64" ]; then
   brew=/opt/homebrew/bin/brew
@@ -6,12 +9,7 @@ else
 fi
 eval "$($brew shellenv)"
 
-# Rust
-# path+=$HOME/.cargo/bin
-
-# Ruby
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-path+=/usr/local/sbin
+path+=(/usr/local/sbin)
 
 # Personal scripts
-path+=$HOME/scripts
+path+=("$HOME/scripts")

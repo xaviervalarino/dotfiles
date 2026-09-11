@@ -28,6 +28,7 @@ stow -Rv --dotfiles wezterm
 
 stow -Rv --dotfiles karabiner
 launchctl kickstart -k "gui/$(id -u)/org.pqrs.karabiner.karabiner_console_user_server"
+goku 2>/dev/null || true
 
 stow -Rv --dotfiles hammerspoon
 
@@ -35,6 +36,7 @@ stow -Rv --dotfiles bat
 bat cache --build
 
 stow -Rv --dotfiles git
+stow -Rv --dotfiles glow
 stow -Rv --dotfiles js
 stow -Rv --dotfiles scripts
 stow -Rv --dotfiles stylua

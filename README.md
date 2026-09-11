@@ -14,9 +14,9 @@ source <(curl -s https://raw.githubusercontent.com/xaviervalarino/dotfiles/main/
 
 ### Symbol font
 
-Install secondary symbol font used in iterm/neovim:
+Secondary symbol font used in WezTerm / Neovim is installed via Homebrew (`font-symbols-only-nerd-font`). Can also be downloaded manually:
 
-[Download - Symbols-2048-em Nerd Font Complete.ttf](https://github.com/ryanoasis/nerd-fonts/raw/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf)
+[Download - Symbols Nerd Font](https://github.com/ryanoasis/nerd-fonts/raw/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf)
 
 ### Browser Extensions
 
