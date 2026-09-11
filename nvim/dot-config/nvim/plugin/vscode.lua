@@ -35,14 +35,6 @@ vim.keymap.set("n", "<leader>ff", function()
     vscode.action("workbench.action.findInFiles", { args = { query = vim.fn.expand("<cword>") } })
 end)
 
--- quickfix / code actions
--- TODO: select code action doesn't work
-vim.keymap.set("n", "<C-n>", function()
-    vscode.call("selectNextSuggestion")
-end)
-vim.keymap.set("n", "<C-p>", function()
-    vscode.action("selectPrevSuggestion")
-end)
 
 vim.keymap.set("n", "<leader>ca", function()
     vscode.action("editor.action.quickFix")

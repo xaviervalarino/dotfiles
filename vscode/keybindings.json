@@ -1,0 +1,23 @@
+// Place your key bindings in this file to override the defaults
+[
+  // Route Ctrl+P / Ctrl+N to Neovim in normal mode for Yanky paste history cycling
+  {
+    "command": "vscode-neovim.send",
+    "key": "ctrl+p",
+    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'",
+    "args": "<C-p>"
+  },
+  {
+    "command": "vscode-neovim.send",
+    "key": "ctrl+n",
+    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'",
+    "args": "<C-n>"
+  },
+  // Route Ctrl+W window commands to Neovim
+  {
+    "command": "vscode-neovim.send",
+    "key": "ctrl+w",
+    "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'",
+    "args": "<C-w>"
+  }
+]

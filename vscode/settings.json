@@ -1,0 +1,24 @@
+{
+  "vscode-neovim.neovimExecutablePaths.darwin": "/opt/homebrew/bin/nvim",
+  "vscode-neovim.neovimInitVimPaths.darwin": "${userHome}/.config/nvim/init.lua",
+  "extensions.experimental.affinity": {
+    "asvetliakov.vscode-neovim": 1
+  },
+  "editor.lineNumbers": "relative",
+  "editor.cursorSurroundingLines": 10,
+  "editor.minimap.enabled": false,
+  "editor.fontFamily": "'Iosevka', 'SF Mono', Menlo, Monaco, monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.5,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.formatOnSave": true,
+  "editor.renderWhitespace": "selection",
+  "editor.smoothScrolling": true,
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "workbench.startupEditor": "none",
+  "git.autofetch": true,
+  "git.confirmSync": false
+}

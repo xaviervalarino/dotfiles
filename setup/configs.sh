@@ -42,13 +42,17 @@ stow -Rv --dotfiles js
 stow -Rv --dotfiles mise
 mise install 2>/dev/null || true
 stow -Rv --dotfiles scripts
-stow -Rv --dotfiles stylua
-# cargo install stylua
-
 stow -Rv --dotfiles tealdeer
 tldr --update 2>/dev/null || true
 
 stow -Rv --dotfiles nvim
+
+# VSCode configuration (settings & keybindings)
+VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
+if [ -d "$VSCODE_USER_DIR" ]; then
+  ln -sf "$SCRIPT_DIR/../vscode/settings.json" "$VSCODE_USER_DIR/settings.json"
+  ln -sf "$SCRIPT_DIR/../vscode/keybindings.json" "$VSCODE_USER_DIR/keybindings.json"
+fi
 
 # Stow private agent configurations if submodule is present
 if [ -d "$SCRIPT_DIR/../agents" ]; then
