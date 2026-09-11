@@ -181,4 +181,14 @@ end)
 
 hs.audiodevice.watcher.start()
 ---------------------------------------------------------------------
+-- Auto-reload Hammerspoon when config files change
+Auto_reload_watcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", function(files)
+    for _, file in ipairs(files) do
+        if file:sub(-4) == ".lua" then
+            hs.reload()
+            return
+        end
+    end
+end):start()
+
 require("util").alert("🔨 loaded")
