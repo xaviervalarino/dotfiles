@@ -5,6 +5,8 @@ corepack = true
 
 [tools]
 node = "lts"
+go = "latest"
+stylua = "latest"
 lua-language-server = "latest"
 "npm:@vtsls/language-server" = "latest"
 "npm:@tailwindcss/language-server" = "latest"
