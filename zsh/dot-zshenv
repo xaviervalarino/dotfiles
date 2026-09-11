@@ -1,17 +1,17 @@
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Ensure CLT linker uses active stable SDK (avoids MacOSX27.0.sdk TAPI arm64e mismatch)
+if [ -d "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk" ]; then
+  export SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+fi
 
 export EDITOR=nvim
 
-# set up Homebrew for multi-admin access through brewer user
-export HOMEBREW_CACHE="/opt/homebrew/cache"
-export HOMEBREW_LOGS="/opt/homebrew/logs"
-export HOMEBREW_CASK_OPTS="--fontdir=/Library/Fonts"
-# export HOMEBREW_NO_ENV_HINTS=true
 
-# set up FNM for multi-user access
-export FNM_DIR="/Library/Application Support/fnm"
+
 
 export GOKU_EDN_CONFIG_FILE=$XDG_CONFIG_HOME/karabiner/karabiner.edn
 

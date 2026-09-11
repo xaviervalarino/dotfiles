@@ -59,12 +59,26 @@ if command -v fzf &> /dev/null; then
  source <(fzf --zsh)
 fi
 
-# fnm
-if command -v fnm &> /dev/null; then
-  export PATH="$FNM_PATH:$PATH"
-  eval "$(fnm env --use-on-cd --version-file-strategy=recursive --corepack-enabled --shell zsh)"
+# mise (runtime executor & version manager)
+if command -v mise &> /dev/null; then
+  eval "$(mise activate zsh)"
 fi
 
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# zoxide (smart cd: use 'z <dir>')
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Sync WezTerm & Git Delta theme
+if [[ -n "$THEME" ]]; then
+  export TERM_COLORSCHEME="$THEME"
+  printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "%s" "$THEME" | base64)"
+else
+  defaults read -g AppleInterfaceStyle &>/dev/null && export TERM_COLORSCHEME="dark" || export TERM_COLORSCHEME="light"
+fi

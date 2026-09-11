@@ -1,17 +1,22 @@
 #!/usr/bin/env zsh
 
 alias g="git"
-alias ls="ls -Gh"
+if command -v eza &>/dev/null; then
+  alias ls="eza --icons --group-directories-first"
+  alias ll="eza -la --icons --octal-permissions --group-directories-first"
+  alias la="eza -a --icons --group-directories-first"
+  alias tree="eza --tree --icons"
+else
+  alias ls="ls -Gh"
+  alias ll="ls -lah"
+fi
 alias mkdir="mkdir -p"
 alias pomodoro="utimer -t 25s && say 'beep boop, times up'"
 alias reload="source ~/.zshrc"
 alias stow="stow --verbose --dotfiles"
 alias vim="nvim"
 
-# Set environment variables and run brew as the 'brewer' user with sudo.
-# -H ensures we use brewer's $HOME directory, while -E keeps the current
-# environment, so vars need to be passed in.
-alias brew="sudo -E -H -u brewer brew"
+unalias brew 2>/dev/null
 alias brew_bundle="brew bundle --file=$HOME/dotfiles/Brewfile"
 
 alias logout="osascript -e 'tell app \"System Events\" to log out'"
@@ -29,10 +34,49 @@ ps_time() {
 #   utimer -c "$1" && say 'beep boop, times up' 
 # }
 
+# Switch or override terminal/editor theme: theme dark | theme light | theme auto
+theme() {
+  case "$1" in
+    dark)
+      export THEME="dark"
+      export TERM_COLORSCHEME="dark"
+      printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "dark" | base64)"
+      echo "Theme set to dark (propagated to session, Neovim, and Git Delta)"
+      ;;
+    light)
+      export THEME="light"
+      export TERM_COLORSCHEME="light"
+      printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "light" | base64)"
+      echo "Theme set to light (propagated to session, Neovim, and Git Delta)"
+      ;;
+    auto|system|reset)
+      unset THEME
+      local sys_mode="light"
+      defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
+      export TERM_COLORSCHEME="$sys_mode"
+      printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "auto" | base64)"
+      echo "Theme reset to auto (follows macOS appearance: $sys_mode)"
+      ;;
+    *)
+      if [[ -n "$THEME" ]]; then
+        echo "Current theme override: $THEME"
+      else
+        local sys_mode="light"
+        defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
+        echo "Current theme: auto (system is $sys_mode)"
+      fi
+      echo "Usage: theme [dark|light|auto]"
+      ;;
+  esac
+}
+
 claude() {
   if (( $+commands[jq] )); then
-    local mode="light"
-    defaults read -g AppleInterfaceStyle &>/dev/null && mode="dark"
+    local mode="${THEME:-}"
+    if [[ -z "$mode" ]]; then
+      mode="light"
+      defaults read -g AppleInterfaceStyle &>/dev/null && mode="dark"
+    fi
 
     local cfg=~/.claude.json
     local current=$(jq -r '.theme // ""' "$cfg" 2>/dev/null)

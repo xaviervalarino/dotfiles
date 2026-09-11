@@ -28,9 +28,12 @@
 [delta]
   navigate = true  # use n and N to move between diff sections
   line-numbers = true
-; dark by default: Catppuccin-Frappe, Catpuccin-Macchiato, Catppuccin-Mocha 
-[delta "Catppuccin-Latte"]
+[delta "dark"]
+  syntax-theme = "1337"
+
+[delta "light"]
   light = true
+  syntax-theme = "GitHub"
 [merge]
   conflictstyle = diff3
 [diff]

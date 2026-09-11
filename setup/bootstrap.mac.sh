@@ -19,9 +19,20 @@ until eval xcode-select -p &> /dev/null; do
   sleep 3
 done
 
+# Detect Homebrew prefix and load into PATH if already installed
+if [ "$(uname -m)" = "arm64" ]; then
+  brew=/opt/homebrew/bin/brew
+else
+  brew=/usr/local/bin/brew
+fi
+if [ -x "$brew" ]; then
+  eval "$($brew shellenv)"
+fi
+
 msg "Installing Homebrew"
-if ! which brew &> /dev/null; then
+if ! command -v brew &> /dev/null; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$($brew shellenv)"
 else
   echo "Homebrew already installed, skipping"
 fi
@@ -33,14 +44,7 @@ else
   echo "Dotfiles directory already exists"
 fi
 
-if [ "$(uname -m)" = "arm64" ]; then
-  brew=/opt/homebrew/bin/brew
-else
-  brew=/usr/local/bin/brew
-fi
-eval "$($brew shellenv)"
-
-cd $HOME/dotfiles || exit 1
+cd "$HOME/dotfiles" || exit 1
 brew bundle install --verbose
 ./setup/defaults.mac.sh
 ./setup/configs.sh

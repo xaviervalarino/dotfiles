@@ -19,7 +19,6 @@ local parsers = {
     "javascript",
     "jq",
     "jsdoc",
-    "jsx",
     "json",
     "json5",
     "luadoc",
@@ -37,6 +36,10 @@ local parsers = {
     "xml",
     "yaml",
 }
+
+if vim.fn.isdirectory("/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk") == 1 then
+    vim.env.SDKROOT = vim.env.SDKROOT or "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+end
 
 vim.schedule(function()
     ts.install(parsers)

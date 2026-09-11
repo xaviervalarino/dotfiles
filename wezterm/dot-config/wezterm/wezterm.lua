@@ -7,12 +7,27 @@ end
 
 -- Appearance --
 
--- get_appearance() returns "Light", "Dark", or *HighContrast variants.
-if wezterm.gui.get_appearance():find("Light") then
-    config.color_scheme = "NvimLight"
-else
-    config.color_scheme = "NvimDark"
+local function scheme_for_appearance(appearance)
+    if appearance:find("Light") then
+        return "Github"
+    else
+        return "GitHub Dark"
+    end
 end
+
+local function get_effective_scheme(pane)
+    local user_vars = pane and pane:get_user_vars() or {}
+    local theme = user_vars.THEME
+    if theme == "dark" then
+        return "GitHub Dark"
+    elseif theme == "light" then
+        return "Github"
+    else
+        return scheme_for_appearance(wezterm.gui.get_appearance())
+    end
+end
+
+config.color_scheme = scheme_for_appearance(wezterm.gui.get_appearance())
 
 config.font = wezterm.font("JetBrains Mono", { weight = "Book" })
 config.font_size = 14.5
@@ -23,10 +38,10 @@ config.force_reverse_video_cursor = true
 
 config.window_decorations = "RESIZE"
 config.window_close_confirmation = "NeverPrompt"
-config.window_content_alignment = {
-    horizontal = "Center",
-    vertical = "Bottom",
-}
+-- config.window_content_alignment = {
+--     horizontal = "Center",
+--     vertical = "Bottom",
+-- }
 config.window_padding = {
     left = 36,
     right = 36,
@@ -85,14 +100,23 @@ local function is_tui(pane)
     return false
 end
 
--- Drop padding for full-screen TUIs; otherwise fall back to config default.
+-- Drop padding for full-screen TUIs; update color scheme dynamically
 wezterm.on("update-right-status", function(window, pane)
+    local overrides = window:get_config_overrides() or {}
+    overrides.color_scheme = get_effective_scheme(pane)
     if is_tui(pane) then
-        window:set_config_overrides({
-            window_padding = { left = 0, right = 0, top = 0, bottom = 0 },
-        })
+        overrides.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
     else
-        window:set_config_overrides({})
+        overrides.window_padding = nil
+    end
+    window:set_config_overrides(overrides)
+end)
+
+wezterm.on("user-var-changed", function(window, pane, name, _)
+    if name == "THEME" then
+        local overrides = window:get_config_overrides() or {}
+        overrides.color_scheme = get_effective_scheme(pane)
+        window:set_config_overrides(overrides)
     end
 end)
 

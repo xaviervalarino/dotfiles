@@ -27,7 +27,7 @@ spoon.SpoonInstall:andUse("EmmyLua")
 -- `hs -c "{lua cmd}"` to run commands
 
 -- TODO: would be nice to look up $HOMEBREW_PREFIX location
--- os.getenv'HOMEBREW_PREFIX' and hs.execute'echo $HOMEBREW_PREFIX' are note working
+require("hs.ipc")
 hs.ipc.cliInstall("/opt/homebrew/")
 
 local switcher = require("switcher")

@@ -1,7 +1,8 @@
-#!usr/bin/env sh
+#!/usr/bin/env sh
 
 brew install lua-language-server
 brew install stylua
+brew install tree-sitter-cli
 
 npm -g install \
   @fsouza/prettierd \

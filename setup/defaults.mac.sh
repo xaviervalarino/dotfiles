@@ -6,26 +6,29 @@
 # https://macos-defaults.com/
 # https://www.defaults-write.com/
 
-# Close any open System Preferences panes, to prevent them from overriding
+# Close any open System Settings panes, to prevent them from overriding
 # settings we’re about to change
-osascript -e 'tell application "System Preferences" to quit'
+osascript -e 'tell application "System Settings" to quit' 2>/dev/null || true
+osascript -e 'tell application "System Preferences" to quit' 2>/dev/null || true
 
 # Ask for the administrator password upfront
 sudo -v
 
-# Expand save panel by default
+# Expand save panel by default and save to disk (not iCloud) by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
 # Trackpad: map bottom right corner to right-click
-# TODO: these don't seem to work
-# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
-# defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool true
-# defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
-# defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadRightClick -bool false
+defaults write com.apple.AppleMultitouchTrackpad TrackpadCornerSecondaryClick -int 2
+defaults write com.apple.AppleMultitouchTrackpad TrackpadRightClick -bool false
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.trackpadCornerClickBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryClick -bool true
 
 # Increase sound quality for Bluetooth headphones/headsets
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
@@ -51,6 +54,9 @@ defaults write com.apple.finder _FXSortFoldersFirst -bool true
 
 # When performing a search, search the current folder by default
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -96,11 +102,13 @@ defaults write com.apple.dock mru-spaces -bool false
 # Dock: remove all icons
 defaults write com.apple.dock persistent-apps -array
 
-# Dock: set to left
-defaults write com.apple.dock "orientation" -string "left"
+# Dock: set to right
+defaults write com.apple.dock "orientation" -string "right"
 
-# Dock: automatically hide and show
+# Dock: automatically hide and show instantly (no delay)
 defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.15
 
 # Dock: make icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
@@ -120,7 +128,14 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 
-# Move hammerspoon config to XDG_CONFIG_HOME
-defaults write org.hammerspoon.Hammerspoon MJConfigFile "$XDG_CONFIG_HOME/hammerspoon/init.lua"
+# Fast keyboard repeat rate and disable press-and-hold for keys (essential for Vim)
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
-killall cfprefsd Dock Finder Photos SystemUIServer
+# Move hammerspoon config to XDG_CONFIG_HOME
+defaults write org.hammerspoon.Hammerspoon MJConfigFile "${XDG_CONFIG_HOME:-$HOME/.config}/hammerspoon/init.lua"
+
+for app in "cfprefsd" "Dock" "Finder" "Photos" "SystemUIServer"; do
+    killall "${app}" &> /dev/null || true
+done

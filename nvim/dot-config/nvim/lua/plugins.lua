@@ -77,6 +77,15 @@ end
 
 local nvim_plugins = {
     {
+        "projekt0n/github-nvim-theme",
+        name = "github-theme",
+        lazy = false,
+        priority = 1000,
+        config = function()
+            require("rc.theme").setup()
+        end,
+    },
+    {
         "neovim/nvim-lspconfig",
         dependencies = {
             "yioneko/nvim-vtsls",

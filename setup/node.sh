@@ -1,9 +1,12 @@
 #!/usr/bin/env sh
 
-# Install @latest
-if ! which volta > /dev/null; then echo 'Volta is missing' exit 1; fi
+# Install Node via mise
+if ! command -v mise > /dev/null; then
+  echo 'mise is missing, install with: brew install mise'
+  exit 1
+fi
 
-volta install node@latest
+mise use -g node@lts
 
 # Install global packages
 npm -g install \
@@ -12,9 +15,9 @@ npm -g install \
   svelte-language-server \
   typescript \
   typescript-language-server \
-  vscode-langservers-extracted  \
+  vscode-langservers-extracted \
   uvcc # camera controller
 
 # Check what was installed
-volta list
-npm ls -g
+mise ls node
+npm ls -g --depth=0
