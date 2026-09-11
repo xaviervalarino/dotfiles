@@ -72,6 +72,7 @@ if not vim.g.vscode then
         { src = "https://github.com/saecki/live-rename.nvim" },
         { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
         { src = "https://github.com/dmmulroy/tsc.nvim" },
+        { src = "https://github.com/nvim-mini/mini.sessions" },
     }
     for _, s in ipairs(nvim_specs) do
         table.insert(specs, s)
@@ -138,4 +139,5 @@ if not vim.g.vscode then
     require("rc.rename")
     require("rc.treesitter-context")
     require("tsc").setup()
+    require("rc.sessions")
 end

@@ -93,6 +93,10 @@
       "rev": "b1c5a726921b7a8c9321e9a7a208aa0571de5810",
       "src": "https://github.com/nvim-mini/mini.pairs.git"
     },
+    "mini.sessions": {
+      "rev": "59b682b3208eefb5053a80dd3bc93ced69f363af",
+      "src": "https://github.com/nvim-mini/mini.sessions"
+    },
     "mini.surround": {
       "rev": "8d5d0c5aa92449368ac251e85451d79d8f69d296",
       "src": "https://github.com/nvim-mini/mini.surround.git"
