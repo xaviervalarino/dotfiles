@@ -45,6 +45,9 @@ brew "yqrashawn/goku/goku"
 brew "zsh-completions"
 brew "zoxide"
 
+tap "felixkratz/formulae"
+brew "borders"
+
 cask "qlmarkdown"
 cask "syntax-highlight"
 
