@@ -185,19 +185,20 @@
                  [:j [:wm "down"]]
                  [:k [:wm "up"]]
                  [:l [:wm "right"]]
-                 ; TODO: left/bottom/top/right half
+                 [:!Sh [:wm "swap_left"]]
+                 [:!Sj [:wm "swap_down"]]
+                 [:!Sk [:wm "swap_up"]]
+                 [:!Sl [:wm "swap_right"]]
+                 [:f [:wm "toggle_floating"]]
+                 [:r [:wm "cycle_width"]]
+                 [:i [:wm "slurp"]]
+                 [:o [:wm "barf"]]
                  [:m [:mission_control]]
                  [:d [:wm "toggle_show_desktop"]]
                  [:n [:wm "move_to_next_display"]]
                  [:semicolon [:wm "center"]]
                  [:quote [:wm "fill"]]
-                 [:r [["r_layer" 1] [:indicator "on"]] !r_layer]
-                 :r_layer
-                 [:h nil nil {:held [:wm "grow_left" "true"]  :afterup [:wm "grow_left" "false"]}]
-                 [:j nil nil {:held [:wm "grow_down" "true"]  :afterup [:wm "grow_down" "false"]}]
-                 [:k nil nil {:held [:wm "grow_up" "true"]    :afterup [:wm "grow_up" "false"]}]
-                 [:l nil nil {:held [:wm "grow_right" "true"] :afterup [:wm "grow_right" "false"]}]
-                 [{:any :key_code} [["r_layer" 0] [:indicator "off"]]]]}
+                 [:slash [:wm "toggle_cheatsheet"]]]}
 
         {:des "Application launcher"
          :rules [[:!SCcomma [:open "System Preferences"]]
@@ -218,6 +219,9 @@
                  [:t   [[:open "WezTerm"] ["launch_layer" 0]]]
                  [:z   [[:open "Zoom.us"] ["launch_layer" 0]]]
                  [:s   [[:open "Slack"] ["launch_layer" 0]]]
+                 [:!Ss [[:wm "save_session"] ["launch_layer" 0]]]
+                 [:r   [[:wm "restore_session"] ["launch_layer" 0]]]
+                 [:!Sr [[:wm "restore_session"] ["launch_layer" 0]]]
                  [:return_or_enter [[:open "Finder"] ["launch_layer" 0]]]
                  ; Move to Mission Control space
                  [:1   [[:spaces 1] ["launch_layer" 0]]]
