@@ -19,7 +19,7 @@ stow -Rv --dotfiles zsh
 # export ENV
 source "$HOME/.zshenv" 2>/dev/null || true
 source "$HOME/.zprofile" 2>/dev/null || true
-[ -f "$HOME/.zsh_history" ] && rm -v "$HOME/.zsh_history"
+[ -f "$HOME/.zsh_history" ] && [ ! -f "$XDG_DATA_HOME/zsh/history" ] && cp "$HOME/.zsh_history" "$XDG_DATA_HOME/zsh/history"
 
 # fuzzy finder
 yes | "$HOMEBREW_PREFIX/opt/fzf/install"
