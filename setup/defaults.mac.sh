@@ -11,8 +11,6 @@
 osascript -e 'tell application "System Settings" to quit' 2>/dev/null || true
 osascript -e 'tell application "System Preferences" to quit' 2>/dev/null || true
 
-# Ask for the administrator password upfront
-sudo -v
 
 # Expand save panel by default and save to disk (not iCloud) by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -86,8 +84,8 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
-# Show the /Volumes folder
-sudo chflags nohidden /Volumes
+# Show the /Volumes folder (only if sudo is already cached non-interactively)
+sudo -n chflags nohidden /Volumes 2>/dev/null || true
 
 # Expand the following File Info panes:
 # “General”, “Open with”, and “Sharing & Permissions”
@@ -156,10 +154,8 @@ defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
 
-# Safari: enable Develop menu and Web Inspector
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
+# WebKit / Safari: enable Web Inspector in WebKit web views
+# (Note: In modern macOS, Safari's Develop menu requires toggling in Safari > Settings > Advanced)
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
 # Move hammerspoon config to XDG_CONFIG_HOME
