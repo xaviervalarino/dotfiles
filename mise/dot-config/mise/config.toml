@@ -1,0 +1,7 @@
+[settings]
+legacy_version_file = true
+[settings.node]
+corepack = true
+
+[tools]
+node = "lts"
