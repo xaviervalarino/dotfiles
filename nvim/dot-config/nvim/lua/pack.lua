@@ -64,6 +64,7 @@ if not vim.g.vscode then
         { src = "https://github.com/nvim-mini/mini.clue" },
         { src = "https://github.com/stevearc/conform.nvim" },
         { src = "https://github.com/davidosomething/format-ts-errors.nvim" },
+        { src = "https://github.com/dmmulroy/ts-error-translator.nvim" },
         { src = "https://github.com/folke/twilight.nvim" },
         { src = "https://github.com/folke/zen-mode.nvim" },
         { src = "https://github.com/sindrets/diffview.nvim" },

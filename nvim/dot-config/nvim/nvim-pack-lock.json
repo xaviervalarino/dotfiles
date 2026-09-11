@@ -146,6 +146,10 @@
       "rev": "40aedd8a68c78a656a10a8d62d80c54af59420fb",
       "src": "https://github.com/nvim-telescope/telescope.nvim.git"
     },
+    "ts-error-translator.nvim": {
+      "rev": "558abff11b9e8f4cefc0de09df780c56841c7a4b",
+      "src": "https://github.com/dmmulroy/ts-error-translator.nvim"
+    },
     "tsc.nvim": {
       "rev": "e083bcf1e54bc3af7df92b33235efb334e8c782c",
       "src": "https://github.com/dmmulroy/tsc.nvim.git"
