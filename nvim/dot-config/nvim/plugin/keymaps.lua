@@ -9,7 +9,7 @@ vim.keymap.set("n", "[d", function()
     if not vim.g.vscode then
         vim.diagnostic.jump({ count = -1, float = true })
     else
-        return "S-<F8>"
+        require("vscode").action("editor.action.marker.prev")
     end
 end, { desc = "Go to previous [D]iagnostic message" })
 
@@ -17,7 +17,7 @@ vim.keymap.set("n", "]d", function()
     if not vim.g.vscode then
         vim.diagnostic.jump({ count = 1, float = true })
     else
-        return "<F8>"
+        require("vscode").action("editor.action.marker.next")
     end
 end, { desc = "Go to next [D]iagnostic message" })
 
@@ -41,7 +41,7 @@ vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" }
 
 vim.keymap.set("n", "<C-h>", function()
     if not vim.g.vscode then
-        return "<C-w><C-h>"
+        vim.cmd.wincmd("h")
     else
         require("vscode").action("workbench.action.focusLeftGroup")
     end
@@ -49,7 +49,7 @@ end, { desc = "Move focus to the left window" })
 
 vim.keymap.set("n", "<C-l>", function()
     if not vim.g.vscode then
-        return "<C-w><C-l>"
+        vim.cmd.wincmd("l")
     else
         require("vscode").action("workbench.action.focusRightGroup")
     end
@@ -57,7 +57,7 @@ end, { desc = "Move focus to the right window" })
 
 vim.keymap.set("n", "<C-j>", function()
     if not vim.g.vscode then
-        return "<C-w><C-j>"
+        vim.cmd.wincmd("j")
     else
         require("vscode").action("workbench.action.focusBelowGroup")
     end
@@ -65,7 +65,7 @@ end, { desc = "Move focus to the lower window" })
 
 vim.keymap.set("n", "<C-k>", function()
     if not vim.g.vscode then
-        return "<C-w><C-k>"
+        vim.cmd.wincmd("k")
     else
         require("vscode").action("workbench.action.focusAboveGroup")
     end

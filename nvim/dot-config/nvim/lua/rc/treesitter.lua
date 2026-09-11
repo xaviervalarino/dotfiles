@@ -42,7 +42,12 @@ if vim.fn.isdirectory("/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk") == 
 end
 
 vim.schedule(function()
-    ts.install(parsers)
+    local missing = vim.tbl_filter(function(lang)
+        return #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".so", false) == 0
+    end, parsers)
+    if #missing > 0 then
+        ts.install(missing)
+    end
 end)
 
 vim.api.nvim_create_autocmd("FileType", {

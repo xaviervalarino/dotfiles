@@ -22,11 +22,11 @@ autocmd("ColorScheme", {
 autocmd({ "WinEnter", "WinLeave" }, {
     group = augroup("LocalNumbers", { clear = true }),
     callback = function(ctx)
-        local is_floating_win = #ctx.file > 0
-        local is_help_file = vim.api.nvim_get_option_value("filetype", { buf = ctx.buf }) ~= "help"
-        local is_rename = vim.endswith(ctx.file, "lsp:rename")
+        local is_floating_win = vim.api.nvim_win_get_config(0).relative ~= ""
+        local ft = vim.api.nvim_get_option_value("filetype", { buf = ctx.buf })
+        local is_special = ft == "help" or ft == "oil" or vim.endswith(ctx.file, "lsp:rename")
 
-        if is_floating_win or is_help_file or is_rename then
+        if is_floating_win or is_special or not vim.wo.number then
             return
         end
 
