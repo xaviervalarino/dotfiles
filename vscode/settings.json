@@ -20,5 +20,7 @@
   "files.insertFinalNewline": true,
   "workbench.startupEditor": "none",
   "git.autofetch": true,
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "totalTypeScript.hideAllTips": false,
+  "totalTypeScript.hideBasicTips": true
 }
