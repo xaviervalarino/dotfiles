@@ -5,3 +5,11 @@ corepack = true
 
 [tools]
 node = "lts"
+lua-language-server = "latest"
+"npm:@vtsls/language-server" = "latest"
+"npm:@tailwindcss/language-server" = "latest"
+"npm:vscode-langservers-extracted" = "latest"
+"npm:graphql-language-service-cli" = "latest"
+"npm:some-sass-language-server" = "latest"
+"npm:@fsouza/prettierd" = "latest"
+"npm:bash-language-server" = "latest"

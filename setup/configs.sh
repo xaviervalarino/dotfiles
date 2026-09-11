@@ -40,6 +40,7 @@ stow -Rv --dotfiles git
 stow -Rv --dotfiles glow
 stow -Rv --dotfiles js
 stow -Rv --dotfiles mise
+mise install 2>/dev/null || true
 stow -Rv --dotfiles scripts
 stow -Rv --dotfiles stylua
 # cargo install stylua

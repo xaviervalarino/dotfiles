@@ -1,3 +1,9 @@
+-- Ensure mise shims directory is in PATH so all managed LSPs are always found
+local mise_shims = vim.fn.expand("~/.local/share/mise/shims")
+if vim.fn.isdirectory(mise_shims) == 1 and not vim.env.PATH:find(mise_shims, 1, true) then
+    vim.env.PATH = mise_shims .. ":" .. vim.env.PATH
+end
+
 -- Node version managers (fnm, nvm, volta) use ephemeral shell paths that
 -- Neovim may not inherit. Resolve the real bin directory from the `node`
 -- binary so npm-installed LSP servers are always found.
