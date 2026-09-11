@@ -9,7 +9,7 @@ fi
 mise use -g node@lts
 
 # Install global packages
-npm -g install \
+mise exec node@lts -- npm -g install \
   bash-language-server \
   prettier \
   svelte-language-server \
@@ -20,4 +20,4 @@ npm -g install \
 
 # Check what was installed
 mise ls node
-npm ls -g --depth=0
+mise exec node@lts -- npm ls -g --depth=0

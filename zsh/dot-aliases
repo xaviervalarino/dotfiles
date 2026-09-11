@@ -11,7 +11,7 @@ else
   alias ll="ls -lah"
 fi
 alias mkdir="mkdir -p"
-alias pomodoro="utimer -t 25s && say 'beep boop, times up'"
+alias pomodoro="utimer -t 25m && say 'beep boop, times up'"
 alias reload="source ~/.zshrc"
 alias stow="stow --verbose --dotfiles"
 alias vim="nvim"
@@ -89,12 +89,11 @@ claude() {
 }
 
 heic_to_jpg() {
-  extension=${2##*.}
-  echo $extension
-  if [[ $extension != 'jpg' && $extension != 'jpeg' ]]; then
-    echo "Error: extension must be 'jpg' or 'jpeg'"
+  local extension="${2##*.}"
+  if [[ "$extension" != "jpg" && "$extension" != "jpeg" ]]; then
+    echo "Error: destination extension must be 'jpg' or 'jpeg'"
   else
-    sips -s format jpeg $1 --out $2
+    sips -s format jpeg "$1" --out "$2"
   fi
 }
 
