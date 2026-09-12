@@ -1,0 +1,452 @@
+/* #ui */
+
+/* ==========================================================================
+   THEME DEFINITIONS (GitHub Light / Dark - Refined Harmony)
+   ========================================================================== */
+:root, :host {
+  --vc-canvas-default: #ffffff;
+  --vc-canvas-subtle: #f6f8fa;
+  --vc-border-default: #d0d7de;
+  --vc-border-muted: #eaeef2;
+  --vc-border-accent: #0969da;
+  --vc-fg-default: #1f2328;
+  --vc-fg-muted: #656d76;
+  --vc-fg-subtle: #8c959f;
+  --vc-accent-fg: #0969da;
+  --vc-match-fg: #0969da;
+  --vc-hint-bg: #ffe97d;
+  --vc-hint-border: #d4a72c;
+  --vc-hint-fg: #1f2328;
+  --vc-hint-match: #656d76;
+  --vc-selection-bg: #add6ff;
+  --vc-selection-fg: #1f2328;
+  --vc-shadow-lg: 0 3px 8px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--vc-border-default);
+  --vc-shadow-hud: 0 -1px 6px rgba(0, 0, 0, 0.08);
+  --vc-item-hover: rgba(208, 215, 222, 0.32);
+  --vc-item-selected: rgba(9, 105, 218, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root, :host {
+    --vc-canvas-default: #0d1117;
+    --vc-canvas-subtle: #161b22;
+    --vc-border-default: #30363d;
+    --vc-border-muted: #21262d;
+    --vc-border-accent: #58a6ff;
+    --vc-fg-default: #f0f6fc;
+    --vc-fg-muted: #8b949e;
+    --vc-fg-subtle: #6e7681;
+    --vc-accent-fg: #58a6ff;
+    --vc-match-fg: #58a6ff;
+    --vc-hint-bg: #e3b341;
+    --vc-hint-border: #bb8009;
+    --vc-hint-fg: #0d1117;
+    --vc-hint-match: #30363d;
+    --vc-selection-bg: #1f6feb;
+    --vc-selection-fg: #ffffff;
+    --vc-shadow-lg: 0 3px 8px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--vc-border-default);
+    --vc-shadow-hud: 0 -1px 6px rgba(0, 0, 0, 0.4);
+    --vc-item-hover: rgba(110, 118, 129, 0.12);
+    --vc-item-selected: rgba(56, 139, 253, 0.16);
+  }
+}
+
+:root.D, :host(.D), .D {
+  --vc-canvas-default: #0d1117;
+  --vc-canvas-subtle: #161b22;
+  --vc-border-default: #30363d;
+  --vc-border-muted: #21262d;
+  --vc-border-accent: #58a6ff;
+  --vc-fg-default: #f0f6fc;
+  --vc-fg-muted: #8b949e;
+  --vc-fg-subtle: #6e7681;
+  --vc-accent-fg: #58a6ff;
+  --vc-match-fg: #58a6ff;
+  --vc-hint-bg: #e3b341;
+  --vc-hint-border: #bb8009;
+  --vc-hint-fg: #0d1117;
+  --vc-hint-match: #30363d;
+  --vc-selection-bg: #1f6feb;
+  --vc-selection-fg: #ffffff;
+  --vc-shadow-lg: 0 3px 8px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--vc-border-default);
+  --vc-shadow-hud: 0 -1px 6px rgba(0, 0, 0, 0.4);
+  --vc-item-hover: rgba(110, 118, 129, 0.12);
+  --vc-item-selected: rgba(56, 139, 253, 0.16);
+}
+
+/* ==========================================================================
+   UI CLASSES (Top Z-Index)
+   ========================================================================== */
+.Omnibar, iframe.Omnibar, .VimiumUI {
+  z-index: 2147483647 !important;
+}
+
+.LH {
+  background: var(--vc-hint-bg);
+  border-color: var(--vc-hint-border);
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", sans-serif;
+  font-weight: 600;
+  padding: 2px 4px 1px;
+  z-index: 2147483647 !important;
+}
+.HM > .LH {
+  color: var(--vc-hint-fg);
+  text-shadow: none;
+}
+.HM > .LH .MC,
+.HM > .LH .MH {
+  color: var(--vc-hint-match);
+}
+.IH {
+  background: rgba(46, 160, 67, 0.15);
+  border-color: #2ea043;
+}
+.IHS {
+  background: rgba(248, 81, 73, 0.2);
+  border-color: #f85149;
+}
+.BH {
+  color: var(--vc-accent-fg);
+}
+.Flash {
+  box-shadow: 0 0 5px 2px var(--vc-accent-fg);
+}
+.Sel {
+  box-shadow: 0 0 5px 2px var(--vc-accent-fg);
+}
+.Frame {
+  border-color: var(--vc-hint-border);
+}
+
+.HUD {
+  color: var(--vc-fg-default);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", sans-serif;
+  z-index: 2147483647 !important;
+}
+.HUD:after {
+  background: var(--vc-canvas-default);
+  border-color: var(--vc-border-default);
+  box-shadow: var(--vc-shadow-hud);
+}
+
+#HDlg {
+  background: var(--vc-canvas-default);
+  border-color: var(--vc-border-default);
+  color: var(--vc-fg-default);
+  box-shadow: var(--vc-shadow-lg);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", sans-serif;
+  z-index: 2147483647 !important;
+}
+.Vim, .VimL {
+  color: var(--vc-accent-fg);
+}
+.VimC {
+  color: var(--vc-fg-muted);
+}
+#HCls {
+  color: var(--vc-fg-subtle);
+}
+#HCls:hover {
+  color: var(--vc-fg-default);
+}
+.HelpKey {
+  background-color: var(--vc-canvas-subtle);
+  border-color: var(--vc-border-default);
+  color: var(--vc-fg-default);
+}
+.HDivider {
+  border-color: var(--vc-border-default);
+}
+.HelpSectionTitle {
+  color: var(--vc-accent-fg);
+}
+.HelpCommandName {
+  color: var(--vc-accent-fg);
+}
+
+/* #omni */
+
+/* ==========================================================================
+   THEME DEFINITIONS (Omnibar)
+   ========================================================================== */
+:root, body {
+  --vc-canvas-default: #ffffff;
+  --vc-canvas-subtle: #f6f8fa;
+  --vc-border-default: #d0d7de;
+  --vc-border-muted: #eaeef2;
+  --vc-border-accent: #0969da;
+  --vc-fg-default: #1f2328;
+  --vc-fg-muted: #656d76;
+  --vc-fg-subtle: #8c959f;
+  --vc-accent-fg: #0969da;
+  --vc-match-fg: #0969da;
+  --vc-shadow-lg: 0 3px 8px rgba(0, 0, 0, 0.12), 0 0 0 1px var(--vc-border-default);
+  --vc-item-hover: rgba(208, 215, 222, 0.32);
+  --vc-item-selected: rgba(9, 105, 218, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root, body {
+    --vc-canvas-default: #0d1117;
+    --vc-canvas-subtle: #161b22;
+    --vc-border-default: #30363d;
+    --vc-border-muted: #21262d;
+    --vc-border-accent: #58a6ff;
+    --vc-fg-default: #f0f6fc;
+    --vc-fg-muted: #8b949e;
+    --vc-fg-subtle: #6e7681;
+    --vc-accent-fg: #58a6ff;
+    --vc-match-fg: #58a6ff;
+    --vc-shadow-lg: 0 3px 8px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--vc-border-default);
+    --vc-item-hover: rgba(110, 118, 129, 0.12);
+    --vc-item-selected: rgba(56, 139, 253, 0.16);
+  }
+}
+
+body.has-dark {
+  --vc-canvas-default: #0d1117;
+  --vc-canvas-subtle: #161b22;
+  --vc-border-default: #30363d;
+  --vc-border-muted: #21262d;
+  --vc-border-accent: #58a6ff;
+  --vc-fg-default: #f0f6fc;
+  --vc-fg-muted: #8b949e;
+  --vc-fg-subtle: #6e7681;
+  --vc-accent-fg: #58a6ff;
+  --vc-match-fg: #58a6ff;
+  --vc-shadow-lg: 0 3px 8px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--vc-border-default);
+  --vc-item-hover: rgba(110, 118, 129, 0.12);
+  --vc-item-selected: rgba(56, 139, 253, 0.16);
+}
+
+/* ==========================================================================
+   OMNIBAR CONTAINER (Unclipped Shadow & Apple Sans-Serif)
+   ========================================================================== */
+html {
+  overflow: hidden !important;
+}
+
+body {
+  animation: show 180ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  background: var(--vc-canvas-default);
+  border: 1px solid var(--vc-border-default);
+  border-radius: 8px;
+  box-shadow: var(--vc-shadow-lg);
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", Helvetica, Arial, sans-serif;
+  margin: 9px 12px 10px;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+body::after {
+  border: none !important;
+  content: none !important;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Top bounded search section */
+#bar {
+  background: var(--vc-canvas-default);
+  border: none;
+  border-bottom: 1px solid var(--vc-border-muted);
+  border-radius: 7px 7px 0 0;
+  box-sizing: border-box;
+  contain: strict;
+  height: 54px;
+  margin: 0;
+  max-height: 54px;
+  padding: 0;
+}
+
+#bar.empty {
+  border-bottom: none;
+}
+
+#input {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  box-sizing: border-box;
+  color: var(--vc-fg-default);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  height: 53px;
+  line-height: 53px;
+  margin: 0;
+  outline: none;
+  padding: 0 20px;
+  width: 100%;
+}
+
+#input:focus {
+  border: none;
+  box-shadow: none;
+}
+
+#toolbar {
+  display: none !important;
+}
+
+/* Results List */
+#list {
+  background: var(--vc-canvas-default);
+  border-radius: 0 0 7px 7px;
+  contain: content;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  background: var(--vc-canvas-default);
+  border-bottom: 1px solid var(--vc-border-muted);
+  box-sizing: border-box;
+  contain: strict;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", Helvetica, Arial, sans-serif;
+  height: 44px;
+  max-height: 44px;
+  overflow: hidden;
+  padding: 4px 20px 0;
+}
+
+.item.b {
+  border-bottom: none;
+}
+
+.item:hover {
+  background-color: var(--vc-item-hover);
+  border-bottom-color: var(--vc-border-muted);
+}
+
+.item.s {
+  background-color: var(--vc-item-selected);
+  border-bottom-color: var(--vc-border-muted);
+}
+
+.item.p {
+  border-color: var(--vc-border-accent);
+}
+
+/* Fix Icon Clipping & Negative Margin Overlap */
+.icon,
+.no-favicon .icon {
+  background: none !important;
+  display: inline-block !important;
+  fill: var(--vc-fg-subtle);
+  height: 15px !important;
+  margin: 0 10px 0 0 !important;
+  padding: 0 !important;
+  vertical-align: -2px !important;
+  width: 15px !important;
+}
+
+.history, .bookm, .domain {
+  fill: var(--vc-fg-subtle);
+}
+
+.tab {
+  stroke: var(--vc-accent-fg);
+}
+
+.search {
+  fill: var(--vc-accent-fg);
+}
+
+/* Title (14px) */
+.top {
+  color: var(--vc-fg-default);
+  font-size: 14px;
+  font-weight: 500;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.top .title {
+  color: var(--vc-fg-default);
+  display: inline !important;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 0 !important;
+}
+
+/* URL / Subtitle (12px Monospace) */
+.bottom {
+  font-size: 12px;
+  height: 18px;
+  line-height: 18px;
+  margin-left: 25px;
+  margin-top: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bottom a,
+.mono-url a {
+  color: var(--vc-fg-muted);
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* Match Highlight */
+match {
+  color: var(--vc-match-fg);
+  font-weight: 600;
+}
+
+.title > match {
+  color: var(--vc-match-fg);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.alt .alt-index::after {
+  background: var(--vc-border-muted);
+  color: var(--vc-fg-default);
+}
+
+/* #find */
+
+::selection {
+  background: var(--vc-selection-bg);
+  color: var(--vc-selection-fg);
+}
+
+.r {
+  background: var(--vc-canvas-default);
+  color: var(--vc-fg-default);
+  box-shadow: inset 0 0 2px 1px var(--vc-border-default);
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro", "Segoe UI", sans-serif;
+}
+
+#i {
+  color: var(--vc-fg-default);
+}
+
+#c {
+  color: var(--vc-fg-subtle);
+}
+
+/* #find:host */
+
+:host {
+  background: var(--vc-canvas-default);
+}

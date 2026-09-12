@@ -1,0 +1,31 @@
+{
+  "name": "Vimium C",
+  "time": 1726161600000,
+  "environment": {
+    "extension": "1.99.99",
+    "platform": "mac"
+  },
+  "exclusionRules": [
+    {
+      "passKeys": "",
+      "pattern": ":https://mail.google.com/"
+    },
+    {
+      "passKeys": "",
+      "pattern": ":https://docs.google.com/"
+    },
+    {
+      "passKeys": "",
+      "pattern": ":https://www.figma.com/"
+    },
+    {
+      "passKeys": "",
+      "pattern": ":https://www.notion.so/"
+    }
+  ],
+  "keyMappings": "map <c-d> scrollPageDown\nmap <c-u> scrollPageUp\nmap <c-k> Vomnibar.activateTabs\nmap <c-p> Vomnibar.activate\nmap J nextTab\nmap K previousTab\nmap yt duplicateTab",
+  "linkHintCharacters": "asdfjklweio",
+  "searchEngines": "g: https://www.google.com/search?q=%s Google\nd: https://duckduckgo.com/?q=%s DuckDuckGo\nr: https://www.google.com/search?q=site%3Areact.dev+%s React\ngh: https://github.com/search?q=%s GitHub\nw: https://en.wikipedia.org/w/index.php?search=%s Wikipedia\nm: https://developer.mozilla.org/en-US/search?q=%s MDN\nnpm: https://www.npmjs.com/search?q=%s npm\nyt: https://www.youtube.com/results?search_query=%s YouTube\nmaps: https://www.google.com/maps?q=%s Google Maps",
+  "searchUrl": "https://www.google.com/search?q=%s Google",
+  "smoothScroll": true
+}
