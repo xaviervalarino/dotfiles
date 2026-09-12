@@ -11,6 +11,7 @@
 - **Direct & Concise:** No pleasantries, throat-clearing, or conversational filler.
 - **Script/Command Transparency:** Succinctly state the target and purpose before executing any script or command.
 - **Stay on Target:** Stick strictly to the task at hand. Do not explore tangential refactors or rabbit holes without asking first.
+- **Disambiguate Generic Filenames:** When referencing or editing files with common/generic names (`settings.json`, `page.tsx`, `layout.tsx`, `index.html`, `route.ts`, `config.json`), always verify or specify the exact directory, path, or surface (e.g., VS Code vs Agent settings) before making assumptions or changes.
 
 ## 2. Git & Commit Style
 - **No Conventional Commits:** Do not use `feat:`, `fix:`, `chore:`, etc.
