@@ -34,6 +34,9 @@ setopt EXTENDED_HISTORY
 ## https://jlk.fjfi.cvut.cz/arch/manpages/man/zshcontrib.0#REMEMBERING_RECENT_DIRECTORIES
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
 add-zsh-hook chpwd chpwd_recent_dirs
+
+# Freeze terminal modes so Zsh natively restores settings if external commands corrupt them
+ttyctl -f 2>/dev/null
 ## Add arg completion as menu (requires `compinit` to be run)
 zstyle ':completion:*' menu selection
 

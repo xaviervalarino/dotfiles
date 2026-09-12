@@ -88,6 +88,19 @@ claude() {
   command claude "$@"
 }
 
+# Restore terminal TTY specifically after `agy` sessions.
+# When commands run inside agy's sandbox fail, deadlock (e.g. interactive `brew install`),
+# or invoke missing/broken binaries (e.g. `luac`), the sandbox PTY pipe breaks
+# and causes the daemon to crash/restart, leaving the host terminal in raw mode (no echo).
+# Target $TTY so recovery succeeds even when stdin is piped or redirected (e.g. cat f | agy).
+agy() {
+  {
+    command agy "$@"
+  } always {
+    [[ -n "$TTY" ]] && stty sane < "$TTY" 2>/dev/null
+  }
+}
+
 heic_to_jpg() {
   local extension="${2##*.}"
   if [[ "$extension" != "jpg" && "$extension" != "jpeg" ]]; then
