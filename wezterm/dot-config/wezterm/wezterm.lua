@@ -140,6 +140,17 @@ config.keys = {
     },
 }
 
+-- Mouse --
+
+config.mouse_bindings = {
+    -- Cmd-click opens links in your default browser, even inside TUI apps
+    {
+        event = { Up = { streak = 1, button = "Left" } },
+        mods = "CMD",
+        action = wezterm.action.OpenLinkAtMouseCursor,
+    },
+}
+
 -- Event handlers --
 
 --- Get a clean display title for a tab.
