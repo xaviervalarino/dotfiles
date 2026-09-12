@@ -37,6 +37,8 @@ local parsers = {
     "yaml",
 }
 
+-- Fallback SDKROOT to Command Line Tools SDK to avoid Xcode TAPI arm64e
+-- linker errors when nvim-treesitter compiles C parsers
 if vim.fn.isdirectory("/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk") == 1 then
     vim.env.SDKROOT = vim.env.SDKROOT or "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
 end

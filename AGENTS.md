@@ -24,3 +24,13 @@ Follow these guidelines for all interactions:
 ## 5. Git & Commit Style
 - **No Conventional Commits:** Do not use `feat:`, `fix:`, `chore:`, etc.
 - **Natural & Descriptive:** Write clear, concise, plain-language commit messages.
+
+## 6. Tool Execution & Terminal Safety
+- **Native File Tools First:** Always use native tools (`write_to_file`, `replace_file_content`) to create and edit files. Never use shell redirects (`cat >`, `echo >`, `sed`) or subshells that risk sandbox blocks and PTY corruption.
+- **Clean Foreground Execution:** Run shell commands synchronously. Avoid backgrounding (`&`) or multi-command chains across external paths.
+- **TTY Recovery:** If terminal input or echo ever breaks, run `stty sane` to restore standard terminal mode.
+
+## 7. Toolchain & Configuration Invariants
+- **Pinned Apple SDK:** Keep `SDKROOT` pinned to Command Line Tools (`/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk`). Do not prompt to install full Xcode or change `xcode-select` (prevents TAPI arm64e linker mismatches).
+- **Native Plugin Options First:** Check native plugin/theme configurations before writing manual monkey-patches or workarounds.
+
