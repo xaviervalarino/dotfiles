@@ -16,6 +16,7 @@
 - **No Conventional Commits:** Do not use `feat:`, `fix:`, `chore:`, etc.
 - **Natural & Descriptive:** Write clear, concise, plain-language commit messages.
 - **Under 50 Characters:** Keep commit subject lines under 50 characters to avoid gitlint prompts.
+- **Pre-Commit Verification:** Run project linter or type check on modified files before asking to commit.
 
 ## 3. Git Worktrees Setup
 > [!NOTE]
@@ -25,6 +26,7 @@
 - **Dependencies:** Run `yarn install` in worktree root (never symlink root `node_modules` across worktrees; yarn installs fast via cache and sets up Husky).
 - **Package Builds & Codegen:** Run `yarn build:packages && yarn gen` to keep workspace packages and GraphQL types self-contained and isolated from other branches.
 - **Cwd over `git -C`:** Never use `git -C <path>`. Always set the command execution directory (`Cwd`) directly to the worktree to preserve prefix-matched tool permissions and prevent approval prompts.
+- **Worktree Cleanup:** Remove worktrees (`git worktree remove`) once a feature branch PR merges to avoid stale workspaces.
 
 ## 4. Tool Execution & Terminal Safety
 - **Native File Tools First:** Always use native tools (`write_to_file`, `replace_file_content`) to create and edit files. Never use shell redirects (`cat >`, `echo >`, `sed`) or subshells that risk sandbox blocks and PTY corruption.
