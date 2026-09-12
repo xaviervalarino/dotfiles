@@ -89,15 +89,17 @@ claude() {
 }
 
 # Restore terminal TTY specifically after `agy` sessions.
-# When commands run inside agy's sandbox fail, deadlock (e.g. interactive `brew install`),
-# or invoke missing/broken binaries (e.g. `luac`), the sandbox PTY pipe breaks
-# and causes the daemon to crash/restart, leaving the host terminal in raw mode (no echo).
-# Target $TTY so recovery succeeds even when stdin is piped or redirected (e.g. cat f | agy).
+# In `settings.json`, AGY defaults commands to isolated sandboxes. When sandboxed
+# commands fail, deadlock, or crash the daemon, the sandbox PTY pipe disconnects
+# and can leave the host terminal stuck in raw mode (no echo).
+# Use `[[ -t 0 ]]` to restore line discipline only when stdin is a real terminal;
+# targeting `$TTY` or running `stty` in background/subshell/pipe contexts triggers
+# kernel SIGTTIN/SIGTTOU signals that freeze the process in `STAT = T`.
 agy() {
   {
     command agy "$@"
   } always {
-    [[ -n "$TTY" ]] && stty sane < "$TTY" 2>/dev/null
+    [[ -t 0 ]] && stty sane 2>/dev/null
   }
 }
 
