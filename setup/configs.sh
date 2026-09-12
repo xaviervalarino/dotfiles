@@ -57,8 +57,10 @@ if [ -d "$VSCODE_USER_DIR" ]; then
   fi
 fi
 
-# Stow private agent configurations if submodule is present
-if [ -d "$SCRIPT_DIR/../agents" ]; then
+# Bootstrap private agent configurations if submodule is present
+if [ -x "$SCRIPT_DIR/../agents/bootstrap.sh" ]; then
+  "$SCRIPT_DIR/../agents/bootstrap.sh"
+elif [ -d "$SCRIPT_DIR/../agents" ]; then
   stow -Rv --dotfiles -d "$SCRIPT_DIR/../agents" -t "$HOME" gemini 2>/dev/null || true
   stow -Rv --dotfiles -d "$SCRIPT_DIR/../agents" -t "$HOME" claude 2>/dev/null || true
 fi
