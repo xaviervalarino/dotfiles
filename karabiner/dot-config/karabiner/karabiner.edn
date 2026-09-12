@@ -20,7 +20,6 @@
  :templates {:wm "/opt/homebrew/bin/hs -c \"WM.%s(%s)\""
              :hs "/opt/homebrew/bin/hs -c \"hs.%s()\""
              :launch "/opt/homebrew/bin/hs -c \"Launch.%s()\""
-             :indicator "/opt/homebrew/bin/hs -c \"Indicator.%s()\""
              :spaces "/opt/homebrew/bin/hs -c \"Spaces(%s)\""
              :menu_item "/opt/homebrew/bin/hs -c \"Menu_item('%s', '%s')\""
              :play_pause "/opt/homebrew/bin/hs -c \"hs.eventtap.event.newSystemKeyEvent ('PLAY',true) :post ()\""
@@ -51,8 +50,7 @@
                   {:alone [{:key :escape}
                            {:set ["r_layer" 0]}
                            {:set ["launch_layer" 0]}
-                           {:set ["hs_layer" 0]}
-                           [:indicator "off"]]
+                           {:set ["hs_layer" 0]}]
                    :afterup {:set ["caps_layer" 0]}}]]}
 
         {:des "OS convenience"
