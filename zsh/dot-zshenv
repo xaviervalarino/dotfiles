@@ -3,13 +3,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
-# Pin SDKROOT to Command Line Tools SDK:
-# Avoids Xcode SDK TAPI arm64e linker mismatches that break Neovim Treesitter
-# parser compilation and Homebrew C-extension builds on macOS.
-if [ -d "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk" ]; then
-  export SDKROOT="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
-fi
-
 export EDITOR=nvim
 
 
