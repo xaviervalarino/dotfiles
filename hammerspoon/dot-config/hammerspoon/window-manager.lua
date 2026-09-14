@@ -7,7 +7,15 @@ hs.window.animationDuration = 0.12
 hs.application.enableSpotlightForNameSearches(true)
 
 -- Load PaperWM Spoon
-local paperwm = hs.loadSpoon("PaperWM")
+-- PaperWM yields to the ribbon window manager when this flag file exists.
+-- Toggle: touch/rm ~/.config/ribbon/paperwm.disabled, then hs -c "hs.reload()"
+local paperwm_disabled = hs.fs.attributes(os.getenv("HOME") .. "/.config/ribbon/paperwm.disabled") ~= nil
+local paperwm = nil
+if not paperwm_disabled then
+    paperwm = hs.loadSpoon("PaperWM")
+else
+    hs.alert.show("PaperWM off (ribbon active)")
+end
 
 if paperwm then
     -- Tiling & spacing config: 8px between windows
@@ -183,6 +191,33 @@ function M.move_to_next_display()
     end
 end
 
+local is_running = (paperwm ~= nil)
+
+--- Toggle PaperWM window manager on/off
+function M.toggle()
+    if is_running and paperwm then
+        paperwm:stop()
+        stop_borders()
+        is_running = false
+        hs.alert.show("PaperWM Off")
+    elseif paperwm then
+        paperwm:start()
+        start_borders()
+        is_running = true
+        hs.alert.show("PaperWM On")
+    end
+end
+
+--- Stop PaperWM window manager
+function M.stop()
+    if is_running and paperwm then
+        paperwm:stop()
+        stop_borders()
+        is_running = false
+        hs.alert.show("PaperWM Off")
+    end
+end
+
 -- Cheatsheet HUD
 local last_alert_id = nil
 function M.toggle_cheatsheet()
@@ -206,6 +241,7 @@ function M.toggle_cheatsheet()
         "w + '             Toggle Full Width",
         "w + ;             Center Window",
         "w + n             Move to Next Display",
+        "w + q             Toggle PaperWM (Stop/Start)",
         "w + /             Toggle This Cheatsheet",
     }, "\n")
 

@@ -196,7 +196,8 @@
                  [:n [:wm "move_to_next_display"]]
                  [:semicolon [:wm "center"]]
                  [:quote [:wm "fill"]]
-                 [:slash [:wm "toggle_cheatsheet"]]]}
+                 [:slash [:wm "toggle_cheatsheet"]]
+                 [:q [:wm "toggle"]]]}
 
         {:des "Application launcher"
          :rules [[:!SCcomma [:open "System Preferences"]]
