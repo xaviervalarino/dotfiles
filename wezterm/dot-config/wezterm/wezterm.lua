@@ -95,7 +95,7 @@ config.window_padding = {
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
-config.tab_max_width = 120
+config.tab_max_width = 135
 
 -- Bell --
 
@@ -200,16 +200,111 @@ local function tab_has_alert(tab_info)
     return false
 end
 
+--- Get non-title width (padding, indicators, index) for a tab.
+local function tab_chrome_width(tab_info, has_alert)
+    local index = tab_info.tab_index + 1
+    local index_len = #tostring(index)
+    return (has_alert and 7 or 5) + index_len
+end
+
+--- Get terminal window width in columns.
+local function get_window_cols(tab_info)
+    local max_col = 0
+    if tab_info.panes then
+        for _, p in ipairs(tab_info.panes) do
+            local right = (p.left or 0) + (p.width or 0)
+            if right > max_col then
+                max_col = right
+            end
+        end
+    end
+    if max_col > 0 then
+        return max_col
+    end
+    local pane = tab_info.active_pane
+    if pane and pane.width and pane.width > 0 then
+        return pane.width
+    end
+    return 120
+end
+
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
     local title = get_tab_title(tab)
     local is_active = tab.is_active
+    local num_tabs = #tabs
 
-    -- Active/selected or hovered tab shows full title up to 120 cols;
-    -- Inactive tabs truncate at 18 columns
-    local limit = (is_active or hover) and 120 or 18
+    -- Tabs are max 120 chars by default with an ellipsis if they overflow.
+    -- If there are too many tabs open that 120 doesn't fit, prioritize the active tab.
+    -- On hover the sizing does not change (only changes on selection/active).
+    local limit = 120
+    if num_tabs > 1 then
+        local total_cols = get_window_cols(tab)
+        local has_alerts = {}
+        local tab_titles = {}
+        local total_needed = 0
+        local active_tab_info = nil
+
+        for _, t in ipairs(tabs) do
+            local alert = tab_has_alert(t)
+            has_alerts[t.tab_id] = alert
+            local t_title = get_tab_title(t)
+            tab_titles[t.tab_id] = t_title
+            local chrome = tab_chrome_width(t, alert)
+            local natural_len = math.min(120, wezterm.column_width(t_title))
+            total_needed = total_needed + natural_len + chrome
+            if t.is_active then
+                active_tab_info = t
+            end
+        end
+
+        if total_needed > total_cols then
+            local num_inactive = num_tabs - 1
+            local min_inactive_title = 2
+            local reserved_for_inactive = 0
+            for _, t in ipairs(tabs) do
+                if not t.is_active then
+                    reserved_for_inactive = reserved_for_inactive
+                        + tab_chrome_width(t, has_alerts[t.tab_id])
+                        + min_inactive_title
+                end
+            end
+
+            local active_chrome = active_tab_info
+                    and tab_chrome_width(active_tab_info, has_alerts[active_tab_info.tab_id])
+                or 6
+            local active_available = math.max(active_chrome + 3, total_cols - reserved_for_inactive)
+            local active_title_limit = math.min(120, active_available - active_chrome)
+
+            local active_title_text = active_tab_info
+                    and (tab_titles[active_tab_info.tab_id] or get_tab_title(active_tab_info))
+                or ""
+            local active_title_len = math.min(active_title_limit, wezterm.column_width(active_title_text))
+            local active_used = active_title_len + active_chrome
+
+            local remaining_for_inactive = math.max(0, total_cols - active_used)
+            local avg_inactive_slot = math.floor(remaining_for_inactive / num_inactive)
+
+            if is_active then
+                limit = active_title_limit
+            else
+                local my_chrome = tab_chrome_width(tab, has_alerts[tab.tab_id])
+                limit = math.max(min_inactive_title, avg_inactive_slot - my_chrome)
+                limit = math.min(120, limit)
+            end
+        else
+            limit = 120
+        end
+    else
+        limit = 120
+    end
+
     local width = wezterm.column_width(title)
     if width > limit then
-        title = wezterm.truncate_right(title, limit - 1) .. "…"
+        if limit <= 1 then
+            title = "…"
+        else
+            title = wezterm.truncate_right(title, limit - 1) .. "…"
+        end
     end
 
     local index = tab.tab_index + 1
