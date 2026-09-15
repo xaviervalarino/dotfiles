@@ -19,22 +19,44 @@
 [core]
   editor = nvim
   excludesfile = ~/.config/git/excludes
-  pager = delta --features="$TERM_COLORSCHEME"
+  pager = delta --features="${TERM_COLORSCHEME:-dark}"
 [push]
   default = simple
 [pull]
   rebase = true
 [interactive]
-  diffFilter = delta --features="$TERM_COLORSCHEME" --color-only
+  diffFilter = delta --features="${TERM_COLORSCHEME:-dark}" --color-only
 [delta]
   navigate = true  # use n and N to move between diff sections
   line-numbers = true
 [delta "dark"]
-  syntax-theme = "1337"
+  syntax-theme = "GitHub Dark"
+  minus-style = syntax "#3d1418"
+  minus-emph-style = syntax "#67060c"
+  plus-style = syntax "#103219"
+  plus-emph-style = syntax "#1a5e2a"
+  minus-empty-line-marker-style = normal "#3d1418"
+  plus-empty-line-marker-style = normal "#103219"
+  line-numbers-minus-style = "#f85149"
+  line-numbers-plus-style = "#3fb950"
+  line-numbers-zero-style = "#6e7681"
+  line-numbers-left-style = "#30363d"
+  line-numbers-right-style = "#30363d"
 
 [delta "light"]
   light = true
-  syntax-theme = "GitHub"
+  syntax-theme = "GitHub Light"
+  minus-style = syntax "#ffebe9"
+  minus-emph-style = syntax "#ffc1c0"
+  plus-style = syntax "#dafbe1"
+  plus-emph-style = syntax "#acf2bd"
+  minus-empty-line-marker-style = normal "#ffebe9"
+  plus-empty-line-marker-style = normal "#dafbe1"
+  line-numbers-minus-style = "#cf222e"
+  line-numbers-plus-style = "#1a7f37"
+  line-numbers-zero-style = "#8c959f"
+  line-numbers-left-style = "#d0d7de"
+  line-numbers-right-style = "#d0d7de"
 [merge]
   conflictstyle = diff3
 [diff]
