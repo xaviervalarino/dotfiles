@@ -16,6 +16,7 @@
   cached = diff --cached
   unstage = reset HEAD --
   last = log -1 HEAD
+  prune-merged="!bash -c 'for branch in $(gh pr list --state closed --base main --json headRefName --jq \".[] | .headRefName\"); do if git show-ref --quiet refs/heads/\"$branch\"; then git branch -d \"$branch\"; fi; done'"
 [core]
   editor = nvim
   excludesfile = ~/.config/git/excludes
@@ -76,3 +77,4 @@
 [include]
   path = ~/.gitconfig.local
 
+# vim:ft=config
