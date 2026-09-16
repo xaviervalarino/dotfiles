@@ -6,6 +6,13 @@ pcall(function()
     })
 end)
 
+pcall(function()
+    require("format-ts-errors").setup({
+        add_markdown = true,
+        start_indent_level = 0,
+    })
+end)
+
 vim.diagnostic.config({
     severity_sort = true,
     float = {
@@ -13,6 +20,9 @@ vim.diagnostic.config({
     },
     virtual_text = {
         hl_mode = "combine",
+        prefix = function()
+            return "●"
+        end,
     },
 })
 
@@ -53,3 +63,23 @@ local options = vim.tbl_deep_extend("force", curr_options, {
 })
 
 vim.diagnostic.config(options)
+
+-- Ensure floating diagnostic window renders markdown with syntax highlighting & concealed links
+local orig_open_float = vim.diagnostic.open_float
+vim.diagnostic.open_float = function(...)
+    local float_bufnr, winnr = orig_open_float(...)
+
+    if float_bufnr and vim.api.nvim_buf_is_valid(float_bufnr) then
+        vim.api.nvim_buf_clear_namespace(float_bufnr, -1, 0, -1)
+        vim.bo[float_bufnr].filetype = "markdown"
+
+        pcall(vim.treesitter.start, float_bufnr, "markdown")
+
+        if winnr and vim.api.nvim_win_is_valid(winnr) then
+            vim.wo[winnr].conceallevel = 2
+            vim.wo[winnr].concealcursor = "c"
+        end
+    end
+
+    return float_bufnr, winnr
+end

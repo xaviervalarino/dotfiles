@@ -1,17 +1,18 @@
-local function get_hl_color(group, attr)
-    local hl = vim.api.nvim_get_hl(0, { name = group, link = false })
-    local color = hl[attr]
-    if color then
-        return string.format("#%06x", color)
-    end
+local function setup_highlight()
+    local comment_hl = vim.api.nvim_get_hl(0, { name = "Comment", link = false })
+    local cursor_hl = vim.api.nvim_get_hl(0, { name = "CursorLine", link = false })
+    vim.api.nvim_set_hl(0, "CursorComment", {
+        fg = comment_hl.fg,
+        bg = cursor_hl.bg,
+    })
 end
 
-local comment_fg = get_hl_color("Comment", "fg")
-local cursor_bg = get_hl_color("CursorLine", "bg")
+setup_highlight()
 
-vim.api.nvim_set_hl(0, "CursorComment", { fg = comment_fg, bg = cursor_bg })
+vim.api.nvim_create_autocmd("ColorScheme", { callback = setup_highlight })
 
 require("gitblame").setup({
     highlight_group = "CursorComment",
+    set_extmark_options = { hl_mode = "combine" },
     ignored_filetypes = { "gitcommit" },
 })
