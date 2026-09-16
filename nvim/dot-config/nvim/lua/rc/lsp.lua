@@ -131,49 +131,28 @@ vim.lsp.config("lua_ls", {
 })
 vim.lsp.enable("lua_ls")
 
-require("lspconfig.configs").vtsls = require("vtsls").lspconfig
-require("lspconfig").vtsls.setup({
-    settings = {
-        typescript = {
-            autoUseWorkspaceTsdk = true,
-            inlayHints = {
-                parameterNames = { enabled = "literals" },
-                parameterTypes = { enabled = true },
-                variableTypes = { enabled = true },
-                propertyDeclarationTypes = { enabled = true },
-                functionLikeReturnTypes = { enabled = true },
-                enumMemberValues = { enabled = true },
-            },
-        },
-    },
+vim.lsp.config("tsc", {
     on_attach = function(client, bufnr)
-        require("twoslash-queries").attach(client, bufnr)
-
-        local cmd = require("vtsls").commands
-
-        local function on_reject(msg_or_err)
-            vim.notify(msg_or_err)
-        end
+        pcall(function()
+            require("twoslash-queries").attach(client, bufnr)
+        end)
 
         vim.keymap.set("n", "<leader>im", function()
-            cmd.add_missing_imports(bufnr, function()
-                vim.notify("adding missing imports")
-                cmd.remove_unused_imports(bufnr, function()
-                    vim.notify("removing unused imports")
-                    cmd.sort_imports(bufnr, function()
-                        vim.notify("sorting imports")
-                    end, on_reject)
-                end, on_reject)
-            end, on_reject)
-        end, { desc = "TS: update [im]ports" })
+            vim.lsp.buf.code_action({
+                context = { only = { "source.organizeImports" } },
+                apply = true,
+            })
+        end, { desc = "TS: organize [im]ports", buffer = bufnr })
 
         vim.keymap.set("n", "<leader>fa", function()
-            cmd.fix_all(bufnr)
-        end, { desc = "TS: [f]ix [a]ll" })
-
-        vim.keymap.set("n", "<leader>rf", ":VtsRename % ", { desc = "TS: [r]ename [f]ile" })
+            vim.lsp.buf.code_action({
+                context = { only = { "source.fixAll" } },
+                apply = true,
+            })
+        end, { desc = "TS: [f]ix [a]ll", buffer = bufnr })
     end,
 })
+vim.lsp.enable("tsc")
 
 vim.lsp.config("tailwindcss", {
     root_dir = function(bufnr, on_dir)

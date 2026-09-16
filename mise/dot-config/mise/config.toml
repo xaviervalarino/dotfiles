@@ -6,9 +6,11 @@ corepack = true
 [tools]
 node = "lts"
 go = "latest"
+"go:golang.org/x/tools/gopls" = "latest"
 stylua = "latest"
 lua-language-server = "latest"
-"npm:@vtsls/language-server" = "latest"
+"npm:@typescript/native-preview" = "7.0.0-dev.20260707.2"
+"npm:eslint_d" = "latest"
 "npm:@tailwindcss/language-server" = "latest"
 "npm:vscode-langservers-extracted" = "latest"
 "npm:graphql-language-service-cli" = "latest"

@@ -11,6 +11,11 @@ end
 
 require("oil").setup({
     skip_confirm_for_simple_edits = true,
+    lsp_file_methods = {
+        enabled = true,
+        timeout_ms = 2500,
+        autosave_changes = true,
+    },
     win_options = {
         signcolumn = "yes:2",
         winbar = "%!v:lua.get_oil_winbar()",
