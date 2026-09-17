@@ -10,6 +10,20 @@ I use [`stow`](https://www.gnu.org/software/stow/) to manage my dotfiles. If you
 source <(curl -s https://raw.githubusercontent.com/xaviervalarino/dotfiles/main/setup/bootstrap.mac.sh)
 ```
 
+## Git Fuzzy Completions
+
+Context-aware fuzzy completion for Git triggered by `**<TAB>` (powered by `fzf` via [`zsh/dot-fzf-git.zsh`](./zsh/dot-fzf-git.zsh)):
+
+- `git diff -- **` / `git diff **`: changed & deleted files with diff preview (`-m` multi-select)
+- `git diff --cached **`: staged files with diff preview
+- `git diff <branch> **`: files changed against that branch/commit
+- `git add **`: unstaged files (modified, deleted, untracked) with diff/preview
+- `git restore **`: unstaged files (or staged files when `--staged` is passed)
+- `git reset **` / `git unstage **`: staged files to unstage (or branches/commits with `--hard`)
+- `git checkout **` / `git co **` / `git switch **`: branches sorted by commit date
+- `git branch -d **`: local branches for deletion (`-m` multi-select)
+- `g` alias: works identically for all Git commands (`g diff -- **`, `g co **`, etc.)
+
 ## Post Install
 
 ### Symbol font
