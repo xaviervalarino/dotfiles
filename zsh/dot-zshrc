@@ -60,7 +60,12 @@ WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 # Init command-line fuzzy finder
 ## https://github.com/junegunn/fzf
 if command -v fzf &> /dev/null; then
- source <(fzf --zsh)
+  source <(fzf --zsh)
+  if [ -f "$HOME/.fzf-git.zsh" ]; then
+    source "$HOME/.fzf-git.zsh"
+  elif [ -f "${0:a:h}/dot-fzf-git.zsh" ]; then
+    source "${0:a:h}/dot-fzf-git.zsh"
+  fi
 fi
 
 # mise (runtime executor & version manager)
