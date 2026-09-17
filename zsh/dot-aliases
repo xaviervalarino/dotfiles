@@ -5,7 +5,7 @@ if command -v eza &>/dev/null; then
   alias ls="eza --icons --group-directories-first"
   alias ll="eza -la --icons --octal-permissions --group-directories-first"
   alias la="eza -a --icons --group-directories-first"
-  alias tree="eza --tree --icons"
+  alias tree="eza --tree --icons --level=3"
 else
   alias ls="ls -Gh"
   alias ll="ls -lah"
@@ -96,10 +96,25 @@ claude() {
 # targeting `$TTY` or running `stty` in background/subshell/pipe contexts triggers
 # kernel SIGTTIN/SIGTTOU signals that freeze the process in `STAT = T`.
 agy() {
+  local live="$HOME/.gemini/antigravity-cli/settings.json"
+  local repo="$HOME/dotfiles/agents/gemini/dot-gemini/antigravity-cli/settings.json"
+
+  # Sync repo edits to live settings before launch
+  if [[ -f "$repo" && -d "${live:h}" ]]; then
+    if [[ ! -f "$live" || "$repo" -nt "$live" ]]; then
+      cp "$repo" "$live"
+    fi
+  fi
+
   {
     command agy "$@"
   } always {
     [[ -t 0 ]] && stty sane 2>/dev/null
+
+    # Sync runtime settings back to dotfiles repo on exit
+    if [[ -f "$live" && -d "${repo:h}" ]]; then
+      cmp -s "$live" "$repo" || cp "$live" "$repo"
+    fi
   }
 }
 
