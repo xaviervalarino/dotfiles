@@ -120,10 +120,20 @@ agy() {
     # by `agy mcp list` but NOT by the runtime, which still dials a disabled server
     # and still stalls on it. Verified 2026-09-17. Filter on status and this guard
     # skips exactly the server that is about to hang the dispatch.
-    local mcp_down=() mcp_name mcp_url
+    # Probe TCP reachability, NOT HTTP semantics. A healthy streamable-HTTP MCP
+    # server holds a bare GET open (it is waiting to stream), so curl would time
+    # out against a perfectly working server and block every dispatch. Verified
+    # 2026-09-17: GET /mcp on a live Storybook hangs, while a JSON-RPC POST
+    # answers in 16ms. Only "is anything listening" separates the real hazard.
+    local mcp_down=() mcp_name mcp_url mcp_hostport mcp_host mcp_port
     while read -r mcp_name mcp_url; do
       [[ -z "$mcp_url" ]] && continue
-      curl -s -o /dev/null --max-time 2 "$mcp_url" || mcp_down+=("$mcp_name ($mcp_url)")
+      mcp_hostport=${${mcp_url#*://}%%/*}
+      mcp_host=${mcp_hostport%%:*}
+      mcp_port=${mcp_hostport##*:}
+      [[ "$mcp_port" == "$mcp_host" ]] && mcp_port=80
+      nc -z -G 2 "$mcp_host" "$mcp_port" >/dev/null 2>&1 ||
+        mcp_down+=("$mcp_name ($mcp_url)")
     done < <(command agy mcp list 2>/dev/null |
       awk '$2 == "http" && $NF ~ /localhost|127\.0\.0\.1/ { print $1, $NF }')
     if (( ${#mcp_down} )); then
