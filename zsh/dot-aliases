@@ -106,10 +106,33 @@ agy() {
     fi
   fi
 
+  # Headless turns hang silently when the keyring token has lapsed, returning
+  # {"status":"SUCCESS", num_turns:0}. Refuse to dispatch rather than stall.
+  # Interactive agy is left alone — it is the re-auth path.
+  local cli_log="$HOME/.gemini/antigravity-cli/cli.log" print_mode=0
+  if [[ " $* " == *" -p "* || " $* " == *" --print "* || " $* " == *" --prompt "* ]]; then
+    print_mode=1
+    command agy models >/dev/null 2>&1
+    # A healthy run logs "not logged in" *before* it authenticates, so only the
+    # last of the two signals is meaningful.
+    case "$(grep -E 'not logged into Antigravity|OAuth: authenticated successfully' "$cli_log" 2>/dev/null | tail -1)" in
+      *"authenticated successfully"*)
+        print -u2 "agy: token $(grep -oE 'expiry=[0-9-]+ [0-9:]+' "$cli_log" | tail -1)" ;;
+      *"not logged into Antigravity"*)
+        print -u2 "agy: not authenticated — run 'agy' interactively first."
+        return 1 ;;
+      *)
+        print -u2 "agy: could not confirm auth (log format may have changed) — proceeding." ;;
+    esac
+  fi
+
   {
     command agy "$@"
   } always {
     [[ -t 0 ]] && stty sane 2>/dev/null
+
+    (( print_mode )) && [[ "$(grep -E 'not logged into Antigravity|OAuth: authenticated successfully' "$cli_log" 2>/dev/null | tail -1)" == *"not logged into Antigravity"* ]] \
+      && print -u2 "agy: auth lapsed during this run — result envelope is unreliable."
 
     # Sync runtime settings back to dotfiles repo on exit
     if [[ -f "$live" && -d "${repo:h}" ]]; then
