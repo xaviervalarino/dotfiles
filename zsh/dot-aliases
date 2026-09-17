@@ -106,12 +106,33 @@ agy() {
     fi
   fi
 
-  # Headless turns hang silently when the keyring token has lapsed, returning
-  # {"status":"SUCCESS", num_turns:0}. Refuse to dispatch rather than stall.
+  # Headless turns stall silently and still return {"status":"SUCCESS"}. Two known
+  # causes: an MCP server that never finishes connecting, and a lapsed auth token.
+  # Refuse to dispatch rather than burn the --print-timeout on either.
   # Interactive agy is left alone — it is the re-auth path.
   local cli_log="$HOME/.gemini/antigravity-cli/cli.log" print_mode=0
   if [[ " $* " == *" -p "* || " $* " == *" --print "* || " $* " == *" --prompt "* ]]; then
     print_mode=1
+
+    # An MCP server on a dead localhost port never fails its connect — it retries
+    # until --print-timeout while the turn sits idle. Cheapest gate, so it runs first.
+    # NOTE: the STATUS column is deliberately ignored. `agy mcp disable` is honoured
+    # by `agy mcp list` but NOT by the runtime, which still dials a disabled server
+    # and still stalls on it. Verified 2026-09-17. Filter on status and this guard
+    # skips exactly the server that is about to hang the dispatch.
+    local mcp_down=() mcp_name mcp_url
+    while read -r mcp_name mcp_url; do
+      [[ -z "$mcp_url" ]] && continue
+      curl -s -o /dev/null --max-time 2 "$mcp_url" || mcp_down+=("$mcp_name ($mcp_url)")
+    done < <(command agy mcp list 2>/dev/null |
+      awk '$2 == "http" && $NF ~ /localhost|127\.0\.0\.1/ { print $1, $NF }')
+    if (( ${#mcp_down} )); then
+      print -u2 "agy: MCP server unreachable — print mode would stall until --print-timeout:"
+      printf '  %s\n' "${mcp_down[@]}" >&2
+      print -u2 "Start it, or remove it: agy mcp remove <name>  (disable does NOT stop the dial)"
+      return 1
+    fi
+
     command agy models >/dev/null 2>&1
     # A healthy run logs "not logged in" *before* it authenticates, so only the
     # last of the two signals is meaningful.
