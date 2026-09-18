@@ -120,26 +120,26 @@ agy() {
     # by `agy mcp list` but NOT by the runtime, which still dials a disabled server
     # and still stalls on it. Verified 2026-09-17. Filter on status and this guard
     # skips exactly the server that is about to hang the dispatch.
-    # Probe TCP reachability, NOT HTTP semantics. A healthy streamable-HTTP MCP
-    # server holds a bare GET open (it is waiting to stream), so curl would time
-    # out against a perfectly working server and block every dispatch. Verified
-    # 2026-09-17: GET /mcp on a live Storybook hangs, while a JSON-RPC POST
-    # answers in 16ms. Only "is anything listening" separates the real hazard.
-    local mcp_down=() mcp_name mcp_url mcp_hostport mcp_host mcp_port
+    # A server that ACCEPTS the connection and then says nothing is the hazard.
+    # After initializing over POST, agy opens a standalone SSE stream with a bare
+    # GET and applies no timeout to it, so one silent endpoint hangs the whole
+    # turn. Verified 2026-09-17: Storybook's /mcp swallows that GET and never
+    # sends a header, while dbhub answers 405 in 60ms and never stalls.
+    #
+    # So the test is "did it answer at all", not "is the port open" (a running
+    # Storybook passes that) and not "did the body finish" (a legitimately
+    # streaming server never would). response_code is 000 only when no headers
+    # ever arrived; any real status, even 401 or 405, means the server replied.
+    local mcp_down=() mcp_name mcp_url mcp_code
     while read -r mcp_name mcp_url; do
       [[ -z "$mcp_url" ]] && continue
-      mcp_hostport=${${mcp_url#*://}%%/*}
-      mcp_host=${mcp_hostport%%:*}
-      mcp_port=${mcp_hostport##*:}
-      [[ "$mcp_port" == "$mcp_host" ]] && mcp_port=80
-      nc -z -G 2 "$mcp_host" "$mcp_port" >/dev/null 2>&1 ||
-        mcp_down+=("$mcp_name ($mcp_url)")
-    done < <(command agy mcp list 2>/dev/null |
-      awk '$2 == "http" && $NF ~ /localhost|127\.0\.0\.1/ { print $1, $NF }')
+      mcp_code=$(curl -s -o /dev/null -w '%{response_code}' --max-time 2 "$mcp_url" 2>/dev/null)
+      [[ "$mcp_code" == "000" || -z "$mcp_code" ]] && mcp_down+=("$mcp_name ($mcp_url)")
+    done < <(command agy mcp list 2>/dev/null | awk '$2 == "http" { print $1, $NF }')
     if (( ${#mcp_down} )); then
-      print -u2 "agy: MCP server unreachable — print mode would stall until --print-timeout:"
+      print -u2 "agy: MCP server accepts connections but never answers; print mode would stall:"
       printf '  %s\n' "${mcp_down[@]}" >&2
-      print -u2 "Start it, or remove it: agy mcp remove <name>  (disable does NOT stop the dial)"
+      print -u2 "Fix: agy mcp remove <name>   (disable is ignored by the runtime; restarting the server does not help)"
       return 1
     fi
 
