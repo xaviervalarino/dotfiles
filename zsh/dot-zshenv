@@ -5,6 +5,8 @@ export XDG_CACHE_HOME="$HOME/.cache"
 
 export EDITOR=nvim
 
+# Personal secrets & local environment overrides (untracked)
+[[ -f "$HOME/.env.personal" ]] && source "$HOME/.env.personal"
 
 
 
