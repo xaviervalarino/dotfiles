@@ -27,7 +27,6 @@ brew "mpv"
 brew "neovim"
 brew "pandoc"
 brew "pdf2svg"
-brew "pidof"
 brew "pstree"
 brew "pure"
 brew "ripgrep"
@@ -63,15 +62,12 @@ cask "slack"
 cask "wacom-tablet"
 cask "wezterm"
 cask "zen"
-cask "zoom"
 
 # Personal
 cask "affinity-designer"
 cask "affinity-photo"
 cask "affinity-publisher"
 cask "blender"
-cask "battle-net" # starcraft BW
-
-mas "WhatsApp", id: 1147396723
+cask "WhatsApp"
 
 # vim:ft=ruby
