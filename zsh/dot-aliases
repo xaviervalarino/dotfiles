@@ -96,65 +96,12 @@ claude() {
 # targeting `$TTY` or running `stty` in background/subshell/pipe contexts triggers
 # kernel SIGTTIN/SIGTTOU signals that freeze the process in `STAT = T`.
 agy() {
-  # Headless turns stall silently and still return {"status":"SUCCESS"}. Two known
-  # causes: an MCP server that never finishes connecting, and a lapsed auth token.
-  # Refuse to dispatch rather than burn the --print-timeout on either.
-  # Interactive agy is left alone — it is the re-auth path.
-  # Note: settings.json sync is handled asynchronously via launchd (com.user.gemini-settings-sync).
-  local cli_log="$HOME/.gemini/antigravity-cli/cli.log" print_mode=0
-  if [[ " $* " == *" -p "* || " $* " == *" --print "* || " $* " == *" --prompt "* ]]; then
-    print_mode=1
-
-    # An MCP server on a dead localhost port never fails its connect — it retries
-    # until --print-timeout while the turn sits idle. Cheapest gate, so it runs first.
-    # NOTE: the STATUS column is deliberately ignored. `agy mcp disable` is honoured
-    # by `agy mcp list` but NOT by the runtime, which still dials a disabled server
-    # and still stalls on it. Verified 2026-09-17. Filter on status and this guard
-    # skips exactly the server that is about to hang the dispatch.
-    # A server that ACCEPTS the connection and then says nothing is the hazard.
-    # After initializing over POST, agy opens a standalone SSE stream with a bare
-    # GET and applies no timeout to it, so one silent endpoint hangs the whole
-    # turn. Verified 2026-09-17: Storybook's /mcp swallows that GET and never
-    # sends a header, while dbhub answers 405 in 60ms and never stalls.
-    #
-    # So the test is "did it answer at all", not "is the port open" (a running
-    # Storybook passes that) and not "did the body finish" (a legitimately
-    # streaming server never would). response_code is 000 only when no headers
-    # ever arrived; any real status, even 401 or 405, means the server replied.
-    local mcp_down=() mcp_name mcp_url mcp_code
-    while read -r mcp_name mcp_url; do
-      [[ -z "$mcp_url" ]] && continue
-      mcp_code=$(curl -s -o /dev/null -w '%{response_code}' --max-time 2 "$mcp_url" 2>/dev/null)
-      [[ "$mcp_code" == "000" || -z "$mcp_code" ]] && mcp_down+=("$mcp_name ($mcp_url)")
-    done < <(command agy mcp list 2>/dev/null | awk '$2 == "http" { print $1, $NF }')
-    if (( ${#mcp_down} )); then
-      print -u2 "agy: MCP server accepts connections but never answers; print mode would stall:"
-      printf '  %s\n' "${mcp_down[@]}" >&2
-      print -u2 "Fix: agy mcp remove <name>   (disable is ignored by the runtime; restarting the server does not help)"
-      return 1
-    fi
-
-    command agy models >/dev/null 2>&1
-    # A healthy run logs "not logged in" *before* it authenticates, so only the
-    # last of the two signals is meaningful.
-    case "$(grep -E 'not logged into Antigravity|OAuth: authenticated successfully' "$cli_log" 2>/dev/null | tail -1)" in
-      *"authenticated successfully"*)
-        print -u2 "agy: token $(grep -oE 'expiry=[0-9-]+ [0-9:]+' "$cli_log" | tail -1)" ;;
-      *"not logged into Antigravity"*)
-        print -u2 "agy: not authenticated — run 'agy' interactively first."
-        return 1 ;;
-      *)
-        print -u2 "agy: could not confirm auth (log format may have changed) — proceeding." ;;
-    esac
-  fi
-
+  # Headless dispatch belongs to agy-dispatch (~/.claude/skills/agy-delegate/scripts),
+  # which runs the MCP and auth preflight. This wrapper only restores the TTY.
   {
     command agy "$@"
   } always {
     [[ -t 0 ]] && stty sane 2>/dev/null
-
-    (( print_mode )) && [[ "$(grep -E 'not logged into Antigravity|OAuth: authenticated successfully' "$cli_log" 2>/dev/null | tail -1)" == *"not logged into Antigravity"* ]] \
-      && print -u2 "agy: auth lapsed during this run — result envelope is unreliable."
   }
 }
 
