@@ -11,5 +11,6 @@ eval "$($brew shellenv)"
 
 path+=(/usr/local/sbin)
 
-# Personal scripts
+# Personal binaries and scripts
+path=("$HOME/.local/bin" $path)
 path+=("$HOME/scripts")
