@@ -16,7 +16,7 @@
   cached = diff --cached
   unstage = reset HEAD --
   last = log -1 HEAD
-  prune-merged = "!for branch in $(gh pr list --state merged --base main --limit 100 --json headRefName --jq '.[].headRefName'); do if git show-ref --quiet \"refs/heads/$branch\"; then git branch -D \"$branch\"; fi; done"
+  prune-merged = "!git for-each-ref --format='%(refname:short)' refs/heads/ | grep -v -E '^(main|master)$' | xargs -P 8 -n 1 -I {} sh -c 'if [ \"$(gh pr view \"$1\" --json state --jq .state 2>/dev/null)\" = \"MERGED\" ]; then git branch -D \"$1\"; fi' _ {}"
 [core]
   editor = nvim
   excludesfile = ~/.config/git/excludes
@@ -25,6 +25,8 @@
   default = simple
 [pull]
   rebase = true
+[fetch]
+  prune = true
 [interactive]
   diffFilter = delta --features="${TERM_COLORSCHEME:-dark}" --color-only
 [delta]
