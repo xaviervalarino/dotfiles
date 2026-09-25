@@ -7,9 +7,8 @@
   "editor.lineNumbers": "relative",
   "editor.cursorSurroundingLines": 10,
   "editor.minimap.enabled": false,
-  "editor.fontFamily": "'Iosevka', 'SF Mono', Menlo, Monaco, monospace",
+  "editor.fontFamily": "\"JetBrains Mono\"",
   "editor.fontLigatures": true,
-  "editor.fontSize": 14,
   "editor.lineHeight": 1.5,
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
@@ -22,5 +21,7 @@
   "git.autofetch": true,
   "git.confirmSync": false,
   "totalTypeScript.hideAllTips": false,
-  "totalTypeScript.hideBasicTips": true
+  "totalTypeScript.hideBasicTips": true,
+  "workbench.colorTheme": "GitHub Dark Default",
+  "editor.fontSize": 13
 }
