@@ -14,6 +14,7 @@
   ammend = commit --amend
   amend = commit --amend
   cached = diff --cached
+  diff-side = -c delta.side-by-side=true diff
   unstage = reset HEAD --
   last = log -1 HEAD
   prune-merged = "!git for-each-ref --format='%(refname:short)' refs/heads/ | grep -v -E '^(main|master)$' | xargs -P 8 -n 1 -I {} sh -c 'if [ \"$(gh pr view \"$1\" --json state --jq .state 2>/dev/null)\" = \"MERGED\" ]; then git branch -D \"$1\"; fi' _ {}"
@@ -23,6 +24,9 @@
   pager = delta --features="${TERM_COLORSCHEME:-dark}"
 [push]
   default = simple
+  autoSetupRemote = true
+[status]
+  submoduleSummary = true
 [pull]
   rebase = true
 [fetch]
@@ -32,6 +36,9 @@
 [delta]
   navigate = true  # use n and N to move between diff sections
   line-numbers = true
+  hyperlinks = true
+  hunk-header-style = file line-number syntax
+  pager = less -RFM --mouse
 [delta "dark"]
   syntax-theme = "GitHub Dark"
   minus-style = syntax "#3d1418"
@@ -45,6 +52,7 @@
   line-numbers-zero-style = "#6e7681"
   line-numbers-left-style = "#30363d"
   line-numbers-right-style = "#30363d"
+  map-styles = "bold purple => syntax dim #1f1728, bold blue => syntax dim #1f1728, bold cyan => syntax dim #111f2a, bold yellow => syntax dim #111f2a"
 
 [delta "light"]
   light = true
@@ -60,10 +68,16 @@
   line-numbers-zero-style = "#8c959f"
   line-numbers-left-style = "#d0d7de"
   line-numbers-right-style = "#d0d7de"
+  map-styles = "bold purple => syntax dim #f8f3fc, bold blue => syntax dim #f8f3fc, bold cyan => syntax dim #f1f8fd, bold yellow => syntax dim #f1f8fd"
 [merge]
-  conflictstyle = diff3
+  conflictstyle = zdiff3
+[rerere]
+  enabled = true
 [diff]
+  algorithm = histogram
+  submodule = log
   colorMoved = default
+  colorMovedWS = allow-indentation-change
 [init]
   defaultBranch = main
   templatedir = ~/.config/git/template/
