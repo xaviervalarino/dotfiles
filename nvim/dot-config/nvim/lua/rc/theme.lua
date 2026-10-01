@@ -30,6 +30,19 @@ function M.apply_theme(mode)
             options = {
                 transparent = true,
             },
+            groups = {
+                all = {
+                    StatusLine = { bg = "NONE", fg = "fg2" },
+                    StatusLineNC = { bg = "NONE", fg = "fg3" },
+                    NormalFloat = { bg = "bg0", fg = "fg1" },
+                    FloatBorder = { bg = "bg0", fg = "palette.border.default" },
+                    FloatTitle = { bg = "bg0", fg = "palette.accent.fg", bold = true },
+                    CursorLine = { bg = "bg2" },
+                    WinbarPath = { fg = "fg2" },
+                    WinbarFile = { fg = "fg1", bold = true },
+                    WinbarMod = { fg = "palette.attention.fg", bold = true },
+                },
+            },
         })
     end
 

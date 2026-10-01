@@ -30,6 +30,9 @@ require("blink.cmp").setup({
     },
     signature = { enabled = true },
     sources = {
+        per_filetype = {
+            markdown = { "path", "snippets" },
+        },
         providers = {
             path = {
                 opts = {
