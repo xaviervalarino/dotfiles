@@ -93,3 +93,9 @@ if [[ -n "$THEME" ]]; then
 else
   defaults read -g AppleInterfaceStyle &>/dev/null && export TERM_COLORSCHEME="dark" || export TERM_COLORSCHEME="light"
 fi
+
+if [[ "$TERM_COLORSCHEME" == "light" ]]; then
+  zstyle :prompt:pure:git:branch color blue
+else
+  zstyle :prompt:pure:git:branch color cyan
+fi

@@ -36,26 +36,18 @@ ps_time() {
 
 # Switch or override terminal/editor theme: theme dark | theme light | theme auto
 theme() {
-  case "$1" in
-    dark)
-      export THEME="dark"
-      export TERM_COLORSCHEME="dark"
-      printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "dark" | base64)"
-      echo "Theme set to dark (propagated to session, Neovim, and Git Delta)"
-      ;;
-    light)
-      export THEME="light"
-      export TERM_COLORSCHEME="light"
-      printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "light" | base64)"
-      echo "Theme set to light (propagated to session, Neovim, and Git Delta)"
+  local mode="$1"
+  case "$mode" in
+    dark|light)
+      export THEME="$mode"
+      export TERM_COLORSCHEME="$mode"
       ;;
     auto|system|reset)
       unset THEME
       local sys_mode="light"
       defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
       export TERM_COLORSCHEME="$sys_mode"
-      printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "auto" | base64)"
-      echo "Theme reset to auto (follows macOS appearance: $sys_mode)"
+      mode="auto"
       ;;
     *)
       if [[ -n "$THEME" ]]; then
@@ -66,8 +58,33 @@ theme() {
         echo "Current theme: auto (system is $sys_mode)"
       fi
       echo "Usage: theme [dark|light|auto]"
+      return 0
       ;;
   esac
+
+  local branch_color="cyan"
+  [[ "${TERM_COLORSCHEME:-dark}" == "light" ]] && branch_color="blue"
+  zstyle :prompt:pure:git:branch color "$branch_color"
+  prompt_pure_git_branch_color="$branch_color"
+  printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "%s" "$mode" | base64)"
+
+  if [[ "$mode" == "auto" ]]; then
+    echo "Theme reset to auto (follows macOS appearance: $TERM_COLORSCHEME)"
+  else
+    echo "Theme set to $mode (propagated to session, Neovim, and Git Delta)"
+  fi
+}
+
+# Toggle or set macOS appearance and sync terminal session immediately
+appearance() {
+  command appearance "$@"
+  if [[ -z "$THEME" ]]; then
+    theme auto
+  else
+    local sys_mode="light"
+    defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
+    theme "$sys_mode"
+  fi
 }
 
 claude() {
