@@ -15,29 +15,12 @@ local function scheme_for_appearance(appearance)
     end
 end
 
-local function get_effective_scheme(pane)
-    local user_vars = {}
-    if pane then
-        if type(pane.get_user_vars) == "function" then
-            user_vars = pane:get_user_vars() or {}
-        elseif type(pane.user_vars) == "table" then
-            user_vars = pane.user_vars
-        end
-    end
-    local theme = user_vars.THEME
-    if theme == "dark" then
-        return "GitHub Dark"
-    elseif theme == "light" then
-        return "Github"
-    else
-        return scheme_for_appearance(wezterm.gui.get_appearance())
-    end
-end
-
 local function tab_bar_colors_for_scheme(scheme_name)
     local schemes = wezterm.color.get_builtin_schemes()
     local s = schemes[scheme_name]
-    if not s then return nil end
+    if not s then
+        return nil
+    end
 
     local is_dark = scheme_name:find("Dark") ~= nil
     local bg = s.background
@@ -62,6 +45,38 @@ local function tab_bar_colors_for_scheme(scheme_name)
             bg_color = bg,
             fg_color = is_dark and "#7d8590" or "#6e7781",
         },
+    }
+end
+
+local builtin_schemes = wezterm.color.get_builtin_schemes()
+local github_light = builtin_schemes["Github"]
+if github_light then
+    local light_copy = {}
+    for k, v in pairs(github_light) do
+        light_copy[k] = v
+    end
+    light_copy.ansi = {
+        github_light.ansi[1],
+        github_light.ansi[2],
+        github_light.ansi[3],
+        github_light.ansi[4],
+        github_light.ansi[5],
+        github_light.ansi[6],
+        "#1b6978",
+        github_light.ansi[8],
+    }
+    light_copy.brights = {
+        github_light.brights[1],
+        github_light.brights[2],
+        github_light.brights[3],
+        github_light.brights[4],
+        github_light.brights[5],
+        github_light.brights[6],
+        "#0969da",
+        github_light.brights[8],
+    }
+    config.color_schemes = {
+        ["Github"] = light_copy,
     }
 end
 
@@ -111,9 +126,43 @@ config.visual_bell = {
 -- Keys --
 
 config.keys = {
+    {
+        key = "t",
+        mods = "SUPER",
+        action = wezterm.action_callback(function(window, pane)
+            local mux_window = window:mux_window()
+            local overrides = window:get_config_overrides() or {}
+            local opts = {}
+            if overrides.color_scheme then
+                opts.set_environment_variables = {
+                    THEME = overrides.color_scheme:find("Dark") and "dark" or "light",
+                }
+            end
+            local tab, _, _ = mux_window:spawn_tab(opts)
+            local num_tabs = #mux_window:tabs()
+            tab:move_to_tab_index(num_tabs - 1)
+            tab:activate()
+        end),
+    },
     { key = "[", mods = "SUPER|CTRL", action = wezterm.action.MoveTabRelative(-1) },
     { key = "]", mods = "SUPER|CTRL", action = wezterm.action.MoveTabRelative(1) },
     { key = "r", mods = "SUPER", action = wezterm.action.ReloadConfiguration },
+    {
+        -- Shrinks the window to fit the active screen, then centers it.
+        key = "c",
+        mods = "SUPER|CTRL",
+        action = wezterm.action_callback(function(window)
+            local screen = wezterm.gui.screens().active
+            local dims = window:get_dimensions()
+            local width = math.min(dims.pixel_width, math.floor(screen.width * 0.9))
+            local height = math.min(dims.pixel_height, math.floor(screen.height * 0.9))
+            window:set_inner_size(width, height)
+            window:set_position(
+                screen.x + math.floor((screen.width - width) / 2),
+                screen.y + math.floor((screen.height - height) / 2)
+            )
+        end),
+    },
     {
         key = "r",
         mods = "SUPER|SHIFT",
@@ -153,6 +202,107 @@ config.mouse_bindings = {
 
 -- Event handlers --
 
+--- Return true if any pattern in `patterns` matches anywhere in `haystack`.
+--- @param haystack string|string[] String, or list of strings, to search in.
+--- @param patterns string[] Lua patterns to test against the haystack.
+--- @return boolean
+local function find_any(haystack, patterns)
+    local strs = type(haystack) == "string" and { haystack } or haystack --[[@as string[] ]]
+    for _, str in ipairs(strs) do
+        for _, p in ipairs(patterns) do
+            if str:find(p) then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+-- Full-screen TUI apps that should run without window padding and show in tab titles.
+local tui_apps = { "nvim", "opencode", "claude" }
+
+--- Detect whether the foreground process in `pane` is a full-screen TUI app.
+--- Falls back to inspecting argv so apps wrapped by a runtime are matched correctly.
+--- @param pane table A wezterm pane object.
+--- @return boolean
+local function is_tui(pane)
+    if not pane then
+        return false
+    end
+    local process = (type(pane.get_foreground_process_name) == "function" and pane:get_foreground_process_name())
+        or pane.foreground_process_name
+    if find_any(process, tui_apps) then
+        return true
+    end
+    local info = type(pane.get_foreground_process_info) == "function" and pane:get_foreground_process_info() or nil
+    if info and info.argv then
+        return find_any(info.argv, tui_apps)
+    end
+    return false
+end
+
+--- Shorten path components in Vim style (e.g. ~/dotfiles/wezterm -> ~/d/wezterm)
+--- @param path string
+--- @return string
+local function path_shorten(path)
+    if not path or path == "" then
+        return ""
+    end
+    local home = os.getenv("HOME") or ""
+    if home ~= "" and path:sub(1, #home) == home then
+        path = "~" .. path:sub(#home + 1)
+    end
+    local parts = {}
+    for part in path:gmatch("[^/]+") do
+        table.insert(parts, part)
+    end
+    if #parts == 0 then
+        return path
+    end
+    local is_absolute = path:sub(1, 1) == "/"
+    local starts_with_tilde = parts[1] == "~"
+    local start_idx = starts_with_tilde and 2 or 1
+    for i = start_idx, #parts - 1 do
+        local p = parts[i]
+        if p:sub(1, 1) == "." and #p > 1 then
+            parts[i] = p:sub(1, 2)
+        else
+            parts[i] = p:sub(1, 1)
+        end
+    end
+    local result = table.concat(parts, "/")
+    if is_absolute and not starts_with_tilde then
+        result = "/" .. result
+    end
+    return result
+end
+
+--- Extract the current working directory from pane URL.
+--- @param pane table A wezterm pane object.
+--- @return string|nil
+local function get_pane_cwd(pane)
+    if not pane then
+        return nil
+    end
+    local url = pane.current_working_url
+    if not url then
+        return nil
+    end
+    local raw_path = nil
+    if type(url) == "string" then
+        raw_path = url:gsub("^file://[^/]*", "")
+    elseif (type(url) == "table" or type(url) == "userdata") and url.file_path then
+        raw_path = url.file_path
+    end
+    if raw_path then
+        raw_path = raw_path:gsub("%%(%x%x)", function(hex)
+            return string.char(tonumber(hex, 16))
+        end)
+        return raw_path
+    end
+    return nil
+end
+
 --- Get a clean display title for a tab.
 --- @param tab_info table A wezterm TabInformation object.
 --- @return string
@@ -162,11 +312,21 @@ local function get_tab_title(tab_info)
         return title
     end
     local pane = tab_info.active_pane
-    if pane and pane.title and #pane.title > 0 then
-        return pane.title
+    if not pane then
+        return "tab"
     end
-    if pane and pane.foreground_process_name then
-        return pane.foreground_process_name:gsub("^.*/", "")
+    if is_tui(pane) then
+        local proc = pane.foreground_process_name
+        if proc and #proc > 0 then
+            return proc:gsub("^.*/", "")
+        end
+    end
+    local cwd = get_pane_cwd(pane)
+    if cwd and #cwd > 0 then
+        return path_shorten(cwd)
+    end
+    if pane.title and #pane.title > 0 then
+        return path_shorten(pane.title)
     end
     return "tab"
 end
@@ -179,7 +339,7 @@ wezterm.on("bell", function(window, pane)
     bell_panes[pane:pane_id()] = true
 end)
 
---- Return true if the tab has an unseen alert or new output.
+--- Return true if the tab has an unseen alert.
 --- @param tab_info table A wezterm TabInformation object.
 --- @return boolean
 local function tab_has_alert(tab_info)
@@ -193,7 +353,7 @@ local function tab_has_alert(tab_info)
         return false
     end
 
-    if pane.has_unseen_output or bell_panes[pane.pane_id] then
+    if bell_panes[pane.pane_id] then
         return true
     end
 
@@ -308,14 +468,27 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     end
 
     local index = tab.tab_index + 1
-    local is_dark = config.color_scheme and config.color_scheme:find("Dark") ~= nil
+    local is_dark = true
+    if config.resolved_palette and config.resolved_palette.background then
+        local ok, c = pcall(wezterm.color.parse, config.resolved_palette.background)
+        if ok and c then
+            local _, _, l, _ = c:hsla()
+            is_dark = l < 0.5
+        end
+    end
+
+    local palette = config.resolved_palette and config.resolved_palette.tab_bar
+    local tab_bg = palette and palette.background or (is_dark and "#0d1117" or "#ffffff")
+    if hover and not is_active and palette and palette.inactive_tab_hover then
+        tab_bg = palette.inactive_tab_hover.bg_color or tab_bg
+    end
 
     if tab_has_alert(tab) then
-        -- Red alert dot, normal inactive colors for number and title
         local dot_color = is_dark and "#f85149" or "#cf222e"
         local num_color = is_dark and "#484f58" or "#afb8c1"
         local title_color = is_dark and "#7d8590" or "#6e7781"
         return {
+            { Background = { Color = tab_bg } },
             { Foreground = { Color = dot_color } },
             { Text = "  ● " },
             { Foreground = { Color = num_color } },
@@ -325,92 +498,51 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
         }
     end
 
-    if is_active then
-        -- Number in lighter/muted secondary color, no colon (saving a column), title in bold warm yellow
-        local num_color = is_dark and "#8b949e" or "#8c959f"
-        local title_color = is_dark and "#e3b341" or "#9a6700"
-        return {
-            { Foreground = { Color = num_color } },
-            { Text = "  " .. index .. " " },
-            { Attribute = { Intensity = "Bold" } },
-            { Foreground = { Color = title_color } },
-            { Text = title .. "  " },
-        }
-    else
-        -- Inactive: number in subtle dimmed color, title in muted text color
-        local num_color = is_dark and "#484f58" or "#afb8c1"
-        local title_color = is_dark and "#7d8590" or "#6e7781"
-        return {
-            { Foreground = { Color = num_color } },
-            { Text = "  " .. index .. " " },
-            { Foreground = { Color = title_color } },
-            { Text = title .. "  " },
-        }
-    end
+    local num_color = is_active and (is_dark and "#8b949e" or "#8c959f") or (is_dark and "#484f58" or "#afb8c1")
+    local title_color = is_active and (is_dark and "#e3b341" or "#9a6700") or (is_dark and "#7d8590" or "#6e7781")
+
+    return {
+        { Background = { Color = tab_bg } },
+        { Foreground = { Color = num_color } },
+        { Text = "  " .. index .. " " },
+        { Attribute = { Intensity = is_active and "Bold" or "Normal" } },
+        { Foreground = { Color = title_color } },
+        { Text = title .. "  " },
+    }
 end)
 
---- Return true if any pattern in `patterns` matches anywhere in `haystack`.
---- @param haystack string|string[] String, or list of strings, to search in.
---- @param patterns string[] Lua patterns to test against the haystack.
---- @return boolean
-local function find_any(haystack, patterns)
-    local strs = type(haystack) == "string" and { haystack } or haystack --[[@as string[] ]]
-    for _, str in ipairs(strs) do
-        for _, p in ipairs(patterns) do
-            if str:find(p) then
-                return true
-            end
-        end
-    end
-    return false
-end
-
--- Full-screen TUI apps that should run without window padding.
-local tui_apps = { "nvim", "opencode" }
-
---- Detect whether the foreground process in `pane` is a full-screen TUI app.
---- Falls back to inspecting argv so apps wrapped by a runtime (e.g. opencode,
---- which is launched via a `node` script) are matched correctly.
---- @param pane table A wezterm pane object.
---- @return boolean
-local function is_tui(pane)
-    local process = pane:get_foreground_process_name()
-    if find_any(process, tui_apps) then
-        return true
-    end
-    local info = pane:get_foreground_process_info()
-    if info and info.argv then
-        return find_any(info.argv, tui_apps)
-    end
-    return false
-end
-
--- Drop padding for full-screen TUIs; update color scheme dynamically
+-- Drop padding for full-screen TUIs; theme is window-scoped and not reset per tab
 wezterm.on("update-right-status", function(window, pane)
     local overrides = window:get_config_overrides() or {}
-    local scheme = get_effective_scheme(pane)
-    overrides.color_scheme = scheme
-    overrides.colors = {
-        tab_bar = tab_bar_colors_for_scheme(scheme),
-    }
-    if is_tui(pane) then
-        overrides.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
-    else
-        overrides.window_padding = nil
+    local has_padding_override = overrides.window_padding ~= nil
+    local needs_zero_padding = is_tui(pane)
+
+    if needs_zero_padding ~= has_padding_override then
+        overrides.window_padding = needs_zero_padding and { left = 0, right = 0, top = 0, bottom = 0 } or nil
+        window:set_config_overrides(overrides)
     end
-    window:set_config_overrides(overrides)
 
     window:set_right_status("")
 end)
 
-wezterm.on("user-var-changed", function(window, pane, name, _)
+wezterm.on("user-var-changed", function(window, pane, name, value)
     if name == "THEME" then
+        local user_vars = pane and (type(pane.get_user_vars) == "function" and pane:get_user_vars() or pane.user_vars)
+            or {}
+        local raw = (value and value ~= "") and value or user_vars.THEME
+        local theme = raw and raw:gsub("%s+", "")
+        local theme_schemes = { dark = "GitHub Dark", light = "Github" }
+        local scheme = theme_schemes[theme]
+
         local overrides = window:get_config_overrides() or {}
-        local scheme = get_effective_scheme(pane)
         overrides.color_scheme = scheme
-        overrides.colors = {
-            tab_bar = tab_bar_colors_for_scheme(scheme),
-        }
+        if scheme then
+            overrides.colors = {
+                tab_bar = tab_bar_colors_for_scheme(scheme),
+            }
+        else
+            overrides.colors = nil
+        end
         window:set_config_overrides(overrides)
     end
 end)
