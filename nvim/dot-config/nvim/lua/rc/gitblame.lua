@@ -13,6 +13,9 @@ vim.api.nvim_create_autocmd("ColorScheme", { callback = setup_highlight })
 
 require("gitblame").setup({
     highlight_group = "CursorComment",
-    set_extmark_options = { hl_mode = "combine" },
+    set_extmark_options = {
+        hl_mode = "combine",
+        priority = 1,
+    },
     ignored_filetypes = { "gitcommit" },
 })

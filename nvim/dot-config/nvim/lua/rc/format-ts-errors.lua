@@ -19,10 +19,19 @@ vim.diagnostic.config({
         border = "rounded",
     },
     virtual_text = {
+        current_line = true,
         hl_mode = "combine",
         prefix = function()
             return "●"
         end,
+    },
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "E",
+            [vim.diagnostic.severity.WARN] = "W",
+            [vim.diagnostic.severity.INFO] = "I",
+            [vim.diagnostic.severity.HINT] = "H",
+        },
     },
 })
 

@@ -11,9 +11,7 @@ vim.opt.listchars:append({
 
 vim.o.autowriteall = true
 
-vim.schedule(function()
-    vim.o.clipboard = "unnamedplus"
-end)
+vim.opt.clipboard = "unnamedplus"
 
 -- Visual -------------------------
 vim.o.breakindent = true
@@ -23,7 +21,8 @@ vim.o.number = true
 vim.o.cursorline = true
 vim.o.wrap = false
 vim.o.scrolloff = 10
-vim.wo.signcolumn = "yes"
+vim.o.signcolumn = "yes:1"
+vim.wo.signcolumn = "yes:1"
 
 vim.opt.fillchars = { diff = "╱" }
 -- set.fillchars = {
