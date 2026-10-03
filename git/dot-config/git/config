@@ -34,6 +34,7 @@
 [interactive]
   diffFilter = delta --features="${TERM_COLORSCHEME:-dark}" --color-only
 [delta]
+  tabs = 4
   navigate = true  # use n and N to move between diff sections
   line-numbers = true
   hyperlinks = true
