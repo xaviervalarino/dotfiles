@@ -99,10 +99,10 @@ config.window_close_confirmation = "NeverPrompt"
 --     vertical = "Bottom",
 -- }
 config.window_padding = {
-    left = 36,
-    right = 36,
-    top = 32,
-    bottom = 32,
+    left = 16,
+    right = 16,
+    top = 16,
+    bottom = 16,
 }
 
 -- Tabs --
@@ -228,7 +228,7 @@ local function find_any(haystack, patterns)
     return false
 end
 
--- Full-screen TUI apps that should run without window padding and show in tab titles.
+-- Full-screen TUI apps that show in tab titles.
 local tui_apps = { "nvim", "opencode", "claude" }
 
 --- Detect whether the foreground process in `pane` is a full-screen TUI app.
@@ -521,18 +521,12 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     }
 end)
 
--- Drop padding for full-screen TUIs; theme is window-scoped and not reset per tab
-wezterm.on("update-right-status", function(window, pane)
+wezterm.on("window-config-reloaded", function(window, pane)
     local overrides = window:get_config_overrides() or {}
-    local has_padding_override = overrides.window_padding ~= nil
-    local needs_zero_padding = is_tui(pane)
-
-    if needs_zero_padding ~= has_padding_override then
-        overrides.window_padding = needs_zero_padding and { left = 0, right = 0, top = 0, bottom = 0 } or nil
+    if overrides.window_padding ~= nil then
+        overrides.window_padding = nil
         window:set_config_overrides(overrides)
     end
-
-    window:set_right_status("")
 end)
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
