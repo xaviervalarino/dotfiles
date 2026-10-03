@@ -18,7 +18,8 @@
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "workbench.startupEditor": "none",
-  "git.autofetch": true,
+  "git.autofetch": "all",
+  "git.autofetchPeriod": 30,
   "git.confirmSync": false,
   "totalTypeScript.hideAllTips": true,
   "workbench.colorTheme": "GitHub Dark Default",
@@ -27,8 +28,6 @@
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
-    "**/.worktrees/**": true,
-    "**/.claude/worktrees/**": true,
     "**/node_modules/**": true,
     "**/.pnpm-store/**": true,
     "**/dist/**": true,
@@ -60,9 +59,5 @@
   "security.workspace.trust.untrustedFiles": "open",
   "editor.fontWeight": "450",
   "diffEditor.renderSideBySide": false,
-  "git.blame.editorDecoration.enabled": true,
-  // "scm.diffDecorations": "all",
-  // "scm.diffDecorationsGutterVisibility": "always",
-  // "scm.diffDecorationsGutterWidth": 4,
-  // "scm.diffDecorationsGutterPattern": { "added": false, "modified": false }
+  "git.blame.editorDecoration.enabled": true
 }
