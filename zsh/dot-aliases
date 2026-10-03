@@ -105,23 +105,6 @@ claude() {
   command claude "$@"
 }
 
-# Restore terminal TTY specifically after `agy` sessions.
-# In `settings.json`, AGY defaults commands to isolated sandboxes. When sandboxed
-# commands fail, deadlock, or crash the daemon, the sandbox PTY pipe disconnects
-# and can leave the host terminal stuck in raw mode (no echo).
-# Use `[[ -t 0 ]]` to restore line discipline only when stdin is a real terminal;
-# targeting `$TTY` or running `stty` in background/subshell/pipe contexts triggers
-# kernel SIGTTIN/SIGTTOU signals that freeze the process in `STAT = T`.
-agy() {
-  # Headless dispatch belongs to agy-dispatch (~/.claude/skills/agy-delegate/scripts),
-  # which runs the MCP and auth preflight. This wrapper only restores the TTY.
-  {
-    command agy "$@"
-  } always {
-    [[ -t 0 ]] && stty sane 2>/dev/null
-  }
-}
-
 heic_to_jpg() {
   local extension="${2##*.}"
   if [[ "$extension" != "jpg" && "$extension" != "jpeg" ]]; then
