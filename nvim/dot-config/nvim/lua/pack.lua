@@ -82,6 +82,12 @@ end
 -- Add all plugins via native vim.pack
 vim.pack.add(specs, { confirm = false })
 
+-- Ensure nvim-treesitter runtime queries are in runtimepath
+local ts_runtime = site_dir .. "/pack/core/opt/nvim-treesitter/runtime"
+if vim.fn.isdirectory(ts_runtime) == 1 then
+    vim.opt.rtp:prepend(ts_runtime)
+end
+
 -- Setup headless plugins
 require("rc.treesitter")
 require("mini.ai").setup()

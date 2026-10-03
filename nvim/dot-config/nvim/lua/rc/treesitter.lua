@@ -9,7 +9,6 @@ local parsers = {
     "markdown",
     "markdown_inline",
     "css",
-    "diff",
     "editorconfig",
     "git_config",
     "git_rebase",
@@ -58,7 +57,7 @@ pcall(vim.treesitter.language.register, "bash", "zsh")
 
 vim.api.nvim_create_autocmd("FileType", {
     callback = function(ev)
-        if vim.startswith(ev.file, "blink-cmp") or vim.startswith(ev.file, "oil:") then
+        if vim.startswith(ev.file, "blink-cmp") or vim.startswith(ev.file, "oil:") or ev.match == "diff" then
             return
         end
 
