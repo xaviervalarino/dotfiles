@@ -127,6 +127,16 @@ config.visual_bell = {
 
 config.keys = {
     {
+        key = "d",
+        mods = "SUPER",
+        action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+    },
+    {
+        key = "d",
+        mods = "SUPER|SHIFT",
+        action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+    },
+    {
         key = "t",
         mods = "SUPER",
         action = wezterm.action_callback(function(window, pane)
