@@ -13,9 +13,9 @@ mattpocock.ts-error-translator
 ms-playwright.playwright
 ms-vscode-remote.remote-containers
 orta.vscode-jest
-orta.vscode-twoslash-queries
 redhat.vscode-yaml
 somewhatstationery.some-sass
+typescriptteam.native-preview
 stringham.copy-with-imports
 upstash.context7-mcp
 usernamehw.errorlens

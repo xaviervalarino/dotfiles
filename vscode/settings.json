@@ -20,8 +20,45 @@
   "workbench.startupEditor": "none",
   "git.autofetch": true,
   "git.confirmSync": false,
-  "totalTypeScript.hideAllTips": false,
-  "totalTypeScript.hideBasicTips": true,
+  "totalTypeScript.hideAllTips": true,
   "workbench.colorTheme": "GitHub Dark Default",
-  "editor.fontSize": 13
+  "editor.fontSize": 13,
+  "js/ts.experimental.useTsgo": true,
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/.worktrees/**": true,
+    "**/.claude/worktrees/**": true,
+    "**/node_modules/**": true,
+    "**/.pnpm-store/**": true,
+    "**/dist/**": true,
+    "**/build/**": true,
+    "**/coverage/**": true,
+    "**/.next/**": true,
+    "**/.turbo/**": true
+  },
+  "search.exclude": {
+    "**/dist": true,
+    "**/build": true,
+    "**/coverage": true,
+    "**/.next": true,
+    "**/.turbo": true
+  },
+  "search.followSymlinks": false,
+  "tailwindCSS.files.exclude": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/.hg/**",
+    "**/.svn/**",
+    "**/.worktrees/**",
+    "**/.claude/worktrees/**"
+  ],
+  "npm.autoDetect": "off",
+  "jest.runMode": "on-demand",
+  "telemetry.telemetryLevel": "off",
+  "workbench.enableExperiments": false,
+  // "scm.diffDecorations": "all",
+  // "scm.diffDecorationsGutterVisibility": "always",
+  // "scm.diffDecorationsGutterWidth": 4,
+  // "scm.diffDecorationsGutterPattern": { "added": false, "modified": false }
 }
