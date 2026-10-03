@@ -30,20 +30,20 @@ local specs = {
     { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
     { src = "https://github.com/tpope/vim-sleuth" },
     { src = "https://github.com/nvim-mini/mini.ai" },
-    { src = "https://github.com/nvim-mini/mini.pairs" },
     { src = "https://github.com/nvim-mini/mini.surround" },
     { src = "https://github.com/gbprod/yanky.nvim" },
     { src = "https://github.com/nvim-mini/mini.comment" },
     { src = "https://github.com/JoosepAlviste/nvim-ts-context-commentstring" },
-    { src = "https://github.com/windwp/nvim-ts-autotag" },
     { src = "https://github.com/cbochs/grapple.nvim" },
 }
 
+-- VS Code owns insert mode, so insert-mode plugins never run there
 if not vim.g.vscode then
     local nvim_specs = {
+        { src = "https://github.com/nvim-mini/mini.pairs" },
+        { src = "https://github.com/windwp/nvim-ts-autotag" },
         { src = "https://github.com/projekt0n/github-nvim-theme" },
         { src = "https://github.com/neovim/nvim-lspconfig" },
-        { src = "https://github.com/yioneko/nvim-vtsls" },
         { src = "https://github.com/marilari88/twoslash-queries.nvim" },
         { src = "https://github.com/folke/lazydev.nvim" },
         { src = "https://github.com/nvim-lua/plenary.nvim" },
@@ -85,14 +85,14 @@ vim.pack.add(specs, { confirm = false })
 -- Setup headless plugins
 require("rc.treesitter")
 require("mini.ai").setup()
-require("mini.pairs").setup()
 require("mini.surround").setup({ n_lines = 200 })
 require("rc.yanky")
 require("rc.comment")
-require("nvim-ts-autotag").setup({})
 require("rc.grapple")
 
 if not vim.g.vscode then
+    require("mini.pairs").setup()
+    require("nvim-ts-autotag").setup({})
     require("rc.theme").setup()
     require("rc.lsp")
     require("lazydev").setup({})

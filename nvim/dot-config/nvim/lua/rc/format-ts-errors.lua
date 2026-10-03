@@ -32,7 +32,7 @@ local options = vim.tbl_deep_extend("force", curr_options, {
     float = {
         format = function(diagnostic)
             local src = diagnostic.source or ""
-            local is_ts = src == "vtsls" or src == "typescript" or src == "tsserver" or src == "ts"
+            local is_ts = src == "typescript" or src == "tsserver" or src == "ts"
 
             if not is_ts then
                 return diagnostic.message

@@ -66,7 +66,10 @@ vim.api.nvim_create_autocmd("FileType", {
         local has_parser = #vim.api.nvim_get_runtime_file("parser/" .. lang .. ".so", false) > 0
 
         if has_parser then
-            pcall(vim.treesitter.start, ev.buf, lang)
+            -- VS Code renders its own highlighting; the embedded nvim never draws these
+            if not vim.g.vscode then
+                pcall(vim.treesitter.start, ev.buf, lang)
+            end
             vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
     end,
