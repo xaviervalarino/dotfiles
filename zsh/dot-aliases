@@ -141,4 +141,74 @@ mov2mp4() {
     ffmpeg "${args[@]}" "${1:r}.mp4"
 }
 
+# Manage git worktrees rooted at .worktrees/<name>.
+# Usage:
+#   gw                      Jump to an existing worktree via fzf
+#   gw add <name> [base]    Create branch and worktree at .worktrees/<name>, link .env, and cd in
+#   gw rm [name]            Remove worktree; opens fzf selection when name is omitted
+#   gw ls                   List active worktrees
+gw() {
+  local root
+  root="$(git rev-parse --show-toplevel 2>/dev/null)" || {
+    echo "gw: fatal: not a git repository" >&2
+    return 1
+  }
+
+  case "${1:-}" in
+    add)
+      local name="$2" base="${3:-HEAD}"
+      if [[ -z "$name" ]]; then
+        echo "Usage: gw add <name> [base]" >&2
+        return 1
+      fi
+
+      local wt_dir="$root/.worktrees/$name"
+
+      # Verify repository ignores the worktrees directory
+      if ! git check-ignore -q .worktrees/ 2>/dev/null; then
+        echo "gw: warning: .worktrees/ is not in .gitignore" >&2
+      fi
+
+      git worktree add -b "$name" "$wt_dir" "$base" || return 1
+
+      # Link environment files from primary root when present
+      local env_file
+      for env_file in .env .env.local; do
+        if [[ -f "$root/$env_file" && ! -e "$wt_dir/$env_file" ]]; then
+          ln -s "$root/$env_file" "$wt_dir/$env_file"
+        fi
+      done
+
+      cd "$wt_dir" || return 1
+      ;;
+
+    rm)
+      local target="$2"
+      if [[ -z "$target" ]]; then
+        # Exclude primary checkout from removal list
+        target=$(git worktree list --porcelain | awk '/^worktree / {print $2}' | grep '/\.worktrees/' | fzf --prompt="Remove worktree: ")
+      fi
+
+      if [[ -n "$target" ]]; then
+        # Resolve target to path if given by branch name
+        [[ -d "$root/.worktrees/$target" ]] && target="$root/.worktrees/$target"
+        git worktree remove "$target"
+      fi
+      ;;
+
+    ls)
+      git worktree list
+      ;;
+
+    *)
+      # Select and jump to worktree
+      local dir
+      dir=$(git worktree list --porcelain | awk '/^worktree / {print $2}' | fzf --prompt="Jump to worktree: ")
+      if [[ -n "$dir" ]]; then
+        cd "$dir" || return 1
+      fi
+      ;;
+  esac
+}
+
 # vi:filetype=sh
