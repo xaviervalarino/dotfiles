@@ -108,6 +108,7 @@ config.window_padding = {
 -- Tabs --
 
 config.tab_bar_at_bottom = true
+config.mouse_wheel_scrolls_tabs = false
 config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
 config.tab_max_width = 135
