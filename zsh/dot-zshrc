@@ -1,8 +1,10 @@
 #!/usr/bin/env zsh
 
-if type brew &>/dev/null; then
-  fpath+=$(brew --prefix)/share/zsh/site-functions
-fi
+ typeset -U fpath
+
+[[ -d "$HOMEBREW_PREFIX/share/zsh/site-functions" ]] && fpath+=( "$HOMEBREW_PREFIX/share/zsh/site-functions" )
+
+[[ -d "$HOME/.docker/completions" ]] && fpath+=( "$HOME/.docker/completions" )
 
 #------------------------------------------
 # Activate zsh completions
@@ -83,8 +85,6 @@ fi
 if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
 fi
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Sync WezTerm & Git Delta theme
 if [[ -n "$THEME" ]]; then

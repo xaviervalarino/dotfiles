@@ -11,6 +11,8 @@ eval "$($brew shellenv)"
 
 path+=(/usr/local/sbin)
 
+# prepend to override system binaries
+path=("$HOME/.local/bin" $path) 
+
 # Personal binaries and scripts
-path=("$HOME/.local/bin" $path)
 path+=("$HOME/scripts")
