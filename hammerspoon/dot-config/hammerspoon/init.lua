@@ -20,7 +20,7 @@ hs.loadSpoon("SpoonInstall")
 
 -- Load Hammerspoon annotations for Sumneko LSP
 spoon.SpoonInstall:andUse("EmmyLua")
--- URLDispather = require './url-dispatcher'
+require("url-dispatcher")
 
 -- allow Hammerspoon to be used through CLI
 -- `hs` to start REPL
@@ -180,13 +180,15 @@ end)
 hs.audiodevice.watcher.start()
 ---------------------------------------------------------------------
 -- Auto-reload Hammerspoon when config files change
-Auto_reload_watcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", function(files)
-    for _, file in ipairs(files) do
-        if file:sub(-4) == ".lua" then
-            hs.reload()
-            return
+Auto_reload_watcher = hs.pathwatcher
+    .new(os.getenv("HOME") .. "/.hammerspoon/", function(files)
+        for _, file in ipairs(files) do
+            if file:sub(-4) == ".lua" then
+                hs.reload()
+                return
+            end
         end
-    end
-end):start()
+    end)
+    :start()
 
 require("util").alert("🔨 loaded")
