@@ -73,6 +73,7 @@ if not vim.g.vscode then
         { src = "https://github.com/nvim-treesitter/nvim-treesitter-context" },
         { src = "https://github.com/dmmulroy/tsc.nvim" },
         { src = "https://github.com/nvim-mini/mini.sessions" },
+        { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
     }
     for _, s in ipairs(nvim_specs) do
         table.insert(specs, s)
