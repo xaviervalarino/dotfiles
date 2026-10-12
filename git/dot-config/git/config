@@ -21,7 +21,9 @@
 [core]
   editor = nvim
   excludesfile = ~/.config/git/excludes
-  pager = delta --features="${TERM_COLORSCHEME:-dark}"
+  pager = delta --features="${COLOR_PALETTE:-github}-${COLOR_MODE:-dark}"
+  diffFilter = delta --features="${COLOR_PALETTE:-github}-${COLOR_MODE:-dark}" --color-only
+
 [push]
   default = simple
   autoSetupRemote = true
@@ -32,7 +34,7 @@
 [fetch]
   prune = true
 [interactive]
-  diffFilter = delta --features="${TERM_COLORSCHEME:-dark}" --color-only
+  diffFilter = delta --features="${COLOR_PALETTE:-github}-${COLOR_MODE:-dark}" --color-only
 [delta]
   tabs = 4
   navigate = true  # use n and N to move between diff sections
@@ -40,36 +42,10 @@
   hyperlinks = true
   hunk-header-style = file line-number syntax
   pager = less -RFM --mouse
-[delta "dark"]
-  syntax-theme = "GitHub Dark"
-  minus-style = syntax "#3d1418"
-  minus-emph-style = syntax "#67060c"
-  plus-style = syntax "#103219"
-  plus-emph-style = syntax "#1a5e2a"
-  minus-empty-line-marker-style = normal "#3d1418"
-  plus-empty-line-marker-style = normal "#103219"
-  line-numbers-minus-style = "#f85149"
-  line-numbers-plus-style = "#3fb950"
-  line-numbers-zero-style = "#6e7681"
-  line-numbers-left-style = "#30363d"
-  line-numbers-right-style = "#30363d"
-  map-styles = "bold purple => syntax dim #1f1728, bold blue => syntax dim #1f1728, bold cyan => syntax dim #111f2a, bold yellow => syntax dim #111f2a"
 
-[delta "light"]
-  light = true
-  syntax-theme = "GitHub Light"
-  minus-style = syntax "#ffebe9"
-  minus-emph-style = syntax "#ffc1c0"
-  plus-style = syntax "#dafbe1"
-  plus-emph-style = syntax "#acf2bd"
-  minus-empty-line-marker-style = normal "#ffebe9"
-  plus-empty-line-marker-style = normal "#dafbe1"
-  line-numbers-minus-style = "#cf222e"
-  line-numbers-plus-style = "#1a7f37"
-  line-numbers-zero-style = "#8c959f"
-  line-numbers-left-style = "#d0d7de"
-  line-numbers-right-style = "#d0d7de"
-  map-styles = "bold purple => syntax dim #f8f3fc, bold blue => syntax dim #f8f3fc, bold cyan => syntax dim #f1f8fd, bold yellow => syntax dim #f1f8fd"
+[include]
+  path = themes/delta.inc
+
 [merge]
   conflictstyle = zdiff3
 [rerere]
