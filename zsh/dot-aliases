@@ -34,51 +34,74 @@ ps_time() {
 #   utimer -c "$1" && say 'beep boop, times up' 
 # }
 
-# Switch or override terminal/editor theme: theme dark | theme light | theme auto
+# -----------------------------------------------------------------------------
+# Color Management System
+#   COLOR_MODE:    Polarity ("dark" | "light") Governs background luminance,
+#                  prompt branch indicators, and Git Delta diff highlights.
+#   COLOR_PALETTE: Aesthetic family ("github" | "rose-pine" | "tokyonight")
+#                  Selects syntax highlighting themes in WezTerm and Neovim.
+# -----------------------------------------------------------------------------
 theme() {
   local mode="$1"
+  local palette="${2:-}"
+
+  # Allow passing palette as first argument: theme rose-pine
+  if [[ "$mode" == "rose-pine" || "$mode" == "github" || "$mode" == "tokyonight" ]]; then
+    palette="$mode"
+    mode="${COLOR_MODE:-dark}"
+  fi
+
   case "$mode" in
     dark|light)
-      export THEME="$mode"
-      export TERM_COLORSCHEME="$mode"
+      export COLOR_MODE="$mode"
       ;;
     auto|system|reset)
-      unset THEME
+      unset COLOR_MODE
       local sys_mode="light"
       defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
-      export TERM_COLORSCHEME="$sys_mode"
+      export COLOR_MODE="$sys_mode"
       mode="auto"
       ;;
     *)
-      if [[ -n "$THEME" ]]; then
-        echo "Current theme override: $THEME"
+      if [[ -n "$COLOR_MODE" ]]; then
+        echo "Current mode: $COLOR_MODE (palette: ${COLOR_PALETTE:-github})"
       else
         local sys_mode="light"
         defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
-        echo "Current theme: auto (system is $sys_mode)"
+        echo "Current mode: auto (system is $sys_mode, palette: ${COLOR_PALETTE:-github})"
       fi
-      echo "Usage: theme [dark|light|auto]"
+      echo "Usage: theme [dark|light|auto] [github|rose-pine|tokyonight]"
       return 0
       ;;
   esac
 
-  local branch_color="cyan"
-  [[ "${TERM_COLORSCHEME:-dark}" == "light" ]] && branch_color="blue"
-  zstyle :prompt:pure:git:branch color "$branch_color"
-  prompt_pure_git_branch_color="$branch_color"
-  printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "%s" "$mode" | base64)"
+  [[ -n "$palette" ]] && export COLOR_PALETTE="$palette"
+
+  # Export BAT_THEME for bat and delta
+  typeset -A bat_themes=(
+    github-dark     "GitHub Dark"
+    github-light    "GitHub Light"
+    rose-pine-dark  "rose-pine"
+    rose-pine-light "rose-pine-dawn"
+    tokyonight-dark "Tokyo Night"
+  )
+  export BAT_THEME="${bat_themes[${palette:-${COLOR_PALETTE:-github}}-${mode}]:-GitHub Dark}"
+
+  # Propagate to WezTerm via OSC 1337 user variables
+  printf "\033]1337;SetUserVar=COLOR_MODE=%s\007" "$(printf "%s" "$mode" | base64)"
+  [[ -n "$palette" ]] && printf "\033]1337;SetUserVar=COLOR_PALETTE=%s\007" "$(printf "%s" "$palette" | base64)"
 
   if [[ "$mode" == "auto" ]]; then
-    echo "Theme reset to auto (follows macOS appearance: $TERM_COLORSCHEME)"
+    echo "Theme reset to auto (follows macOS appearance: $COLOR_MODE)"
   else
-    echo "Theme set to $mode (propagated to session, Neovim, and Git Delta)"
+    echo "Theme set to $COLOR_MODE (${COLOR_PALETTE:-github})"
   fi
 }
 
 # Toggle or set macOS appearance and sync terminal session immediately
 appearance() {
   command appearance "$@"
-  if [[ -z "$THEME" ]]; then
+  if [[ -z "$COLOR_MODE" ]]; then
     theme auto
   else
     local sys_mode="light"
@@ -89,7 +112,7 @@ appearance() {
 
 claude() {
   if (( $+commands[jq] )); then
-    local mode="${THEME:-}"
+    local mode="${COLOR_MODE:-}"
     if [[ -z "$mode" ]]; then
       mode="light"
       defaults read -g AppleInterfaceStyle &>/dev/null && mode="dark"
@@ -115,30 +138,30 @@ heic_to_jpg() {
 }
 
 mov2mp4() {
-    local has_audio
-    has_audio=$(ffprobe -i "$1" -show_streams -select_streams a -loglevel quiet | head -1)
-    local filters=''
-    local args=(-i "$1" -c:v libx264 -preset medium -crf 23 -map_metadata -1 -movflags +faststart)
+  local has_audio
+  has_audio=$(ffprobe -i "$1" -show_streams -select_streams a -loglevel quiet | head -1)
+  local filters=''
+  local args=(-i "$1" -c:v libx264 -preset medium -crf 23 -map_metadata -1 -movflags +faststart)
+  if [[ -n "$has_audio" ]]; then
+    args+=(-c:a aac -b:a 192k -async 1)
+  else
+    args+=(-an)
+  fi
+  if [[ "$2" == "-f" ]]; then
+    local speedup_factor=$3
+    local scale=$(bc <<< "scale=2; 1/$speedup_factor")
     if [[ -n "$has_audio" ]]; then
-        args+=(-c:a aac -b:a 192k -async 1)
+      filters='[0:v]setpts='"$scale"'*PTS[v];[0:a]atempo='"$speedup_factor"'[a]'
     else
-        args+=(-an)
+      filters='setpts='"$scale"'*PTS'
     fi
-    if [[ "$2" == "-f" ]]; then
-        local speedup_factor=$3
-        local scale=$(bc <<< "scale=2; 1/$speedup_factor")
-        if [[ -n "$has_audio" ]]; then
-            filters='[0:v]setpts='"$scale"'*PTS[v];[0:a]atempo='"$speedup_factor"'[a]'
-        else
-            filters='setpts='"$scale"'*PTS'
-        fi
-    fi
-    if [[ -n "$filters" && -n "$has_audio" ]]; then
-        args+=(-filter_complex "$filters" -map "[v]" -map "[a]")
-    elif [[ -n "$filters" ]]; then
-        args+=(-filter:v "$filters")
-    fi
-    ffmpeg "${args[@]}" "${1:r}.mp4"
+  fi
+  if [[ -n "$filters" && -n "$has_audio" ]]; then
+    args+=(-filter_complex "$filters" -map "[v]" -map "[a]")
+  elif [[ -n "$filters" ]]; then
+    args+=(-filter:v "$filters")
+  fi
+  ffmpeg "${args[@]}" "${1:r}.mp4"
 }
 
 # Manage git worktrees rooted at .worktrees/<name>.

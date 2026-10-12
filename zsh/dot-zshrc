@@ -86,16 +86,10 @@ if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
-# Sync WezTerm & Git Delta theme
-if [[ -n "$THEME" ]]; then
-  export TERM_COLORSCHEME="$THEME"
-  printf "\033]1337;SetUserVar=THEME=%s\007" "$(printf "%s" "$THEME" | base64)"
-else
-  defaults read -g AppleInterfaceStyle &>/dev/null && export TERM_COLORSCHEME="dark" || export TERM_COLORSCHEME="light"
+# Sync WezTerm & Git Delta color schemes
+if [[ -z "$COLOR_MODE" ]]; then
+  defaults read -g AppleInterfaceStyle &>/dev/null && export COLOR_MODE="dark" || export COLOR_MODE="light"
 fi
-
-if [[ "$TERM_COLORSCHEME" == "light" ]]; then
-  zstyle :prompt:pure:git:branch color blue
-else
-  zstyle :prompt:pure:git:branch color cyan
+if [[ -z "$BAT_THEME" ]]; then
+  [[ "$COLOR_MODE" == "light" ]] && export BAT_THEME="GitHub Light" || export BAT_THEME="GitHub Dark"
 fi
