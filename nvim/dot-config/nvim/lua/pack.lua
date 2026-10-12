@@ -43,6 +43,7 @@ if not vim.g.vscode then
         { src = "https://github.com/nvim-mini/mini.pairs" },
         { src = "https://github.com/windwp/nvim-ts-autotag" },
         { src = "https://github.com/projekt0n/github-nvim-theme" },
+        { src = "https://github.com/rose-pine/neovim", name = "rose-pine" },
         { src = "https://github.com/neovim/nvim-lspconfig" },
         { src = "https://github.com/marilari88/twoslash-queries.nvim" },
         { src = "https://github.com/folke/lazydev.nvim" },

@@ -7,22 +7,81 @@ end
 
 -- Appearance --
 
-local function scheme_for_appearance(appearance)
-    if appearance:find("Light") then
-        return "Github"
-    else
-        return "GitHub Dark"
+local palette_schemes = {
+    github = { dark = "GitHub Dark", light = "Github" },
+    ["rose-pine"] = { dark = "rose-pine", light = "rose-pine-dawn" },
+    tokyonight = { dark = "Tokyo Night", light = "Tokyo Night Day" },
+}
+
+local function scheme_for_mode_and_palette(mode, palette)
+    palette = palette or "github"
+    mode = mode or "dark"
+    local entry = palette_schemes[palette] or palette_schemes["github"]
+    return entry[mode] or entry["dark"]
+end
+
+local function detect_mode_and_palette(scheme_name)
+    if not scheme_name or scheme_name == "" then
+        return "dark", "github"
     end
+    for pal, entry in pairs(palette_schemes) do
+        if scheme_name == entry.dark then
+            return "dark", pal
+        elseif scheme_name == entry.light then
+            return "light", pal
+        end
+    end
+    local is_dark = not (scheme_name:find("Light") or scheme_name:find("dawn") or scheme_name:find("Day"))
+    local pal = scheme_name:find("rose%-pine") and "rose-pine" or "github"
+    return is_dark and "dark" or "light", pal
+end
+
+local function scheme_for_appearance(appearance)
+    local mode = appearance:find("Light") and "light" or "dark"
+    return scheme_for_mode_and_palette(mode, "github")
+end
+
+local function get_effective_color_state(window, pane)
+    local user_vars = pane and (type(pane.get_user_vars) == "function" and pane:get_user_vars() or pane.user_vars) or {}
+    local overrides = window
+            and (type(window.get_config_overrides) == "function" and window:get_config_overrides() or window.config_overrides)
+        or {}
+    local eff = window and (type(window.effective_config) == "function" and window:effective_config())
+    local active_scheme = overrides.color_scheme or (eff and eff.color_scheme) or config.color_scheme or ""
+
+    local fallback_mode, fallback_palette = detect_mode_and_palette(active_scheme)
+
+    local mode = user_vars.COLOR_MODE or user_vars.THEME or fallback_mode
+    local palette = user_vars.COLOR_PALETTE or fallback_palette
+
+    if mode == "auto" or mode == "" then
+        mode = fallback_mode
+    end
+    if palette == "" then
+        palette = fallback_palette
+    end
+
+    return mode, palette
 end
 
 local function tab_bar_colors_for_scheme(scheme_name)
     local schemes = wezterm.color.get_builtin_schemes()
-    local s = schemes[scheme_name]
+    local s = (config.color_schemes and config.color_schemes[scheme_name]) or schemes[scheme_name]
     if not s then
         return nil
     end
 
-    local is_dark = scheme_name:find("Dark") ~= nil
+    local is_dark = true
+    if s.background then
+        local ok, c = pcall(wezterm.color.parse, s.background)
+        if ok and c then
+            local _, _, l, _ = c:hsla()
+            is_dark = l < 0.5
+        end
+    else
+        is_dark = scheme_name:find("Dark") ~= nil
+    end
+
     local bg = s.background
     local fg = s.foreground
 
@@ -130,26 +189,52 @@ config.keys = {
     {
         key = "d",
         mods = "SUPER",
-        action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }),
+        action = wezterm.action_callback(function(window, pane)
+            local mode, palette = get_effective_color_state(window, pane)
+            pane:split({
+                direction = "Right",
+                domain = "CurrentPaneDomain",
+                set_environment_variables = {
+                    COLOR_MODE = mode,
+                    COLOR_PALETTE = palette,
+                    THEME = mode,
+                    TERM_COLORSCHEME = mode,
+                },
+            })
+        end),
     },
     {
         key = "d",
         mods = "SUPER|SHIFT",
-        action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }),
+        action = wezterm.action_callback(function(window, pane)
+            local mode, palette = get_effective_color_state(window, pane)
+            pane:split({
+                direction = "Bottom",
+                domain = "CurrentPaneDomain",
+                set_environment_variables = {
+                    COLOR_MODE = mode,
+                    COLOR_PALETTE = palette,
+                    THEME = mode,
+                    TERM_COLORSCHEME = mode,
+                },
+            })
+        end),
     },
     {
         key = "t",
         mods = "SUPER",
         action = wezterm.action_callback(function(window, pane)
             local mux_window = window:mux_window()
-            local overrides = window:get_config_overrides() or {}
-            local opts = {}
-            if overrides.color_scheme then
-                opts.set_environment_variables = {
-                    THEME = overrides.color_scheme:find("Dark") and "dark" or "light",
-                }
-            end
-            local tab, _, _ = mux_window:spawn_tab(opts)
+            local mode, palette = get_effective_color_state(window, pane)
+            local tab, _, _ = mux_window:spawn_tab({
+                domain = "CurrentPaneDomain",
+                set_environment_variables = {
+                    COLOR_MODE = mode,
+                    COLOR_PALETTE = palette,
+                    THEME = mode,
+                    TERM_COLORSCHEME = mode,
+                },
+            })
             local num_tabs = #mux_window:tabs()
             tab:move_to_tab_index(num_tabs - 1)
             tab:activate()
@@ -531,15 +616,32 @@ wezterm.on("window-config-reloaded", function(window, pane)
 end)
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
-    if name == "THEME" then
+    if name == "COLOR_MODE" or name == "COLOR_PALETTE" or name == "THEME" then
         local user_vars = pane and (type(pane.get_user_vars) == "function" and pane:get_user_vars() or pane.user_vars)
             or {}
-        local raw = (value and value ~= "") and value or user_vars.THEME
-        local theme = raw and raw:gsub("%s+", "")
-        local theme_schemes = { dark = "GitHub Dark", light = "Github" }
-        local scheme = theme_schemes[theme]
-
         local overrides = window:get_config_overrides() or {}
+        local current_mode, current_palette = detect_mode_and_palette(overrides.color_scheme or config.color_scheme)
+
+        local mode = current_mode
+        local palette = current_palette
+
+        if name == "COLOR_MODE" or name == "THEME" then
+            local val = (value and value ~= "") and value or user_vars[name]
+            val = val and val:gsub("%s+", "")
+            if val == "dark" or val == "light" then
+                mode = val
+            elseif val == "auto" then
+                mode = scheme_for_appearance(wezterm.gui.get_appearance()):find("Dark") and "dark" or "light"
+            end
+        elseif name == "COLOR_PALETTE" then
+            local val = (value and value ~= "") and value or user_vars.COLOR_PALETTE
+            val = val and val:gsub("%s+", "")
+            if val and val ~= "" then
+                palette = val
+            end
+        end
+
+        local scheme = scheme_for_mode_and_palette(mode, palette)
         overrides.color_scheme = scheme
         if scheme then
             overrides.colors = {
@@ -550,6 +652,20 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
         end
         window:set_config_overrides(overrides)
     end
+end)
+
+wezterm.on("new-tab-button-click", function(window, pane, button, default_action)
+    local mode, palette = get_effective_color_state(window, pane)
+    window:mux_window():spawn_tab({
+        domain = "CurrentPaneDomain",
+        set_environment_variables = {
+            COLOR_MODE = mode,
+            COLOR_PALETTE = palette,
+            THEME = mode,
+            TERM_COLORSCHEME = mode,
+        },
+    })
+    return false
 end)
 
 return config
