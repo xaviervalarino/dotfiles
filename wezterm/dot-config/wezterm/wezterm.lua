@@ -129,7 +129,7 @@ if github_light then
         "#9a6700",
         github_light.ansi[5],
         github_light.ansi[6],
-        "#1b6978",
+        "#0969da",
         github_light.ansi[8],
     }
     light_copy.brights = {
