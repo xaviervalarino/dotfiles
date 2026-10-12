@@ -7,6 +7,14 @@ end
 
 -- Appearance --
 
+--------------------------------------------------------------------------------
+-- Color Management System:
+--   COLOR_MODE:    Polarity ("dark" | "light") - controls background luminance,
+--                  tab bar contrast, and terminal process environment.
+--   COLOR_PALETTE: Theme family ("github" | "rose-pine" | "tokyonight") -
+--                  selects the specific active colorscheme.
+--------------------------------------------------------------------------------
+
 local palette_schemes = {
     github = { dark = "GitHub Dark", light = "Github" },
     ["rose-pine"] = { dark = "rose-pine", light = "rose-pine-dawn" },
@@ -51,7 +59,7 @@ local function get_effective_color_state(window, pane)
 
     local fallback_mode, fallback_palette = detect_mode_and_palette(active_scheme)
 
-    local mode = user_vars.COLOR_MODE or user_vars.THEME or fallback_mode
+    local mode = user_vars.COLOR_MODE or fallback_mode
     local palette = user_vars.COLOR_PALETTE or fallback_palette
 
     if mode == "auto" or mode == "" then
@@ -197,8 +205,6 @@ config.keys = {
                 set_environment_variables = {
                     COLOR_MODE = mode,
                     COLOR_PALETTE = palette,
-                    THEME = mode,
-                    TERM_COLORSCHEME = mode,
                 },
             })
         end),
@@ -214,8 +220,6 @@ config.keys = {
                 set_environment_variables = {
                     COLOR_MODE = mode,
                     COLOR_PALETTE = palette,
-                    THEME = mode,
-                    TERM_COLORSCHEME = mode,
                 },
             })
         end),
@@ -231,8 +235,6 @@ config.keys = {
                 set_environment_variables = {
                     COLOR_MODE = mode,
                     COLOR_PALETTE = palette,
-                    THEME = mode,
-                    TERM_COLORSCHEME = mode,
                 },
             })
             local num_tabs = #mux_window:tabs()
@@ -616,7 +618,7 @@ wezterm.on("window-config-reloaded", function(window, pane)
 end)
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
-    if name == "COLOR_MODE" or name == "COLOR_PALETTE" or name == "THEME" then
+    if name == "COLOR_MODE" or name == "COLOR_PALETTE" then
         local user_vars = pane and (type(pane.get_user_vars) == "function" and pane:get_user_vars() or pane.user_vars)
             or {}
         local overrides = window:get_config_overrides() or {}
@@ -625,7 +627,7 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
         local mode = current_mode
         local palette = current_palette
 
-        if name == "COLOR_MODE" or name == "THEME" then
+        if name == "COLOR_MODE" then
             local val = (value and value ~= "") and value or user_vars[name]
             val = val and val:gsub("%s+", "")
             if val == "dark" or val == "light" then
@@ -661,8 +663,6 @@ wezterm.on("new-tab-button-click", function(window, pane, button, default_action
         set_environment_variables = {
             COLOR_MODE = mode,
             COLOR_PALETTE = palette,
-            THEME = mode,
-            TERM_COLORSCHEME = mode,
         },
     })
     return false

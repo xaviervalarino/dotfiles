@@ -1,8 +1,16 @@
 local M = {}
 
---- Get the desired mode ("dark" or "light") based on COLOR_MODE, THEME, or macOS appearance
+--------------------------------------------------------------------------------
+-- Color Management System:
+--   COLOR_MODE:    Polarity ("dark" | "light") - controls background luminance,
+--                  statusline contrast, diffs, and prompt indicators.
+--   COLOR_PALETTE: Theme family ("github" | "rose-pine") - controls the syntax
+--                  palette and colorscheme plugin.
+--------------------------------------------------------------------------------
+
+--- Get the desired mode ("dark" or "light") based on COLOR_MODE or macOS appearance
 function M.get_mode()
-    local mode = vim.env.COLOR_MODE or vim.env.THEME or vim.env.TERM_COLORSCHEME
+    local mode = vim.env.COLOR_MODE
     if mode == "dark" or mode == "light" then
         return mode
     end
@@ -110,18 +118,14 @@ function M.setup()
 
         if arg_mode == "dark" or arg_mode == "light" then
             vim.env.COLOR_MODE = arg_mode
-            vim.env.THEME = arg_mode
             M.apply_theme(arg_mode, arg_palette)
             io.stdout:write("\027]1337;SetUserVar=COLOR_MODE=" .. vim.base64.encode(arg_mode) .. "\007")
-            io.stdout:write("\027]1337;SetUserVar=THEME=" .. vim.base64.encode(arg_mode) .. "\007")
             print("Theme set to " .. (arg_palette or M.get_palette()) .. " (" .. arg_mode .. ")")
         elseif arg_mode == "auto" or arg_mode == "system" or arg_mode == "reset" then
             vim.env.COLOR_MODE = nil
-            vim.env.THEME = nil
             local detected = M.get_mode()
             M.apply_theme(detected, arg_palette)
             io.stdout:write("\027]1337;SetUserVar=COLOR_MODE=" .. vim.base64.encode("auto") .. "\007")
-            io.stdout:write("\027]1337;SetUserVar=THEME=" .. vim.base64.encode("auto") .. "\007")
             print("Theme reset to auto (macOS appearance: " .. detected .. ")")
         elseif arg_palette then
             M.apply_theme(nil, arg_palette)
@@ -153,7 +157,7 @@ function M.setup()
     vim.api.nvim_create_autocmd("FocusGained", {
         group = vim.api.nvim_create_augroup("ThemeSync", { clear = true }),
         callback = function()
-            if not vim.env.COLOR_MODE and not vim.env.THEME then
+            if not vim.env.COLOR_MODE then
                 M.apply_theme()
             end
         end,
