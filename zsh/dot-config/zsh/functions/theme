@@ -1,0 +1,62 @@
+# -----------------------------------------------------------------------------
+# Color Management System
+#   COLOR_MODE:    Polarity ("dark" | "light") Governs background luminance,
+#                  prompt branch indicators, and Git Delta diff highlights.
+#   COLOR_PALETTE: Aesthetic family ("github" | "rose-pine" | "tokyonight")
+#                  Selects syntax highlighting themes in WezTerm and Neovim.
+# -----------------------------------------------------------------------------
+
+local mode="$1"
+local palette="${2:-}"
+
+# Allow passing palette as first argument: theme rose-pine
+if [[ "$mode" == "rose-pine" || "$mode" == "github" || "$mode" == "tokyonight" ]]; then
+  palette="$mode"
+  mode="${COLOR_MODE:-dark}"
+fi
+
+case "$mode" in
+  dark|light)
+    export COLOR_MODE="$mode"
+    ;;
+  auto|system|reset)
+    unset COLOR_MODE
+    local sys_mode="light"
+    defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
+    export COLOR_MODE="$sys_mode"
+    mode="auto"
+    ;;
+  *)
+    if [[ -n "$COLOR_MODE" ]]; then
+      echo "Current mode: $COLOR_MODE (palette: ${COLOR_PALETTE:-github})"
+    else
+      local sys_mode="light"
+      defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
+      echo "Current mode: auto (system is $sys_mode, palette: ${COLOR_PALETTE:-github})"
+    fi
+    echo "Usage: theme [dark|light|auto] [github|rose-pine|tokyonight]"
+    return 0
+    ;;
+esac
+
+[[ -n "$palette" ]] && export COLOR_PALETTE="$palette"
+
+# Export BAT_THEME for bat and delta
+typeset -A bat_themes=(
+  github-dark     "GitHub Dark"
+  github-light    "GitHub Light"
+  rose-pine-dark  "rose-pine"
+  rose-pine-light "rose-pine-dawn"
+  tokyonight-dark "Tokyo Night"
+)
+export BAT_THEME="${bat_themes[${palette:-${COLOR_PALETTE:-github}}-${mode}]:-GitHub Dark}"
+
+# Propagate to WezTerm via OSC 1337 user variables
+printf "\033]1337;SetUserVar=COLOR_MODE=%s\007" "$(printf "%s" "$mode" | base64)"
+[[ -n "$palette" ]] && printf "\033]1337;SetUserVar=COLOR_PALETTE=%s\007" "$(printf "%s" "$palette" | base64)"
+
+if [[ "$mode" == "auto" ]]; then
+  echo "Theme reset to auto (follows macOS appearance: $COLOR_MODE)"
+else
+  echo "Theme set to $COLOR_MODE (${COLOR_PALETTE:-github})"
+fi

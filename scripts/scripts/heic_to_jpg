@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+# Convert HEIC images to JPEG
+if [[ $# -lt 2 ]]; then
+  echo "Usage: heic_to_jpg <input.heic> <output.jpg>" >&2
+  exit 1
+fi
+
+extension="${2##*.}"
+if [[ "$extension" != "jpg" && "$extension" != "jpeg" ]]; then
+  echo "Error: destination extension must be 'jpg' or 'jpeg'" >&2
+  exit 1
+fi
+
+sips -s format jpeg "$1" --out "$2"

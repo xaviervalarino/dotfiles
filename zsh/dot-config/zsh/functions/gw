@@ -1,0 +1,215 @@
+# Manage git worktrees rooted at .worktrees/<name>.
+# Usage:
+#   gw                      Jump to an existing worktree via fzf
+#   gw <name|branch>        Jump to worktree matching branch or directory name
+#   gw add <name> [base]    Create branch and worktree at .worktrees/<name>, link .env, and cd in
+#   gw rm [name|branch]     Remove worktree by branch or dir name (fzf picker if omitted)
+#   gw ls                   List active worktrees
+#   gw help                 Show this help message
+
+local root
+root="$(git worktree list --porcelain 2>/dev/null | awk 'NR==1 && /^worktree / {print $2}')"
+
+if [[ -z "$root" ]]; then
+  echo "gw: fatal: not a git repository" >&2
+  return 1
+fi
+
+_gw_find() {
+  local query="$1"
+  git worktree list --porcelain | awk -v root="$root" -v q="$query" '
+  BEGIN { RS = ""; FS = "\n" }
+  {
+    wt = ""; br = ""
+    for (i = 1; i <= NF; i++) {
+      if ($i ~ /^worktree /) { sub(/^worktree /, "", $i); wt = $i }
+      if ($i ~ /^branch refs\/heads\//) { sub(/^branch refs\/heads\//, "", $i); br = $i }
+    }
+    if (wt == "" || wt == root) next
+    rel_wt = wt
+    sub("^" root "/\\.worktrees/", "", rel_wt)
+    base_wt = wt
+    sub(".*/", "", base_wt)
+    root_rel = wt
+    sub("^" root "/", "", root_rel)
+
+    if (wt == q || root_rel == q || rel_wt == q || base_wt == q || br == q) {
+      print wt "\t" br
+      exit
+    }
+  }'
+}
+
+case "${1:-}" in
+  add)
+    shift
+    local name="$1" base="${2:-HEAD}"
+
+    if [[ -z "$name" ]]; then
+      echo "Usage: gw add <name> [base]" >&2
+      return 1
+    fi
+
+    local wt_dir="$root/.worktrees/$name"
+
+    # Verify repository ignores the worktrees directory
+    if ! git check-ignore -q .worktrees/ 2>/dev/null; then
+      echo "gw: warning: .worktrees/ is not in .gitignore" >&2
+    fi
+
+    if git show-ref --verify --quiet "refs/heads/$name" || git show-ref --verify --quiet "refs/remotes/origin/$name"; then
+      git worktree add "$wt_dir" "$name" || return 1
+    else
+      git worktree add -b "$name" "$wt_dir" "$base" || return 1
+    fi
+
+    # Link environment files from primary root when present
+    local env_file
+    for env_file in .env .env.local; do
+      if [[ -f "$root/$env_file" && ! -e "$wt_dir/$env_file" ]]; then
+        ln -s "$root/$env_file" "$wt_dir/$env_file"
+      fi
+    done
+
+    cd "$wt_dir" || return 1
+    ;;
+
+  rm|remove)
+    shift
+    local force=false target=""
+    while [[ $# -gt 0 ]]; do
+      case "$1" in
+        -f|--force)
+          force=true
+          shift
+          ;;
+        -*)
+          echo "gw: unknown flag '$1'" >&2
+          return 1
+          ;;
+        *)
+          if [[ -z "$target" ]]; then
+            target="$1"
+          fi
+          shift
+          ;;
+      esac
+    done
+
+    local wt_path="" wt_branch=""
+
+    if [[ -z "$target" ]]; then
+      local selected
+      selected=$(git worktree list --porcelain | awk -v root="$root" '
+      BEGIN { RS = ""; FS = "\n" }
+      {
+        wt = ""; br = ""
+        for (i = 1; i <= NF; i++) {
+          if ($i ~ /^worktree /) { sub(/^worktree /, "", $i); wt = $i }
+          if ($i ~ /^branch refs\/heads\//) { sub(/^branch refs\/heads\//, "", $i); br = $i }
+        }
+        if (wt == "" || wt == root) next
+        rel_wt = wt
+        sub("^" root "/", "", rel_wt)
+        printf "%-32s %s\t%s\t%s\n", (br ? br : "(detached)"), rel_wt, wt, br
+      }' | fzf --prompt="Remove worktree: " --with-nth=1)
+      [[ -z "$selected" ]] && return 0
+      wt_path="$(printf '%s' "$selected" | cut -f2)"
+      wt_branch="$(printf '%s' "$selected" | cut -f3)"
+    else
+      local match
+      match="$(_gw_find "$target")"
+
+      if [[ -z "$match" ]]; then
+        echo "gw: fatal: no worktree found matching '$target'" >&2
+        return 1
+      fi
+
+      wt_path="$(printf '%s' "$match" | cut -f1)"
+      wt_branch="$(printf '%s' "$match" | cut -f2)"
+    fi
+
+    # Jump back to root before removal if currently inside target worktree
+    if [[ "$PWD" == "$wt_path" || "$PWD" == "$wt_path"/* ]]; then
+      cd "$root" || return 1
+    fi
+
+    if [[ "$force" != true ]]; then
+      if (cd "$wt_path" && git status --porcelain 2>/dev/null | grep -q -v '^[?]'); then
+        echo "gw: error: worktree has uncommitted changes in tracked files" >&2
+        echo "Use 'gw rm -f' to force removal." >&2
+        return 1
+      fi
+    fi
+
+    git worktree remove --force "$wt_path" || return 1
+
+    if [[ -n "$wt_branch" ]] && git show-ref --verify --quiet "refs/heads/$wt_branch"; then
+      if [[ "$force" == true ]]; then
+        git branch -D "$wt_branch"
+      elif [[ -t 0 ]]; then
+        read -q "reply?Delete associated branch '$wt_branch'? [y/N] "
+        echo
+        if [[ "$reply" =~ ^[Yy]$ ]]; then
+          git branch -d "$wt_branch" 2>/dev/null || git branch -D "$wt_branch"
+        fi
+      fi
+    fi
+    ;;
+
+  ls|list)
+    git worktree list
+    ;;
+
+  help|-h|--help)
+    printf "%s\n" \
+      "Usage:" \
+      "  gw                      Jump to an existing worktree via fzf" \
+      "  gw <name|branch>        Jump to worktree matching branch or directory name" \
+      "  gw add <name> [base]    Create branch and worktree at .worktrees/<name>, link .env, and cd in" \
+      "  gw rm [name|branch]     Remove worktree by branch or dir name (fzf picker if omitted)" \
+      "  gw ls                   List active worktrees" \
+      "  gw help                 Show this help message" \
+      "" \
+      "Options for 'gw rm':" \
+      "  -f, --force             Force remove dirty worktree and delete branch" \
+      "" \
+      "Aliases:" \
+      "  gw remove               Alias for 'gw rm'" \
+      "  gw list                 Alias for 'gw ls'"
+    ;;
+
+  *)
+    if [[ -z "${1:-}" ]]; then
+      local selected wt_path
+      selected=$(git worktree list --porcelain | awk -v root="$root" '
+      BEGIN { RS = ""; FS = "\n" }
+      {
+        wt = ""; br = ""
+        for (i = 1; i <= NF; i++) {
+          if ($i ~ /^worktree /) { sub(/^worktree /, "", $i); wt = $i }
+          if ($i ~ /^branch refs\/heads\//) { sub(/^branch refs\/heads\//, "", $i); br = $i }
+        }
+        if (wt == "") next
+        rel_wt = (wt == root) ? "[root]" : wt
+        sub("^" root "/", "", rel_wt)
+        printf "%-32s %s\t%s\n", (br ? br : "(detached)"), rel_wt, wt
+      }' | fzf --prompt="Jump to worktree: " --with-nth=1)
+      [[ -z "$selected" ]] && return 0
+      wt_path="$(printf '%s' "$selected" | cut -f2)"
+      if [[ -n "$wt_path" ]]; then
+        cd "$wt_path" || return 1
+      fi
+    else
+      local match wt_path
+      match="$(_gw_find "$1")"
+      if [[ -n "$match" ]]; then
+        wt_path="$(printf '%s' "$match" | cut -f1)"
+        cd "$wt_path" || return 1
+      else
+        echo "gw: unknown command or worktree '$1'. Run 'gw help' for usage." >&2
+        return 1
+      fi
+    fi
+    ;;
+esac

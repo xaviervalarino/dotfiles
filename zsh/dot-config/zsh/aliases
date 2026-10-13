@@ -1,0 +1,67 @@
+#!/usr/bin/env zsh
+
+alias g="git"
+if command -v eza &>/dev/null; then
+  alias ls="eza --icons --group-directories-first"
+  alias ll="eza -la --icons --octal-permissions --group-directories-first"
+  alias la="eza -a --icons --group-directories-first"
+  alias tree="eza --tree --icons --level=3"
+else
+  alias ls="ls -Gh"
+  alias ll="ls -lah"
+fi
+alias mkdir="mkdir -p"
+alias pomodoro="utimer -t 25m && say 'beep boop, times up'"
+alias reload="source ~/.zshrc"
+alias stow="stow --verbose --dotfiles"
+alias vim="nvim"
+
+unalias brew 2>/dev/null
+alias brew_bundle="brew bundle --file=$HOME/dotfiles/Brewfile"
+
+alias logout="osascript -e 'tell app \"System Events\" to log out'"
+
+ql() {
+  qlmanage -p "$1" &>/dev/null
+}
+
+ps_time() {
+  pid=$(pgrep -i "$1")
+  ps -p "$pid" -o etime=
+}
+
+# pom() {
+#   utimer -c "$1" && say 'beep boop, times up' 
+# }
+
+# Toggle or set macOS appearance and sync terminal session immediately
+appearance() {
+  command appearance "$@"
+  if [[ -z "$COLOR_MODE" ]]; then
+    theme auto
+  else
+    local sys_mode="light"
+    defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
+    theme "$sys_mode"
+  fi
+}
+
+claude() {
+  if (( $+commands[jq] )); then
+    local mode="${COLOR_MODE:-}"
+    if [[ -z "$mode" ]]; then
+      mode="light"
+      defaults read -g AppleInterfaceStyle &>/dev/null && mode="dark"
+    fi
+
+    local cfg=~/.claude.json
+    local current=$(jq -r '.theme // ""' "$cfg" 2>/dev/null)
+    if [[ "$current" != "$mode" ]]; then
+      jq --arg t "$mode" '.theme = $t' "$cfg" > "${cfg}.tmp" && mv "${cfg}.tmp" "$cfg"
+    fi
+  fi
+
+  command claude "$@"
+}
+
+# vi:filetype=sh

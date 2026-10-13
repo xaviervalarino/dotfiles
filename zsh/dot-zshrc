@@ -6,14 +6,20 @@
 
 [[ -d "$HOME/.docker/completions" ]] && fpath+=( "$HOME/.docker/completions" )
 
+# Autoload custom functions from XDG config directory
+# Glob qualifiers: 'N' enables nullglob (avoids error if empty), ':t' takes the basename
+fpath+=( "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/functions" )
+autoload -Uz "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/functions"/*(N:t)
+
 #------------------------------------------
 # Activate zsh completions
 autoload -Uz compinit
-compinit -u
+[[ -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh" ]] || mkdir -p "${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+compinit -u -d "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compdump"
 
 #------------------------------------------
 # Aliases: some aliases require `compinit` to be loaded
-source $HOME/.aliases
+source "${XDG_CONFIG_HOME:-$HOME/.config}/zsh/aliases"
 
 #------------------------------------------
 # History
