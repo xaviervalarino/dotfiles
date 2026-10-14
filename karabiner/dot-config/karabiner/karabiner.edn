@@ -13,10 +13,10 @@
 ; ## | optional any
 
 {:alone 100
- :delay 210
- :held 210
+ :delay 160
+ :held 180
  :sim 50
- :simlayer-threshold 1000
+ :simlayer-threshold 500
  :templates {:wm "/opt/homebrew/bin/hs -c \"WM.%s(%s)\""
              :hs "/opt/homebrew/bin/hs -c \"hs.%s()\""
              :launch "/opt/homebrew/bin/hs -c \"Launch.%s()\""
@@ -24,12 +24,14 @@
              :menu_item "/opt/homebrew/bin/hs -c \"Menu_item('%s', '%s')\""
              :play_pause "/opt/homebrew/bin/hs -c \"hs.eventtap.event.newSystemKeyEvent ('PLAY',true) :post ()\""
              :open "open -a \"%s\""
-             :say "say \"%s %s\""}
+             :say "say \"%s %s\""
+             :ribbon "/Users/xavier/dev/ribbon/bin/ribbon %s"}
 
  :layers {:tab_layer {:key :tab}
           :return_layer {:key :return_or_enter :condi ["launch_layer" 0]}}
 
- :simlayers {:w_layer {:key :w :modi {:optional :left_shift}}}
+ :simlayers {:w_layer {:key :w}
+             :W_layer {:key :w :modi {:mandatory :shift}}}
 
  :devices {:mistel      [{:vendor_id 1241 :product_id 323}]
            :mbp         [{:vendor_id 1452 :product_id 833}
@@ -179,16 +181,23 @@
 
         {:des "Move focused windows"
          :rules [:w_layer
-                 [:h [:wm "left"]]
-                 [:j [:wm "down"]]
-                 [:k [:wm "up"]]
-                 [:l [:wm "right"]]
-                 ; TODO: left/bottom/top/right half
+                 [:h [:ribbon "focus left"]]
+                 [:j [:ribbon "focus down"]]
+                 [:k [:ribbon "focus up"]]
+                 [:l [:ribbon "focus right"]]
+                 [:i [:ribbon "slurp"]]
+                 [:o [:ribbon "barf"]]
+                 [:quote [:ribbon "cycle-width"]]
+                 :W_layer
+                 [:h [:ribbon "swap left"]]
+                 [:j [:ribbon "swap down"]]
+                 [:k [:ribbon "swap up"]]
+                 [:l [:ribbon "swap right"]]
+                 :w_layer
                  [:m [:mission_control]]
                  [:d [:wm "toggle_show_desktop"]]
                  [:n [:wm "move_to_next_display"]]
                  [:semicolon [:wm "center"]]
-                 [:quote [:wm "fill"]]
                  [:r ["r_layer" 1] !r_layer]
                  :r_layer
                  [:h nil nil {:held [:wm "grow_left" "true"]  :afterup [:wm "grow_left" "false"]}]
