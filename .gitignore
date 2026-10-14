@@ -2,3 +2,5 @@ automatic_backups
 Spoons
 karabiner.json
 .envrc
+.clj-kondo
+.lsp

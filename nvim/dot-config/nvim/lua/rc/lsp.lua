@@ -43,6 +43,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+vim.lsp.enable("clojure_lsp")
+
 vim.lsp.enable("graphql")
 
 vim.lsp.enable("gopls")
