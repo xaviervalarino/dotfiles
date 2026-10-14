@@ -27,14 +27,13 @@ end)
 -- TODO: unstageChange might need a range or unstageFile might need a filename
 -- vs_map("n", "gH", "editor.action.unstageFile")
 
-vim.keymap.set("n", "<leader>rn", function()
+vim.keymap.set("n", "<leader>r", function()
     vscode.action("editor.action.rename")
 end)
 
 vim.keymap.set("n", "<leader>ff", function()
     vscode.action("workbench.action.findInFiles", { args = { query = vim.fn.expand("<cword>") } })
 end)
-
 
 vim.keymap.set("n", "<leader>ca", function()
     vscode.action("editor.action.quickFix")
