@@ -6,42 +6,74 @@
 #                  Selects syntax highlighting themes in WezTerm and Neovim.
 # -----------------------------------------------------------------------------
 
-local mode="$1"
+local action="$1"
 local palette="${2:-}"
+local theme_dir="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
+local mode_file="$theme_dir/mode"
+local palette_file="$theme_dir/palette"
+local pane_file=""
+[[ -n "$WEZTERM_PANE" ]] && pane_file="$theme_dir/pane_${WEZTERM_PANE}"
 
 # Allow passing palette as first argument: theme rose-pine
-if [[ "$mode" == "rose-pine" || "$mode" == "github" || "$mode" == "tokyonight" ]]; then
-  palette="$mode"
-  mode="${COLOR_MODE:-dark}"
+if [[ "$action" == "rose-pine" || "$action" == "github" || "$action" == "tokyonight" ]]; then
+  palette="$action"
+  action="sync"
 fi
 
-case "$mode" in
+mkdir -p "$theme_dir"
+
+case "$action" in
   dark|light)
-    export COLOR_MODE="$mode"
+    export COLOR_MODE="$action"
+    printf "%s" "$action" > "$mode_file"
+    [[ -n "$pane_file" ]] && printf "%s" "$action" > "$pane_file"
     ;;
   auto|system|reset)
-    unset COLOR_MODE
+    rm -f "$mode_file"
+    [[ -n "$pane_file" ]] && rm -f "$pane_file"
     local sys_mode="light"
     defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
     export COLOR_MODE="$sys_mode"
-    mode="auto"
+    action="auto"
     ;;
-  *)
-    if [[ -n "$COLOR_MODE" ]]; then
-      echo "Current mode: $COLOR_MODE (palette: ${COLOR_PALETTE:-github})"
+  sync|"")
+    # Resolve 3-tier precedence:
+    # Tier 1: Per-pane override (e.g. from Neovim)
+    if [[ -n "$pane_file" && -f "$pane_file" ]]; then
+      read -r COLOR_MODE < "$pane_file"
+    # Tier 2: Injected from parent / WezTerm spawn
+    elif [[ -n "$COLOR_MODE" && "$COLOR_MODE" != "auto" ]]; then
+      : # Keep inherited COLOR_MODE
+    # Tier 3: Global state file
+    elif [[ -f "$mode_file" ]]; then
+      read -r COLOR_MODE < "$mode_file"
+    # Tier 4: macOS system appearance
     else
       local sys_mode="light"
       defaults read -g AppleInterfaceStyle &>/dev/null && sys_mode="dark"
-      echo "Current mode: auto (system is $sys_mode, palette: ${COLOR_PALETTE:-github})"
+      export COLOR_MODE="$sys_mode"
     fi
-    echo "Usage: theme [dark|light|auto] [github|rose-pine|tokyonight]"
+    export COLOR_MODE
+    ;;
+  *)
+    echo "Current mode: ${COLOR_MODE:-auto} (palette: ${COLOR_PALETTE:-github})"
+    echo "Usage: theme [dark|light|auto|sync] [github|rose-pine|tokyonight]"
     return 0
     ;;
 esac
 
-[[ -n "$palette" ]] && export COLOR_PALETTE="$palette"
+# Update palette if provided or read from state
+if [[ -n "$palette" ]]; then
+  export COLOR_PALETTE="$palette"
+  printf "%s" "$palette" > "$palette_file"
+elif [[ -f "$palette_file" ]]; then
+  read -r COLOR_PALETTE < "$palette_file"
+  export COLOR_PALETTE
+else
+  export COLOR_PALETTE="${COLOR_PALETTE:-github}"
+fi
 
-# Export BAT_THEME for bat and delta
+# Ensure BAT_THEME matches resolved mode and palette (never "auto")
 typeset -A bat_themes=(
   github-dark     "GitHub Dark"
   github-light    "GitHub Light"
@@ -49,14 +81,18 @@ typeset -A bat_themes=(
   rose-pine-light "rose-pine-dawn"
   tokyonight-dark "Tokyo Night"
 )
-export BAT_THEME="${bat_themes[${palette:-${COLOR_PALETTE:-github}}-${mode}]:-GitHub Dark}"
+export BAT_THEME="${bat_themes[${COLOR_PALETTE}-${COLOR_MODE}]:-GitHub Dark}"
 
-# Propagate to WezTerm via OSC 1337 user variables
-printf "\033]1337;SetUserVar=COLOR_MODE=%s\007" "$(printf "%s" "$mode" | base64)"
-[[ -n "$palette" ]] && printf "\033]1337;SetUserVar=COLOR_PALETTE=%s\007" "$(printf "%s" "$palette" | base64)"
+# Emit OSC 1337 only in local WezTerm sessions (skip in tmux without passthrough / SSH)
+if [[ -n "$WEZTERM_PANE" && -z "$TMUX" && -z "$SSH_TTY" && -t 1 ]]; then
+  local osc_mode="${action}"
+  [[ "$osc_mode" != "auto" ]] && osc_mode="$COLOR_MODE"
+  printf "\033]1337;SetUserVar=COLOR_MODE=%s\007" "$(printf "%s" "$osc_mode" | base64)"
+  [[ -n "$palette" ]] && printf "\033]1337;SetUserVar=COLOR_PALETTE=%s\007" "$(printf "%s" "$palette" | base64)"
+fi
 
-if [[ "$mode" == "auto" ]]; then
-  echo "Theme reset to auto (follows macOS appearance: $COLOR_MODE)"
-else
-  echo "Theme set to $COLOR_MODE (${COLOR_PALETTE:-github})"
+if [[ "$action" == "dark" || "$action" == "light" ]]; then
+  echo "Theme set to $COLOR_MODE ($COLOR_PALETTE)"
+elif [[ "$action" == "auto" ]]; then
+  echo "Theme reset to auto (macOS appearance: $COLOR_MODE, palette: $COLOR_PALETTE)"
 fi

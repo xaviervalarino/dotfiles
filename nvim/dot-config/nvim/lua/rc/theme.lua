@@ -8,11 +8,56 @@ local M = {}
 --                  palette and colorscheme plugin.
 --------------------------------------------------------------------------------
 
+local function get_theme_dir()
+    local base = vim.env.XDG_STATE_HOME or (vim.env.HOME .. "/.local/state")
+    return base .. "/theme"
+end
+
+local function read_state(name)
+    local f = io.open(get_theme_dir() .. "/" .. name, "r")
+    if not f then
+        return nil
+    end
+    local content = f:read("*a")
+    f:close()
+    if content then
+        content = content:gsub("%s+", "")
+        if content ~= "" then
+            return content
+        end
+    end
+    return nil
+end
+
+local function write_state(name, content)
+    local dir = get_theme_dir()
+    vim.fn.mkdir(dir, "p")
+    local f = io.open(dir .. "/" .. name, "w")
+    if f then
+        f:write(content)
+        f:close()
+    end
+end
+
 --- Get the desired mode ("dark" or "light") based on COLOR_MODE or macOS appearance
 function M.get_mode()
+    local pane_id = vim.env.WEZTERM_PANE
+    if pane_id and pane_id ~= "" then
+        local saved = read_state("pane_" .. pane_id)
+        if saved == "dark" or saved == "light" then
+            return saved
+        end
+    end
+
     local mode = vim.env.COLOR_MODE
     if mode == "dark" or mode == "light" then
         return mode
+    end
+
+    -- Check persistent state file
+    local saved = read_state("mode")
+    if saved == "dark" or saved == "light" then
+        return saved
     end
 
     -- Query macOS system appearance
@@ -33,7 +78,8 @@ function M.get_palette()
     if palette and palette ~= "" then
         return palette:lower():gsub("%s+", "")
     end
-    return "github"
+
+    return read_state("palette") or "github"
 end
 
 --- Apply theme based on mode ("dark" or "light") and palette ("github", "rose-pine")
@@ -111,21 +157,40 @@ function M.setup()
             arg_mode = ""
         end
 
+        local pane_id = vim.env.WEZTERM_PANE
+        local is_wezterm = pane_id and pane_id ~= "" and not vim.env.TMUX
+
         if arg_palette and arg_palette ~= "" then
             vim.env.COLOR_PALETTE = arg_palette
-            io.stdout:write("\027]1337;SetUserVar=COLOR_PALETTE=" .. vim.base64.encode(arg_palette) .. "\007")
+            write_state("palette", arg_palette)
+            if is_wezterm then
+                io.stdout:write("\027]1337;SetUserVar=COLOR_PALETTE=" .. vim.base64.encode(arg_palette) .. "\007")
+            end
         end
 
         if arg_mode == "dark" or arg_mode == "light" then
             vim.env.COLOR_MODE = arg_mode
+            write_state("mode", arg_mode)
+            if pane_id and pane_id ~= "" then
+                write_state("pane_" .. pane_id, arg_mode)
+            end
             M.apply_theme(arg_mode, arg_palette)
-            io.stdout:write("\027]1337;SetUserVar=COLOR_MODE=" .. vim.base64.encode(arg_mode) .. "\007")
+            if is_wezterm then
+                io.stdout:write("\027]1337;SetUserVar=COLOR_MODE=" .. vim.base64.encode(arg_mode) .. "\007")
+            end
             print("Theme set to " .. (arg_palette or M.get_palette()) .. " (" .. arg_mode .. ")")
         elseif arg_mode == "auto" or arg_mode == "system" or arg_mode == "reset" then
             vim.env.COLOR_MODE = nil
+            local theme_dir = get_theme_dir()
+            os.remove(theme_dir .. "/mode")
+            if pane_id and pane_id ~= "" then
+                os.remove(theme_dir .. "/pane_" .. pane_id)
+            end
             local detected = M.get_mode()
             M.apply_theme(detected, arg_palette)
-            io.stdout:write("\027]1337;SetUserVar=COLOR_MODE=" .. vim.base64.encode("auto") .. "\007")
+            if is_wezterm then
+                io.stdout:write("\027]1337;SetUserVar=COLOR_MODE=" .. vim.base64.encode("auto") .. "\007")
+            end
             print("Theme reset to auto (macOS appearance: " .. detected .. ")")
         elseif arg_palette then
             M.apply_theme(nil, arg_palette)
@@ -153,12 +218,13 @@ function M.setup()
         desc = "Set or reset Neovim theme mode (dark, light, auto) and palette (github, rose-pine)",
     })
 
-    -- When returning focus to Neovim, if mode is auto, sync with macOS appearance
+    -- When returning focus to Neovim, if mode is auto, sync with appearance
     vim.api.nvim_create_autocmd("FocusGained", {
         group = vim.api.nvim_create_augroup("ThemeSync", { clear = true }),
         callback = function()
-            if not vim.env.COLOR_MODE then
-                M.apply_theme()
+            local desired = M.get_mode()
+            if desired ~= vim.o.background then
+                M.apply_theme(desired)
             end
         end,
     })

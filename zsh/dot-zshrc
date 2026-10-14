@@ -93,9 +93,18 @@ if command -v zoxide &> /dev/null; then
 fi
 
 # Sync WezTerm & Git Delta color schemes
-if [[ -z "$COLOR_MODE" ]]; then
-  defaults read -g AppleInterfaceStyle &>/dev/null && export COLOR_MODE="dark" || export COLOR_MODE="light"
-fi
-if [[ -z "$BAT_THEME" ]]; then
-  [[ "$COLOR_MODE" == "light" ]] && export BAT_THEME="GitHub Light" || export BAT_THEME="GitHub Dark"
-fi
+theme sync
+
+# Auto-sync theme when returning to prompt if changed by Neovim
+_theme_precmd() {
+  local _pane_file="${XDG_STATE_HOME:-$HOME/.local/state}/theme/pane_${WEZTERM_PANE}"
+  if [[ -n "$WEZTERM_PANE" && -f "$_pane_file" ]]; then
+    local _pane_mode
+    read -r _pane_mode < "$_pane_file"
+    if [[ -n "$_pane_mode" && "$_pane_mode" != "$COLOR_MODE" ]]; then
+      theme sync
+    fi
+  fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _theme_precmd
