@@ -44,9 +44,30 @@ local function detect_mode_and_palette(scheme_name)
     return is_dark and "dark" or "light", pal
 end
 
+local function read_theme_file(filename)
+    local state_dir = os.getenv("XDG_STATE_HOME") or ((os.getenv("HOME") or "") .. "/.local/state")
+    local f = io.open(state_dir .. "/theme/" .. filename, "r")
+    if not f then
+        return nil
+    end
+    local content = f:read("*a")
+    f:close()
+    if content then
+        content = content:gsub("%s+", "")
+        if content ~= "" then
+            return content
+        end
+    end
+    return nil
+end
+
 local function scheme_for_appearance(appearance)
-    local mode = appearance:find("Light") and "light" or "dark"
-    return scheme_for_mode_and_palette(mode, "github")
+    local mode = read_theme_file("mode")
+    if mode ~= "dark" and mode ~= "light" then
+        mode = "dark"
+    end
+    local palette = read_theme_file("palette") or "github"
+    return scheme_for_mode_and_palette(mode, palette)
 end
 
 local function get_effective_color_state(window, pane)
@@ -105,8 +126,8 @@ local function tab_bar_colors_for_scheme(scheme_name)
             intensity = "Bold",
         },
         inactive_tab_hover = {
-            bg_color = is_dark and "#161b22" or "#eaeef2",
-            fg_color = fg,
+            bg_color = bg,
+            fg_color = is_dark and "#7d8590" or "#6e7781",
         },
         new_tab = {
             bg_color = bg,
@@ -152,6 +173,22 @@ config.colors = {
     tab_bar = tab_bar_colors_for_scheme(config.color_scheme),
 }
 
+local function update_global_color_state(scheme, mode, palette)
+    if not scheme or scheme == "" then
+        return
+    end
+    wezterm.GLOBAL.last_color_scheme = scheme
+    if not mode or not palette then
+        mode, palette = detect_mode_and_palette(scheme)
+    end
+    wezterm.GLOBAL.last_mode = mode
+    wezterm.GLOBAL.last_palette = palette
+end
+
+if not wezterm.GLOBAL.last_color_scheme then
+    update_global_color_state(config.color_scheme)
+end
+
 config.font = wezterm.font("JetBrains Mono", { weight = "Book" })
 config.font_size = 14.5
 config.line_height = 1.25
@@ -193,7 +230,53 @@ config.visual_bell = {
 
 -- Keys --
 
+local function spawn_tab_next_to_active(window, pane)
+    local mux_window = window:mux_window()
+    local current_idx = 0
+    for i, tab_info in ipairs(mux_window:tabs_with_info()) do
+        if tab_info.is_active then
+            current_idx = tab_info.tab_index or (i - 1)
+            break
+        end
+    end
+    local mode, palette = get_effective_color_state(window, pane)
+    local _, new_pane = mux_window:spawn_tab({
+        domain = "CurrentPaneDomain",
+        set_environment_variables = {
+            COLOR_MODE = mode,
+            COLOR_PALETTE = palette,
+        },
+    })
+    window:perform_action(wezterm.action.MoveTab(current_idx + 1), new_pane or pane)
+end
+
 config.keys = {
+    {
+        key = "n",
+        mods = "SUPER",
+        action = wezterm.action_callback(function(window, pane)
+            local mode, palette = get_effective_color_state(window, pane)
+            local _, _, new_window = wezterm.mux.spawn_window({
+                domain = "CurrentPaneDomain",
+                set_environment_variables = {
+                    COLOR_MODE = mode,
+                    COLOR_PALETTE = palette,
+                },
+            })
+            local scheme = scheme_for_mode_and_palette(mode, palette)
+            if scheme and new_window then
+                local gui_win = new_window:gui_window()
+                if gui_win then
+                    local overrides = gui_win:get_config_overrides() or {}
+                    overrides.color_scheme = scheme
+                    overrides.colors = {
+                        tab_bar = tab_bar_colors_for_scheme(scheme),
+                    }
+                    gui_win:set_config_overrides(overrides)
+                end
+            end
+        end),
+    },
     {
         key = "d",
         mods = "SUPER",
@@ -227,20 +310,7 @@ config.keys = {
     {
         key = "t",
         mods = "SUPER",
-        action = wezterm.action_callback(function(window, pane)
-            local mux_window = window:mux_window()
-            local mode, palette = get_effective_color_state(window, pane)
-            local tab, _, _ = mux_window:spawn_tab({
-                domain = "CurrentPaneDomain",
-                set_environment_variables = {
-                    COLOR_MODE = mode,
-                    COLOR_PALETTE = palette,
-                },
-            })
-            local num_tabs = #mux_window:tabs()
-            tab:move_to_tab_index(num_tabs - 1)
-            tab:activate()
-        end),
+        action = wezterm.action_callback(spawn_tab_next_to_active),
     },
     { key = "[", mods = "SUPER|CTRL", action = wezterm.action.MoveTabRelative(-1) },
     { key = "]", mods = "SUPER|CTRL", action = wezterm.action.MoveTabRelative(1) },
@@ -305,6 +375,9 @@ config.mouse_bindings = {
 --- @param patterns string[] Lua patterns to test against the haystack.
 --- @return boolean
 local function find_any(haystack, patterns)
+    if not haystack then
+        return false
+    end
     local strs = type(haystack) == "string" and { haystack } or haystack --[[@as string[] ]]
     for _, str in ipairs(strs) do
         for _, p in ipairs(patterns) do
@@ -319,24 +392,75 @@ end
 -- Full-screen TUI apps that show in tab titles.
 local tui_apps = { "nvim", "opencode", "claude" }
 
---- Detect whether the foreground process in `pane` is a full-screen TUI app.
+--- Identify whether the foreground process in `pane` is a known TUI app.
 --- Falls back to inspecting argv so apps wrapped by a runtime are matched correctly.
+--- @param pane table A wezterm pane or PaneInformation object.
+--- @return string|nil
+local function get_tui_app(pane)
+    if not pane then
+        return nil
+    end
+
+    local mux_pane = nil
+    pcall(function()
+        if pane.pane_id then
+            mux_pane = wezterm.mux.get_pane(pane.pane_id)
+        elseif type(pane.get_foreground_process_name) == "function" then
+            mux_pane = pane
+        end
+    end)
+
+    local process = nil
+    if mux_pane then
+        pcall(function()
+            process = mux_pane:get_foreground_process_name()
+        end)
+    end
+
+    if process and #process > 0 then
+        for _, app in ipairs(tui_apps) do
+            if process:find(app) then
+                return app
+            end
+        end
+    end
+
+    if mux_pane then
+        local info = nil
+        pcall(function()
+            info = mux_pane:get_foreground_process_info()
+        end)
+        if info and info.argv then
+            for _, arg in ipairs(info.argv) do
+                for _, app in ipairs(tui_apps) do
+                    if arg:find(app) then
+                        return app
+                    end
+                end
+            end
+        end
+    end
+
+    local title = nil
+    pcall(function()
+        title = pane.title
+    end)
+    if title and #title > 0 then
+        for _, app in ipairs(tui_apps) do
+            if title:find(app) then
+                return app
+            end
+        end
+    end
+
+    return nil
+end
+
+--- Detect whether the foreground process in `pane` is a full-screen TUI app.
 --- @param pane table A wezterm pane object.
 --- @return boolean
 local function is_tui(pane)
-    if not pane then
-        return false
-    end
-    local process = (type(pane.get_foreground_process_name) == "function" and pane:get_foreground_process_name())
-        or pane.foreground_process_name
-    if find_any(process, tui_apps) then
-        return true
-    end
-    local info = type(pane.get_foreground_process_info) == "function" and pane:get_foreground_process_info() or nil
-    if info and info.argv then
-        return find_any(info.argv, tui_apps)
-    end
-    return false
+    return get_tui_app(pane) ~= nil
 end
 
 --- Shorten path components in Vim style (e.g. ~/dotfiles/wezterm -> ~/d/wezterm)
@@ -376,27 +500,44 @@ local function path_shorten(path)
 end
 
 --- Extract the current working directory from pane URL.
---- @param pane table A wezterm pane object.
+--- @param pane table A wezterm pane or PaneInformation object.
 --- @return string|nil
 local function get_pane_cwd(pane)
     if not pane then
         return nil
     end
-    local url = pane.current_working_url
+    local url = nil
+    pcall(function()
+        url = pane.current_working_dir
+    end)
+    if not url then
+        local mux_pane = nil
+        pcall(function()
+            if pane.pane_id then
+                mux_pane = wezterm.mux.get_pane(pane.pane_id)
+            elseif type(pane.get_current_working_dir) == "function" then
+                mux_pane = pane
+            end
+            if mux_pane then
+                url = mux_pane:get_current_working_dir()
+            end
+        end)
+    end
     if not url then
         return nil
     end
-    local raw_path = nil
-    if type(url) == "string" then
-        raw_path = url:gsub("^file://[^/]*", "")
-    elseif (type(url) == "table" or type(url) == "userdata") and url.file_path then
-        raw_path = url.file_path
+    local file_path = nil
+    pcall(function()
+        file_path = url.file_path
+    end)
+    if file_path and #file_path > 0 then
+        return file_path
     end
-    if raw_path then
-        raw_path = raw_path:gsub("%%(%x%x)", function(hex)
+    if type(url) == "string" then
+        local raw_path = url:gsub("^file://[^/]*", "")
+        return raw_path:gsub("%%(%x%x)", function(hex)
             return string.char(tonumber(hex, 16))
         end)
-        return raw_path
     end
     return nil
 end
@@ -405,7 +546,10 @@ end
 --- @param tab_info table A wezterm TabInformation object.
 --- @return string
 local function get_tab_title(tab_info)
-    local title = tab_info.tab_title
+    local title = nil
+    pcall(function()
+        title = tab_info.tab_title
+    end)
     if title and #title > 0 then
         return title
     end
@@ -413,18 +557,45 @@ local function get_tab_title(tab_info)
     if not pane then
         return "tab"
     end
-    if is_tui(pane) then
-        local proc = pane.foreground_process_name
-        if proc and #proc > 0 then
-            return proc:gsub("^.*/", "")
+    local tui = get_tui_app(pane)
+    if tui == "claude" then
+        local p_title = nil
+        pcall(function()
+            p_title = pane.title
+        end)
+        if not p_title or p_title == "" then
+            local mux_pane = nil
+            pcall(function()
+                if pane.pane_id then
+                    mux_pane = wezterm.mux.get_pane(pane.pane_id)
+                end
+            end)
+            if mux_pane then
+                pcall(function()
+                    p_title = mux_pane:get_title()
+                end)
+            end
         end
+        if p_title and #p_title > 0 then
+            p_title = p_title:match("^%s*(.-)%s*$") or p_title
+            if not p_title:match("^%d+%.%d+") and not p_title:find("/versions/") and #p_title > 0 then
+                return p_title
+            end
+        end
+        return "claude"
+    elseif tui then
+        return tui
     end
     local cwd = get_pane_cwd(pane)
     if cwd and #cwd > 0 then
         return path_shorten(cwd)
     end
-    if pane.title and #pane.title > 0 then
-        return path_shorten(pane.title)
+    local p_title = nil
+    pcall(function()
+        p_title = pane.title
+    end)
+    if p_title and #p_title > 0 then
+        return path_shorten(p_title)
     end
     return "tab"
 end
@@ -434,7 +605,13 @@ end
 local bell_panes = {}
 
 wezterm.on("bell", function(window, pane)
-    bell_panes[pane:pane_id()] = true
+    local pane_id = nil
+    pcall(function()
+        pane_id = type(pane.pane_id) == "function" and pane:pane_id() or pane.pane_id
+    end)
+    if pane_id then
+        bell_panes[pane_id] = true
+    end
 end)
 
 --- Return true if the tab has an unseen alert.
@@ -446,12 +623,19 @@ local function tab_has_alert(tab_info)
         return false
     end
 
+    local pane_id = nil
+    pcall(function()
+        pane_id = pane.pane_id
+    end)
+
     if tab_info.is_active then
-        bell_panes[pane.pane_id] = nil
+        if pane_id then
+            bell_panes[pane_id] = nil
+        end
         return false
     end
 
-    if bell_panes[pane.pane_id] then
+    if pane_id and bell_panes[pane_id] then
         return true
     end
 
@@ -460,160 +644,226 @@ end
 
 --- Get non-title width (padding, indicators, index) for a tab.
 local function tab_chrome_width(tab_info, has_alert)
-    local index = tab_info.tab_index + 1
+    local idx = 0
+    pcall(function()
+        idx = tab_info.tab_index or tab_info.index or 0
+    end)
+    local index = idx + 1
     local index_len = #tostring(index)
-    return (has_alert and 7 or 5) + index_len
+    local left_pad = idx == 0 and 2 or 0
+    return (has_alert and 5 or 3) + index_len + left_pad
 end
 
 --- Get terminal window width in columns.
 local function get_window_cols(tab_info)
     local max_col = 0
-    if tab_info.panes then
-        for _, p in ipairs(tab_info.panes) do
-            local right = (p.left or 0) + (p.width or 0)
-            if right > max_col then
-                max_col = right
+    pcall(function()
+        if tab_info.panes then
+            for _, p in ipairs(tab_info.panes) do
+                local left, width = 0, 0
+                pcall(function()
+                    left = p.left or 0
+                end)
+                pcall(function()
+                    width = p.width or 0
+                end)
+                local right = left + width
+                if right > max_col then
+                    max_col = right
+                end
             end
         end
-    end
+    end)
     if max_col > 0 then
         return max_col
     end
     local pane = tab_info.active_pane
-    if pane and pane.width and pane.width > 0 then
-        return pane.width
+    if pane then
+        local width = 0
+        pcall(function()
+            width = pane.width or 0
+        end)
+        if width > 0 then
+            return width
+        end
     end
     return 120
 end
 
-wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-    local title = get_tab_title(tab)
-    local is_active = tab.is_active
-    local num_tabs = #tabs
+wezterm.on("format-tab-title", function(tab, tabs, panes, config_handle, hover, max_width)
+    local ok, result = pcall(function()
+        local raw_title = get_tab_title(tab)
+        local title = raw_title:gsub("^%d+:%s*", "")
+        local is_active = tab.is_active
+        local num_tabs = #tabs
 
-    -- Tabs are max 120 chars by default with an ellipsis if they overflow.
-    -- If there are too many tabs open that 120 doesn't fit, prioritize the active tab.
-    -- On hover the sizing does not change (only changes on selection/active).
-    local limit = 120
-    if num_tabs > 1 then
-        local total_cols = get_window_cols(tab)
-        local has_alerts = {}
-        local tab_titles = {}
-        local total_needed = 0
-        local active_tab_info = nil
+        -- Tabs are max 120 chars by default with an ellipsis if they overflow.
+        -- If there are too many tabs open that 120 doesn't fit, prioritize the active tab.
+        -- On hover the sizing does not change (only changes on selection/active).
+        local limit = 120
+        if num_tabs > 1 then
+            local total_cols = get_window_cols(tab)
+            local has_alerts = {}
+            local tab_titles = {}
+            local total_needed = 0
+            local active_tab_info = nil
 
-        for _, t in ipairs(tabs) do
-            local alert = tab_has_alert(t)
-            has_alerts[t.tab_id] = alert
-            local t_title = get_tab_title(t)
-            tab_titles[t.tab_id] = t_title
-            local chrome = tab_chrome_width(t, alert)
-            local natural_len = math.min(120, wezterm.column_width(t_title))
-            total_needed = total_needed + natural_len + chrome
-            if t.is_active then
-                active_tab_info = t
-            end
-        end
-
-        if total_needed > total_cols then
-            local num_inactive = num_tabs - 1
-            local min_inactive_title = 2
-            local reserved_for_inactive = 0
             for _, t in ipairs(tabs) do
-                if not t.is_active then
-                    reserved_for_inactive = reserved_for_inactive
-                        + tab_chrome_width(t, has_alerts[t.tab_id])
-                        + min_inactive_title
+                local alert = tab_has_alert(t)
+                has_alerts[t.tab_id] = alert
+                local t_title = get_tab_title(t)
+                tab_titles[t.tab_id] = t_title
+                local chrome = tab_chrome_width(t, alert)
+                local natural_len = math.min(120, wezterm.column_width(t_title))
+                total_needed = total_needed + natural_len + chrome
+                if t.is_active then
+                    active_tab_info = t
                 end
             end
 
-            local active_chrome = active_tab_info
-                    and tab_chrome_width(active_tab_info, has_alerts[active_tab_info.tab_id])
-                or 6
-            local active_available = math.max(active_chrome + 3, total_cols - reserved_for_inactive)
-            local active_title_limit = math.min(120, active_available - active_chrome)
+            if total_needed > total_cols then
+                local num_inactive = num_tabs - 1
+                local min_inactive_title = 2
+                local reserved_for_inactive = 0
+                for _, t in ipairs(tabs) do
+                    if not t.is_active then
+                        reserved_for_inactive = reserved_for_inactive
+                            + tab_chrome_width(t, has_alerts[t.tab_id])
+                            + min_inactive_title
+                    end
+                end
 
-            local active_title_text = active_tab_info
-                    and (tab_titles[active_tab_info.tab_id] or get_tab_title(active_tab_info))
-                or ""
-            local active_title_len = math.min(active_title_limit, wezterm.column_width(active_title_text))
-            local active_used = active_title_len + active_chrome
+                local active_chrome = active_tab_info
+                        and tab_chrome_width(active_tab_info, has_alerts[active_tab_info.tab_id])
+                    or 6
+                local active_available = math.max(active_chrome + 3, total_cols - reserved_for_inactive)
+                local active_title_limit = math.min(120, active_available - active_chrome)
 
-            local remaining_for_inactive = math.max(0, total_cols - active_used)
-            local avg_inactive_slot = math.floor(remaining_for_inactive / num_inactive)
+                local active_title_text = active_tab_info
+                        and (tab_titles[active_tab_info.tab_id] or get_tab_title(active_tab_info))
+                    or ""
+                local active_title_len = math.min(active_title_limit, wezterm.column_width(active_title_text))
+                local active_used = active_title_len + active_chrome
 
-            if is_active then
-                limit = active_title_limit
+                local remaining_for_inactive = math.max(0, total_cols - active_used)
+                local avg_inactive_slot = math.floor(remaining_for_inactive / num_inactive)
+
+                if is_active then
+                    limit = active_title_limit
+                else
+                    local my_chrome = tab_chrome_width(tab, has_alerts[tab.tab_id])
+                    limit = math.max(min_inactive_title, avg_inactive_slot - my_chrome)
+                    limit = math.min(120, limit)
+                end
             else
-                local my_chrome = tab_chrome_width(tab, has_alerts[tab.tab_id])
-                limit = math.max(min_inactive_title, avg_inactive_slot - my_chrome)
-                limit = math.min(120, limit)
+                limit = 120
             end
         else
             limit = 120
         end
-    else
-        limit = 120
-    end
 
-    local width = wezterm.column_width(title)
-    if width > limit then
-        if limit <= 1 then
-            title = "…"
-        else
-            title = wezterm.truncate_right(title, limit - 1) .. "…"
+        local width = wezterm.column_width(title)
+        if width > limit then
+            if limit <= 1 then
+                title = "…"
+            else
+                title = wezterm.truncate_right(title, limit - 1) .. "…"
+            end
         end
-    end
 
-    local index = tab.tab_index + 1
-    local is_dark = true
-    if config.resolved_palette and config.resolved_palette.background then
-        local ok, c = pcall(wezterm.color.parse, config.resolved_palette.background)
-        if ok and c then
+        local idx = 0
+        pcall(function()
+            idx = tab.tab_index or tab.index or 0
+        end)
+        local index = idx + 1
+        local is_dark = true
+        local tab_bg = nil
+        pcall(function()
+            if config_handle and config_handle.resolved_palette then
+                local pal = config_handle.resolved_palette
+                tab_bg = pal.tab_bar and pal.tab_bar.background or pal.background
+            end
+        end)
+        if not tab_bg then
+            local schemes = wezterm.color.get_builtin_schemes()
+            local s = (config.color_schemes and config.color_schemes[config.color_scheme])
+                or schemes[config.color_scheme or "GitHub Dark"]
+            tab_bg = s and s.background or "#0d1117"
+        end
+        local ok_parse, c = pcall(wezterm.color.parse, tab_bg)
+        if ok_parse and c then
             local _, _, l, _ = c:hsla()
             is_dark = l < 0.5
         end
-    end
 
-    local palette = config.resolved_palette and config.resolved_palette.tab_bar
-    local tab_bg = palette and palette.background or (is_dark and "#0d1117" or "#ffffff")
-    if hover and not is_active and palette and palette.inactive_tab_hover then
-        tab_bg = palette.inactive_tab_hover.bg_color or tab_bg
-    end
+        local left_pad = idx == 0 and "  " or ""
 
-    if tab_has_alert(tab) then
-        local dot_color = is_dark and "#f85149" or "#cf222e"
-        local num_color = is_dark and "#484f58" or "#afb8c1"
-        local title_color = is_dark and "#7d8590" or "#6e7781"
+        if tab_has_alert(tab) then
+            local dot_color = is_dark and "#f85149" or "#cf222e"
+            local num_color = is_dark and "#484f58" or "#afb8c1"
+            local title_color = is_dark and "#7d8590" or "#6e7781"
+            return {
+                { Background = { Color = tab_bg } },
+                { Foreground = { Color = dot_color } },
+                { Text = left_pad .. "● " },
+                { Foreground = { Color = num_color } },
+                { Text = index .. " " },
+                { Foreground = { Color = title_color } },
+                { Text = title .. "  " },
+            }
+        end
+
+        local num_color = is_active and (is_dark and "#8b949e" or "#8c959f") or (is_dark and "#484f58" or "#afb8c1")
+        local title_color = is_active and (is_dark and "#e3b341" or "#9a6700") or (is_dark and "#7d8590" or "#6e7781")
+
         return {
             { Background = { Color = tab_bg } },
-            { Foreground = { Color = dot_color } },
-            { Text = "  ● " },
             { Foreground = { Color = num_color } },
-            { Text = index .. " " },
+            { Text = left_pad .. index .. " " },
+            { Attribute = { Intensity = is_active and "Bold" or "Normal" } },
             { Foreground = { Color = title_color } },
             { Text = title .. "  " },
         }
+    end)
+
+    if not ok then
+        wezterm.log_error("format-tab-title error: " .. tostring(result))
+        return {
+            { Foreground = { Color = "#ff5555" } },
+            { Text = " [TAB_ERR: " .. tostring(result):sub(1, 60) .. "] " },
+        }
     end
-
-    local num_color = is_active and (is_dark and "#8b949e" or "#8c959f") or (is_dark and "#484f58" or "#afb8c1")
-    local title_color = is_active and (is_dark and "#e3b341" or "#9a6700") or (is_dark and "#7d8590" or "#6e7781")
-
-    return {
-        { Background = { Color = tab_bg } },
-        { Foreground = { Color = num_color } },
-        { Text = "  " .. index .. " " },
-        { Attribute = { Intensity = is_active and "Bold" or "Normal" } },
-        { Foreground = { Color = title_color } },
-        { Text = title .. "  " },
-    }
+    return result
 end)
 
 wezterm.on("window-config-reloaded", function(window, pane)
     local overrides = window:get_config_overrides() or {}
+    local changed = false
     if overrides.window_padding ~= nil then
         overrides.window_padding = nil
+        changed = true
+    end
+
+    local target_scheme = wezterm.GLOBAL.last_color_scheme
+    if target_scheme and overrides.color_scheme == nil and target_scheme ~= config.color_scheme then
+        overrides.color_scheme = target_scheme
+        overrides.colors = {
+            tab_bar = tab_bar_colors_for_scheme(target_scheme),
+        }
+        changed = true
+    end
+
+    if changed then
         window:set_config_overrides(overrides)
+    end
+end)
+
+wezterm.on("window-focus-changed", function(window, pane)
+    if window:is_focused() then
+        local overrides = window:get_config_overrides() or {}
+        local eff = window:effective_config()
+        local active_scheme = overrides.color_scheme or (eff and eff.color_scheme) or config.color_scheme
+        update_global_color_state(active_scheme)
     end
 end)
 
@@ -630,10 +880,18 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
         if name == "COLOR_MODE" then
             local val = (value and value ~= "") and value or user_vars[name]
             val = val and val:gsub("%s+", "")
-            if val == "dark" or val == "light" then
+            if val == "auto" then
+                local auto_mode = wezterm.gui.get_appearance():find("Light") and "light" or "dark"
+                local auto_scheme = scheme_for_mode_and_palette(auto_mode, palette)
+                overrides.color_scheme = auto_scheme
+                overrides.colors = {
+                    tab_bar = tab_bar_colors_for_scheme(auto_scheme),
+                }
+                window:set_config_overrides(overrides)
+                update_global_color_state(auto_scheme, auto_mode, palette)
+                return
+            elseif val == "dark" or val == "light" then
                 mode = val
-            elseif val == "auto" then
-                mode = scheme_for_appearance(wezterm.gui.get_appearance()):find("Dark") and "dark" or "light"
             end
         elseif name == "COLOR_PALETTE" then
             local val = (value and value ~= "") and value or user_vars.COLOR_PALETTE
@@ -653,18 +911,13 @@ wezterm.on("user-var-changed", function(window, pane, name, value)
             overrides.colors = nil
         end
         window:set_config_overrides(overrides)
+
+        update_global_color_state(scheme, mode, palette)
     end
 end)
 
 wezterm.on("new-tab-button-click", function(window, pane, button, default_action)
-    local mode, palette = get_effective_color_state(window, pane)
-    window:mux_window():spawn_tab({
-        domain = "CurrentPaneDomain",
-        set_environment_variables = {
-            COLOR_MODE = mode,
-            COLOR_PALETTE = palette,
-        },
-    })
+    spawn_tab_next_to_active(window, pane)
     return false
 end)
 
