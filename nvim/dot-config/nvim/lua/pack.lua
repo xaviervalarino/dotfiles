@@ -75,6 +75,7 @@ if not vim.g.vscode then
         { src = "https://github.com/dmmulroy/tsc.nvim" },
         { src = "https://github.com/nvim-mini/mini.sessions" },
         { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+        { src = "https://github.com/ThorstenRhau/brygga.nvim", version = vim.version.range("*") },
     }
     for _, s in ipairs(nvim_specs) do
         table.insert(specs, s)

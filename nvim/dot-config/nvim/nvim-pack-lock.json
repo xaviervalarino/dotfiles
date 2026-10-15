@@ -9,6 +9,11 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": "'v1.*'"
     },
+    "brygga.nvim": {
+      "rev": "7392fd4fe113d0c86a85d93b487f6df7e714e491",
+      "src": "https://github.com/ThorstenRhau/brygga.nvim",
+      "version": ">=0.0.0"
+    },
     "conform.nvim": {
       "rev": "016802de402556da54c36bd7359b441266b01cdd",
       "src": "https://github.com/stevearc/conform.nvim"
