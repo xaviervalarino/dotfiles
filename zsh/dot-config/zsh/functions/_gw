@@ -1,0 +1,37 @@
+#compdef gw
+
+_gw() {
+  local curcontext="$curcontext" state line ret=1
+  typeset -A opt_args
+
+  _arguments -C \
+    '1:subcommand:->subcmd' \
+    '*::options:->subcmd_args' && ret=0
+
+  case "$state" in
+    subcmd)
+      local -a subcommands=(
+        'add:Create or move worktree at .worktrees/<name>'
+        'rm:Remove worktree by branch or dir name'
+        'ls:List active worktrees'
+        'help:Show help message'
+      )
+      _describe -t subcommands 'gw subcommand' subcommands && ret=0
+      ;;
+
+    subcmd_args)
+      case "$words[1]" in
+        rm)
+          _arguments \
+            '(-f --force)'{-f,--force}'[Force remove dirty or untracked worktree]' && ret=0
+          ;;
+      esac
+      ;;
+  esac
+
+  return ret
+}
+
+if (( CURRENT )); then
+  _gw "$@"
+fi

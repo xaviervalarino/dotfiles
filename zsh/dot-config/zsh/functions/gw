@@ -1,215 +1,465 @@
 # Manage git worktrees rooted at .worktrees/<name>.
-# Usage:
-#   gw                      Jump to an existing worktree via fzf
-#   gw <name|branch>        Jump to worktree matching branch or directory name
-#   gw add <name> [base]    Create branch and worktree at .worktrees/<name>, link .env, and cd in
-#   gw rm [name|branch]     Remove worktree by branch or dir name (fzf picker if omitted)
-#   gw ls                   List active worktrees
-#   gw help                 Show this help message
 
+# -----------------------------------------------------------------------------
+# 1. Early Help Fast-Path (runs outside git repositories)
+# -----------------------------------------------------------------------------
+case "${1:-}" in
+  help|-h|--help)
+    printf "%s\n" \
+      "Usage:" \
+      "  gw                      Jump to an existing worktree via fzf" \
+      "  gw <name|branch>        Jump to worktree matching branch or directory name" \
+      "  gw add [name] [base]    Create or move worktree at .worktrees/<name>" \
+      "  gw rm [name|branch]     Remove worktree by branch or dir name" \
+      "  gw ls                   List active worktrees" \
+      "  gw help                 Show this help message" \
+      "" \
+      "Options for 'gw rm':" \
+      "  -f, --force             Force remove dirty worktree"
+    return 0
+    ;;
+esac
+
+# -----------------------------------------------------------------------------
+# 2. Repository Root Discovery
+# -----------------------------------------------------------------------------
 local root
-root="$(git worktree list --porcelain 2>/dev/null | awk 'NR==1 && /^worktree / {print $2}')"
+
+# Extract the primary worktree path from line 1 of porcelain output.
+# Stripping the prefix preserves spaces in repository paths.
+root="$(git worktree list --porcelain 2>/dev/null | awk 'NR==1 && /^worktree / { sub(/^worktree /, "", $0); print }')"
 
 if [[ -z "$root" ]]; then
   echo "gw: fatal: not a git repository" >&2
   return 1
 fi
 
-_gw_find() {
-  local query="$1"
-  git worktree list --porcelain | awk -v root="$root" -v q="$query" '
-  BEGIN { RS = ""; FS = "\n" }
-  {
-    wt = ""; br = ""
-    for (i = 1; i <= NF; i++) {
-      if ($i ~ /^worktree /) { sub(/^worktree /, "", $i); wt = $i }
-      if ($i ~ /^branch refs\/heads\//) { sub(/^branch refs\/heads\//, "", $i); br = $i }
-    }
-    if (wt == "" || wt == root) next
-    rel_wt = wt
-    sub("^" root "/\\.worktrees/", "", rel_wt)
-    base_wt = wt
-    sub(".*/", "", base_wt)
-    root_rel = wt
-    sub("^" root "/", "", root_rel)
+# -----------------------------------------------------------------------------
+# 3. Helper Functions
+# -----------------------------------------------------------------------------
+{
+  # Resolve default branch for primary checkout (origin/HEAD -> init.defaultBranch -> master -> first local).
+  _gw_default_branch() {
+    local ref def
 
-    if (wt == q || root_rel == q || rel_wt == q || base_wt == q || br == q) {
-      print wt "\t" br
-      exit
-    }
-  }'
-}
-
-case "${1:-}" in
-  add)
-    shift
-    local name="$1" base="${2:-HEAD}"
-
-    if [[ -z "$name" ]]; then
-      echo "Usage: gw add <name> [base]" >&2
-      return 1
+    ref="$(git -C "$root" symbolic-ref refs/remotes/origin/HEAD 2>/dev/null || true)"
+    if [[ -n "$ref" ]]; then
+      echo "${ref#refs/remotes/origin/}"
+      return
     fi
 
-    local wt_dir="$root/.worktrees/$name"
-
-    # Verify repository ignores the worktrees directory
-    if ! git check-ignore -q .worktrees/ 2>/dev/null; then
-      echo "gw: warning: .worktrees/ is not in .gitignore" >&2
-    fi
-
-    if git show-ref --verify --quiet "refs/heads/$name" || git show-ref --verify --quiet "refs/remotes/origin/$name"; then
-      git worktree add "$wt_dir" "$name" || return 1
+    def="$(git -C "$root" config init.defaultBranch 2>/dev/null || echo "main")"
+    if git -C "$root" show-ref --verify --quiet "refs/heads/$def"; then
+      echo "$def"
+    elif git -C "$root" show-ref --verify --quiet refs/heads/master; then
+      echo "master"
     else
-      git worktree add -b "$name" "$wt_dir" "$base" || return 1
+      local first_branch
+
+      first_branch="$(git -C "$root" for-each-ref --format='%(refname:short)' --count=1 refs/heads/ 2>/dev/null || true)"
+      echo "${first_branch:-main}"
     fi
+  }
 
-    # Link environment files from primary root when present
-    local env_file
-    for env_file in .env .env.local; do
-      if [[ -f "$root/$env_file" && ! -e "$wt_dir/$env_file" ]]; then
-        ln -s "$root/$env_file" "$wt_dir/$env_file"
-      fi
-    done
+  # Generate raw tab-delimited worktree stream: <branch>\t<rel-path>\t<abs-path>
+  _gw_list_worktrees() {
+    local include_root="${1:-false}"
 
-    cd "$wt_dir" || return 1
-    ;;
+    git -C "$root" worktree list --porcelain | ENV_ROOT="$root" ENV_INC="$include_root" awk '
+    BEGIN {
+      RS = ""; FS = "\n"
+      root = ENVIRON["ENV_ROOT"]
+      inc = ENVIRON["ENV_INC"]
+    }
+    {
+      wt = ""; br = ""
+      for (i = 1; i <= NF; i++) {
+        if ($i ~ /^worktree /) { sub(/^worktree /, "", $i); wt = $i }
+        if ($i ~ /^branch refs\/heads\//) { sub(/^branch refs\/heads\//, "", $i); br = $i }
+      }
+      if (wt == "") next
+      if (wt == root && inc != "true") next
 
-  rm|remove)
-    shift
-    local force=false target=""
+      rel_wt = wt
+      if (wt == root) {
+        rel_wt = "[root]"
+      } else if (index(wt, root "/") == 1) {
+        rel_wt = substr(wt, length(root) + 2)
+      }
+
+      display_br = (br ? br : "(detached)")
+      print display_br "\t" rel_wt "\t" wt
+    }'
+  }
+
+  # Generate raw tab-delimited local branch stream with worktree & commit status: <branch>\t<status>\t<branch>
+  _gw_list_branches() {
+    local wt_raw
+
+    wt_raw="$(_gw_list_worktrees true)"
+
+    git -C "$root" for-each-ref --format='%(refname:short)%09%(committerdate:relative)%09%(subject)' refs/heads/ | ENV_WT="$wt_raw" awk -F'\t' '
+    BEGIN {
+      n = split(ENVIRON["ENV_WT"], lines, "\n")
+      for (i = 1; i <= n; i++) {
+        if (split(lines[i], f, "\t") >= 2) {
+          wt_map[f[1]] = f[2]
+        }
+      }
+    }
+    {
+      br = $1
+      age = $2
+      subj = $3
+
+      if (br in wt_map) {
+        status = wt_map[br] " • " age
+      } else {
+        status = age (subj != "" ? " • " subj : "")
+      }
+
+      print br "\t" status "\t" br
+    }'
+  }
+
+  # Unified modular fzf picker (<primary>\t<secondary>\t<value>).
+  # Dynamic alignment on wide screens (>= 85 cols); stacked 2-line layout on narrow.
+  _gw_picker() {
+    local prompt="Select: " print_query=false initial_query=""
+
     while [[ $# -gt 0 ]]; do
       case "$1" in
-        -f|--force)
-          force=true
-          shift
-          ;;
-        -*)
-          echo "gw: unknown flag '$1'" >&2
-          return 1
-          ;;
-        *)
-          if [[ -z "$target" ]]; then
-            target="$1"
-          fi
-          shift
-          ;;
+        --prompt=*) prompt="${1#*=}"; shift ;;
+        --prompt) prompt="$2"; shift 2 ;;
+        --print-query) print_query=true; shift ;;
+        -q) initial_query="$2"; shift 2 ;;
+        *) shift ;;
       esac
     done
 
-    local wt_path="" wt_branch=""
+    local cols="${COLUMNS:-$(tput cols 2>/dev/null || echo 80)}"
+    local is_stacked=false
 
-    if [[ -z "$target" ]]; then
-      local selected
-      selected=$(git worktree list --porcelain | awk -v root="$root" '
-      BEGIN { RS = ""; FS = "\n" }
-      {
-        wt = ""; br = ""
-        for (i = 1; i <= NF; i++) {
-          if ($i ~ /^worktree /) { sub(/^worktree /, "", $i); wt = $i }
-          if ($i ~ /^branch refs\/heads\//) { sub(/^branch refs\/heads\//, "", $i); br = $i }
+    if (( cols < 85 )); then
+      is_stacked=true
+    fi
+
+    local formatted
+
+    formatted=$(ENV_STACKED="$is_stacked" awk -F'\t' '
+    BEGIN {
+      stacked = (ENVIRON["ENV_STACKED"] == "true")
+      count = 0
+      max_p = 12
+    }
+    NF >= 2 {
+      count++
+      p[count] = $1
+      s[count] = $2
+      v[count] = (NF >= 3 ? $3 : $1)
+      is_root[count] = ($1 == "main" || $2 ~ /^\[root\]/)
+
+      if (length($1) > max_p) max_p = length($1)
+    }
+    END {
+      c_reset = "\033[0m"
+      c_pri = "\033[1;32m"
+      c_root = "\033[1;34m"
+      c_sec = "\033[2;36m"
+
+      for (i = 1; i <= count; i++) {
+        pri_color = is_root[i] ? c_root : c_pri
+        if (stacked) {
+          # Stacked 2-line layout for narrow windows (NUL-delimited for fzf --read0)
+          printf "%s%s%s\n  %s%s%s\t%s%c", pri_color, p[i], c_reset, c_sec, s[i], c_reset, v[i], 0
+        } else {
+          # Side-by-side columns dynamically aligned to longest primary name
+          fmt = "%s%-" (max_p + 2) "s%s  %s%s%s\t%s\n"
+          printf fmt, pri_color, p[i], c_reset, c_sec, s[i], c_reset, v[i]
         }
-        if (wt == "" || wt == root) next
-        rel_wt = wt
-        sub("^" root "/", "", rel_wt)
-        printf "%-32s %s\t%s\t%s\n", (br ? br : "(detached)"), rel_wt, wt, br
-      }' | fzf --prompt="Remove worktree: " --with-nth=1)
-      [[ -z "$selected" ]] && return 0
-      wt_path="$(printf '%s' "$selected" | cut -f2)"
-      wt_branch="$(printf '%s' "$selected" | cut -f3)"
+      }
+    }')
+
+    [[ -z "$formatted" ]] && return 1
+
+    local fzf_args=(--ansi --prompt="$prompt" -d $'\t' --with-nth=1)
+
+    [[ "$is_stacked" == true ]] && fzf_args+=(--read0)
+    [[ "$print_query" == true ]] && fzf_args+=(--print-query)
+    [[ -n "$initial_query" ]] && fzf_args+=(-q "$initial_query")
+
+    local out query selected rc=0
+
+    out=$(printf "%s" "$formatted" | fzf "${fzf_args[@]}") || rc=$?
+    if [[ $rc -ne 0 && $rc -ne 1 ]] || [[ -z "$out" ]]; then
+      return 1
+    fi
+
+    if [[ "$print_query" == true ]]; then
+      local lines=("${(@f)out}")
+
+      query="${lines[1]}"
+      selected="${lines[2]}"
+      if [[ -n "$selected" ]]; then
+        printf '%s' "${selected##*$'\t'}"
+      else
+        printf '%s' "$query"
+      fi
     else
-      local match
-      match="$(_gw_find "$target")"
+      printf '%s' "${out##*$'\t'}"
+    fi
 
-      if [[ -z "$match" ]]; then
-        echo "gw: fatal: no worktree found matching '$target'" >&2
-        return 1
+    return 0
+  }
+
+  # Find worktree path by branch, directory name, or full path.
+  # Prioritizes exact branch/path matches; falls back to directory basename.
+  _gw_find() {
+    local query="$1" include_root="${2:-false}" branch_only="${3:-false}"
+
+    [[ -z "$query" ]] && return 0
+
+    git -C "$root" worktree list --porcelain | ENV_ROOT="$root" ENV_Q="$query" ENV_INC="$include_root" ENV_BR_ONLY="$branch_only" awk '
+    BEGIN {
+      RS = ""; FS = "\n"
+      root = ENVIRON["ENV_ROOT"]
+      q = ENVIRON["ENV_Q"]
+      inc = ENVIRON["ENV_INC"]
+      branch_only = (ENVIRON["ENV_BR_ONLY"] == "true")
+      if (q == "") exit
+    }
+    {
+      wt = ""; br = ""
+      for (i = 1; i <= NF; i++) {
+        if ($i ~ /^worktree /) { sub(/^worktree /, "", $i); wt = $i }
+        if ($i ~ /^branch refs\/heads\//) { sub(/^branch refs\/heads\//, "", $i); br = $i }
+      }
+      if (wt == "") next
+      if (wt == root && inc != "true") next
+
+      # Branch-only mode: match exact branch name (used by gw add)
+      if (branch_only) {
+        if (br == q) {
+          print wt "\t" br
+          exit
+        }
+        next
+      }
+
+      rel_wt = wt
+      prefix = root "/.worktrees/"
+      if (index(wt, prefix) == 1) {
+        rel_wt = substr(wt, length(prefix) + 1)
+      }
+
+      root_rel = wt
+      if (index(wt, root "/") == 1) {
+        root_rel = substr(wt, length(root) + 2)
+      }
+
+      # Priority 1: Exact branch, absolute path, or relative path matches
+      if (wt == q || root_rel == q || rel_wt == q || br == q || (wt == root && (q == "root" || q == "[root]"))) {
+        print wt "\t" br
+        exit
+      }
+
+      # Priority 2: Fallback to directory basename match
+      base_wt = wt
+      sub(".*/", "", base_wt)
+      if (base_wt == q && fallback == "") {
+        fallback = wt "\t" br
+      }
+    }
+    END {
+      if (fallback != "") print fallback
+    }'
+  }
+
+  # ---------------------------------------------------------------------------
+  # 4. Command Dispatch
+  # ---------------------------------------------------------------------------
+  case "${1:-}" in
+    add)
+      shift
+      local name="$1" base="${2:-HEAD}"
+
+      # Interactive branch picker: when no name provided, list branches with status
+      if [[ -z "$name" ]]; then
+        name="$(_gw_list_branches | _gw_picker --prompt="Worktree branch: " --print-query)"
+        [[ -z "$name" ]] && return 0
       fi
 
-      wt_path="$(printf '%s' "$match" | cut -f1)"
-      wt_branch="$(printf '%s' "$match" | cut -f2)"
-    fi
+      # Jump immediately if the branch already has an existing worktree
+      local existing_wt existing_path
 
-    # Jump back to root before removal if currently inside target worktree
-    if [[ "$PWD" == "$wt_path" || "$PWD" == "$wt_path"/* ]]; then
-      cd "$root" || return 1
-    fi
-
-    if [[ "$force" != true ]]; then
-      if (cd "$wt_path" && git status --porcelain 2>/dev/null | grep -q -v '^[?]'); then
-        echo "gw: error: worktree has uncommitted changes in tracked files" >&2
-        echo "Use 'gw rm -f' to force removal." >&2
-        return 1
+      existing_wt="$(_gw_find "$name" false true)"
+      if [[ -n "$existing_wt" ]]; then
+        existing_path="${existing_wt%%$'\t'*}"
+        echo "gw: branch '$name' already has worktree at $existing_path"
+        cd "$existing_path" || return 1
+        return 0
       fi
-    fi
 
-    git worktree remove --force "$wt_path" || return 1
+      local wt_dir="$root/.worktrees/$name"
 
-    if [[ -n "$wt_branch" ]] && git show-ref --verify --quiet "refs/heads/$wt_branch"; then
-      if [[ "$force" == true ]]; then
-        git branch -D "$wt_branch"
-      elif [[ -t 0 ]]; then
-        read -q "reply?Delete associated branch '$wt_branch'? [y/N] "
-        echo
-        if [[ "$reply" =~ ^[Yy]$ ]]; then
-          git branch -d "$wt_branch" 2>/dev/null || git branch -D "$wt_branch"
+      # Verify repository ignores the worktrees directory
+      if ! git -C "$root" check-ignore -q .worktrees/ 2>/dev/null; then
+        echo "gw: warning: .worktrees/ is not in .gitignore" >&2
+      fi
+
+      # If the target branch exists locally and is currently checked out in the
+      # primary checkout, switch primary root to the default branch first.
+      if git -C "$root" show-ref --verify --quiet "refs/heads/$name"; then
+        local root_branch
+
+        root_branch="$(git -C "$root" branch --show-current 2>/dev/null)"
+        if [[ "$root_branch" == "$name" ]]; then
+          # Abort immediately if primary checkout has uncommitted changes
+          if git -C "$root" status --porcelain 2>/dev/null | grep -q .; then
+            echo "gw: error: primary checkout has uncommitted changes on '$name'" >&2
+            echo "Commit, stash, or discard them before moving branch to worktree." >&2
+            return 1
+          fi
+
+          local def_branch
+
+          def_branch="$(_gw_default_branch)"
+          if [[ "$def_branch" == "$name" ]]; then
+            echo "gw: error: cannot move default branch '$name' out of primary checkout" >&2
+            return 1
+          fi
+
+          echo "gw: moving branch '$name' from primary checkout to worktree"
+          git -C "$root" switch "$def_branch" || {
+            echo "gw: error: failed to switch primary checkout to '$def_branch'" >&2
+            return 1
+          }
         fi
+
+        git worktree add "$wt_dir" "$name" || return 1
+      elif [[ -n "$(git -C "$root" for-each-ref --format='%(refname)' "refs/remotes/*/$name" 2>/dev/null)" ]]; then
+        # Check out remote branch using Git DWIM
+        git worktree add "$wt_dir" "$name" || return 1
+      else
+        # Create a new branch starting at base
+        git worktree add -b "$name" "$wt_dir" "$base" || return 1
       fi
-    fi
-    ;;
 
-  ls|list)
-    git worktree list
-    ;;
+      # Link environment files from primary root when present
+      local env_file
 
-  help|-h|--help)
-    printf "%s\n" \
-      "Usage:" \
-      "  gw                      Jump to an existing worktree via fzf" \
-      "  gw <name|branch>        Jump to worktree matching branch or directory name" \
-      "  gw add <name> [base]    Create branch and worktree at .worktrees/<name>, link .env, and cd in" \
-      "  gw rm [name|branch]     Remove worktree by branch or dir name (fzf picker if omitted)" \
-      "  gw ls                   List active worktrees" \
-      "  gw help                 Show this help message" \
-      "" \
-      "Options for 'gw rm':" \
-      "  -f, --force             Force remove dirty worktree and delete branch" \
-      "" \
-      "Aliases:" \
-      "  gw remove               Alias for 'gw rm'" \
-      "  gw list                 Alias for 'gw ls'"
-    ;;
+      for env_file in .env .env.local; do
+        if [[ -f "$root/$env_file" && ! -e "$wt_dir/$env_file" ]]; then
+          ln -s "$root/$env_file" "$wt_dir/$env_file"
+        fi
+      done
 
-  *)
-    if [[ -z "${1:-}" ]]; then
-      local selected wt_path
-      selected=$(git worktree list --porcelain | awk -v root="$root" '
-      BEGIN { RS = ""; FS = "\n" }
-      {
-        wt = ""; br = ""
-        for (i = 1; i <= NF; i++) {
-          if ($i ~ /^worktree /) { sub(/^worktree /, "", $i); wt = $i }
-          if ($i ~ /^branch refs\/heads\//) { sub(/^branch refs\/heads\//, "", $i); br = $i }
-        }
-        if (wt == "") next
-        rel_wt = (wt == root) ? "[root]" : wt
-        sub("^" root "/", "", rel_wt)
-        printf "%-32s %s\t%s\n", (br ? br : "(detached)"), rel_wt, wt
-      }' | fzf --prompt="Jump to worktree: " --with-nth=1)
-      [[ -z "$selected" ]] && return 0
-      wt_path="$(printf '%s' "$selected" | cut -f2)"
-      if [[ -n "$wt_path" ]]; then
-        cd "$wt_path" || return 1
+      cd "$wt_dir" || return 1
+      ;;
+
+    rm)
+      shift
+      local force=false target=""
+
+      # Parse flags and optional target argument
+      while [[ $# -gt 0 ]]; do
+        case "$1" in
+          -f|--force)
+            force=true
+            shift
+            ;;
+          --)
+            shift
+            [[ -z "$target" && $# -gt 0 ]] && target="$1"
+            shift $#
+            ;;
+          -*)
+            echo "gw: unknown flag '$1'" >&2
+            return 1
+            ;;
+          *)
+            if [[ -z "$target" ]]; then
+              target="$1"
+            fi
+            shift
+            ;;
+        esac
+      done
+
+      local wt_path=""
+
+      # Try direct lookup by branch or directory name
+      if [[ -n "$target" ]]; then
+        local match
+
+        match="$(_gw_find "$target" false)"
+        [[ -n "$match" ]] && wt_path="${match%%$'\t'*}"
       fi
-    else
-      local match wt_path
-      match="$(_gw_find "$1")"
-      if [[ -n "$match" ]]; then
-        wt_path="$(printf '%s' "$match" | cut -f1)"
+
+      # Interactive picker: open fzf via _gw_picker when no argument or direct lookup did not match
+      if [[ -z "$wt_path" ]]; then
+        local picker_args=(--prompt="Remove worktree: ")
+        [[ -n "$target" ]] && picker_args+=(-q "$target")
+
+        wt_path="$(_gw_list_worktrees false | _gw_picker "${picker_args[@]}")"
+      fi
+
+      if [[ -z "$wt_path" ]]; then
+        return 0
+      fi
+
+      # Step out to primary checkout if currently inside the target worktree (:A resolves symlinks).
+      if [[ "$PWD:A" == "$wt_path:A" || "$PWD:A" == "$wt_path:A"/* ]]; then
+        cd "$root" || return 1
+      fi
+
+      # Delegate dirty and untracked file safety to Git.
+      # Only pass --force when the user explicitly specified -f/--force.
+      local rm_opts=()
+      [[ "$force" == true ]] && rm_opts+=(--force)
+
+      git worktree remove "${rm_opts[@]}" "$wt_path" || return 1
+
+      # Prune empty parent directories up to .worktrees when branch contained slashes
+      local parent_dir="$wt_path:h"
+      local wt_base="${root:A}/.worktrees"
+
+      while [[ "$parent_dir:A" != "$wt_base" && "$parent_dir:A" == "$wt_base"/* ]]; do
+        rmdir "$parent_dir" 2>/dev/null || break
+        parent_dir="$parent_dir:h"
+      done
+
+      echo "gw: removed worktree '$wt_path'"
+      ;;
+
+    ls)
+      git worktree list
+      ;;
+
+    *)
+      # No argument: interactive fuzzy jump across all active worktrees
+      if [[ -z "${1:-}" ]]; then
+        local wt_path
+
+        wt_path="$(_gw_list_worktrees true | _gw_picker --prompt="Jump to worktree: ")"
+        [[ -z "$wt_path" ]] && return 0
         cd "$wt_path" || return 1
       else
-        echo "gw: unknown command or worktree '$1'. Run 'gw help' for usage." >&2
-        return 1
+        # Argument provided: jump to matching worktree or root (gw main)
+        local match wt_path
+
+        match="$(_gw_find "$1" true)"
+        if [[ -n "$match" ]]; then
+          wt_path="${match%%$'\t'*}"
+          cd "$wt_path" || return 1
+        else
+          echo "gw: unknown command or worktree '$1'. Run 'gw help' for usage." >&2
+          return 1
+        fi
       fi
-    fi
-    ;;
-esac
+      ;;
+  esac
+} always {
+  # Clean up internal helper functions to prevent polluting global shell namespace
+  unfunction _gw_default_branch _gw_list_worktrees _gw_list_branches _gw_find _gw_picker 2>/dev/null
+}
