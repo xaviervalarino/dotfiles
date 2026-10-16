@@ -16,4 +16,7 @@ export GOKU_EDN_CONFIG_FILE=$XDG_CONFIG_HOME/karabiner/karabiner.edn
 export FZF_DEFAULT_OPTS="--color=16"
 export BAT_THEME="ansi"
 
+# Point zsh heredoc tempfiles at $TMPDIR so sandboxed shells (srt) can write them
+[[ -d "$TMPDIR" ]] && export TMPPREFIX="${TMPDIR%/}/zsh"
+
 # vim:syntax=sh
