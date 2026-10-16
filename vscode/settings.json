@@ -7,7 +7,7 @@
   "editor.lineNumbers": "relative",
   "editor.cursorSurroundingLines": 10,
   "editor.minimap.enabled": false,
-  "editor.fontFamily": "\"JetBrains Mono\"",
+  "editor.fontFamily": "JetBrains Mono",
   "editor.fontLigatures": true,
   "editor.lineHeight": 1.5,
   "editor.bracketPairColorization.enabled": true,
@@ -22,7 +22,7 @@
   "git.autofetchPeriod": 30,
   "git.confirmSync": false,
   "totalTypeScript.hideAllTips": true,
-  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.colorTheme": "Rosé Pine",
   "editor.fontSize": 13,
   "js/ts.experimental.useTsgo": true,
   "files.watcherExclude": {
