@@ -30,9 +30,6 @@
  :layers {:tab_layer {:key :tab}
           :return_layer {:key :return_or_enter :condi ["launch_layer" 0]}}
 
- :simlayers {:w_layer {:key :w}
-             :W_layer {:key :w :modi {:mandatory :shift}}}
-
  :devices {:mistel      [{:vendor_id 1241 :product_id 323}]
            :mbp         [{:vendor_id 1452 :product_id 833}
                          {:vendor_id 1452 :product_id 834}]
@@ -61,7 +58,8 @@
                  [:p [:play_pause]]]}
 
         {:des "Caps + Homerow arrow keys H/J/K/L"
-         :rules [:caps_layer
+         ; yields to caps + w/e window commands and the resize layer
+         :rules [[:condi :caps_layer :!wm_layer :!swap_layer :!r_layer]
                  [:##h :left_arrow]
                  [:##j :down_arrow]
                  [:##k :up_arrow]
@@ -179,8 +177,22 @@
                  [:!Chyphen  {:mkey {:vwheel 32} :modi :left_command}]
                  [:!Cequal_sign  {:mkey {:vwheel -32} :modi :left_command}]]}
 
-        {:des "Move focused windows"
-         :rules [:w_layer
+        {:des "Caps + W + H/J/K/L window focus, Caps + E + H/J/K/L swap"
+         :rules [[:w ["wm_layer" 1] :caps_layer {:afterup {:set ["wm_layer" 0]}}]
+                 [:e ["swap_layer" 1] :caps_layer {:afterup {:set ["swap_layer" 0]}}]
+                 :swap_layer
+                 [:h [:ribbon "swap left"]]
+                 [:j [:ribbon "swap down"]]
+                 [:k [:ribbon "swap up"]]
+                 [:l [:ribbon "swap right"]]
+                 ; r_layer precedes wm_layer so its h/j/k/l win while resizing
+                 :r_layer
+                 [:h nil nil {:held [:wm "grow_left" "true"]  :afterup [:wm "grow_left" "false"]}]
+                 [:j nil nil {:held [:wm "grow_down" "true"]  :afterup [:wm "grow_down" "false"]}]
+                 [:k nil nil {:held [:wm "grow_up" "true"]    :afterup [:wm "grow_up" "false"]}]
+                 [:l nil nil {:held [:wm "grow_right" "true"] :afterup [:wm "grow_right" "false"]}]
+                 [{:any :key_code} ["r_layer" 0]]
+                 :wm_layer
                  [:h [:ribbon "focus left"]]
                  [:j [:ribbon "focus down"]]
                  [:k [:ribbon "focus up"]]
@@ -188,23 +200,11 @@
                  [:i [:ribbon "slurp"]]
                  [:o [:ribbon "barf"]]
                  [:quote [:ribbon "cycle-width"]]
-                 :W_layer
-                 [:h [:ribbon "swap left"]]
-                 [:j [:ribbon "swap down"]]
-                 [:k [:ribbon "swap up"]]
-                 [:l [:ribbon "swap right"]]
-                 :w_layer
                  [:m [:mission_control]]
                  [:d [:wm "toggle_show_desktop"]]
                  [:n [:wm "move_to_next_display"]]
                  [:semicolon [:wm "center"]]
-                 [:r ["r_layer" 1] !r_layer]
-                 :r_layer
-                 [:h nil nil {:held [:wm "grow_left" "true"]  :afterup [:wm "grow_left" "false"]}]
-                 [:j nil nil {:held [:wm "grow_down" "true"]  :afterup [:wm "grow_down" "false"]}]
-                 [:k nil nil {:held [:wm "grow_up" "true"]    :afterup [:wm "grow_up" "false"]}]
-                 [:l nil nil {:held [:wm "grow_right" "true"] :afterup [:wm "grow_right" "false"]}]
-                 [{:any :key_code} ["r_layer" 0]]]}
+                 [:r ["r_layer" 1]]]}
 
         {:des "Application launcher"
          :rules [[:!SCcomma [:open "System Preferences"]]
