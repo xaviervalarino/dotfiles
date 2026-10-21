@@ -49,6 +49,8 @@ Launch.nts = goto_chrome_tab("nts.live")
 WM = require("window-manager")
 WM.detach_chrome_tab = detach_chrome_tab
 
+Ribbon_swipe = require("ribbon-swipe").start()
+
 -- Menu Item Selection ----------------------------------------------
 Menu_item = function(app_name, menu_item)
     local app = hs.application.find(app_name)
