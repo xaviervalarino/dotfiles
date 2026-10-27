@@ -25,6 +25,8 @@
   "workbench.colorTheme": "Rosé Pine",
   "editor.fontSize": 13,
   "js/ts.experimental.useTsgo": true,
+  "github.copilot.chat.languageContext.typescript.enabled": false,
+  "github.copilot.chat.languageContext.typescript7.enabled": true,
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
