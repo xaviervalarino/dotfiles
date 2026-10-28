@@ -54,14 +54,19 @@ claude() {
       defaults read -g AppleInterfaceStyle &>/dev/null && mode="dark"
     fi
 
-    local cfg=~/.claude.json
+    local cfg="${CLAUDE_CONFIG_DIR:-$HOME}/.claude.json"
     local current=$(jq -r '.theme // ""' "$cfg" 2>/dev/null)
-    if [[ "$current" != "$mode" ]]; then
+    if [[ -f "$cfg" && "$current" != "$mode" ]]; then
       jq --arg t "$mode" '.theme = $t' "$cfg" > "${cfg}.tmp" && mv "${cfg}.tmp" "$cfg"
     fi
   fi
 
   command claude "$@"
+}
+
+# Personal account: separate config dir holds its own login. Plain `claude` stays on work.
+claude-personal() {
+  CLAUDE_CONFIG_DIR=~/.claude-personal claude "$@"
 }
 
 # vi:filetype=sh
