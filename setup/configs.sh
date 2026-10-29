@@ -26,6 +26,9 @@ yes | "$HOMEBREW_PREFIX/opt/fzf/install"
 
 stow -Rv --dotfiles wezterm
 stow -Rv --dotfiles ghostty
+# Herdr keeps sockets and session state beside config.toml; a real directory keeps them out of the repo
+mkdir -p "$XDG_CONFIG_HOME/herdr"
+stow -Rv --dotfiles herdr
 
 stow -Rv --dotfiles karabiner
 launchctl kickstart -k "gui/$(id -u)/org.pqrs.karabiner.karabiner_console_user_server"
