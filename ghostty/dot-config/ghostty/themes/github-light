@@ -1,0 +1,23 @@
+# Ghostty's bundled GitHub theme with yellow and cyan darkened to stay readable on the light background.
+palette = 0=#3e3e3e
+palette = 1=#970b16
+palette = 2=#07962a
+palette = 3=#9a6700
+palette = 4=#003e8a
+palette = 5=#e94691
+palette = 6=#0969da
+palette = 7=#b2b2b2
+palette = 8=#666666
+palette = 9=#de0000
+palette = 10=#7ac895
+palette = 11=#bf8700
+palette = 12=#2e6cba
+palette = 13=#f29592
+palette = 14=#0969da
+palette = 15=#ffffff
+background = #f4f4f4
+foreground = #3e3e3e
+cursor-color = #3f3f3f
+cursor-text = #f4f4f4
+selection-background = #a9c1e2
+selection-foreground = #535353

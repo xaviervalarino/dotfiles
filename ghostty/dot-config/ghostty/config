@@ -1,0 +1,33 @@
+# Appearance --
+
+# Follows the macOS appearance.
+theme = light:github-light,dark:GitHub Dark
+
+# JetBrains Mono is Ghostty's built-in default font, so no font-family is set.
+font-size = 14.5
+adjust-cell-height = 25%
+cursor-color = cell-foreground
+cursor-text = cell-background
+
+# Window --
+
+macos-titlebar-style = tabs
+window-padding-x = 16
+window-padding-y = 16
+confirm-close-surface = false
+
+# Left Option sends Alt for Neovim and shell keybinds; right Option still types accented characters.
+macos-option-as-alt = left
+
+# Bell --
+
+# Prefixes the alerted tab's title with 🔔 and borders it until focused; no Dock bounce.
+bell-features = no-attention,title,border
+
+# Keys --
+
+# cmd+t, cmd+n, cmd+d and cmd+shift+d already open tabs, windows and splits by default.
+keybind = cmd+ctrl+[=move_tab:-1
+keybind = cmd+ctrl+]=move_tab:1
+keybind = cmd+r=reload_config
+keybind = cmd+shift+r=prompt_tab_title
