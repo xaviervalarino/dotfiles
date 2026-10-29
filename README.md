@@ -10,6 +10,10 @@ I use [`stow`](https://www.gnu.org/software/stow/) to manage my dotfiles. If you
 source <(curl -s https://raw.githubusercontent.com/xaviervalarino/dotfiles/main/setup/bootstrap.mac.sh)
 ```
 
+## Terminals
+
+WezTerm and Ghostty are both set up. See [`docs/terminals.md`](./docs/terminals.md) for how the theme reaches each one and how to remove either.
+
 ## Git Fuzzy Completions
 
 Context-aware fuzzy completion for Git triggered by `**<TAB>` (powered by `fzf` via [`zsh/dot-fzf-git.zsh`](./zsh/dot-fzf-git.zsh)):
