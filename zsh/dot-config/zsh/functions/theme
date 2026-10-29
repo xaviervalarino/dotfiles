@@ -3,7 +3,7 @@
 #   COLOR_MODE:    Polarity ("dark" | "light") Governs background luminance,
 #                  prompt branch indicators, and Git Delta diff highlights.
 #   COLOR_PALETTE: Aesthetic family ("github" | "rose-pine" | "tokyonight")
-#                  Selects syntax highlighting themes in WezTerm and Neovim.
+#                  Selects syntax highlighting themes in WezTerm, Ghostty and Neovim.
 # -----------------------------------------------------------------------------
 
 local action="$1"
@@ -12,7 +12,8 @@ local theme_dir="${XDG_STATE_HOME:-$HOME/.local/state}/theme"
 local mode_file="$theme_dir/mode"
 local palette_file="$theme_dir/palette"
 local pane_file=""
-[[ -n "$WEZTERM_PANE" ]] && pane_file="$theme_dir/pane_${WEZTERM_PANE}"
+local pane_id="${THEME_PANE_ID:-$WEZTERM_PANE}"
+[[ -n "$pane_id" ]] && pane_file="$theme_dir/pane_${pane_id}"
 
 # Allow passing palette as first argument: theme rose-pine
 if [[ "$action" == "rose-pine" || "$action" == "github" || "$action" == "tokyonight" ]]; then
@@ -89,6 +90,13 @@ if [[ -n "$WEZTERM_PANE" && -z "$TMUX" && -z "$SSH_TTY" && -t 1 ]]; then
   [[ "$osc_mode" != "auto" ]] && osc_mode="$COLOR_MODE"
   printf "\033]1337;SetUserVar=COLOR_MODE=%s\007" "$(printf "%s" "$osc_mode" | base64)"
   [[ -n "$palette" ]] && printf "\033]1337;SetUserVar=COLOR_PALETTE=%s\007" "$(printf "%s" "$palette" | base64)"
+fi
+
+# Ghostty has no user vars, so recolor it directly; with no mode override it follows macOS
+if [[ "$TERM_PROGRAM" == "ghostty" && -z "$SSH_TTY" && -t 1 ]] && (( $+commands[term-colors] )); then
+  local term_mode="auto"
+  [[ -f "$mode_file" || ( -n "$pane_file" && -f "$pane_file" ) ]] && term_mode="$COLOR_MODE"
+  term-colors "$term_mode" "$COLOR_PALETTE" 2>/dev/null
 fi
 
 if [[ "$action" == "dark" || "$action" == "light" ]]; then

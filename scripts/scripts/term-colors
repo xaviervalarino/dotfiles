@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+# Print the escape sequences that recolor the current terminal with a Ghostty theme
+# Usage: term-colors <dark|light|auto> [github|rose-pine|tokyonight]
+# "auto" follows the macOS appearance. The Ghostty config's theme already does that with
+# the github palette, so github resets to the config; other palettes pin the current mode.
+
+set -euo pipefail
+
+mode="${1:-}"
+palette="${2:-github}"
+
+if [[ "$mode" == "auto" ]]; then
+  if [[ "$palette" == "github" ]]; then
+    # OSC 104 resets the palette, 110 the foreground, 111 the background
+    printf '\033]104\007\033]110\007\033]111\007'
+    exit 0
+  fi
+  mode="light"
+  defaults read -g AppleInterfaceStyle &>/dev/null && mode="dark"
+fi
+
+case "$palette-$mode" in
+  github-dark) name="GitHub Dark" ;;
+  github-light) name="github-light" ;;
+  rose-pine-dark) name="Rose Pine" ;;
+  rose-pine-light) name="Rose Pine Dawn" ;;
+  tokyonight-dark) name="TokyoNight Night" ;;
+  tokyonight-light) name="TokyoNight Day" ;;
+  *)
+    echo "Usage: term-colors <dark|light|auto> [github|rose-pine|tokyonight]" >&2
+    exit 1
+    ;;
+esac
+
+file=""
+for dir in \
+  "${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/themes" \
+  "${GHOSTTY_RESOURCES_DIR:-/Applications/Ghostty.app/Contents/Resources/ghostty}/themes"; do
+  if [[ -f "$dir/$name" ]]; then
+    file="$dir/$name"
+    break
+  fi
+done
+if [[ -z "$file" ]]; then
+  echo "term-colors: theme \"$name\" not found" >&2
+  exit 1
+fi
+
+# Theme lines read `palette = 3=#9a6700` or `background = #f4f4f4`, spaces optional. The
+# cursor color is left alone so the config's cell-foreground cursor survives.
+while IFS= read -r line || [[ -n "$line" ]]; do
+  line="${line//[[:space:]]/}"
+  key="${line%%=*}"
+  value="${line#*=}"
+  case "$key" in
+    palette) printf '\033]4;%s;%s\007' "${value%%=*}" "${value#*=}" ;;
+    foreground) printf '\033]10;%s\007' "$value" ;;
+    background) printf '\033]11;%s\007' "$value" ;;
+  esac
+done < "$file"

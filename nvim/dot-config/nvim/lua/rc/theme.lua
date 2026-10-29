@@ -39,10 +39,33 @@ local function write_state(name, content)
     end
 end
 
+--- Pane key for per-pane overrides, set by zshrc (WezTerm pane ID or Ghostty tty)
+local function get_pane_id()
+    local pane_id = vim.env.THEME_PANE_ID or vim.env.WEZTERM_PANE
+    if pane_id and pane_id ~= "" then
+        return pane_id
+    end
+    return nil
+end
+
+--- Recolor Ghostty, which has no user vars, through the term-colors script;
+--- with no mode override it follows macOS
+local function sync_ghostty(mode, palette)
+    if vim.env.TERM_PROGRAM ~= "ghostty" or vim.fn.executable("term-colors") == 0 then
+        return
+    end
+    local pane_id = get_pane_id()
+    local overridden = read_state("mode") or (pane_id and read_state("pane_" .. pane_id))
+    local out = vim.fn.system({ "term-colors", overridden and mode or "auto", palette })
+    if vim.v.shell_error == 0 then
+        io.stdout:write(out)
+    end
+end
+
 --- Get the desired mode ("dark" or "light") based on COLOR_MODE or macOS appearance
 function M.get_mode()
-    local pane_id = vim.env.WEZTERM_PANE
-    if pane_id and pane_id ~= "" then
+    local pane_id = get_pane_id()
+    if pane_id then
         local saved = read_state("pane_" .. pane_id)
         if saved == "dark" or saved == "light" then
             return saved
@@ -157,8 +180,8 @@ function M.setup()
             arg_mode = ""
         end
 
-        local pane_id = vim.env.WEZTERM_PANE
-        local is_wezterm = pane_id and pane_id ~= "" and not vim.env.TMUX
+        local pane_id = get_pane_id()
+        local is_wezterm = vim.env.WEZTERM_PANE and vim.env.WEZTERM_PANE ~= "" and not vim.env.TMUX
 
         if arg_palette and arg_palette ~= "" then
             vim.env.COLOR_PALETTE = arg_palette
@@ -171,19 +194,20 @@ function M.setup()
         if arg_mode == "dark" or arg_mode == "light" then
             vim.env.COLOR_MODE = arg_mode
             write_state("mode", arg_mode)
-            if pane_id and pane_id ~= "" then
+            if pane_id then
                 write_state("pane_" .. pane_id, arg_mode)
             end
             M.apply_theme(arg_mode, arg_palette)
             if is_wezterm then
                 io.stdout:write("\027]1337;SetUserVar=COLOR_MODE=" .. vim.base64.encode(arg_mode) .. "\007")
             end
+            sync_ghostty(arg_mode, arg_palette or M.get_palette())
             print("Theme set to " .. (arg_palette or M.get_palette()) .. " (" .. arg_mode .. ")")
         elseif arg_mode == "auto" or arg_mode == "system" or arg_mode == "reset" then
             vim.env.COLOR_MODE = nil
             local theme_dir = get_theme_dir()
             os.remove(theme_dir .. "/mode")
-            if pane_id and pane_id ~= "" then
+            if pane_id then
                 os.remove(theme_dir .. "/pane_" .. pane_id)
             end
             local detected = M.get_mode()
@@ -191,9 +215,11 @@ function M.setup()
             if is_wezterm then
                 io.stdout:write("\027]1337;SetUserVar=COLOR_MODE=" .. vim.base64.encode("auto") .. "\007")
             end
+            sync_ghostty(detected, arg_palette or M.get_palette())
             print("Theme reset to auto (macOS appearance: " .. detected .. ")")
         elseif arg_palette then
             M.apply_theme(nil, arg_palette)
+            sync_ghostty(M.get_mode(), arg_palette)
             print("Palette set to " .. arg_palette .. " (" .. M.get_mode() .. ")")
         else
             print(

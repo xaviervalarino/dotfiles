@@ -92,13 +92,24 @@ if command -v zoxide &> /dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
-# Sync WezTerm & Git Delta color schemes
+# Per-pane theme overrides key on THEME_PANE_ID. Ghostty has no pane ID, so its panes key
+# on the tty; a new tab can reuse a closed tab's tty, so a login shell drops the old state.
+THEME_PANE_ID=""
+if [[ -n "$WEZTERM_PANE" ]]; then
+  THEME_PANE_ID="$WEZTERM_PANE"
+elif [[ "$TERM_PROGRAM" == "ghostty" ]]; then
+  THEME_PANE_ID="tty_${TTY##*/}"
+  [[ -o login ]] && rm -f "${XDG_STATE_HOME:-$HOME/.local/state}/theme/pane_${THEME_PANE_ID}"
+fi
+export THEME_PANE_ID
+
+# Sync WezTerm, Ghostty & Git Delta color schemes
 theme sync
 
 # Auto-sync theme when returning to prompt if changed by Neovim
 _theme_precmd() {
-  local _pane_file="${XDG_STATE_HOME:-$HOME/.local/state}/theme/pane_${WEZTERM_PANE}"
-  if [[ -n "$WEZTERM_PANE" && -f "$_pane_file" ]]; then
+  local _pane_file="${XDG_STATE_HOME:-$HOME/.local/state}/theme/pane_${THEME_PANE_ID}"
+  if [[ -n "$THEME_PANE_ID" && -f "$_pane_file" ]]; then
     local _pane_mode
     read -r _pane_mode < "$_pane_file"
     if [[ -n "$_pane_mode" && "$_pane_mode" != "$COLOR_MODE" ]]; then
