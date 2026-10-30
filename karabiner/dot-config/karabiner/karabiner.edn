@@ -40,7 +40,9 @@
                 :figma             ["^com\\.figma\\.Desktop$"]
                 :slack             ["^com\\.tinyspeck\\.slackmacgap$"]
                 :term              ["^net\\.kovidgoyal\\.kitty$"
-                                    "^com\\.github\\.wez\\.wezterm$"]
+                                    "^com\\.github\\.wez\\.wezterm$"
+                                    "^com\\.mitchellh\\.ghostty$"
+                                    "^dev\\.herdr\\.app$"]
                 :vscode            ["com.microsoft.VSCode"]
                 :affinity ["^com\\.seriflabs\\.affinity"]}
 
