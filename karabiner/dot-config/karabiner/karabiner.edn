@@ -42,7 +42,8 @@
                 :term              ["^net\\.kovidgoyal\\.kitty$"
                                     "^com\\.github\\.wez\\.wezterm$"
                                     "^com\\.mitchellh\\.ghostty$"
-                                    "^dev\\.herdr\\.app$"]
+                                    "^dev\\.herdr\\.app$"
+                                    "^com\\.superlogical\\.rex$"]
                 :vscode            ["com.microsoft.VSCode"]
                 :affinity ["^com\\.seriflabs\\.affinity"]}
 
@@ -180,13 +181,17 @@
                  [:!Cequal_sign  {:mkey {:vwheel -32} :modi :left_command}]]}
 
         {:des "Caps + W + H/J/K/L window focus, Caps + E + H/J/K/L swap"
-         :rules [[:w ["wm_layer" 1] :caps_layer {:afterup {:set ["wm_layer" 0]}}]
+         :rules [[:w [["wm_layer" 1] [:ribbon "pan begin"]] :caps_layer {:afterup [{:set ["wm_layer" 0]} [:ribbon "pan end"]]}]
                  [:e ["swap_layer" 1] :caps_layer {:afterup {:set ["swap_layer" 0]}}]
                  :swap_layer
                  [:h [:ribbon "swap left"]]
                  [:j [:ribbon "swap down"]]
                  [:k [:ribbon "swap up"]]
                  [:l [:ribbon "swap right"]]
+                 [:period [:ribbon "grow left"]]
+                 [:comma [:ribbon "shrink left"]]
+                 [:open_bracket [:ribbon "move first"]]
+                 [:close_bracket [:ribbon "move last"]]
                  ; r_layer precedes wm_layer so its h/j/k/l win while resizing
                  :r_layer
                  [:h nil nil {:held [:wm "grow_left" "true"]  :afterup [:wm "grow_left" "false"]}]
@@ -202,10 +207,15 @@
                  [:i [:ribbon "slurp"]]
                  [:o [:ribbon "barf"]]
                  [:quote [:ribbon "cycle-width"]]
-                 [:m [:mission_control]]
+                 [:m [:ribbon "overview"]]
                  [:d [:wm "toggle_show_desktop"]]
-                 [:n [:wm "move_to_next_display"]]
-                 [:semicolon [:wm "center"]]
+                 [:n [:ribbon "move-to-display next"]]
+                 [:semicolon [:ribbon "align center"]]
+                 ; comma and period, not hyphen and equal_sign: the Mistel rules map caps + those to F11/F12
+                 [:period [:ribbon "grow right"]]
+                 [:comma [:ribbon "shrink right"]]
+                 [:open_bracket [:ribbon "focus first"]]
+                 [:close_bracket [:ribbon "focus last"]]
                  [:r ["r_layer" 1]]]}
 
         {:des "Application launcher"
