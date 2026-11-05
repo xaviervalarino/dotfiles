@@ -1,0 +1,13 @@
+{
+  "zoom": 1.1,
+  "font_ligatures": true,
+  "sounds": {
+    "enabled": true
+  },
+  "minimum_contrast": 1.0,
+  "appearance": "dark",
+  "theme": {
+    "light": "github-light",
+    "dark": "github-dark"
+  }
+}
