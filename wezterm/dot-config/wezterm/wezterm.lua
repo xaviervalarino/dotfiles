@@ -343,18 +343,6 @@ config.keys = {
             end),
         }),
     },
-    {
-        key = "r",
-        mods = "SUPER|CTRL",
-        action = wezterm.action.PromptInputLine({
-            description = "Enter new tab name:",
-            action = wezterm.action_callback(function(window, pane, line)
-                if line then
-                    window:active_tab():set_title(line)
-                end
-            end),
-        }),
-    },
 }
 
 -- Mouse --
