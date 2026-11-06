@@ -14,7 +14,7 @@
       "space s w": "pane::DeploySearch",
       "space s d": "diagnostics::Deploy",
       "space s r": "editor::FindAllReferences",
-      "space s k": "zed::OpenKeymapEditor",
+      "space s k": "zed::OpenKeymap",
       "space s s": "command_palette::Toggle",
       "space space": "tab_switcher::Toggle",
       "space /": "buffer_search::Deploy",
