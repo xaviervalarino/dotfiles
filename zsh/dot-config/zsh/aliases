@@ -47,6 +47,12 @@ appearance() {
 }
 
 claude() {
+  # Rex draws ANSI palette colors from its own theme; pick the ANSI theme for this launch only.
+  if [[ "$TERM_PROGRAM" == "rex" ]]; then
+    command claude --settings '{"theme":"custom:rex-ansi"}' "$@"
+    return
+  fi
+
   if (( $+commands[jq] )); then
     local mode="${COLOR_MODE:-}"
     if [[ -z "$mode" ]]; then
