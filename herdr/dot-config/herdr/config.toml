@@ -8,10 +8,3 @@ name = "terminal"
 auto_switch = true
 dark_name = "terminal"
 light_name = "terminal"
-
-[theme.custom.light]
-overlay0 = "darkgray"
-overlay1 = "darkgray"
-panel_bg = "white"
-active_row_bg = "gray"
-text = "black"
