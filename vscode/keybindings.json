@@ -19,5 +19,10 @@
     "key": "ctrl+w",
     "when": "editorTextFocus && neovim.init && neovim.mode == 'normal'",
     "args": "<C-w>"
+  },
+  {
+    "key": "ctrl+cmd+c",
+    "command": "claude-vscode.editor.openLast",
+    "when": "!config.claudeCode.useTerminal"
   }
 ]

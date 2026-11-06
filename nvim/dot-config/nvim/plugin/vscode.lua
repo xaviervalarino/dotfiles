@@ -4,6 +4,9 @@ end
 
 local vscode = require("vscode")
 
+-- Route the + and * registers through VS Code's clipboard API instead of spawning pbcopy/pbpaste
+vim.g.clipboard = vim.g.vscode_clipboard
+
 ---Run VS Code editor commands through keymaps
 ---https://code.visualstudio.com/api/references/commands
 ---@param mode string|string[]
