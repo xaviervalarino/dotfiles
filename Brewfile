@@ -63,6 +63,7 @@ cask "qobuz"
 cask "slack"
 cask "wacom-tablet"
 cask "wezterm"
+cask "zed"
 cask "zen"
 
 # Personal

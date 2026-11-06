@@ -1,0 +1,124 @@
+// Zed keymap, ported from nvim/dot-config/nvim (leader = space).
+//
+// Defaults: `zed: open default keymap` in the command palette.
+// A key bound alone and as a prefix (`space c` and `space c a`) waits about
+// one second before firing the shorter binding.
+[
+  {
+    "context": "VimControl && !menu",
+    "bindings": {
+      // rc/telescope.lua
+      "space s f": "file_finder::Toggle",
+      "space s g": "pane::DeploySearch",
+      // Project search seeds its query from the word under the cursor
+      "space s w": "pane::DeploySearch",
+      "space s d": "diagnostics::Deploy",
+      "space s r": "editor::FindAllReferences",
+      "space s k": "zed::OpenKeymapEditor",
+      "space s s": "command_palette::Toggle",
+      "space space": "tab_switcher::Toggle",
+      "space /": "buffer_search::Deploy",
+
+      // plugin/lsp-attach.lua and rc/rename.lua
+      "space c a": "editor::ToggleCodeActions",
+      "space r": "editor::Rename",
+      "space d s": "outline::Toggle",
+      "space shift-d": "editor::GoToTypeDefinition",
+      "space t h": "editor::ToggleInlayHints",
+
+      // plugin/keymaps.lua
+      "space e": "editor::Hover",
+      "space q": "diagnostics::Deploy",
+
+      // rc/aerial.lua
+      "space o": "outline_panel::ToggleFocus",
+
+      // rc/diffview.lua
+      "space g v": "git::Diff",
+      "space g h": "git::FileHistory",
+      "space g s": "git_panel::ToggleFocus",
+
+      // Agents: panel, and the review of an agent thread's edits
+      "space a a": "agent::ToggleFocus",
+      "space a d": "agent::OpenAgentDiff",
+
+      // plugin/vscode.lua
+      "space a f": "editor::Format"
+    }
+  },
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "g r": "editor::FindAllReferences",
+      "-": "pane::RevealInProjectPanel",
+
+      // plugin/keymaps.lua
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp",
+      "ctrl-l": "workspace::ActivatePaneRight",
+
+      // plugin/vscode.lua
+      "shift-h": "pane::ActivatePreviousItem",
+      "shift-l": "pane::ActivateNextItem",
+      "] h": "editor::GoToHunk",
+      "[ h": "editor::GoToPreviousHunk",
+      "g h": "git::ToggleStaged",
+      "space c": "pane::CloseActiveItem",
+      // Normal mode only: visual mode binds space w to syntax-node selection
+      "space w s": "project_symbols::Toggle",
+      "space w o": "pane::CloseOtherItems",
+      "space w z": "workspace::ToggleZoom",
+      "space w c": "workspace::ToggleCenteredLayout",
+
+      // mini.surround: sa{motion}{char}, sd{char}, sr{old}{new}
+      "s": null,
+      "s a": ["vim::PushAddSurrounds", {}],
+      "s d": "vim::PushDeleteSurrounds",
+      "s r": ["vim::PushChangeSurrounds", {}]
+    }
+  },
+  {
+    "context": "vim_mode == visual && !menu",
+    "bindings": {
+      // mini.surround: sa{char} around the selection
+      "s": null,
+      "s a": "vim::PushAddSurrounds",
+
+      // plugin/vscode.lua
+      "space w": "editor::SelectLargerSyntaxNode",
+      "space shift-w": "editor::SelectSmallerSyntaxNode"
+    }
+  },
+  {
+    // mini.ai: q and b pick the nearest quote or bracket pair, current line first
+    "context": "vim_operator == a || vim_operator == i || vim_operator == cs",
+    "bindings": {
+      "q": "vim::MiniQuotes",
+      "b": "vim::MiniBrackets"
+    }
+  },
+  {
+    // mini.diff: dh expands the hunk under the cursor
+    "context": "vim_operator == d",
+    "bindings": {
+      "h": "editor::ToggleSelectedDiffHunks"
+    }
+  },
+  {
+    "context": "ProjectPanel && not_editing",
+    "bindings": {
+      "ctrl-l": "workspace::ActivatePaneRight",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp"
+    }
+  },
+  {
+    "context": "OutlinePanel && not_editing",
+    "bindings": {
+      "ctrl-h": "workspace::ActivatePaneLeft",
+      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-k": "workspace::ActivatePaneUp"
+    }
+  }
+]

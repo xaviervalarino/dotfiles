@@ -51,6 +51,10 @@ tldr --update 2>/dev/null || true
 
 stow -Rv --dotfiles nvim
 
+# Zed keeps its prompt library and user themes beside settings.json; a real directory keeps them out of the repo
+mkdir -p "$XDG_CONFIG_HOME/zed"
+stow -Rv --dotfiles zed
+
 # VSCode configuration (settings & keybindings)
 VSCODE_USER_DIR="$HOME/Library/Application Support/Code/User"
 if [ -d "$VSCODE_USER_DIR" ]; then
