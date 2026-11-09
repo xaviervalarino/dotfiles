@@ -119,44 +119,6 @@ Thunderbolt = hs.usb.watcher.new(function(event)
 end)
 Thunderbolt:start()
 
--- Spaces -----------------------------------------------------------
-
----Get ordered list of space IDs
-local function getSpaces()
-    local t = {}
-    for _, screen in ipairs(hs.screen.allScreens()) do
-        -- spacesForScreen throws on a screen without a UUID and returns nil for one missing from Mission Control
-        local uuid = screen:getUUID()
-        if uuid then
-            for _, space in ipairs(hs.spaces.spacesForScreen(uuid) or {}) do
-                table.insert(t, space)
-            end
-        end
-    end
-    return t
-end
-
-local lastActiveWindows = hs.window.filter.new():setCurrentSpace(true):getWindows()
-
----Go to space by it's Mission Control number
----Focuses the last focused (usually the topmost) window for that space
----@param number number The number as seen in Mission Control, i.e. 1-8
-Spaces = function(number)
-    local spaceID = getSpaces()[number]
-    if not spaceID then return end
-    hs.spaces.gotoSpace(spaceID)
-
-    -- set focus to last active window in the Space being selected
-    if spaceID ~= hs.spaces.activeSpaceOnScreen() then
-        for _, lastActive in ipairs(lastActiveWindows) do
-            if hs.spaces.windowSpaces(lastActive)[1] == spaceID then
-                lastActive:focus()
-                break
-            end
-        end
-    end
-end
-
 ---------------------------------------------------------------------
 -- Watch for changes to the default output device (e.g., when headphones are plugged in)
 local lastDevice = hs.audiodevice.defaultOutputDevice():name()

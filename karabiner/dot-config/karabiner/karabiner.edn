@@ -20,7 +20,7 @@
  :templates {:wm "/opt/homebrew/bin/hs -c \"WM.%s(%s)\""
              :hs "/opt/homebrew/bin/hs -c \"hs.%s()\""
              :launch "/opt/homebrew/bin/hs -c \"Launch.%s()\""
-             :spaces "/opt/homebrew/bin/hs -c \"Spaces(%s)\""
+             :spaces "/Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index %s"
              :menu_item "/opt/homebrew/bin/hs -c \"Menu_item('%s', '%s')\""
              :play_pause "/opt/homebrew/bin/hs -c \"hs.eventtap.event.newSystemKeyEvent ('PLAY',true) :post ()\""
              :open "open -a \"%s\""
