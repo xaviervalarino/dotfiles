@@ -26,6 +26,7 @@ yes | "$HOMEBREW_PREFIX/opt/fzf/install"
 
 stow -Rv --dotfiles wezterm
 stow -Rv --dotfiles ghostty
+stow -Rv --dotfiles rex
 # Herdr keeps sockets and session state beside config.toml; a real directory keeps them out of the repo
 mkdir -p "$XDG_CONFIG_HOME/herdr"
 stow -Rv --dotfiles herdr
