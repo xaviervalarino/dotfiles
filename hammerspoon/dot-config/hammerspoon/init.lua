@@ -125,21 +125,25 @@ Thunderbolt:start()
 local function getSpaces()
     local t = {}
     for _, screen in ipairs(hs.screen.allScreens()) do
-        for _, space in ipairs(hs.spaces.spacesForScreen(screen)) do
-            table.insert(t, space)
+        -- spacesForScreen throws on a screen without a UUID and returns nil for one missing from Mission Control
+        local uuid = screen:getUUID()
+        if uuid then
+            for _, space in ipairs(hs.spaces.spacesForScreen(uuid) or {}) do
+                table.insert(t, space)
+            end
         end
     end
     return t
 end
 
-local spaceIDs = getSpaces()
 local lastActiveWindows = hs.window.filter.new():setCurrentSpace(true):getWindows()
 
 ---Go to space by it's Mission Control number
 ---Focuses the last focused (usually the topmost) window for that space
 ---@param number number The number as seen in Mission Control, i.e. 1-8
 Spaces = function(number)
-    local spaceID = spaceIDs[number]
+    local spaceID = getSpaces()[number]
+    if not spaceID then return end
     hs.spaces.gotoSpace(spaceID)
 
     -- set focus to last active window in the Space being selected
