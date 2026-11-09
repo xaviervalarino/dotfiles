@@ -241,7 +241,7 @@
                  ; Move to Mission Control space
                  [:1   [[:spaces 1] ["launch_layer" 0]]]
                  [:2   [[:spaces 2] ["launch_layer" 0]]]
-                 [:3   [[:spaces 4] ["launch_layer" 0]]]
+                 [:3   [[:spaces 3] ["launch_layer" 0]]]
                  [:4   [[:spaces 4] ["launch_layer" 0]]]
                  [:!S1 [[:spaces 5] ["launch_layer" 0]]]
                  [:!S2 [[:spaces 6] ["launch_layer" 0]]]
